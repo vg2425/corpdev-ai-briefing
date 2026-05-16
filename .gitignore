@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Python (for the index generator script)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local working files
+*.log
+*.tmp
+drafts/
