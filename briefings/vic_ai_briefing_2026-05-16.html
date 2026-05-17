@@ -45,6 +45,9 @@
     padding: 28px 28px 22px;
     margin-bottom: 22px;
   }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
   .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -370,7 +373,10 @@
 
   <!-- HERO -->
   <header class="hero">
-    <div class="eyebrow"><span class="dot"></span>Edition · Sat May 16 2026</div>
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Edition · Sat May 16 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
     <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
     <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
     <div class="pills">
