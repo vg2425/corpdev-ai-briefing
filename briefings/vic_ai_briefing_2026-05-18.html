@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · May 18 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Edition · Mon May 18 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>8</strong> top stories</span>
+      <span class="pill"><strong>2</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>40+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Anthropic in talks for $30B raise at $900B valuation, would eclipse OpenAI for the first time</h3>
+        <p class="tldr">Bloomberg first reported on May 12 that Anthropic is negotiating a round led by Dragoneer, Greenoaks, Sequoia and Altimeter that would nearly triple its February $380B mark. As of today the round is still unsigned and is reportedly targeted to close by end of month.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The figure that matters is not the headline valuation but the revenue trajectory underneath it. Anthropic has publicly said it crossed $30B in annualised revenue earlier this month, up from roughly $9B at the end of 2025. Bloomberg, FT (via secondary reporting) and Yahoo Finance all converge on the same set of lead investors and the same expected close window.</p>
+      <p>I want to flag one number that is widely repeated but worth pushing back on: a $44B Q1 ARR figure attributed to Anthropic appears in the BuildFastWithAI roundup. I cannot independently confirm that against Anthropic's own statements (the company has stated it crossed $30B), so I would treat $30B as the verified floor and $44B as unconfirmed.</p>
+      <p>The economics question still hangs over this: Anthropic's growth is token based, and the Ramp data in story 03 shows enterprise usage outpacing pricing power. A $900B mark prices in either substantially higher per token capture, or the conversion of inference workloads into much higher margin products. Both paths require compute Anthropic does not own.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic at $900B is the clearest signal yet that the buy side believes frontier lab spend is durable and accelerating. Every dollar of that valuation is implicitly underwriting GPU capacity Anthropic does not produce. CoreWeave is one of a small handful of specialised neoclouds that can absorb that demand at scale; the recent SpaceX Colossus 1 lease shows Anthropic is willing to take capacity from whoever can deliver, fast, regardless of competitive optics. Worth tracking which providers are named in this round's diligence calls.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-12/anthropic-in-talks-to-raise-30-billion-at-900-billion-valuation" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://finance.yahoo.com/news/anthropic-talks-raise-30-billion-210804604.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://www.buildfastwithai.com/blogs/ai-news-today-may-18-2026" target="_blank" rel="noopener">BuildFastWithAI (May 18)</a>
+        <a class="src" href="https://techfundingnews.com/anthropic-30b-fundraise-900b-valuation-mega-round/" target="_blank" rel="noopener">TFN</a>
+        <a class="src" href="https://thenextweb.com/news/anthropic-900-billion-valuation-funding-round" target="_blank" rel="noopener">TNW</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag security">Security</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Google says it caught the first AI built zero day before mass exploitation</h3>
+        <p class="tldr">Google Threat Intelligence Group reported on May 11 that it detected a zero day, a two factor authentication bypass for a popular open source admin platform, that was almost certainly built with an LLM. The exploit was disrupted before it could be used at scale.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>GTIG's tells were forensic and oddly mundane: highly annotated code, Python style docstrings inside what should have been a stealth payload, and a hallucinated CVSS score that does not exist in any database. Google explicitly says neither Gemini nor Anthropic's Mythos was the model used, which strongly implies an open weights model or a poorly guard railed third party API.</p>
+      <p>The honest framing: this is one corroborated incident, and GTIG itself notes the only reason it was caught was the model's sloppy artefacts. John Hultquist (GTIG chief analyst) implies in multiple outlets that the count of undetected AI assisted exploits is likely materially higher.</p>
+      <p>Coverage is essentially uniform across Bloomberg, CNBC, The Register, SecurityWeek, CyberScoop, The Hacker News, PYMNTS, Engadget and UPI. That kind of convergence is the strongest cross source signal of the week.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is a leading indicator for two CoreWeave adjacent workloads. First, defensive AI workloads (vuln triage, red teaming, exploit detection) become a buyer category in their own right, and OpenAI just opened the GPT-5.5-Cyber trusted access program on May 15. Second, expect renewed scrutiny on which models customers run on shared infrastructure: workloads that touch security tooling will demand stronger isolation guarantees, attestation, and audit trails. Both push the conversation toward higher value, higher margin tiers of capacity rather than commodity rental.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/11/google-thwarts-effort-hacker-group-use-ai-mass-exploitation-event.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access" target="_blank" rel="noopener">Google Cloud Blog</a>
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-11/hackers-used-ai-to-build-zero-day-attack-google-researchers-say" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://cyberscoop.com/google-threat-intelligence-group-ai-developed-zero-day-exploit/" target="_blank" rel="noopener">CyberScoop</a>
+        <a class="src" href="https://www.securityweek.com/google-detects-first-ai-generated-zero-day-exploit/" target="_blank" rel="noopener">SecurityWeek</a>
+        <a class="src" href="https://thehackernews.com/2026/05/hackers-used-ai-to-develop-first-known.html" target="_blank" rel="noopener">The Hacker News</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">Anthropic passes OpenAI in US enterprise adoption for the first time, Ramp index shows</h3>
+        <p class="tldr">Ramp's May 2026 AI Index, released May 13, has Anthropic at 34.4% enterprise adoption (up 3.8 points) versus OpenAI at 32.3% (down 2.9). It is the first crossover in the entire generative AI cycle.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The dataset is Ramp's corporate card and bill pay data, so "adoption" here means paying for the service through a US business entity rather than seat counts or revenue. That distinction matters: it is a cleaner measure of business buyer preference than self reported usage, but it understates international and consumer demand. Both VentureBeat and Axios call out that caveat.</p>
+      <p>The narrative across VentureBeat, Axios, eWeek and Times Square Chronicles is that Claude Code is the wedge. A figure that keeps showing up: about 4% of all GitHub public commits worldwide are now authored by Claude Code, roughly double the prior month. I have not seen the underlying methodology, so I would treat the 4% number as approximate.</p>
+      <p>VentureBeat's important counterpoint: three things could erase this lead. Compute scarcity, token pricing pressure as competitors discount, and OpenAI's renewed enterprise push with the OpenAI Deployment Company (launched May 11). The crossover may be a peak, not a trend break.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Customer concentration risk and customer concentration upside are the same story here. Anthropic's surge is being fed by Claude Code, which is heavily inference dense and bursty. That is exactly the workload profile CoreWeave's reserved capacity model is built for, and it is also the profile that pressures Anthropic to find more compute, more places, more quickly. Watch for whether the next Anthropic capacity expansion lands at CoreWeave, OCI, a hyperscaler, or another neocloud; each path tells a different story about long term pricing.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" target="_blank" rel="noopener">VentureBeat</a>
+        <a class="src" href="https://www.axios.com/2026/05/13/anthropic-openai-workplace-ai-adoption" target="_blank" rel="noopener">Axios</a>
+        <a class="src" href="https://ramp.com/leading-indicators/ai-index-may-2026" target="_blank" rel="noopener">Ramp AI Index</a>
+        <a class="src" href="https://www.eweek.com/artificial-intelligence/anthropic-overtakes-openai-enterprise-ai-adoption-neuron/" target="_blank" rel="noopener">eWeek</a>
+        <a class="src" href="https://letsdatascience.com/blog/anthropic-passed-openai-business-adoption-ramp-index" target="_blank" rel="noopener">Let's Data Science</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">IREN closes $3B convertible after Nvidia $3.4B cloud deal, pushes committed revenue past $15B</h3>
+        <p class="tldr">On May 15 IREN closed an upsized $3.0B convertible notes offering (initial size $2B) at a 1.00% coupon and a 32.5% conversion premium. The raise follows a five year, $3.4B managed GPU cloud contract with Nvidia and warrants potentially worth $2.1B announced May 7.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>IREN is now the most direct public market comparable for CoreWeave's neocloud thesis, and the market priced this deal at a premium investors do not usually give to debt heavy infrastructure. The 32.5% conversion premium and 1.00% coupon are aggressive terms for a company that was a bitcoin miner two years ago. Underwriters got there because the Nvidia anchor turns IREN into a structurally subsidised buildout: Nvidia takes warrants, IREN takes the offtake.</p>
+      <p>The follow on $625M all stock acquisition of Mirantis (reported across CoinDesk, The Block and FinanceFeeds) is the more interesting tell. It moves IREN from pure GPU rental toward a full stack AI cloud, which is the same direction CoreWeave has been pushing with managed services and now with the Rack Lifecycle Controller for Vera Rubin.</p>
+      <p>Cross source check: CoinDesk, The Block, Decrypt, CNBC, Crypto.news, FinanceFeeds and Yahoo Finance all converge on the same deal structure. The "AI deals reshape growth" framing from MEXC and Crypto.news adds a separate Microsoft contract reference that I cannot independently verify against Microsoft sources, so I would flag that piece as single sourced.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>IREN's deal terms are the new public market benchmark for how the buy side underwrites neocloud capex. A 1.00% coupon implies investors are pricing this as quasi infrastructure with the optionality of equity upside, very different from how the same balance sheets were treated 18 months ago. That is broadly favourable for CoreWeave's cost of capital. The competitive read is sharper though: IREN now has 5 GW committed under Nvidia, plus owned generation. That is the same demand pool CoreWeave is competing for, with the same vendor co marketing the same workloads. Worth a closer look at which named accounts overlap.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.coindesk.com/markets/2026/05/15/iren-closes-usd3-billion-convertible-notes-deal-amid-ai-infrastructure-expansion" target="_blank" rel="noopener">CoinDesk</a>
+        <a class="src" href="https://www.theblock.co/post/401447/iren-closes-3-billion-convertible-notes-offering-as-bitcoin-miners-ai-infrastructure-push-accelerates" target="_blank" rel="noopener">The Block</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/07/iren-stock-ai-infrastructure-nvidia.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://decrypt.co/368028/bitcoin-miner-iren-3-billion-convertible-notes-offering-ai-ambitions-grow" target="_blank" rel="noopener">Decrypt</a>
+        <a class="src" href="https://financefeeds.com/iren-closes-3-billion-convertible-notes-offering/" target="_blank" rel="noopener">FinanceFeeds</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag research">Research</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">Isomorphic Labs closes $2.1B Series B at IsoDDE milestone, total raised passes $2.6B</h3>
+        <p class="tldr">DeepMind's drug discovery spinout closed a $2.1B Series B on May 12, led by Thrive Capital with Alphabet, GV, MGX, Temasek, CapitalG and the UK Sovereign AI Fund participating. Proceeds fund the IsoDDE platform and a first internal pipeline targeting human trials in 2026.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The interesting structural shift here is that Isomorphic is now the largest pure AI bio bet outside of established pharma, with capital sourced from a sovereign wealth coalition (Abu Dhabi, Singapore) plus the UK government. That investor mix mirrors the pattern around xAI and CoreWeave: AI infrastructure and AI applied science are increasingly funded as strategic national assets, not just venture bets.</p>
+      <p>IsoDDE itself is described across coverage as going further than AlphaFold by predicting drug candidates, modelling protein ligand interaction, and predicting binding affinity in a single unified system. I have not read the underlying technical disclosure, so I would treat specific performance claims as company stated rather than verified.</p>
+      <p>Coverage is broad and converging: rdworldonline, AnalyticsDrift, Tech.eu, FierceBiotech, PRNewswire, CXODigitalpulse and Medium all report the same lead investors, the same round size, and the same use of proceeds.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Drug discovery is one of the workloads CoreWeave has explicitly named in its Rubin platform positioning, and it is the kind of large, sustained, MoE friendly inference run that justifies premium GPU capacity. Isomorphic's compute footprint sits inside Alphabet today, but a $2.1B raise plus a clinical pipeline timeline of 2026 will create demand for external capacity for adjacent players, contract research organisations, and integrated bio AI startups that will follow. This is a category formation moment for life sciences AI as an infrastructure buyer cohort.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.fiercebiotech.com/biotech/alphabets-ai-biotech-isomorphic-labs-bags-21b-series-b-fuel-next-gen-drug-design-model" target="_blank" rel="noopener">FierceBiotech</a>
+        <a class="src" href="https://tech.eu/2026/05/13/isomorphic-labs-lands-2-1bn-investment/" target="_blank" rel="noopener">Tech.eu</a>
+        <a class="src" href="https://www.prnewswire.com/news-releases/isomorphic-labs-secures-2-1-billion-funding-to-scale-its-ai-drug-design-engine-302769674.html" target="_blank" rel="noopener">PRNewswire</a>
+        <a class="src" href="https://www.rdworldonline.com/alphabet-spinoff-isomorphic-labs-raises-2-1-billion-in-quest-to-solve-all-disease-with-ai-based-drug-discovery-tools/" target="_blank" rel="noopener">R&amp;D World</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag models">Models</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">Google I/O 2026 opens tomorrow; expectations centred on Gemini 3.5, Spark agents and Veo upgrades</h3>
+        <p class="tldr">I/O begins May 19 with a 10am PT keynote. Reporting from Tom's Guide, Android Authority, Android Central and Newsbytes converges on Gemini 3.5, agentic Spark features, Veo video upgrades, an Omni multimodal generator, Android XR glasses and the rebranded Aluminum OS.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The pre I/O narrative around an "intelligence system" replacing the OS has been telegraphed for months and showed up explicitly at the Android Show last week. Expect Google to position Gemini Spark as an always on agent layer that sits across mail, calendar, browser and OS level intents.</p>
+      <p>I would push back on the most aggressive previews: every Android publication is guessing on Gemini 3.5 specifically. Google has not confirmed the version number. Treat the "3.5" framing as a placeholder until the keynote.</p>
+      <p>The Omni video model rumor is genuinely interesting because it puts Google in direct contact with Runway's territory (see Runway profile, May 15). If Omni ships as a developer API and not just an app, it is a real competitive event for OpenAI Sora successors and for the smaller video model labs.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Two infrastructure reads. First, agentic surfaces at the OS level dramatically expand the inference per user envelope; a Spark agent that runs background tasks across apps is fundamentally more inference dense than a chatbot prompted once per session. Even if Google serves that on TPUs, the demand spillover to neoclouds comes from every Android third party developer who wants to plug into the same agent fabric without TPU access. Second, an Omni style video model trained at frontier scale is a new workload class; CoreWeave already has a relationship powering Runway's models, so the wider pool of buyers who emerge after I/O is directly relevant.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://io.google/2026/" target="_blank" rel="noopener">io.google/2026</a>
+        <a class="src" href="https://www.tomsguide.com/phones/google-pixel-phones/google-i-o-2026-date-time-potential-announcements-and-everything-else-you-need-to-know" target="_blank" rel="noopener">Tom's Guide</a>
+        <a class="src" href="https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/" target="_blank" rel="noopener">Android Authority</a>
+        <a class="src" href="https://www.androidcentral.com/phones/google-pixel/google-io-2026-how-to-watch-what-you-need-to-know" target="_blank" rel="noopener">Android Central</a>
+        <a class="src" href="https://nokiapoweruser.com/google-io-2026-gemini-spark-omni-gemini-3-5-rumors/" target="_blank" rel="noopener">NokiaPowerUser</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag agents">Agents</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">4 sources</span>
+        </div>
+        <h3 class="headline">OpenAI ships ChatGPT personal finance with Plaid; Codex lands on mobile and Windows sandbox</h3>
+        <p class="tldr">On May 15 OpenAI rolled out a personal finance preview for ChatGPT Pro in the US, with Plaid handling connections to 12,000+ institutions. The same week added Codex to ChatGPT mobile, a Codex sandbox for Windows, and the GPT-5.5-Cyber trusted access program for defenders.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The Plaid integration is the strategic part. OpenAI is buying compliance and connectivity rather than building it, which mirrors the playbook Anthropic ran with Claude for Small Business one week earlier (the QuickBooks, HubSpot, DocuSign, Microsoft 365 bundle). Both labs are converging on the thesis that agents need access to real systems of record more than they need new model capabilities.</p>
+      <p>The Codex moves are quieter but matter more for the agentic AI story. Codex mobile and the Windows sandbox close two of the last gaps in agentic coding workflows. Combine that with the OpenAI Deployment Company launch on May 11, and the picture is OpenAI pushing hard to recover the developer mindshare it lost to Claude Code (see story 03).</p>
+      <p>GPT-5.5-Cyber is the most under reported piece. Trusted Access for defenders is OpenAI's first explicit security vertical, and it arrived four days after Google's AI built zero day disclosure. Treat the timing as deliberate.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Three new sustained inference surfaces in one week: personal finance, mobile Codex, and Cyber. Each one is a long lived agent class with different latency and reliability requirements than chatbot inference. The competitive backdrop is OpenAI rebuilding enterprise pull at the exact moment Anthropic is constrained on compute. Both labs are effectively shopping for the same capacity CoreWeave sells.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-15/openai-taps-plaid-to-bring-tailored-financial-advice-to-masses" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://releasebot.io/updates/openai" target="_blank" rel="noopener">OpenAI Release Notes</a>
+        <a class="src" href="https://www.marketingprofs.com/opinions/2026/54786/ai-update-may-15-2026-ai-news-and-views-from-the-past-week" target="_blank" rel="noopener">MarketingProfs roundup</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">08</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag infra">Infra</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">3 sources</span>
+        </div>
+        <h3 class="headline">Europe's AI data center economics keep slipping; CNBC frames it as a sovereignty problem</h3>
+        <p class="tldr">CNBC reported on May 18 that average MW priced electricity ran at $111.65 in the UK, $88.97 in Germany, $44.19 in France versus $28 in the US. Capacity costs across Frankfurt, London, Amsterdam, Paris and Dublin are forecast to rise 12% in 2026.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The price spreads are not new but the framing is hardening. The piece reads less like a market analysis and more like a policy argument that Europe is structurally losing the AI race on power cost alone. France (with its nuclear baseload) is the only major European market in the same zip code as US pricing, and even there a 60% premium to US compute is a hard sell to a frontier lab.</p>
+      <p>I would caveat the specific MW prices: CNBC attributes them to IEA data, but the article does not link the underlying figures, and "average MW priced electricity" is a phrasing that conflates wholesale, retail and industrial tariffs. The directional point holds; the precise numbers may be soft.</p>
+      <p>The CNBC piece pairs with Anthropic's late April hire of a Europe data center deal lead, indicating that even with structurally worse economics, the demand to land capacity in Europe (for data residency and sovereign customer needs) is real.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is the clearest macro argument for why US sited capacity continues to be the highest leverage asset class in the global AI stack. The same workloads that are demand constrained in Europe price the marginal kWh in the US at roughly a quarter of UK levels. To the extent CoreWeave's roadmap touches European expansion, the cost of capital and unit economics need to assume the 2026 to 2028 spread does not close. To the extent the roadmap stays US weighted, the Europe story is a tailwind for premium pricing on cross border workloads that route through US capacity.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/18/europe-ai-energy-electricity-costs-data-centers-china-us.html" target="_blank" rel="noopener">CNBC (May 18)</a>
+        <a class="src" href="https://www.cnbc.com/video/2026/05/11/why-ai-demand-is-pushing-data-centers-to-the-edge-of-europe.html" target="_blank" rel="noopener">CNBC video (May 11)</a>
+        <a class="src" href="https://www.cnbc.com/2026/04/23/anthropic-ai-europe-data-center-capacity-role.html" target="_blank" rel="noopener">CNBC Anthropic Europe hire</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks · past 2 weeks</h2>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">Invest Like the Best</span>
+      <span class="pod-date">May 5 2026</span>
+    </div>
+    <h3 class="pod-title">EP 470 · "AI Founder Mode"</h3>
+    <p class="pod-guest">Guest: Brian Chesky, Co Founder &amp; CEO, Airbnb</p>
+    <div class="pod-detail">
+      <ul>
+        <li>Chesky's core thesis: "AI Founder Mode" demands more, not less, founder involvement in detail. Cheaper marginal work means leverage compounds for the people who can actually direct it.</li>
+        <li>Predicts two categories of professional do not survive the transition: pure people managers, and workers who refuse to evolve. Quote attributed to him in Fortune coverage of the episode, which I would treat as accurate but verify against the audio if quoting directly.</li>
+        <li>Walks through the eleven star exercise as a method for finding product market fit by imagining an absurdly elevated version of the customer experience.</li>
+        <li>Argues founders are usually bad early CEOs, and that AI mostly raises the bar on the founder skill set rather than lowering it.</li>
+      </ul>
+      <a class="src" href="https://joincolossus.com/episode/ai-founder-mode/" target="_blank" rel="noopener">Episode page (Colossus)</a>
+    </div>
+  </article>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">The Cognitive Revolution</span>
+      <span class="pod-date">early May 2026 (exact date unconfirmed)</span>
+    </div>
+    <h3 class="pod-title">AI consciousness and model welfare research</h3>
+    <p class="pod-guest">Guest: Cameron Berg, AI welfare researcher</p>
+    <div class="pod-detail">
+      <ul>
+        <li>I cannot confirm the precise release date of this episode from public episode listings; the show description and recent guest list both place it within the past two weeks but the date stamp varies by platform. Verify before citing.</li>
+        <li>Core thesis: emerging evidence that frontier models can detect interventions on their own internal states, and in some cases resist them, is a meaningful empirical signal regardless of one's prior on consciousness.</li>
+        <li>Discusses Anthropic's work on functional emotions and Claude welfare reports as the most rigorous current attempt to operationalise the question.</li>
+        <li>Argues reinforcement learning may itself shape positive and negative experience, which has implications for how RLHF pipelines should be designed.</li>
+      </ul>
+      <a class="src" href="https://www.cognitiverevolution.ai/" target="_blank" rel="noopener">Cognitive Revolution</a>
+    </div>
+  </article>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals · X / social</h2>
+  <div class="signals">
+
+    <div class="signal">
+      <span class="handle">@emollick</span><span class="date">May 11 2026</span>
+      <span class="quote">"You will know that the AI labs believe in ASI when they disband their newly formed consulting (sorry 'forward deployed engineering') groups." Mollick's read on FDE as a tell that labs themselves price in slow enterprise adoption.</span>
+      <a class="src" href="https://x.com/emollick/status/2054036929461526984" target="_blank" rel="noopener">View post</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">@emollick</span><span class="date">May 10 2026 (approx)</span>
+      <span class="quote">On creative variation: argues current AI models converge too quickly on similar outputs, which limits scientific use and "same y" writing. Points to a paper claiming you can optimise models for creativity directly.</span>
+      <a class="src" href="https://x.com/emollick/status/2053820720241615023" target="_blank" rel="noopener">View post</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Dario Amodei</span><span class="date">May 5 2026 · Anthropic FS briefing, NYC</span>
+      <span class="quote">Shifts framing on AI and employment toward Jevons Paradox: if 90% of a job is automated, everyone does the remaining 10% and demand expands. Caveats that AI moves faster than prior technologies and may strain transition mechanics. Appearance alongside Jamie Dimon.</span>
+      <a class="src" href="https://fortune.com/2026/05/05/dario-amodei-jevons-paradox-will-ai-wipe-out-white-collar-jobs/" target="_blank" rel="noopener">Fortune coverage</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">@sama</span><span class="date">recent (precise date unconfirmed)</span>
+      <span class="quote">"AI will help discover new science, such as cures for diseases, which is perhaps the most important way to increase quality of life long term." Pairs with Altman's repeated public stance that AI will treat most diseases by 2035 and add roughly ten healthy years to human life.</span>
+      <a class="src" href="https://x.com/sama/status/2036488680769241223" target="_blank" rel="noopener">View post</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Yann LeCun</span><span class="date">May 6 2026 (paper window)</span>
+      <span class="quote">LeWorldModel (LeWM) released: a JEPA that trains end to end from raw pixels with two loss terms, around 15M parameters, trainable on a single GPU in hours. Reported up to 48x faster than foundation model based world models on planning benchmarks. Treat the speedup as paper claim until independently reproduced.</span>
+      <a class="src" href="https://le-wm.github.io/" target="_blank" rel="noopener">Project page</a>
+    </div>
+
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <div class="connect-note">
+    <strong>Connected sources note:</strong> Gmail, Google Calendar and Slack are connected in this Cowork session. Today's run did not surface a Slack signal worth promoting into the briefing; if you want me to scan a specific channel (CoreWeave product, customer ops, exec) for a future edition, point me at it.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · 2026-05-18 · Sources: Bloomberg, CNBC, TechCrunch, Reuters, Axios, VentureBeat, The Block, CoinDesk, FierceBiotech, Tech.eu, Tom's Guide, Android Authority, Google Cloud Threat Intelligence, CyberScoop, SecurityWeek, OpenAI release notes, Anthropic news, Ramp AI Index, Colossus, Cognitive Revolution, X.
+    <br />
+    Caveats flagged inline: Anthropic $44B Q1 ARR figure is unverified against Anthropic's own statements (verified floor is $30B). Claude Code's "4% of GitHub commits" methodology has not been published. CNBC's IEA derived MW prices are not linked to a primary source. The Cognitive Revolution episode date is approximate. LeWorldModel speedups are paper claims pending reproduction.
+  </footer>
+
+</div>
+
+<script>
+  function toggle(el, ev) {
+    if (ev && (ev.target.tagName === 'A' || ev.target.closest('a'))) return;
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
