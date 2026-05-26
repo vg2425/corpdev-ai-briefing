@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · May 26 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Edition · Tue May 26 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>8</strong> top stories</span>
+      <span class="pill"><strong>2</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>55+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Anthropic set to close $30B round at $900B+ valuation this week, overtaking OpenAI as the most valuable AI lab</h3>
+        <p class="tldr">Bloomberg first reported the round on May 12, with confirmation on May 22 that the term sheet could be signed as soon as the week of May 26. Sequoia, Dragoneer, Altimeter and Greenoaks each commit roughly $2B as co leads, with Founders Fund and General Catalyst also participating.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>This is Anthropic's second $30B round of 2026. The February round closed at a $380B post money mark, so the headline valuation has more than doubled in roughly three months. If the deal lands at the upper end of the band, Anthropic surpasses OpenAI's $852B March mark for the first time, fully inverting the relative positioning the two labs held for most of 2024 and 2025.</p>
+      <p>The funding sits on top of revenue projections that are doing most of the work. Anthropic informed investors it expects Q2 revenue of about $10.9B, more than double Q1 ($4.8B) and likely the first quarter of operating profit in the company's history (story 02 below). I would push back on the "first profitable quarter" framing slightly: this is operating profit on Anthropic accounting, not a clean GAAP net income print, and it depends on how scheduled compute commitments are amortized. Worth verifying once a formal disclosure exists.</p>
+      <p>Cross source check: Bloomberg, Yahoo Finance, Crunchbase News, TechTimes, MacObserver, KuCoin, TradingKey, AIThinkerLab and StartupHub all converge on the same headline numbers. The $2B per co lead figure is reported by Bloomberg and Crunchbase News. I have not seen a signed term sheet so this should still be characterized as imminent rather than closed.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic at $900B with explicit "difficulties with compute" comments from Dario Amodei (story 07 below) is the cleanest possible bull case for AI neocloud demand. Anthropic's Q1 demand reportedly hit 80x annualized growth versus a planned 10x. Each incremental gigawatt of contracted power that CoreWeave can land into 2027 is competing for exactly this kind of workload. The flip side: a $900B private mark concentrates customer risk, and Anthropic is now exploring alternative silicon paths (Microsoft Maia, story 07), which is the early signal worth tracking.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-12/anthropic-in-talks-to-raise-30-billion-at-900-billion-valuation" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-22/anthropic-to-close-over-30-billion-round-as-soon-as-next-week" target="_blank" rel="noopener">Bloomberg (May 22)</a>
+        <a class="src" href="https://finance.yahoo.com/sectors/technology/articles/anthropic-set-close-30-billion-203545596.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://news.crunchbase.com/venture/biggest-funding-rounds-medical-devices-futuristic-ai-gadgets-frontier-labs-mirus/" target="_blank" rel="noopener">Crunchbase News</a>
+        <a class="src" href="https://www.techtimes.com/articles/317066/20260523/anthropic-funding-round-top-30b-900b-valuation-would-surpass-openai-most-valuable-ai-startup.htm" target="_blank" rel="noopener">TechTimes</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/ai-news/2026/four-labs-four-acquisitions-ai-consolidation-may-2026" target="_blank" rel="noopener">StartupHub</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">8 sources</span>
+        </div>
+        <h3 class="headline">Anthropic projects $10.9B Q2 revenue and its first ever quarterly operating profit, well ahead of prior guidance</h3>
+        <p class="tldr">CNBC and Yahoo Finance reported on May 20 that Anthropic told investors it now expects Q2 revenue of roughly $10.9B versus $4.8B in Q1, with about $559M in operating profit. Last summer the company had guided full year profitability no earlier than 2028.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The single quarter revenue figure, if it lands, would exceed Anthropic's entire 2025 revenue and is roughly an order of magnitude above where the company started 2024. The driver is Claude API and Claude Code growth, with enterprise seats and developer agent workloads compounding. The CNBC source describes the figure as "told investors" rather than disclosed, so I would treat the $10.9B as directional until either the IPO filing or an audited financial release lands.</p>
+      <p>The $559M operating profit number is more interesting than the revenue number. It implies roughly 5 percent operating margin, which is consistent with a company that is still scaling compute commitments aggressively. Several outlets (Quasa, in particular) have flagged that the "operating profit" framing excludes major scheduled compute commitments and is therefore a soft definition. That is a fair pushback worth carrying forward.</p>
+      <p>Cross source check: WSJ via CNBC, Yahoo Finance, Investing.com, Dataconomy, Newsbytes, Winbuzzer and TechBriefly all align on the same figures. The pushback on definitions comes from Quasa and a Medium analysis. Treat as well sourced but not yet audited.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic's revenue scale and gross margin trajectory are the closest available proxy for the unit economics of large scale Claude inference, which is now over 50 percent of CoreWeave's platform activity (per Q1 commentary). If Anthropic is generating operating profit, the inference workload that CoreWeave is running for OpenAI, Microsoft and the rest of the customer book is also more likely to be sustainable at current pricing. The risk to read carefully: if scheduled compute spend later in 2026 erodes the profit print, the read across to GPU cloud pricing power weakens.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/20/anthropic-revenue-explosive-growth-ipo-profitable-quarter.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://finance.yahoo.com/sectors/technology/articles/anthropic-eyes-first-profitable-quarter-045748261.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://www.investing.com/news/economy-news/anthropic-revenue-set-to-more-than-double-to-109-billion-in-q2-4702486" target="_blank" rel="noopener">Investing.com</a>
+        <a class="src" href="https://dataconomy.com/2026/05/21/anthropic-profit-revenue-10-9-billion/" target="_blank" rel="noopener">Dataconomy</a>
+        <a class="src" href="https://winbuzzer.com/2026/05/21/anthropic-targets-first-profit-as-revenue-hits-109b-xcxwbn/" target="_blank" rel="noopener">Winbuzzer</a>
+        <a class="src" href="https://techbriefly.com/2026/05/21/anthropic-operating-profit-quarterly-revenue-109b/" target="_blank" rel="noopener">TechBriefly</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">OpenAI confidentially filed its S-1 with the SEC on Friday May 22, targeting a Q4 2026 listing</h3>
+        <p class="tldr">Fortune, Axios, ChatForest and follow on coverage confirmed on May 22 that OpenAI submitted a confidential draft S-1, with Goldman Sachs and Morgan Stanley lead left. The reported target band is $852B to $1T+ at IPO, with a listing window between Labor Day and Thanksgiving 2026.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>This is the confirmation event for what was telegraphed in last Thursday's briefing. Filing pre Memorial Day means the SEC review window opens roughly in early June, and the standard rule for confidential filings is that the public S-1 has to sit out at least 15 days before the roadshow. That maps cleanly onto a September pricing window but leaves little room for a slip.</p>
+      <p>The financials embedded in the reporting are worth scrutinizing. Roborhythms and Nerd Level Tech both report $13.1B FY 2025 revenue against roughly $22B of cash burn, for about a $9B net loss, and reference internal projections of a $14B operating loss for 2026. These numbers are second hand and not yet visible in any filing, so I would not anchor on them. They do, however, illustrate the magnitude of compute spend that is being funded by equity rather than operating cash flow.</p>
+      <p>Cross source check: Fortune, Axios, ChatForest, Money.com, Roborhythms, Nerd Level Tech and AI Tool Briefing all confirm the filing date and bank line up. None of them have seen the actual document. The valuation range is reported as $852B to over $1T but no specific anchor was provided to me.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>OpenAI's S-1 is, by extension, the most thorough disclosure document ever produced about hyperscale inference and training economics, and CoreWeave is structurally a top three counterparty in the prospectus risk factors. Two things to watch when the public version lands: (1) the disclosed multi year compute commitment line item, which will include CoreWeave, and (2) the customer concentration framing CoreWeave will need to mirror in its own filings. If OpenAI is forced to disclose minimum take or pay commitments to its GPU clouds, that is a direct read on CoreWeave's revenue floor.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://fortune.com/2026/05/22/openai-ipo-filing-1-trillion-may-finally-answer-these-big-questions/" target="_blank" rel="noopener">Fortune</a>
+        <a class="src" href="https://www.axios.com/2026/05/20/openai-ipo-spacex-musk" target="_blank" rel="noopener">Axios</a>
+        <a class="src" href="https://chatforest.com/reviews/openai-ipo-2026-s1-filing-valuation-risks-guide/" target="_blank" rel="noopener">ChatForest</a>
+        <a class="src" href="https://www.roborhythms.com/openai-ipo-filing-2026/" target="_blank" rel="noopener">Roborhythms</a>
+        <a class="src" href="https://nerdleveltech.com/openai-ipo-confidential-filing-explained" target="_blank" rel="noopener">Nerd Level Tech</a>
+        <a class="src" href="https://money.com/when-is-openai-ipo/" target="_blank" rel="noopener">Money</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag research">Research</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">OpenAI says an internal reasoning model autonomously disproved an 80 year old Erdős conjecture in discrete geometry</h3>
+        <p class="tldr">OpenAI, TechCrunch and Interesting Engineering published on May 20 that a general purpose reasoning model produced a disproof of the planar unit distance conjecture posed by Paul Erdős in 1946. The construction reportedly uses Golod Shafarevich theory and infinite class field towers, achieving a polynomial improvement over the square grid bound.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The technical claim, as reported, is that the model produced a family of constructions achieving n^(1+δ) unit distance pairs for some fixed δ &gt; 0. A subsequent refinement by Princeton mathematician Will Sawin is cited at δ ≈ 0.014. I cannot independently verify the proof, and I would caveat that "AI disproves Erdős conjecture" headlines have a long history of overstating what was actually new in the construction. The model output reportedly required human mathematician verification and refinement, which is the norm for any AI assisted result of this kind.</p>
+      <p>What is more interesting than the math is the system claim. OpenAI says the model was a general purpose reasoning system not specifically trained for mathematics or targeted at this problem, and was tested across a broader set of Erdős problems. If that holds up, it is the cleanest evidence to date that frontier reasoning models can produce genuinely novel mathematical output rather than retrieving or interpolating known results. Tim Gowers's reported comment that this is "a milestone in AI mathematics" is plausible but I have not verified it against a primary source.</p>
+      <p>Cross source check: OpenAI's own blog post, TechCrunch, Interesting Engineering, ExplainX, AItoolly, Autogpt and Digg all describe the same construction. Coverage attributes the result to an unnamed "internal reasoning model" with no public model card. Treat the headline claim as well sourced and the technical details as needing independent peer review.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>The relevant signal is not the math, it is the compute profile of the workload. OpenAI is publicly claiming that long horizon, agentic reasoning runs over open mathematical problems produce frontier research. Those workloads have different inference economics than chat: long context, very high token output per query, expensive search and verification loops. If this becomes a routine research pattern at the frontier, the inference fleet shape (more KV cache, more long context inference, less batch efficiency) drifts toward the configurations CoreWeave's Rubin CPX class deployments are built around.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/" target="_blank" rel="noopener">OpenAI</a>
+        <a class="src" href="https://techcrunch.com/2026/05/20/openai-claims-it-solved-an-80-year-old-math-problem-for-real-this-time/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://interestingengineering.com/ai-robotics/openai-paul-erdos-geometry-problem-cracked" target="_blank" rel="noopener">Interesting Engineering</a>
+        <a class="src" href="https://explainx.ai/blog/openai-planar-unit-distance-erdos-problem-solved-2026" target="_blank" rel="noopener">ExplainX</a>
+        <a class="src" href="https://aitoolly.com/ai-news/article/2026-05-21-openai-reasoning-model-disproves-longstanding-erds-conjecture-in-discrete-geometry" target="_blank" rel="noopener">AItoolly</a>
+        <a class="src" href="https://autogpt.net/openai-disproves-erdos-conjecture-unit-distance-problem/" target="_blank" rel="noopener">Autogpt</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">Meta begins 8,000 layoffs alongside $145B AI capex plan, while internal "MCI" surveillance program sparks a union drive</h3>
+        <p class="tldr">CNBC and Tech Startups reported that Meta began notifying 8,000 employees on May 20, roughly 10 percent of headcount, plus the cancellation of 6,000 open requisitions. The same week TechTimes broke that Meta's "Model Capability Initiative" tracks employee clicks, keystrokes and screen snapshots across Workplace and external apps including Google, GitHub and LinkedIn, to train AI imitations of those workflows.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Zuckerberg's internal memo, paraphrased by CNBC, frames the cuts as a function of AI capability increases. Read against the $145B capex plan reported by The Next Web and 24/7 Wall St, this is a clean substitution narrative: headcount dollars reallocated to GPUs, data centers and AI fleet. The narrative is consistent across Intuit (3,000 cuts) and several other enterprise software names this quarter.</p>
+      <p>The MCI surveillance angle is the more reputationally sensitive piece. TechTimes and ZeroHedge report that the program tracks mouse movements, clicks, keystrokes and intermittent screen snapshots across both internal tools and external sites, with no opt out for affected employees. More than 1,000 employees have reportedly signed an internal petition; UK staff have started a formal union organizing drive. I have not seen the leaked audio TechTimes references directly, only secondary descriptions, so I would caveat the specifics until a primary source surfaces.</p>
+      <p>Cross source check: CNBC (two stories), TechTimes, ZeroHedge, Tech Startups, The Next Web and 24/7 Wall St all converge on the 8,000 figure, the $145B capex number and the surveillance program. The audio leak detail is single sourced through TechTimes for now.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Two CoreWeave relevant signals. First, the $145B Meta capex figure is the upper bound of plausible 2026 hyperscaler infra spend, which lifts the ceiling on Nvidia's order book and indirectly on CoreWeave's ability to lock in long term GPU supply. Second, the explicit substitution of headcount for AI throughput is the customer side argument for inference workloads being sticky: Meta is not going to wind down the agent fleet once it has fired the team it replaced. The surveillance angle is a reputational caveat for any data partnership pitch involving Meta sourced training data.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/18/metas-layoffs-starting-this-week-underscore-zuckerbergs-ai-reality-.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/20/meta-layoffs-zuckerberg-says-success-isnt-a-given-in-memo.html" target="_blank" rel="noopener">CNBC memo</a>
+        <a class="src" href="https://thenextweb.com/news/meta-layoffs-8000-zuckerberg-ai-reality-may-2026" target="_blank" rel="noopener">The Next Web</a>
+        <a class="src" href="https://techstartups.com/2026/05/19/meta-begins-layoffs-of-8000-employees-as-zuckerberg-doubles-down-on-ai-overhaul/" target="_blank" rel="noopener">Tech Startups</a>
+        <a class="src" href="https://www.techtimes.com/articles/317081/20260525/meta-employee-surveillance-ai-training-draws-protest-zuckerberg-defends-no-opt-out-program-8000.htm" target="_blank" rel="noopener">TechTimes</a>
+        <a class="src" href="https://247wallst.com/investing/2026/05/08/mark-zuckerberg-just-told-8000-employees-their-layoffs-are-a-line-item-in-his-145-billion-ai-bill/" target="_blank" rel="noopener">24/7 Wall St</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">Pope Leo XIV publishes Magnifica Humanitas on May 25, framing AI as the Rerum Novarum moment of our era</h3>
+        <p class="tldr">The Vatican confirmed publication of Leo XIV's first encyclical on May 25, dated May 15 to mark the 135th anniversary of Leo XIII's Rerum Novarum. The document warns against systems that "reduce people to data points, labor units, or instruments of control," and engages directly with labor, education, warfare, family life and public truth in the AI era.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>This is the first papal encyclical to take artificial intelligence as its primary frame, and the choice of title and signing date is a deliberate analogy: Rerum Novarum in 1891 articulated Catholic social teaching for the industrial revolution and is still the canonical anchor for the Church's labor and economic doctrine. By signing Magnifica Humanitas on May 15 (the Rerum Novarum anniversary) and publishing it on May 25, Leo XIV is explicitly positioning AI in that frame.</p>
+      <p>The substantive content, per Vatican News and the National Catholic Register, runs along three lines: human dignity (people are not data points or labor units), solidarity (AI must not concentrate power) and the common good (development should reach low and middle income countries, not just the labs that build the models). The encyclical also includes a separately notable apology for the Holy See's historical role in legitimizing slavery, which is dominating some of the secular coverage independent of the AI framing.</p>
+      <p>Cross source check: vatican.va, Vatican News, the National Catholic Register, Ascension Press, NBC News and the USCCB statement all align on the publication date and core content. I have not read the full text yet, so any specific policy recommendations cited in secondary coverage should be verified against the vatican.va primary text before being treated as canonical.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Less direct than the financial stories, but real. The encyclical will be widely cited as a moral authority anchor in AI policy debates in the EU, the US Congress and Catholic majority countries (Brazil, the Philippines, Mexico, Poland). For a US listed infrastructure company, the relevant downstream watch item is procurement and ESG screens: large pension funds and university endowments that take Catholic social teaching as a reference point may apply the encyclical's "concentration of power" language to AI infrastructure positions over the next 12 months.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener">vatican.va text</a>
+        <a class="src" href="https://www.vaticannews.va/en/pope/news/2026-05/pope-leo-xiv-encyclical-magnifica-humanitas-ai.html" target="_blank" rel="noopener">Vatican News</a>
+        <a class="src" href="https://www.ncregister.com/cna/full-text-magnifica-humanitas" target="_blank" rel="noopener">National Catholic Register</a>
+        <a class="src" href="https://techcrunch.com/2026/05/25/the-popes-ai-encyclical-isnt-really-about-ai/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.nbcnews.com/world/pope-leo-xiv/pope-leo-xiv-makes-historic-apology-holy-sees-role-legitimizing-slaver-rcna346785" target="_blank" rel="noopener">NBC News</a>
+        <a class="src" href="https://en.wikipedia.org/wiki/Magnifica_humanitas" target="_blank" rel="noopener">Wikipedia entry</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">5 sources</span>
+        </div>
+        <h3 class="headline">Anthropic in early talks to rent Microsoft Maia 200 AI chips on Azure, the first major external Maia deployment</h3>
+        <p class="tldr">CNBC and Bloomberg confirmed on May 21 that Anthropic and Microsoft are in early talks for Anthropic to run workloads on Microsoft's Maia 200 silicon hosted on Azure. The Information broke the story. No deal is signed.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Three facts to anchor on. First, Maia 200 was announced by Microsoft in January 2026 but has not been generally available to Azure customers, so any Anthropic deployment would be effectively a first reference customer. Second, Nadella claimed on the April earnings call that Maia 200 offers "over 30 percent improved tokens per dollar" versus the rest of Microsoft's fleet, which is the kind of efficiency number that would justify an Anthropic look. Third, Anthropic is already running primarily on Trainium at AWS and on TPUs at Google, plus Nvidia GPUs across multiple clouds. Adding Maia would make it the only frontier lab running on four distinct silicon architectures in parallel.</p>
+      <p>The contextual driver is straightforward: Dario Amodei has publicly said Anthropic is compute constrained, with Q1 demand reportedly running 80x annualized versus a 10x plan. The strategic story is more interesting: Microsoft has been the most behind on its in house silicon among the three big clouds, and landing Anthropic would meaningfully accelerate Maia's roadmap and credibility. The reciprocal point is what Anthropic gets in return, which is presumably either price concession or supply commitments outside Maia.</p>
+      <p>Cross source check: Bloomberg, CNBC, GuruFocus, Yahoo Finance and Winbuzzer all confirm the talks and reference The Information's original reporting. The 30 percent tokens per dollar figure is Microsoft's own claim from the April earnings call and has not been independently benchmarked.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is the most directly relevant story in this briefing for CoreWeave positioning. The thesis that AI labs are locked into Nvidia GPUs in the medium term is the foundation of the AI neocloud bull case. Anthropic publicly broadening its silicon set, on top of Trainium and TPU, is the strongest signal yet that frontier labs are actively de risking their compute supply chains. CoreWeave's counter argument is software (CUDA, ecosystem) plus speed of deployment versus hyperscaler procurement timelines, and this deal would be a useful pricing comparison point if Microsoft starts publishing Maia rate cards.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/21/anthropic-microsoft-maia-200-ai-chip.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-21/anthropic-in-talks-to-use-microsoft-ai-chips-information-says" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://www.gurufocus.com/news/8877702/anthropic-negotiates-with-microsoft-for-ai-chip-supply" target="_blank" rel="noopener">GuruFocus</a>
+        <a class="src" href="https://finance.yahoo.com/markets/stocks/articles/microsoft-maia-chip-talks-anthropic-131543201.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://winbuzzer.com/2026/05/22/anthropic-eyes-microsoft-maia-chips-amid-compute-crunch-xcxwbn/" target="_blank" rel="noopener">Winbuzzer</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">08</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag policy">Policy</span>
+          <span class="src-count">4 sources</span>
+        </div>
+        <h3 class="headline">Trump pulls planned AI safety executive order after direct lobbying from Zuckerberg, Musk and David Sacks</h3>
+        <p class="tldr">Axios, NPR and CNN reported between May 20 and May 22 that the White House postponed an executive order that would have established a voluntary 90 day pre release federal review for frontier AI models. Trump said he "didn't like certain aspects" of the order; reporting credits direct calls from Zuckerberg, Musk and AI czar David Sacks.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The order, as described by Axios, would have given federal agencies up to 90 days to review frontier model releases on security and safety grounds. The framework was reportedly voluntary, which is a meaningful caveat: this was much closer to a NIST style reporting regime than a binding pre approval. Even so, the lab CEOs who got the order pulled treated it as a forcing function that would have created a default expectation of compliance.</p>
+      <p>The political signal is bigger than the policy. The accelerationist coalition (Musk, Sacks, Zuckerberg, Andreessen) now appears to have effective veto power over US AI safety executive action through 2026, with the explicit framing that any regulatory friction risks ceding ground to China. That stance is contested inside the administration (some national security and intelligence officials reportedly back the order), but the public outcome is that the order is on ice.</p>
+      <p>Cross source check: Axios, NPR and CNN are the three primary sources, with each citing different administration officials. There is no direct quote from Trump beyond the "didn't like certain aspects" line. Treat the specifics of who lobbied whom as partially reported.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Less regulatory friction at the federal level is mechanically a positive for AI infrastructure capex through 2026 because it reduces the probability that frontier model deployments get delayed for safety review. The risk to monitor is at the state level: California, Colorado and New York have all moved on AI procurement and disclosure rules in 2026, and a federal vacuum tends to accelerate state action. For CoreWeave that means watching California AB style frameworks rather than expecting a national overlay.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.axios.com/2026/05/21/trump-ai-executive-order-postponed-why" target="_blank" rel="noopener">Axios why</a>
+        <a class="src" href="https://www.axios.com/2026/05/22/ai-executive-order-cancelled-white-house" target="_blank" rel="noopener">Axios text</a>
+        <a class="src" href="https://www.npr.org/2026/05/22/nx-s1-5829908/trump-cancels-ai-executive-order-signing" target="_blank" rel="noopener">NPR</a>
+        <a class="src" href="https://www.cnn.com/2026/05/20/tech/ai-executive-order-trump-white-house" target="_blank" rel="noopener">CNN</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks · last 2 weeks</h2>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Dwarkesh Podcast</div>
+      <div class="pod-date">May 15 2026</div>
+    </div>
+    <div class="pod-title">Eric Jang on rebuilding AlphaGo from scratch with modern AI tools</div>
+    <div class="pod-guest">Guest: Eric Jang (1X Technologies, formerly Google Brain)</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Core thesis: the AlphaGo style RL stack from 2016 is now buildable by a small team in weeks rather than a research lab in years, because tooling, environments and base models have collapsed the labor cost of the experiment loop.</li>
+        <li>Most interesting claim: the bottleneck has shifted from algorithmic novelty to environment design. Building good simulators and self play scaffolding is where the time actually goes now.</li>
+        <li>Operational note for infrastructure buyers: the workload profile of a "modern AlphaGo" is asymmetric, with bursty inference dominated by tree search and a long tail of training rollouts. Different from steady state LLM inference.</li>
+        <li>I would push back on the implied "RL is cheap now" framing. Jang acknowledges that the cost has moved rather than disappeared. For frontier scale this still costs a great deal.</li>
+      </ul>
+      <a class="src" href="https://www.dwarkesh.com/podcast/archive" target="_blank" rel="noopener">Dwarkesh archive</a>
+    </div>
+  </article>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Acquired</div>
+      <div class="pod-date">May 18 2026</div>
+    </div>
+    <div class="pod-title">Vanguard: the most effective vehicle ever created for participating in American capitalism</div>
+    <div class="pod-guest">Hosts only (Ben Gilbert and David Rosenthal), no guest</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Frames Vanguard as a structurally unusual entity: largest equity owner of the S&amp;P 500, 50 million clients, no shareholders, no profit motive. Effectively a mutually owned cost minimizer at the center of US capital markets.</li>
+        <li>Useful tech sector frame: passive ownership of the AI buildout is now mechanically dominant. Most of the marginal capital flowing into Nvidia, CoreWeave, Meta and the rest is via index funds, not active fundamentals.</li>
+        <li>Episode does not engage directly with AI, but the implication for AI listed names (CoreWeave included) is that float and index inclusion mechanics are now as relevant to valuation as the underlying revenue trajectory.</li>
+        <li>Treat the Vanguard claims (market share, account count) as Acquired sourced rather than independently audited.</li>
+      </ul>
+      <a class="src" href="https://www.acquired.fm/episodes" target="_blank" rel="noopener">Acquired episodes</a>
+    </div>
+  </article>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals · X and social</h2>
+
+  <div class="signals">
+    <div class="signal">
+      <span class="handle">@karpathy</span><span class="date">May 19 2026</span>
+      <span class="quote">"Personal update: I've joined Anthropic. I think the next few years at the frontier of LLMs will be especially formative. I am very excited to join the team here and get back to R&amp;D." Karpathy is on the pre training team under Nick Joseph, working on Claude assisted pre training research. Reportedly drew about 3 million views in the first hour.</span>
+      <a class="src" href="https://x.com/karpathy/status/2056753169888334312" target="_blank" rel="noopener">X post</a>
+      <a class="src" href="https://techcrunch.com/2026/05/19/openai-co-founder-andrej-karpathy-joins-anthropics-pre-training-team/" target="_blank" rel="noopener">TechCrunch</a>
+    </div>
+    <div class="signal">
+      <span class="handle">@sama</span><span class="date">May 20 2026</span>
+      <span class="quote">Altman offered $2M in OpenAI tokens to every startup in the current Y Combinator batch (about 169 companies), framed as a "tokenmaxxing" experiment. Read alongside the S-1 filing two days later, this is OpenAI buying distribution at the earliest stage of the funnel.</span>
+      <a class="src" href="https://techcrunch.com/2026/05/20/sam-altman-makes-mic-drop-offer-to-every-y-combinator-startup/" target="_blank" rel="noopener">TechCrunch</a>
+    </div>
+    <div class="signal">
+      <span class="handle">@ylecun</span><span class="date">May 5 2026</span>
+      <span class="quote">LeCun, on the Amodei "AI will wipe out white collar entry level jobs" framing: "extremely destructive. Don't listen to CEOs." Argues that economists, not AI lab founders, should be the reference point on labor impact. The Fortune writeup is the most quoted secondary source. Worth carrying as a counterweight to the substitution narrative in story 05.</span>
+      <a class="src" href="https://fortune.com/2026/05/05/ai-job-apocalypse-warnings-destructive-yann-lecun/" target="_blank" rel="noopener">Fortune</a>
+      <a class="src" href="https://x.com/ylecun/status/2045610129119117574" target="_blank" rel="noopener">X post</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Anthropic blog</span><span class="date">May 19 2026</span>
+      <span class="quote">Claude Managed Agents now ship with self hosted sandboxes (public beta) and MCP tunnels (research preview), letting enterprise customers keep tool execution and private MCP services inside their own infrastructure while Anthropic runs the agent loop. Help Net Security separately reports 28 new security and compliance integrations across DLP, SASE, SIEM, identity, eDiscovery and AI posture management.</span>
+      <a class="src" href="https://9to5mac.com/2026/05/19/anthropic-enhances-claude-managed-agents-with-two-new-privacy-and-security-features/" target="_blank" rel="noopener">9to5Mac</a>
+      <a class="src" href="https://www.helpnetsecurity.com/2026/05/25/anthropic-security-compliance-integrations-claude/" target="_blank" rel="noopener">Help Net Security</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Microsoft Power Platform Blog</span><span class="date">May 14 2026</span>
+      <span class="quote">Computer using agents in Copilot Studio are GA across all commercial Power Platform geographies. Built in credentials via Azure Key Vault, observability through the Power Platform admin center, and broader model choice. This is the first hyperscaler computer use stack to reach full GA, ahead of both Anthropic (public beta) and Google (preview).</span>
+      <a class="src" href="https://techcommunity.microsoft.com/blog/copilot-studio-blog/computer-using-agents-in-microsoft-copilot-studio-are-now-generally-available/4519427" target="_blank" rel="noopener">Microsoft TechCommunity</a>
+      <a class="src" href="https://www.digitalapplied.com/blog/computer-use-agents-microsoft-anthropic-google" target="_blank" rel="noopener">Digital Applied comparison</a>
+    </div>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <h2 class="section">Connected sources</h2>
+  <div class="connect-note">
+    <strong>Gmail, Google Calendar and Slack</strong> are connected to this briefing pipeline. This edition did not surface a private signal that materially changed the public ranking, so the ordering is driven by open web sources. If you want me to scan a specific Slack channel (for example #ai-news, #infra-watch, or any internal corp dev channel) before the next Thursday edition, flag it and I will incorporate.
+  </div>
+
+  <footer>
+    Generated by Claude · May 26 2026 · Sources include Bloomberg, Reuters via Yahoo, CNBC, Axios, TechCrunch, Fortune, NPR, CNN, Vatican News, OpenAI, Anthropic, vatican.va, Microsoft, Dwarkesh, Acquired.<br>
+    Caveats flagged inline: Anthropic Q2 $10.9B revenue and $559M operating profit figures are reported by WSJ via CNBC but not yet audited. The "first profitable quarter" framing is contested by Quasa and others on how scheduled compute commitments are treated. OpenAI S-1 financial details (the $13.1B revenue, $22B burn, $14B 2026 operating loss numbers) are second hand and not yet in any filing. The OpenAI Erdős disproof technical details (δ = 0.014 refinement, Golod Shafarevich construction) need peer review. The Anthropic Microsoft Maia talks are early stage and may not result in a deal. Tim Gowers "milestone" quote is reported but I have not independently verified the primary source.
+  </footer>
+
+</div>
+<script>
+  function toggle(el, event) {
+    if (event.target.tagName === 'A') return;
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
