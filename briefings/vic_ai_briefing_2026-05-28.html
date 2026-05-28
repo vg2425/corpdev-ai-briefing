@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · May 28 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Thursday edition · Thu May 28 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>8</strong> top stories</span>
+      <span class="pill"><strong>3</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>60+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">10+ sources</span>
+        </div>
+        <h3 class="headline">Nvidia prints $81.6B Q1 with data center at $75.2B, declares agentic AI demand "parabolic," and unveils a Vera CPU platform targeting a brand new $200B TAM</h3>
+        <p class="tldr">Nvidia reported Q1 FY27 on May 20 with revenue up 85 percent year over year and data center revenue up 92 percent. Huang told the call that "demand has gone parabolic" because "agentic AI has arrived," and announced a standalone Vera CPU line he sized at a $200B opportunity that will pair with Rubin GPUs and ConnectX-9 networking.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Headline numbers. Revenue $81.6B, beating consensus by roughly $3B. Data center $75.2B, up 92 percent year over year. Q2 guide of $91B plus or minus 2 percent with zero China data center compute baked in. An incremental $80B share buyback authorization on top of the existing program, and the quarterly dividend stepped up from $0.01 to $0.25. The buyback and dividend signal that Nvidia is now generating enough cash that capital returns matter as a story, which is a different framing than the pure growth narrative of the last two years.</p>
+      <p>The Vera CPU announcement is the more strategically interesting line item. Huang framed it as a "brand new" $200B market that Nvidia has never addressed, with shipments starting Q3 and around $20B in expected CPU revenue this year. Vera will ship in three configurations: paired with Rubin GPUs, as a standalone CPU, and integrated with ConnectX-9 for storage and security workloads. Huang explicitly said the $200B TAM includes China, which is a notable framing given that the Q2 outlook explicitly excludes China data center compute. Read the two together as Nvidia trying to keep optionality on a China re entry without putting it in the forward guide.</p>
+      <p>Cross source check: CNBC, TechCrunch, Motley Fool, Kiplinger, TheStreet, S&amp;P Global, Benzinga, Manila Times, IBTimes and Nvidia's own 10-Q all converge on the same headline numbers and the same $200B Vera framing. The "agentic AI has arrived" and "demand has gone parabolic" quotes appear in CNBC's call coverage and the TheStreet writeup. The "Nvidia is the only platform that runs every frontier AI model" line names Anthropic, OpenAI, SpaceXAI, Meta and Google's Gemini.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is the cleanest possible read across for CoreWeave's near term revenue book. Two specifics worth carrying. First, Huang explicitly said Nvidia is "growing faster than hyperscale capex" with hyperscaler capex now at a trillion dollars run rate, which compounds the supply constraint argument CoreWeave makes to customers. Second, the Vera CPU launch directly affects CoreWeave's bill of materials for Rubin class deployments: if Vera is paired with Rubin as the reference architecture, the per rack cost mix shifts toward Nvidia silicon and away from third party CPUs. That is positive for performance and lock in but tightens single vendor concentration risk in CoreWeave's supply chain disclosures. Watch for whether CoreWeave's GB200 NVL72 exemplar status extends to Vera Rubin reference designs.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/20/nvidia-nvda-earnings-report-q1-2027.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://techcrunch.com/2026/05/20/jensen-huang-says-hes-found-a-brand-new-200b-market-for-nvidia/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000051/q1fy27pr.htm" target="_blank" rel="noopener">Nvidia 8-K</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/23/nvidia-forecast-for-200-billion-cpu-market-includes-china.html" target="_blank" rel="noopener">CNBC Vera China</a>
+        <a class="src" href="https://www.thestreet.com/investing/stocks/jensen-huang-has-bold-new-message-after-nvidia-q1-beat" target="_blank" rel="noopener">TheStreet</a>
+        <a class="src" href="https://www.fool.com/investing/2026/05/27/jensen-huang-gave-amazing-news-to-nvidia-stock-inv/" target="_blank" rel="noopener">Motley Fool</a>
+        <a class="src" href="https://www.benzinga.com/markets/private-markets/26/05/52710105/nvidias-jensen-huang-sees-brand-new-200-billion-opportunity-in-vera-cpus" target="_blank" rel="noopener">Benzinga</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">10+ sources</span>
+        </div>
+        <h3 class="headline">KPMG embeds Claude across its entire 276,000 person workforce in 138 countries, the most sweeping Big Four AI commitment to date</h3>
+        <p class="tldr">Anthropic and KPMG announced a global alliance on May 19 to deploy Claude to every KPMG employee, integrated into the firm's Digital Gateway client platform. Fortune's May 26 piece frames it as the Big Four answer to two existential threats from AI: customer side disintermediation and internal productivity asymmetry.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The structural shape of the deal. All 276,000 KPMG employees across 138 countries get Claude access, embedded into KPMG's Digital Gateway platform that the firm and its clients use for tax, legal, advisory and audit work. Rollout begins with Tax and Legal and expands across advisory, with full implementation on Microsoft Azure planned by September 2026. Anthropic is naming KPMG a preferred partner for private equity, with joint Claude powered products to be built for PE portfolio companies. Cybersecurity vulnerability identification is one of the named initial focus areas.</p>
+      <p>The thing that makes this more interesting than a typical enterprise rollout is the dual integration: KPMG is putting Claude into the workflow it uses internally and the workflow it sells to clients. Fortune's framing is that the Big Four face two AI nightmares simultaneously: (1) clients automating away the bottom of the consulting funnel, and (2) competitors out productizing them by embedding AI deeper than they can. KPMG's bet is that the same Claude integration solves both problems. I would push back on that framing slightly: if every Big Four firm runs the same Claude integration, the differentiation collapses fast, and KPMG's edge erodes to whatever proprietary data and process scaffolding sits on top.</p>
+      <p>Cross source check: Anthropic's own announcement, Fortune, Winbuzzer, Pulse2, IT Brief, International Accounting Bulletin, Quantum Zeitgeist, AI Reporter, Roic News and Buildfastwithai all align on the 276,000 figure, 138 countries, Digital Gateway integration, Microsoft Azure full rollout by September, and PE preferred partner status. The "Big Four AI nightmares" framing is Fortune's specifically.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Two things to carry forward. First, this is the largest single enterprise Claude commitment publicly disclosed, and it lands directly into Microsoft Azure as the host, not directly into Anthropic infrastructure or a neocloud. That is a continuing pattern: Anthropic's largest enterprise inference workloads tend to flow through hyperscalers under tri party arrangements where Anthropic supplies models and the hyperscaler supplies compute. For CoreWeave, the read is that the route to KPMG class workloads runs through the Microsoft and AWS contracts rather than direct enterprise sales. Second, if KPMG is the template, every Big Four firm needs an equivalent commitment within 12 months, and that is a meaningful step function in inference demand. Deloitte is already a Nvidia ecosystem partner; PwC and EY are the two to watch for the next deal.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.anthropic.com/news/anthropic-kpmg" target="_blank" rel="noopener">Anthropic</a>
+        <a class="src" href="https://fortune.com/2026/05/26/kpmg-anthropic-claude-partnership-big-four-ai/" target="_blank" rel="noopener">Fortune</a>
+        <a class="src" href="https://winbuzzer.com/2026/05/20/kpmg-rolls-out-claude-across-276000-staff-and-client-work-xcxwbn/" target="_blank" rel="noopener">Winbuzzer</a>
+        <a class="src" href="https://pulse2.com/kpmg-claude-integrated-across-276000-person-workforce-in-strategic-alliance-with-anthropic/" target="_blank" rel="noopener">Pulse2</a>
+        <a class="src" href="https://itbrief.co.uk/story/kpmg-forms-global-alliance-with-anthropic-for-claude" target="_blank" rel="noopener">IT Brief</a>
+        <a class="src" href="https://www.roic.ai/news/kpmg-inks-global-alliance-with-anthropic-deploying-claude-to-276000-employees-05-19-2026" target="_blank" rel="noopener">Roic News</a>
+        <a class="src" href="https://www.buildfastwithai.com/blogs/ai-news-today-may-28-2026" target="_blank" rel="noopener">Buildfastwithai</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Cognition raises $1B at a $26B valuation on roughly $492M ARR, while Devin reportedly writes 89 percent of Cognition's own PRs</h3>
+        <p class="tldr">Cognition AI announced the close on Wednesday May 27. Lux Capital, General Catalyst and 8VC co led. Existing investors Founders Fund, Elad Gil and Soma Capital participated alongside new investors Ribbit, Atreides and Layer Global. Valuation more than doubled from $10.2B in September 2025.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The numbers. $1B raised, $25B pre money, $26B post money. ARR reported at approximately $492M, up sharply from the figure cited at the September round. Enterprise customer list now includes Citi, Goldman Sachs, Mercedes-Benz, Elevance, Dell, Santander, the US Army and the US Navy. The internal metric Cognition is emphasizing is that Devin now writes 89 percent of all pull requests merged at Cognition itself, up from roughly 25 percent in early 2025. I would caveat the 89 percent number: this is an internal Cognition stat reported via TechCrunch and ChatForest, not independently audited, and the definition of "PR written by Devin" almost certainly includes human review and merge gating.</p>
+      <p>Valuation framework. At $26B on $492M ARR, this is roughly 53x ARR, in line with the multiple Anthropic was trading at around the February round and below the implied multiple at OpenAI's S-1 band. The pricing assumes Cognition holds revenue growth at roughly the current pace (Cognition more than doubled valuation in eight months while ARR grew faster than that). The risk is the same that applies to every coding agent: the work is being repriced from "per seat" to "per task" and the take rate per outcome is still settling.</p>
+      <p>Cross source check: Bloomberg, TechCrunch, ChatForest, The Next Web, OfficeChai, StartupHub, Whalesbook, The Decoder and Grey Journal all confirm the round size, valuation and lead investors. The $492M ARR figure is reported by TechCrunch and ChatForest, originating from Cognition.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Coding agents are the highest inference intensity workload at the frontier right now. A single Devin session burns more tokens than a typical chat user generates in a month. Cognition's $492M ARR translates roughly into a meaningful inference compute footprint, currently distributed across Anthropic, OpenAI and other model providers, which flows down to CoreWeave and AWS as the underlying infrastructure. The directional point for CoreWeave's customer book: the coding agent layer is where workload growth is steepest right now, ahead of consumer chat and ahead of enterprise copilots. Fireworks AI's parallel $15B valuation talks (Bloomberg, May 27) reinforce the same trend on the inference serving side.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-27/ai-coding-startup-cognition-raises-1-billion-at-26-billion-value" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://chatforest.com/reviews/cognition-ai-devin-1-billion-round-26b-valuation-492m-arr-2026/" target="_blank" rel="noopener">ChatForest</a>
+        <a class="src" href="https://thenextweb.com/news/cognition-just-raised-1-billion-at-a-26-billion-valuation-and-90-of-its-own-code-is-written-by-its-ai" target="_blank" rel="noopener">The Next Web</a>
+        <a class="src" href="https://officechai.com/ai/devin-maker-cognition-raises-1-billion-at-26-billion-valuation/" target="_blank" rel="noopener">OfficeChai</a>
+        <a class="src" href="https://the-decoder.com/ai-coding-agent-devin-maker-cognition-more-than-doubles-its-valuation-to-26-billion-in-under-nine-months/" target="_blank" rel="noopener">The Decoder</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/funding-round/2026/cognition-secures-1b-at-26b-valuation-amidst-ai-boom" target="_blank" rel="noopener">StartupHub</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag policy">Policy</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">China widens overseas travel restrictions to AI talent at private firms including Alibaba and DeepSeek</h3>
+        <p class="tldr">Bloomberg reported on May 26 that Chinese authorities are now requiring formal government approval before AI researchers, founders and executives at private companies can travel abroad. The policy was first applied to some DeepSeek staff in December 2025; it has now been extended to Alibaba and the broader private AI sector.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Selection criteria. Per Bloomberg, individuals are flagged based on strategic value rather than seniority or specific employer, meaning the restrictions apply variably across research, founding and executive roles within the same companies. The framing is preserving talent inside China to prevent emigration, technology leakage and recruitment by US labs. Last year the Wall Street Journal reported that Chinese authorities had informally advised AI founders to avoid US travel; the new requirement formalizes that into a written approval process, which is a meaningful escalation rather than a continuation of past practice.</p>
+      <p>The political signal is bigger than the operational impact. China is now treating private sector AI talent at the same risk tier as state linked researchers in semiconductor and aerospace programs. That has two follow on implications worth tracking: first, expect parallel US export control tightening at the Department of Commerce in response, and second, expect Chinese AI firms to lean more heavily on subsidiaries in Singapore, the UAE and Saudi Arabia for international engagement. Alibaba has already been expanding its Singapore footprint; DeepSeek is harder to read because it has remained deliberately low profile internationally.</p>
+      <p>Cross source check: Bloomberg, Tom's Hardware, Crypto Briefing, MLQ.ai, Invezz, RT, Plataforma Media, Cryptonomist and Heise all converge on the same headline. The DeepSeek December 2025 origin is Bloomberg sourced and has not been independently corroborated.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Less direct than the Nvidia or KPMG stories but worth flagging. The mechanical effect of China hardening internal talent restrictions is to reinforce the bifurcation between US and Chinese AI ecosystems, which is a positive for US AI infrastructure demand at the margin. The risk to watch: if the US administration's accelerationist stance (Sacks, Musk, Andreessen) continues to push for fewer export controls in pursuit of "winning the race," CoreWeave could find itself under regulatory pressure on either side to constrain who it sells GPU capacity to. The relevant precedent is the Biden era diffusion rule, which the Trump administration rescinded in May 2025. Watch for the next iteration of the framework, which is reportedly under discussion at Commerce.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chinese-ai-experts-in-private-firms-now-required-to-secure-approval-before-international-travel-beijing-enforces-policy-to-secure-top-tier-talent-expands-measures-beyond-government" target="_blank" rel="noopener">Tom's Hardware</a>
+        <a class="src" href="https://cryptobriefing.com/china-travel-restrictions-ai-talent/" target="_blank" rel="noopener">Crypto Briefing</a>
+        <a class="src" href="https://mlq.ai/news/china-requires-government-approval-for-ai-researchers-at-alibaba-deepseek-to-travel-abroad/" target="_blank" rel="noopener">MLQ</a>
+        <a class="src" href="https://invezz.com/ng/news/2026/05/26/top-chinese-ai-talent-face-new-overseas-travel-restrictions/" target="_blank" rel="noopener">Invezz</a>
+        <a class="src" href="https://www.heise.de/en/news/China-expands-travel-restrictions-for-AI-talent-11307059.html" target="_blank" rel="noopener">Heise</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">8 sources</span>
+        </div>
+        <h3 class="headline">NextEra to acquire Dominion for $67B, creating a $420B enterprise value utility positioned to capture Virginia's "Data Center Alley"</h3>
+        <p class="tldr">NextEra Energy announced the all stock acquisition of Dominion Energy on May 18, the largest energy deal of the century. Dominion shareholders receive 0.8138 NextEra shares per share held, a roughly 23 percent premium. Bloomberg's May 28 framing centers on whether NextEra can actually accelerate AI data center power buildout in Virginia.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Deal mechanics. All stock transaction, expected to close in 2027 (regulatory). Combined entity holds approximately $250B equity value and $420B enterprise value. NextEra CEO John Ketchum is publicly framing AI factories as the primary driver, with Dominion's Virginia footprint as the strategic crown jewel. Northern Virginia hosts north of 300 data centers and reportedly handles roughly 70 percent of global internet traffic at some exchange points, with AWS, Azure, Google Cloud and Meta all operating significant facilities in the region. The Bloomberg piece on May 28 raises the operational question: can a merger actually move power infrastructure faster than the existing utility, regulatory and interconnection processes allow?</p>
+      <p>Two counterpoints to carry. First, deal close in 2027 is well behind the 2026 and 2027 AI capacity buildout decisions that CoreWeave and the hyperscalers are making right now, so the merger does not relieve near term constraint. Second, the 130 GW construction backlog cited in some secondary coverage (AI Unfiltered) is the combined development pipeline, not signed projects, so it should not be treated as committed capacity. The number that matters more is Northern Virginia's effective near halt on new data center permits in several counties pending power buildout, which the merger does not change.</p>
+      <p>Cross source check: Fortune, CBS News, Bloomberg, Motley Fool, 24/7 Wall St, StartupHub and AI Unfiltered all confirm the $67B headline, 23 percent premium, AI factory framing and 2027 close target. The 130 GW figure varies across outlets and should be treated as directional.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is the single most important infrastructure story of the week for CoreWeave's strategic positioning. Two specifics. First, the deal validates that power, not GPUs, is now the binding constraint for AI capacity expansion in the US, which is the thesis CoreWeave has been articulating to investors since the Q1 print. Second, NextEra and Dominion control a meaningful fraction of the power capacity that CoreWeave will need to contract over the 2027 to 2030 window. The bigger and more integrated the utility counterparty becomes, the more leverage they have on Power Purchase Agreement terms, interconnection priority and behind the meter generation arrangements. Watch for whether CoreWeave's announced Texas and Northern Virginia expansions get re negotiated as the merger progresses through regulatory review.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://fortune.com/2026/05/18/nextera-dominion-67-billion-acquisition-ai-data-centers-largest-utility/" target="_blank" rel="noopener">Fortune</a>
+        <a class="src" href="https://www.cbsnews.com/news/nextera-dominion-67-billion-deal-ai-data-centers/" target="_blank" rel="noopener">CBS News</a>
+        <a class="src" href="https://www.bloomberg.com/news/newsletters/2026-05-28/nextera-is-betting-its-dominion-deal-can-speed-us-infrastructure-for-ai" target="_blank" rel="noopener">Bloomberg May 28</a>
+        <a class="src" href="https://www.fool.com/investing/2026/05/18/did-nextera-energy-just-make-a-massive-67-billion/" target="_blank" rel="noopener">Motley Fool</a>
+        <a class="src" href="https://247wallst.com/investing/2026/05/21/ai-data-centers-are-about-to-break-the-grid-one-company-just-spent-67-billion-to-fix-it/" target="_blank" rel="noopener">24/7 Wall St</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/public-companies/2026/nextera-buys-dominion-for-67b-in-ai-power-deal" target="_blank" rel="noopener">StartupHub</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag security">Security</span>
+          <span class="tag research">Research</span>
+          <span class="src-count">8 sources</span>
+        </div>
+        <h3 class="headline">FT and Alice researchers strip safety guardrails from Meta Llama 3.3 and Google Gemma 3 in under 10 minutes using a GitHub tool</h3>
+        <p class="tldr">A May 25 Financial Times investigation, in collaboration with AI safety group Alice, demonstrated that a publicly available tool called Heretic can remove safety guardrails from open weight models from Meta and Google in under 10 minutes, without specialist hardware. The decensored models reportedly responded to bioweapon, malware and CSAM prompts.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The technical claim. Heretic is a tool hosted publicly on GitHub that its creator says works on more than 3,500 open weight models, applying activation engineering style modifications to suppress safety refusal behaviors. The FT and Alice ran it against Llama 3.3 and Gemma 3, and the resulting models produced responses to prompts that would be refused by the original releases. I would carefully caveat one detail: producing a response to a bioweapon prompt is not the same as producing operationally useful uplift, and the FT writeup does not characterize whether the outputs were qualitatively dangerous or merely jailbreak quality text. The signal is still real, but the magnitude needs further work before the policy conclusion is clean.</p>
+      <p>Why this matters now. The accelerationist coalition (Musk, Sacks, Andreessen) successfully pushed the Trump administration to pull the planned AI safety executive order last week, and the public framing was that voluntary review would slow US labs. The Heretic demonstration cuts against that argument: if open weight models can be decensored in 10 minutes with a GitHub tool, the marginal cost of voluntary pre release review is small relative to the externality. Expect this to be cited in Congressional hearings and in the next round of EU AI Act enforcement discussions. The Kawin Ethayarajh quote in the FT piece ("nowadays it's much easier for the average person") is the line that will get picked up by reporters.</p>
+      <p>Cross source check: Financial Times original (paywall), Irish Times reprint, eWeek, ResultSense, SQ Magazine, Europe Says, Buddy Learner and Let's Data Science all describe the same Heretic demonstration. The "3,500 models" claim originates with Heretic's own GitHub README and has not been independently verified.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Less direct but worth carrying. CoreWeave does not ship open weight models, but it does host them as inference workloads for customers, and the Heretic demonstration sharpens a procurement question for enterprise customers: which open weight models can be deployed safely without the customer taking on substantial liability for downstream misuse? Expect enterprise procurement teams to start asking GPU clouds for "responsible inference" features that block known decensoring patterns. That is a feature surface CoreWeave can compete on against AWS, Azure and GCP if it builds the right inference time guardrail layer.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.irishtimes.com/business/2026/05/25/ai-guardrails-stripped-from-meta-and-google-models-in-minutes/" target="_blank" rel="noopener">Irish Times</a>
+        <a class="src" href="https://www.eweek.com/news/open-weight-ai-guardrails-gemma-llama/" target="_blank" rel="noopener">eWeek</a>
+        <a class="src" href="https://www.resultsense.com/news/2026-05-26-ft-ai-guardrails-stripped-meta-google-models/" target="_blank" rel="noopener">ResultSense</a>
+        <a class="src" href="https://sqmagazine.co.uk/meta-google-ai-models-guardrail-flaw/" target="_blank" rel="noopener">SQ Magazine</a>
+        <a class="src" href="https://www.archynewsy.com/ai-guardrails-stripped-from-meta-and-google-models-in-minutes/" target="_blank" rel="noopener">Archynewsy</a>
+        <a class="src" href="https://letsdatascience.com/news/tools-strip-safety-guardrails-from-meta-google-models-93d3dc60" target="_blank" rel="noopener">Let's Data Science</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag models">Models</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">8 sources</span>
+        </div>
+        <h3 class="headline">Google I/O 2026 ships Gemini 3.5 Flash with frontier level intelligence at 4x speed, alongside Antigravity 2.0 and an AI Studio mobile app</h3>
+        <p class="tldr">Google released Gemini 3.5 Flash to general availability on May 19 at I/O, positioned as a faster and cheaper option for agents and coding. Pricing is $1.50 per million input and $9 per million output, with a 1M token context window and a stated 76.2 percent Terminal-Bench 2.1 score. Gemini 3.5 Pro is held for a June rollout.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Model framing. Google is explicitly positioning Gemini 3.5 Flash as the new default workhorse for agents and coding rather than for chat, which is a meaningful framing shift. The 76.2 percent Terminal-Bench 2.1 score, if it holds up under independent benchmarking, would put Flash ahead of Gemini 3.1 Pro on coding and agentic tasks at roughly half the price. I would caveat the Terminal-Bench number: Google ran the eval and there is no independent reproduction yet. The knowledge cutoff is January 2025 with a 1M input and 65K output token envelope.</p>
+      <p>The bigger story is the rest of I/O. Google announced AI Studio mobile (web and now iOS and Android) which generates working Android apps from prompts, Antigravity 2.0 as a redesigned agentic coding workflow, and a "Gemini Spark" creative tool. The Simon Willison reading (which I would broadly agree with) is that Google is deliberately positioning Flash as the model "we plan to use for everything," which is a different commercial bet than OpenAI (premium GPT-5.5) and Anthropic (premium Opus, Sonnet for volume). Google is willing to give up margin per token in exchange for share of agent traffic.</p>
+      <p>Cross source check: Google blog, TechCrunch, MarkTechPost, Simon Willison, Codersera, Apidog, Let's Data Science and 9to5Google all align on the May 19 release, the price points, the 1M context window, and the agent and coding positioning. The 76.2 percent Terminal-Bench 2.1 figure is Google sourced.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Indirect but real. Google's strategy of pricing Flash aggressively to capture agent traffic puts pressure on the rest of the market to match, which means inference cost per token continues its compression. That is bad for the gross margin per token math at every layer of the stack (model labs, GPU clouds, inference serving) but good for absolute volume. The math CoreWeave should care about is whether volume growth outruns price compression. So far it has, but the gap is narrowing. The other operational signal: Gemini 3.5 Flash runs primarily on TPUs, not GPUs, which keeps the load off the Nvidia and CoreWeave fleets and into Google's own Trillium and successor stack. The implicit competitive question for CoreWeave is whether US enterprise demand routes more to Anthropic on AWS and CoreWeave, or to Google on Google Cloud, as agents go mainstream.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" target="_blank" rel="noopener">Google</a>
+        <a class="src" href="https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.marktechpost.com/2026/05/20/google-introduces-gemini-3-5-flash-at-i-o-2026-a-faster-and-cheaper-model-for-ai-agents-and-coding/" target="_blank" rel="noopener">MarkTechPost</a>
+        <a class="src" href="https://simonwillison.net/2026/May/19/gemini-35-flash/" target="_blank" rel="noopener">Simon Willison</a>
+        <a class="src" href="https://9to5google.com/2026/05/19/google-ai-studio-android-apps/" target="_blank" rel="noopener">9to5Google</a>
+        <a class="src" href="https://techcrunch.com/2026/05/19/googles-ai-studio-now-lets-anyone-build-android-apps-in-minutes/" target="_blank" rel="noopener">TechCrunch AI Studio</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">08</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag business">Business</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">Altman and Amodei both walk back their AI jobs apocalypse predictions as IPOs approach</h3>
+        <p class="tldr">Sam Altman, in Sydney on May 26 at a Commonwealth Bank of Australia event, said he was "pretty wrong" about AI driven white collar job displacement and added: "I'm delighted to be wrong about this." Anthropic's Dario Amodei, who in 2025 warned AI could eliminate 50 percent of entry level white collar jobs, has reframed automation as a multiplier of output rather than a destroyer.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The reversal. Altman's prior framing, made on the Uncapped podcast in 2025, was that "a lot of jobs will go away." His Sydney remarks shift to admitting that the displacement he expected by mid 2026 has not materialized, citing as a personal data point his own attempts to delegate Slack and email responses to AI, which he reverted to handling manually because "people care about human interactions." Amodei's reversal is harder to pin to a single date but is consistent across recent comments and is sharper given that his 50 percent figure was the most cited specific number in 2025's labor automation discourse.</p>
+      <p>The skeptical read, which Fortune and The Decoder both raise explicitly, is that both CEOs are walking back hawkish labor predictions in the months leading up to their respective IPO and major financing events. That framing is uncharitable but not wrong: both companies face material customer and regulatory risk if AI is publicly priced as a labor destroyer, particularly in EU and UK markets where the AI Act and equivalent rules are still being calibrated. I would push back on the strongest version of the cynicism, though: there is also a defensible substantive reading that the data through 2026 simply does not yet show the displacement that was forecast. The MIT and Apollo Research analyses cited in recent papers (which I cannot independently verify) suggest near term displacement is concentrated in narrow function clusters rather than across entry level work as a whole.</p>
+      <p>Cross source check: Fortune, Time, The Decoder, Breitbart, American Bazaar and WION all reference the same Altman Sydney quotes from May 26. The Amodei reframe is referenced in Fortune and The Decoder but not anchored to a single specific interview.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>A softer public labor story is mechanically good for the AI infrastructure capex narrative because it reduces the political backlash risk that drives regulatory restrictions on deployment. The cleaner CoreWeave specific implication is that AI's value proposition is being rearticulated as productivity uplift rather than headcount substitution, which is the framing that hyperscaler and enterprise customers have to support to keep buying. For investor positioning watch this: if the labor narrative stabilizes around "AI multiplies output," expect a lift in software multiples that has already started, and continued strength in the GPU cloud space as long as the volume growth holds.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://fortune.com/2026/05/26/sam-altman-dario-amodei-walking-back-ai-jobs-apocalypse-prophecies-ipo/" target="_blank" rel="noopener">Fortune</a>
+        <a class="src" href="https://time.com/article/2026/05/26/sam-altman-ai-job-losses-openAI-/" target="_blank" rel="noopener">Time</a>
+        <a class="src" href="https://the-decoder.com/sam-altman-and-dario-amodei-walk-back-their-ai-job-apocalypse-predictions/" target="_blank" rel="noopener">The Decoder</a>
+        <a class="src" href="https://americanbazaaronline.com/2026/05/26/altman-says-rapid-growth-of-ai-unlikely-to-lead-to-jobs-apocalypse-481576/" target="_blank" rel="noopener">American Bazaar</a>
+        <a class="src" href="https://www.wionews.com/trending/delighted-to-be-wrong-sam-altman-says-ai-may-not-trigger-feared-white-collar-job-apocalypse-1779801560534" target="_blank" rel="noopener">WION</a>
+        <a class="src" href="https://www.hcamag.com/us/news/general/ai-not-causing-jobs-apocalypse-says-openai-ceo/576606" target="_blank" rel="noopener">HRD</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks · last 2 weeks</h2>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Invest Like the Best</div>
+      <div class="pod-date">May 13 2026</div>
+    </div>
+    <div class="pod-title">Krishna Rao: Anthropic's CFO on compute, scaling to $30B ARR, and the returns to frontier intelligence</div>
+    <div class="pod-guest">Guest: Krishna Rao (CFO, Anthropic)</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Core thesis: compute is "the canvas on which everything else gets built," and the CFO function at a frontier lab is structurally a capital allocation role first, with finance as the second order activity. Rao frames procurement and allocation of compute as the binding constraint that defines the product roadmap.</li>
+        <li>Unit economics framing: Rao argues that the per token gross margin at the model layer is improving even as headline prices fall, because of efficiency gains in pre training and inference. He does not put a number on it, which I would push back on. The directional claim is consistent with what Anthropic is signaling on Q2 operating profit, but the asymmetry of how scheduled compute commitments are recognized is the part the public conversation keeps glossing.</li>
+        <li>Workload mix: Rao acknowledges, in passing, that Anthropic's inference footprint is now spread across AWS Trainium, Google TPU and Nvidia GPUs, with the Microsoft Maia 200 negotiation reported separately by The Information referenced obliquely. The relevant point for infrastructure planners is that any single silicon platform now needs to coexist with the others rather than displace them.</li>
+        <li>Carry the caveat that Rao is the CFO of a company in the middle of a $30B financing round, so every quote is calibrated for the investor audience. Treat takeaways as directional rather than as forward looking financial guidance.</li>
+      </ul>
+      <a class="src" href="https://investlikethebest.libsyn.com/" target="_blank" rel="noopener">Invest Like the Best feed</a>
+    </div>
+  </article>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Invest Like the Best</div>
+      <div class="pod-date">May 20 2026</div>
+    </div>
+    <div class="pod-title">Gavin Baker: Watts and Wafers, the two physical constraints that will dictate the next phase of AI</div>
+    <div class="pod-guest">Guest: Gavin Baker (Founding Partner and CIO, Atreides Management)</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Core thesis: AI growth is now bottlenecked by two physical inputs: electricity (watts) and advanced packaging plus HBM (wafers). Baker's framing is that the GPU narrative dominated 2023 to 2025, the power narrative is dominating 2026, and the HBM and CoWoS narrative will dominate 2027.</li>
+        <li>Specific claims to verify: Baker estimates that effective HBM capacity, not GPU die supply, is the binding constraint at the Rubin generation, with TSMC CoWoS-L packaging as the secondary bottleneck. He cites a number for HBM3E and HBM4 yield ramp that I have not seen confirmed publicly, so I would treat as Baker's working number rather than independently sourced.</li>
+        <li>Investment framing: Baker is publicly long Atreides positions in Nvidia, TSMC and several US utility names, and has previously disclosed positions in private AI infrastructure. The episode does not relitigate those positions but the framing maps directly onto the thesis. Worth listening for the watts vs wafers framework even if the specific picks do not transfer.</li>
+        <li>The most useful frame for CoreWeave: Baker explicitly argues that vertical integration of power, GPU and inference becomes the moat by 2027, which is exactly the strategic question CoreWeave is trying to answer with the announced power deals and the Rubin CPX deployments.</li>
+      </ul>
+      <a class="src" href="https://investlikethebest.libsyn.com/" target="_blank" rel="noopener">Invest Like the Best feed</a>
+    </div>
+  </article>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Invest Like the Best</div>
+      <div class="pod-date">May 5 2026</div>
+    </div>
+    <div class="pod-title">Brian Chesky: AI founder mode</div>
+    <div class="pod-guest">Guest: Brian Chesky (Co founder and CEO, Airbnb)</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Less directly AI infrastructure relevant but a useful management framing episode. Chesky describes how Airbnb has reorganized internal product workflows around AI tooling, with specific design and engineering rituals that O'Shaughnessy walks through in detail.</li>
+        <li>The interesting tension in the conversation is between Chesky's "founder mode" framing (centralized product taste) and the reality that AI tooling decentralizes which decisions even need a founder. Chesky does not fully resolve this and I would push on whether founder mode is durable when AI agents are doing the prototype work.</li>
+        <li>Worth pulling for the section on Airbnb's compute infrastructure decisions specifically. Airbnb does not run frontier training, but Chesky describes a multi vendor inference posture that mirrors what the rest of the enterprise market is converging toward.</li>
+      </ul>
+      <a class="src" href="https://investlikethebest.libsyn.com/" target="_blank" rel="noopener">Invest Like the Best feed</a>
+    </div>
+  </article>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals · X and social</h2>
+
+  <div class="signals">
+    <div class="signal">
+      <span class="handle">@jensenhuangnv</span><span class="date">May 21 2026</span>
+      <span class="quote">"In AI, compute is revenue." On the Q1 earnings call, Huang framed compute supply as the binding constraint on AI revenue growth across the industry. The "demand has gone parabolic" line that closed the call is the headline quote and is now circulating across investor decks. Worth tracking how the parabolic framing holds through Q2.</span>
+      <a class="src" href="https://www.cnbc.com/video/2026/05/21/nvidia-ceo-jensen-huang-in-ai-compute-is-revenue.html" target="_blank" rel="noopener">CNBC video</a>
+    </div>
+    <div class="signal">
+      <span class="handle">@sama</span><span class="date">May 26 2026</span>
+      <span class="quote">"I'm delighted to be wrong about this. I thought there would have been more impact on entry-level white-collar jobs being eliminated by now than has actually happened." Altman, on stage in Sydney with CBA CEO Matt Comyn, walking back his 2025 forecast. Read alongside the OpenAI S-1 filing on May 22 as a deliberate pre IPO repositioning of the labor narrative.</span>
+      <a class="src" href="https://time.com/article/2026/05/26/sam-altman-ai-job-losses-openAI-/" target="_blank" rel="noopener">Time</a>
+      <a class="src" href="https://fortune.com/2026/05/26/sam-altman-dario-amodei-walking-back-ai-jobs-apocalypse-prophecies-ipo/" target="_blank" rel="noopener">Fortune</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Cognition</span><span class="date">May 27 2026</span>
+      <span class="quote">Cognition's internal metric in the round announcement: Devin now writes 89 percent of all pull requests merged at Cognition itself, up from roughly 25 percent in early 2025. I would caveat that this is a self reported number and the definition of "PR written by Devin" almost certainly includes human review gating. Still a striking data point on coding agent saturation in a single AI native company.</span>
+      <a class="src" href="https://thenextweb.com/news/cognition-just-raised-1-billion-at-a-26-billion-valuation-and-90-of-its-own-code-is-written-by-its-ai" target="_blank" rel="noopener">The Next Web</a>
+      <a class="src" href="https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation/" target="_blank" rel="noopener">TechCrunch</a>
+    </div>
+    <div class="signal">
+      <span class="handle">WEF Global Cybersecurity Outlook</span><span class="date">May 4 2026</span>
+      <span class="quote">94 percent of cyber leaders identify AI as the defining force in cybersecurity, with 77 percent of organizations now using AI in cyber operations. The percentage of respondents assessing the security of AI tools nearly doubled from 37 percent in 2025 to 64 percent in 2026, and 87 percent flag AI related vulnerabilities as the fastest growing cyber risk. Published with KPMG, and is now landing into the KPMG Claude rollout narrative.</span>
+      <a class="src" href="https://www.weforum.org/press/2026/05/new-report-shows-how-ai-gives-cybersecurity-competitive-advantage/" target="_blank" rel="noopener">WEF press</a>
+      <a class="src" href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" rel="noopener">Full report PDF</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Salesforce</span><span class="date">May 21 2026</span>
+      <span class="quote">Agentforce Coworker shipped to all Agentforce customers (Enterprise, Unlimited and Agentforce 1) on May 21. Embedded into every Salesforce search bar, with extension into Slack, Teams and ChatGPT. Worth pairing with Microsoft Copilot Studio's computer using agents going GA last week as the first two enterprise platforms to ship full agent loops across the productivity surface.</span>
+      <a class="src" href="https://www.salesforceben.com/salesforce-announces-agentforce-coworker-ai-in-every-search-bar/" target="_blank" rel="noopener">Salesforce Ben</a>
+    </div>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <h2 class="section">Connected sources</h2>
+  <div class="connect-note">
+    <strong>Gmail, Google Calendar and Slack</strong> are connected to this briefing pipeline. This Thursday edition was driven by open web sources; no private signal materially changed the public story ranking. If a specific internal channel (corp dev, infra watch, ai news, customer wins) would be useful to incorporate before Monday's edition, flag it and it will be added to the next pull.
+  </div>
+
+  <footer>
+    Generated by Claude · May 28 2026 · Sources include Bloomberg, CNBC, TechCrunch, Fortune, Time, The Decoder, Anthropic, Nvidia (8-K), Google blog, Financial Times via Irish Times, Motley Fool, CBS News, Tom's Hardware, Simon Willison, Salesforce Ben, WEF, Invest Like the Best.<br>
+    Caveats flagged inline: Nvidia's 76.2 percent Terminal-Bench score for Gemini 3.5 Flash is Google sourced and not independently reproduced. Cognition's 89 percent Devin PR figure and $492M ARR are self reported. The Heretic 3,500 model claim originates with the tool's own README. The 130 GW NextEra construction backlog number varies across outlets and should be treated as directional rather than committed. Sam Altman and Dario Amodei walkback framing is partially editorial across Fortune and The Decoder; the Altman direct quotes from Sydney May 26 are well sourced. Gavin Baker HBM4 ramp numbers are his working figures rather than independently verified.
+  </footer>
+
+</div>
+<script>
+  function toggle(el, event) {
+    if (event.target.tagName === 'A') return;
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
