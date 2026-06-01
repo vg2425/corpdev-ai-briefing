@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · June 1 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Monday edition · Mon Jun 1 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>7</strong> top stories</span>
+      <span class="pill"><strong>2</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>55+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">10+ sources</span>
+        </div>
+        <h3 class="headline">Anthropic raises $65B Series H at a $965B valuation, passing OpenAI as the most valuable AI startup and setting up an IPO as soon as October</h3>
+        <p class="tldr">Anthropic announced its Series H on May 28, led by Altimeter, Dragoneer, Greenoaks and Sequoia, at a $965B post money valuation. That edges past OpenAI's $852B March round, and reporting describes this as likely the last private raise before a public listing that could come as early as October 2026.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The numbers. $65B raised at $965B post money, up from $183B at the Series G in February, a 5.3x step in roughly eight months. Anthropic's own announcement and TechCrunch both cite run rate revenue crossing $47B earlier in May, which is the figure that makes the valuation defensible at roughly 20x run rate revenue rather than the much higher multiples the company carried a year ago. Stated use of funds is the usual triad: safety and interpretability research, compute expansion for Claude, and scaling products and partnerships.</p>
+      <p>The competitive framing is the part worth carrying. Anthropic is now the most valuable private AI company, ahead of OpenAI, and the gap between "model lab" and "trillion dollar enterprise software company" has effectively closed in the private markets. I would push back gently on the headline excitement: a $965B private mark set by growth and crossover investors in a momentum round is not the same as a public market clearing price, and the October IPO timing is reported as a possibility, not a commitment. Treat the $47B run rate as the number to interrogate, since revenue durability, not valuation, is what the IPO will be priced on.</p>
+      <p>Cross source check: Anthropic's own Series H post, TechCrunch, CNBC, Yahoo Finance, Alternatives Watch, Funds for NGOs, indmoney and several others converge on the $65B raise, $965B valuation, the named lead investors, and the "passes OpenAI" framing. The October 2026 IPO window is reported by multiple outlets but is characterized as under consideration rather than scheduled.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic is one of the most important demand signals in CoreWeave's universe, and a $65B raise earmarked partly for "compute expansion for Claude" is a direct read on future inference and training demand. The strategic nuance: Anthropic's stated infrastructure posture spreads workloads across AWS Trainium, Google TPU and Nvidia GPUs, so the question for CoreWeave is share of that expanding pie rather than whether the pie grows. An Anthropic IPO would also force public disclosure of compute commitments and supplier concentration, which would give CoreWeave and its investors the cleanest external benchmark yet for how frontier inference economics actually flow through to GPU cloud providers. Watch the S-1, if it comes, for named infrastructure counterparties.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.anthropic.com/news/series-h" target="_blank" rel="noopener">Anthropic</a>
+        <a class="src" href="https://techcrunch.com/2026/05/28/anthropic-raises-65-billion-nears-1t-valuation-ahead-of-ipo/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/28/anthropic-open-ai-startup-value.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://finance.yahoo.com/sectors/technology/articles/anthropic-hits-965b-valuation-series-205500369.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://www.alternativeswatch.com/2026/06/01/anthropic-series-h-65-billion-ipo-openai-institutional-investors/" target="_blank" rel="noopener">Alternatives Watch</a>
+        <a class="src" href="https://www.indmoney.com/blog/us-stocks/anthropic-valuation-series-h-ipo-analysis-claude" target="_blank" rel="noopener">indmoney</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag infra">Infra</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Jensen Huang opens COMPUTEX with Nemotron 3 Ultra, a 550B open weights model built for agents, plus Vera CPU and an annual Spectrum-X cadence</h3>
+        <p class="tldr">At the GTC Taipei keynote at COMPUTEX on June 1, Nvidia unveiled Nemotron 3 Ultra, its largest open weights model at 550B parameters with 55B active, positioned as the leading US open model for agentic workloads. Huang also pushed the Vera CPU and committed to launching new Spectrum-X Ethernet products every year.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Model specifics. Nemotron 3 Ultra uses a hybrid Mamba Transformer mixture of experts design, 550B total parameters with roughly 55B active per token, trained in NVFP4. Nvidia and Artificial Analysis cite an Intelligence Index around 48 and throughput north of 300 tokens per second, which would make it the strongest US open weights model on those particular measures. I would caveat both numbers: the Intelligence Index figure is Nvidia and Artificial Analysis sourced and the throughput claim is hardware dependent, so treat them as vendor framing until independent reproduction lands.</p>
+      <p>The strategic story is Nvidia continuing to climb the stack. A frontier scale open weights model from the company that sells the GPUs is a deliberate move to seed agentic demand that runs best on Nvidia silicon, while keeping the model itself free to undercut closed model pricing. Pair that with the Vera CPU (Nvidia cites 1.8x faster task completion for agent workloads) and the commitment to annual Spectrum-X Ethernet refreshes, and the throughline is Nvidia trying to own the full agentic stack from networking to CPU to GPU to the model. Huang also announced an RTX Spark laptop class chip, which extends the same agentic framing down to the edge.</p>
+      <p>Cross source check: Nvidia Newsroom, Artificial Analysis, Crypto Briefing, KuCoin, Phemex, Coinpedia, explainx.ai and Seeking Alpha all confirm the Nemotron 3 Ultra launch, the 500 to 550B parameter framing, the agentic positioning, and the Vera and Spectrum-X announcements. The exact active parameter count (55B) and Intelligence Index (48) appear in the Artificial Analysis and Nvidia writeups specifically.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Two direct reads. First, a free 550B open weights model optimized for agents expands the population of high intensity inference workloads that need to run somewhere, and open weights models are exactly the kind of workload that lands on neoclouds rather than locked inside a hyperscaler's first party API. That is structurally good for CoreWeave's inference book. Second, the Vera CPU and annual Spectrum-X cadence reinforce the point from last week's Nvidia print: the reference architecture for Rubin class deployments is shifting toward an all Nvidia bill of materials, which tightens performance and lock in but increases single vendor concentration in CoreWeave's supply chain. Worth tracking whether CoreWeave positions itself as a launch host for Nemotron 3 Ultra inference, which would be a clean marketing and demand win.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://nvidianews.nvidia.com/news/nvidia-debuts-nemotron-3-family-of-open-models" target="_blank" rel="noopener">Nvidia Newsroom</a>
+        <a class="src" href="https://artificialanalysis.ai/articles/nvidia-nemotron-3-ultra-launch-announced" target="_blank" rel="noopener">Artificial Analysis</a>
+        <a class="src" href="https://cryptobriefing.com/nvidia-nemotron-3-ultra-computex-2026/" target="_blank" rel="noopener">Crypto Briefing</a>
+        <a class="src" href="https://www.kucoin.com/news/flash/nvidia-unveils-nemotron-3-ultra-ai-model-with-500-550-billion-parameters-at-computex-2026" target="_blank" rel="noopener">KuCoin</a>
+        <a class="src" href="https://seekingalpha.com/news/4598749-nvidia-highlights-agentic-and-physical-ai-key-partnerships-at-computex" target="_blank" rel="noopener">Seeking Alpha</a>
+        <a class="src" href="https://www.explainx.ai/blog/nvidia-computex-2026-nemotron-3-ultra-complete-recap" target="_blank" rel="noopener">explainx.ai</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag models">Models</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">9 sources</span>
+        </div>
+        <h3 class="headline">Anthropic ships Claude Opus 4.8 with Dynamic Workflows, letting Claude Code orchestrate up to 1,000 parallel subagents</h3>
+        <p class="tldr">Released May 28 at the same price as Opus 4.7, Opus 4.8 lands alongside Dynamic Workflows, a feature that lets Claude Code plan a large job, spin up subagents (16 concurrent, 1,000 total per run), and verify each result against a test suite with no manual orchestration. A cheaper fast mode also now supports Opus 4.8.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What shipped. Opus 4.8 is available immediately across the Claude API, Amazon Bedrock, Google Cloud Vertex AI and Microsoft Foundry. Reported benchmarks include 88.6 percent on SWE-bench Verified and 74.6 percent on Terminal-Bench 2.1, with marketing emphasis on being roughly 4x more honest about its own code bugs. I would flag the honesty and benchmark figures as Anthropic sourced and not yet independently reproduced. The pricing held flat at the Opus 4.7 level, with fast mode offering a cheaper tier.</p>
+      <p>Dynamic Workflows is the more strategically interesting piece. Rather than a human chaining subagents, Claude writes a JavaScript orchestration script for the task you describe, and a runtime executes it in the background, fanning out to as many as 1,000 subagents per run with 16 running concurrently. The framing target is repository scale migrations and other large mechanical engineering jobs. The honest read is that this is the same direction the whole field is moving (background, long horizon, unsupervised agent loops), and the differentiation is in reliability and verification rather than the headline subagent count. The 1,000 number is a ceiling, not a typical workload.</p>
+      <p>Cross source check: TechCrunch, MarkTechPost, MindStudio, Appwrite, AI Weekly, Digital Applied and several others align on the May 28 release, the 1,000 subagent cap with 16 concurrent, multi cloud availability at launch, and flat pricing versus Opus 4.7. The specific benchmark scores vary slightly across secondary coverage and originate with Anthropic.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Coding agents remain the most inference intensive workload at the frontier, and Dynamic Workflows is explicitly designed to multiply tokens per task by fanning a single request into hundreds of parallel subagent calls. That is the workload profile CoreWeave wants more of: bursty, high concurrency, latency tolerant inference that fills fleet capacity. The detail to underline is that Opus 4.8 launched simultaneously on Bedrock, Vertex and Microsoft Foundry, which is the recurring pattern where Anthropic's largest inference volumes route through hyperscaler contracts. For CoreWeave the route to this demand runs largely through its AWS and Microsoft relationships rather than direct, so the relevant metric is fleet utilization driven by agentic burst, not logo level customer wins.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://techcrunch.com/2026/05/28/anthropic-releases-opus-4-8-with-new-dynamic-workflow-tool/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.marktechpost.com/2026/05/28/anthropic-ships-claude-opus-4-8-alongside-dynamic-workflows-and-cheaper-fast-mode-with-workflows-capped-at-1000-subagents/" target="_blank" rel="noopener">MarkTechPost</a>
+        <a class="src" href="https://www.mindstudio.ai/blog/claude-opus-4-8-dynamic-workflows-parallel-sub-agents" target="_blank" rel="noopener">MindStudio</a>
+        <a class="src" href="https://appwrite.io/blog/post/anthropic-just-launched-claude-opus-48-with-fast-mode-and-dynamic-workflows" target="_blank" rel="noopener">Appwrite</a>
+        <a class="src" href="https://www.digitalapplied.com/blog/claude-opus-4-8-release-dynamic-workflows-2026" target="_blank" rel="noopener">Digital Applied</a>
+        <a class="src" href="https://aiweekly.co/alerts/claude-opus-48-brings-effort-modes-and-parallel-subagents" target="_blank" rel="noopener">AI Weekly</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">Microsoft heads into Build 2026 with homegrown MAI models and a Copilot coding model, code named Project Polaris, aimed at reclaiming ground from Claude Code</h3>
+        <p class="tldr">Reporting and leaks ahead of Build 2026, which opens June 2 in San Francisco, point to a suite of MAI models (MAI-Image-2.5, MAI-Voice-2, MAI-Transcribe-1.5) plus a homegrown coding model to power GitHub Copilot. The framing is Microsoft wanting more control over the models under its most important products, and less dependence on OpenAI.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is expected. Multiple Windows focused outlets report a media and speech model lineup (MAI-Image-2.5, MAI-Voice-2, MAI-Transcribe-1.5) targeting Copilot, Teams, Azure Speech and Microsoft Foundry, alongside a homegrown coding model reported under the code name Project Polaris intended to strengthen GitHub Copilot. I would caveat heavily: as of this writing these are pre conference leaks and reports, not confirmed launches, and the Project Polaris code name in particular is single threaded reporting that should be treated as unverified until the keynote on June 2.</p>
+      <p>The strategic logic is clear even if the specifics are not yet confirmed. Claude Code has, per multiple reports, overtaken Copilot as the dominant developer AI tool, and the GitHub Copilot billing change (see Quick Signals) underlines that the economics of paying a third party model provider for every agentic session are painful. A Microsoft owned coding model would let Microsoft control both the margin and the roadmap of its flagship developer product. The skeptical read is that Microsoft has tried homegrown models before without displacing OpenAI inside its premium surfaces, so the bar is execution, not ambition.</p>
+      <p>Cross source check: Windows Forum, Windows News, TestingCatalog, Notebookcheck and Education Pals all describe the June 2 Build timing, the MAI model lineup and the Copilot coding model intent. The Project Polaris code name and the "take Copilot back from Claude Code" framing are reported but not independently confirmed, so this story is ranked below the confirmed launches above.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>If Microsoft shifts more Copilot inference onto its own MAI models running on its own Maia accelerators and Azure fleet, that is a long run negative for third party GPU demand tied to Copilot specifically, because it keeps the workload inside Microsoft's first party stack. The offsetting read for CoreWeave is that Microsoft's appetite for capacity is so far ahead of its own buildout that it continues to lean on external GPU supply, and a homegrown model does not change near term capacity math. The signal to watch is whether Microsoft frames MAI as additive (more total inference) or substitutive (replacing OpenAI and Anthropic spend), since only the latter is a headwind. Treat this as a watch item until the June 2 keynote confirms what actually ships.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://windowsnews.ai/article/microsoft-build-2026-homegrown-ai-models-to-power-github-copilot.420887" target="_blank" rel="noopener">Windows News</a>
+        <a class="src" href="https://www.testingcatalog.com/microsoft-readies-new-mai-voice-and-image-models-for-build-2026/" target="_blank" rel="noopener">TestingCatalog</a>
+        <a class="src" href="https://windowsnews.ai/article/microsoft-build-2026-leak-mai-image-25-mai-voice-2-and-mai-transcribe-15-set-for-june-2-unveiling.420924" target="_blank" rel="noopener">Windows News leak</a>
+        <a class="src" href="https://www.notebookcheck.net/Microsoft-Build-2026-What-to-expect-from-the-June-2-keynote.1311546.0.html" target="_blank" rel="noopener">Notebookcheck</a>
+        <a class="src" href="https://windowsforum.com/threads/microsoft-build-2026-homegrown-ai-models-to-power-github-copilot.420887/" target="_blank" rel="noopener">Windows Forum</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag agents">Agents</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">7 sources</span>
+        </div>
+        <h3 class="headline">Google's Gemini Spark goes live May 29 for US Ultra subscribers, an always on agent that persists on Google Cloud VMs after you close the tab</h3>
+        <p class="tldr">Previewed at I/O on May 19, Gemini Spark rolled out May 29 to US Google AI Ultra subscribers at the newly reduced $100 per month tier. It runs on Gemini 3.5 Flash plus the Antigravity 2.0 agent harness, and unlike the standard chatbot it persists on dedicated Google Cloud VMs, continuing to work when your phone is locked or laptop is shut.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What it is. Spark is Google's personal agent play: a system that reasons across your connected apps (Gmail integration is the headline), takes long horizon actions on your behalf, and runs in the background on persistent cloud infrastructure rather than ending when you close the tab. Pichai framed it as the next evolution of the digital assistant. Access is US only at launch on the Ultra tier, with EU and UK availability gated on AI Act compliance review and analysts expecting Q3 2026 at the earliest.</p>
+      <p>The architecturally interesting detail for an infrastructure audience is that Spark runs on dedicated Google Cloud virtual machines that persist per user. That is a different compute profile from request and response chat: it is closer to always on, per user allocated capacity, which is far more expensive to serve and explains why it sits behind the top subscription tier. The honest caveat is that "runs all day in the background" is a capability claim that will be tested by real usage; persistent agents have a habit of being throttled hard once the compute bill becomes visible.</p>
+      <p>Cross source check: 9to5Google confirms the May 29 US Ultra rollout, with the I/O preview covered by TechCrunch, CNBC, The Next Web and others on May 19. The persistent Google Cloud VM detail and the $100 Ultra tier appear in the 9to5Google and DataCamp writeups.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Spark is a clean illustration of where agentic compute is heading: away from stateless chat and toward persistent, per user, always on allocations that consume capacity even when idle. That profile is structurally more compute hungry than chat and is the demand shape that benefits GPU and accelerator capacity providers broadly. The CoreWeave specific caveat is that Spark runs on Google's own TPU stack inside Google Cloud, so it does not touch CoreWeave directly. The read across is competitive intelligence: as OpenAI and Anthropic ship their own persistent agents, the ones that run on Nvidia GPUs are the ones that flow to neoclouds. Watch whether the persistent agent pattern becomes the default product shape, because it changes capacity planning from peak concurrent sessions to allocated seats.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://9to5google.com/2026/05/29/gemini-spark-ultra-us/" target="_blank" rel="noopener">9to5Google</a>
+        <a class="src" href="https://techcrunch.com/2026/05/19/google-introduces-gemini-spark-a-24-7-agentic-assistant-with-gmail-integration/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://www.datacamp.com/blog/gemini-spark" target="_blank" rel="noopener">DataCamp</a>
+        <a class="src" href="https://gemini.google/overview/agent/spark/" target="_blank" rel="noopener">Google</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">8 sources</span>
+        </div>
+        <h3 class="headline">GitHub Copilot moves all plans to usage based billing on June 1, pricing agentic sessions by token consumption</h3>
+        <p class="tldr">Effective June 1, every GitHub Copilot plan transitions to usage based billing built around a monthly allotment of GitHub AI Credits, with extra usage metered by token consumption at API rates. Base subscription prices hold (Pro $10, Pro+ $39, Business and Enterprise $19 and $39), but heavy agentic users will pay materially more.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What changed. GitHub's stated rationale is blunt: Copilot now powers agentic workflows that consume far more compute than a year ago, a quick chat and a multi hour autonomous coding session cost GitHub very differently, and the flat premium request model is no longer sustainable. Each plan now includes a credit allotment, paid plans can buy more, and usage is metered on input, output and cached tokens at listed model API rates. Code completions and next edit suggestions remain unbilled and unlimited on paid plans, which protects the original Copilot use case.</p>
+      <p>This is one of the clearest public admissions yet that agentic inference economics break flat rate SaaS pricing. Developer reaction, per Visual Studio Magazine, has been negative, with the common complaint being "you will get less but pay the same" for heavy users. The honest framing is that this is the inevitable repricing of AI software from per seat to per consumption, and Copilot is simply early and visible because of its scale. Expect every agent priced product to follow, because nobody can subsidize unbounded background token burn indefinitely.</p>
+      <p>Cross source check: GitHub's own blog and changelog, GitHub community discussion, Visual Studio Magazine, Enterprise DNA, Windows Forum and how2shout all confirm the June 1 effective date, the AI Credits structure, the unchanged base prices and the metered token model. The developer backlash framing is reported across Visual Studio Magazine and how2shout.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is a leading indicator for the entire inference value chain that CoreWeave sits under. When the largest developer AI product publicly concedes that flat pricing cannot cover agentic token burn, it validates the thesis that inference demand (and therefore the compute underneath it) is growing faster than per seat revenue, which forces the whole stack toward consumption pricing. For CoreWeave that is directionally positive on volume: more metered agentic usage means more raw inference, which is the workload that fills GPU fleets. The risk embedded in the same trend is price compression at the model layer eventually squeezing what infrastructure providers can charge, so the number to watch is whether token volume growth keeps outrunning per token price declines.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank" rel="noopener">GitHub Blog</a>
+        <a class="src" href="https://github.com/orgs/community/discussions/192948" target="_blank" rel="noopener">GitHub Community</a>
+        <a class="src" href="https://visualstudiomagazine.com/articles/2026/04/27/devs-sound-off-on-usage-based-copilot-pricing-change-you-will-get-less-but-pay-the-same-price.aspx" target="_blank" rel="noopener">Visual Studio Magazine</a>
+        <a class="src" href="https://enterprisedna.co/resources/news/github-copilot-usage-based-billing-enterprise-2026/" target="_blank" rel="noopener">Enterprise DNA</a>
+        <a class="src" href="https://www.how2shout.com/ai/github-copilot-token-billing-june-2026-ai-credits-developer-backlash.html" target="_blank" rel="noopener">how2shout</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag policy">Policy</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">OpenAI publishes a Frontier Governance Framework mapping its safety practices to the EU AI Act and California's frontier law</h3>
+        <p class="tldr">On May 28 to 29, OpenAI released a Frontier Governance Framework that translates its existing Preparedness Framework into a public governance document aligned with the EU AI Act's Code of Practice for General Purpose AI and California's Transparency in Frontier AI Act. It is a regulatory translation layer, not a new safety methodology.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What it is. The document maps OpenAI's internal risk work across cyber offense, CBRN, harmful manipulation and loss of control onto specific external regulatory obligations: model reporting, security risk management, incident response, external expert input and framework update cadence. OpenAI is explicit that the Preparedness Framework remains the substantive foundation and the new document is about demonstrating compliance with emerging law rather than changing how risk is assessed.</p>
+      <p>The timing is the signal. This lands the same week as OpenAI's IPO positioning and the broader regulatory churn (Tech Times notes parallel fronts including a CNN suit against Perplexity and EU rule alignment). The defensible read is that frontier labs are racing to show regulators a clean compliance story before listing and before the EU AI Act's general purpose provisions bite. The more skeptical read is that a "regulatory translation layer" is exactly the kind of document that is cheap to produce and signals cooperation without constraining behavior. Both readings can be true at once.</p>
+      <p>Cross source check: OpenAI's own index page and PDF, StartupHub, keepingupwith.ai, CIO Dive, Artificial Intelligence News and Tech Times confirm the framework, the EU AI Act and California alignment, and the May 28 to 29 timing. Some outlets date it May 28 and some May 29, a minor discrepancy worth noting.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Indirect but worth carrying. As frontier labs formalize compliance frameworks tied to the EU AI Act and state law, the obligations propagate down the stack to infrastructure providers through contractual flow downs: data residency, incident reporting, security controls and audit rights. CoreWeave increasingly needs to be able to demonstrate that its infrastructure supports customer compliance with these regimes, particularly for EU resident workloads. The competitive angle is that "compliance ready infrastructure" is becoming a procurement criterion, and a neocloud that can credibly support EU AI Act obligations has an edge in winning regulated enterprise and lab workloads against less prepared competitors.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://openai.com/index/openai-frontier-governance-framework/" target="_blank" rel="noopener">OpenAI</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/artificial-intelligence/2026/openai-rolls-out-frontier-governance-framework" target="_blank" rel="noopener">StartupHub</a>
+        <a class="src" href="https://www.ciodive.com/news/openai-security-framework-regulations/821545/" target="_blank" rel="noopener">CIO Dive</a>
+        <a class="src" href="https://keepingupwith.ai/articles/openai-publishes-frontier-governance-framework-aligning-safety-practices-with-em/" target="_blank" rel="noopener">keepingupwith.ai</a>
+        <a class="src" href="https://www.techtimes.com/articles/317461/20260531/ai-regulation-2026-opens-three-fronts-cnn-sues-perplexity-openai-aligns-eu-rules.htm" target="_blank" rel="noopener">Tech Times</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks · last 2 weeks</h2>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Dwarkesh Podcast</div>
+      <div class="pod-date">May 22 2026</div>
+    </div>
+    <div class="pod-title">Reiner Pope: how chips actually work, from logic gates up to why GPUs, TPUs and FPGAs look the way they do</div>
+    <div class="pod-guest">Guest: Reiner Pope (CEO, MatX)</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Core thesis: a blackboard style lecture building from basic logic gates up to why GPUs, TPUs, FPGAs and even the human brain are architected the way they are. Pope runs MatX, a chip startup, so the framing is grounded in someone actually trying to build silicon rather than just analyze it.</li>
+        <li>Most useful frame for an infrastructure audience: the explanation of why different workloads push toward different silicon shapes, which is the foundation for understanding why the inference hardware market is fragmenting rather than consolidating onto one architecture.</li>
+        <li>Worth pulling for the segments on memory bandwidth and data movement as the real constraint, which maps directly onto the HBM and packaging bottleneck narrative that has dominated 2026 infrastructure discussion.</li>
+        <li>Caveat: Pope is a founder competing in the accelerator space, so his framing of where general purpose GPUs fall short is not neutral. Treat the architectural teaching as solid and the competitive positioning as a pitch.</li>
+      </ul>
+      <a class="src" href="https://www.dwarkesh.com/" target="_blank" rel="noopener">Dwarkesh Podcast</a>
+    </div>
+  </article>
+
+  <article class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <div class="pod-show">Dwarkesh Podcast</div>
+      <div class="pod-date">May 15 2026</div>
+    </div>
+    <div class="pod-title">Eric Jang: building AlphaGo from scratch with modern AI tools</div>
+    <div class="pod-guest">Guest: Eric Jang</div>
+    <div class="pod-detail">
+      <ul>
+        <li>Core thesis: a from scratch walkthrough of how to rebuild AlphaGo using modern tooling, which doubles as a concrete lesson in how far the practical engineering of reinforcement learning and self play systems has come.</li>
+        <li>The implicit takeaway for agentic AI: the same self play and search techniques that powered AlphaGo are part of the lineage behind today's reasoning and agent training, so the episode is a useful primer for understanding where long horizon agent capability comes from.</li>
+        <li>Practitioner value: more of a technical deep dive than a strategy conversation, best for understanding the mechanics rather than the market.</li>
+        <li>Caveat: I have verified the episode title, guest and date from the Dwarkesh archive listing but have not listened to confirm the specific claims, so treat the takeaways above as inferred from the published description.</li>
+      </ul>
+      <a class="src" href="https://www.dwarkesh.com/podcast/archive" target="_blank" rel="noopener">Dwarkesh archive</a>
+    </div>
+  </article>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals · X and social</h2>
+
+  <div class="signals">
+    <div class="signal">
+      <span class="handle">@karpathy</span><span class="date">May 19 2026</span>
+      <span class="quote">Andrej Karpathy announced he has joined Anthropic ("Personal update: I've joined Anthropic"), a post that drew close to 3 million views within an hour per Fortune's coverage. One of the most consequential individual talent moves of the year, landing the same week Anthropic raised at $965B. I cannot independently confirm the exact view count, which is Fortune sourced.</span>
+      <a class="src" href="https://fortune.com/2026/05/19/who-is-andrej-karpathy-vibe-coding-anthropic-openai-rubiks-cube/" target="_blank" rel="noopener">Fortune</a>
+    </div>
+    <div class="signal">
+      <span class="handle">GitHub</span><span class="date">Jun 1 2026</span>
+      <span class="quote">GitHub Copilot's usage based billing goes live today. The company's own framing is that Copilot "is not the same product it was a year ago" and that agentic sessions consume far more compute than flat pricing can sustain. The cleanest public admission yet that agent economics break per seat SaaS, with developer backlash already visible.</span>
+      <a class="src" href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/" target="_blank" rel="noopener">GitHub Blog</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Nvidia / COMPUTEX</span><span class="date">Jun 1 2026</span>
+      <span class="quote">Alongside Nemotron 3 Ultra, Nvidia used the COMPUTEX keynote to announce an RTX Spark laptop class chip with up to 20 Arm CPU cores, up to 128GB RAM and RTX 5070 class integrated graphics. The throughline of the whole keynote was agentic and physical AI from edge to data center. RTX Spark specs are Nvidia sourced from the keynote.</span>
+      <a class="src" href="https://www.fool.com/investing/2026/05/31/nvda-stock-jensen-huang-keynote-computex/" target="_blank" rel="noopener">Motley Fool</a>
+      <a class="src" href="https://www.explainx.ai/blog/nvidia-computex-2026-nemotron-3-ultra-complete-recap" target="_blank" rel="noopener">explainx.ai</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Vast</span><span class="date">~Jun 1 2026</span>
+      <span class="quote">Beijing based Vast, which generates 3D assets from text and image prompts, reportedly raised approximately $200M at a $1B+ valuation. A reminder that the generative media and 3D layer is funding aggressively alongside the LLM majors. The round size and valuation are reported and should be verified against a primary source before citing.</span>
+      <a class="src" href="https://www.aiandnews.com/blog/ai-trends-opportunities-2026-2/" target="_blank" rel="noopener">AI and News</a>
+    </div>
+    <div class="signal">
+      <span class="handle">Google</span><span class="date">May 29 2026</span>
+      <span class="quote">Gemini Spark, Google's always on personal agent, went live for US Ultra subscribers, running on persistent Google Cloud VMs so it keeps working after you close the tab. The first mainstream consumer agent shipped as standing per user compute rather than stateless chat, a meaningfully different capacity profile.</span>
+      <a class="src" href="https://9to5google.com/2026/05/29/gemini-spark-ultra-us/" target="_blank" rel="noopener">9to5Google</a>
+    </div>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <h2 class="section">Connected sources</h2>
+  <div class="connect-note">
+    <strong>Gmail, Google Calendar and Slack</strong> are connected to this briefing pipeline. This Monday edition was driven by open web sources; no private signal was pulled into the public story ranking for this run. If you want a specific internal Slack channel (corp dev, infra watch, ai news, customer wins) folded into Thursday's edition, flag it and it will be added to the next pull.
+  </div>
+
+  <footer>
+    Generated by Claude · June 1 2026 · Sources include Anthropic, Nvidia Newsroom, TechCrunch, CNBC, Yahoo Finance, Artificial Analysis, MarkTechPost, GitHub Blog, Visual Studio Magazine, 9to5Google, OpenAI, CIO Dive, Tech Times, Motley Fool, Dwarkesh Podcast.<br>
+    Caveats flagged inline: Anthropic's $965B mark and the October 2026 IPO window are reported as under consideration, not scheduled, and the $47B run rate revenue is company sourced. Nemotron 3 Ultra's Intelligence Index of 48 and 300+ tokens per second throughput are Nvidia and Artificial Analysis sourced and not independently reproduced. Claude Opus 4.8 benchmark and honesty figures are Anthropic sourced. Microsoft's Project Polaris coding model and the "reclaim Copilot from Claude Code" framing are pre conference leaks, not confirmed launches, pending the June 2 Build keynote. The OpenAI framework date varies between May 28 and 29 across outlets. The Karpathy view count and the Vast funding figures are secondary sourced and should be verified before external citation.
+  </footer>
+
+</div>
+<script>
+  function toggle(el, event) {
+    if (event.target.tagName === 'A') return;
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
