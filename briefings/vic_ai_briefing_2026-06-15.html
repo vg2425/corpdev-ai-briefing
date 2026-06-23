@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · June 15 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Monday edition · Mon Jun 15 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>7</strong> top stories</span>
+      <span class="pill"><strong>2</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>60+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag security">Security</span>
+          <span class="tag models">Models</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">7+ sources</span>
+        </div>
+        <h3 class="headline">The US government ordered Anthropic to suspend Claude Fable 5 and Mythos 5 worldwide on June 12 after a jailbreak, just three days after launch</h3>
+        <p class="tldr">According to a public statement Anthropic posted June 13, the company disabled both Mythos class models globally on June 12 to comply with a US export control directive it says it received at 5:21 PM ET, citing national security authorities and concern that the safeguards could be bypassed to extract cyberattack useful information. The trigger was a reported jailbreak by a researcher using the handle "Pliny the Liberator" who within 48 hours of the June 9 launch published what they claimed was Fable 5's roughly 120,000 character system prompt to X and GitHub.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What happened. We covered the Fable 5 and Mythos 5 launch in Thursday's edition as a deliberate two tier safety play: a guardrailed public Fable 5 and a gated Mythos 5 for vetted cyberdefenders. That architecture collapsed fast. Reports describe the jailbreak as a mix of multi agent decomposition, Unicode tricks and narrative framing that defeated Fable's safety classifiers and exposed the system prompt. Anthropic's own statement, mirrored by independent commentators including Simon Willison and Snyk, frames the worldwide suspension as compliance with a government directive rather than a voluntary pull, which is an unusual and notable distinction.</p>
+      <p>What is verified and what is not. The suspension itself, the June 12 timing and the Pliny attribution appear across multiple independent write ups, so I am treating the core event as solid. The precise mechanism of the jailbreak, the exact contents of the leaked prompt and the specific legal authority invoked are described unevenly across sources, several of which are security blogs rather than primary reporting, so treat those details as reported rather than confirmed. Anthropic has not, as far as I can verify, published the full directive text.</p>
+      <p>The strategic read. This is the first time I am aware of that a US export control mechanism has been used to switch off a commercial frontier model in real time, worldwide, including for paying enterprise customers. That sets a precedent worth sitting with. The optimistic read is that the gating worked as a backstop and the state had a lever when a safeguard failed. The skeptical read is that a single researcher defeated the flagship safety story within 48 hours, and that a model can now be turned off globally by directive is a new and material operational risk for anyone building on a single closed model. It also lands at an awkward moment, days before Anthropic's leadership heads to the G7 and weeks before a planned IPO.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic is one of CoreWeave's largest and most strategic customers, so a sudden global suspension of its newest models is a direct demand event, not an abstract safety story. If Fable 5 and Mythos 5 inference goes dark, the serving capacity provisioned for them idles or reverts to older models like Opus 4.8, which changes near term utilization on whatever fleet hosts that traffic. The sharper lesson is concentration risk on the demand side: CoreWeave leans on a small set of frontier labs, and this shows how fast a single regulatory action can disrupt one of them. The counterweight is that training demand is unaffected and arguably reinforced, because a failed safeguard pushes labs toward more safety and red team compute, which is more GPU hours, not fewer. Watch how quickly Anthropic restores access and whether enterprise customers burned by a worldwide switch off start hedging across multiple model providers, which would actually diversify and stabilize the demand base CoreWeave serves.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://simonwillison.net/2026/Jun/13/us-government-directive-to-suspend-access/" target="_blank" rel="noopener">Simon Willison</a>
+        <a class="src" href="https://snyk.io/blog/fable-mythos-suspension-security-takeaways/" target="_blank" rel="noopener">Snyk</a>
+        <a class="src" href="https://www.startupdaily.net/topic/artificial-intelligence-machine-learning/the-us-government-locking-foreign-users-out-of-claudes-fable-5-explained/" target="_blank" rel="noopener">Startup Daily</a>
+        <a class="src" href="https://cybersecuritynews.com/anthropics-claude-fable-5-jailbroken/" target="_blank" rel="noopener">Cybersecurity News</a>
+        <a class="src" href="https://www.developersdigest.tech/blog/why-the-us-government-pulled-fable-5" target="_blank" rel="noopener">Developers Digest</a>
+        <a class="src" href="https://alphasignalai.substack.com/p/claude-fable-5-prompt-leak-is-a-user" target="_blank" rel="noopener">AlphaSignal</a>
+        <a class="src" href="https://undercodetesting.com/fable-5-mythos-5-shut-down-the-ai-jailbreak-that-triggered-a-global-security-blackout-video/" target="_blank" rel="noopener">Undercode Testing</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag policy">Policy</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">Altman, Hassabis and Amodei all head to the G7 summit at Évian this week, the first time all three frontier lab heads attend together</h3>
+        <p class="tldr">Bloomberg and others reported June 12 that Sam Altman, Demis Hassabis and Dario Amodei will attend the 52nd G7 summit in Évian les Bains, France, running June 15 to 17, with AI a primary agenda item. OpenAI's chief global affairs officer Chris Lehane said tech firms expect to leave with a package of voluntary commitments, with youth safety and frontier cyber and bio risks cited as focus areas.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is happening. Macron reportedly extended a personal invitation to Altman, his first appearance at the summit, and the framing across coverage is that this is the first G7 with all three of OpenAI, Google DeepMind and Anthropic represented at the top. The stated agenda leans toward voluntary commitments rather than binding rules, with youth safety positioned as Altman's personal priority and frontier risk in cyber and biological domains as the shared theme.</p>
+      <p>The strategic read. The timing is striking. The same week a US directive forced a worldwide model suspension over exactly the cyber risk category the summit means to discuss, the lab heads are convening with G7 governments. That is either a useful real world case study for the room or an uncomfortable backdrop, depending on framing. The honest skeptical note is that voluntary commitments from competing labs have a weak track record of constraining behavior, and a summit communique is not regulation. Still, the optics of rivals sitting together with heads of state matters for how AI governance hardens over the next year.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>CoreWeave does not have a seat at this table, but the rules that come out of rooms like this shape the operating environment for every layer below the models, including the infrastructure that trains and serves them. Frontier cyber and bio risk commitments tend to translate downstream into compute governance, know your customer expectations and reporting obligations for large training runs, which land on the providers hosting that compute. The Fable suspension this week is a live demonstration that governments will reach into the stack, so any framework that clarifies the rules of the road is arguably better for a capital intensive operator than ambiguity. Watch whether the summit produces anything touching data center siting, energy or export controls, all of which hit CoreWeave's cost base and customer mix directly.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-06-12/anthropic-openai-google-executives-plan-to-attend-g7-summit" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://dataconomy.com/2026/06/12/ai-leaders-openai-google-deepmind-anthropic-g7-summit/" target="_blank" rel="noopener">Dataconomy</a>
+        <a class="src" href="https://thenextweb.com/news/g7-ai-summit-altman-amodei-hassabis" target="_blank" rel="noopener">The Next Web</a>
+        <a class="src" href="https://www.yahoo.com/news/politics/articles/sam-altman-demis-hassabis-dario-115705986.html" target="_blank" rel="noopener">Yahoo News</a>
+        <a class="src" href="https://qz.com/openai-google-deepmind-anthropic-ceos-g7-france-061226" target="_blank" rel="noopener">Quartz</a>
+        <a class="src" href="https://www.onenewspage.com/n/Internet/1ztfzbm0ty/Altman-Amodei-and-Hassabis-are-heading-to-the.htm" target="_blank" rel="noopener">One News Page</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag infra">Infra</span>
+          <span class="src-count">5 sources</span>
+        </div>
+        <h3 class="headline">Anthropic's revenue run rate reportedly hits $47B as Daniela Amodei defends the IPO push and argues the race is now capability per dollar of compute</h3>
+        <p class="tldr">Across reporting clustered around June 4 to 9, Anthropic president Daniela Amodei defended the company's economics ahead of a confidential IPO filing, framing the next phase of the boom as won by whoever delivers the most capability per dollar of compute rather than the biggest raw training run. Coverage cites an annualized revenue run rate said to have climbed to roughly $47B by May and compute commitments described around $100B, both of which should be treated as reported figures.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The numbers, flagged. Multiple outlets cite a run rate that rose from about $14B in February to roughly $47B by May, alongside a confidential IPO filing reported around June 1 and a public listing variously pegged to October 2026. I have not seen Anthropic confirm the $47B figure or the compute commitment number directly, and run rate is an annualization of a recent period rather than booked annual revenue, so treat the trajectory as directionally reported and the specific dollar amounts as unverified. The "capability per dollar of compute" framing is attributed to Amodei in interview coverage; I cannot independently confirm the exact wording.</p>
+      <p>Why it connects to today's lead. An IPO narrative built on efficient, defensible, safety forward economics collides awkwardly with a flagship model getting suspended worldwide by government order three days after launch. The bull case is that disciplined efficiency and a trusted brand are exactly what survive a noisy market. The bear case is that the Fable episode hands skeptics a concrete example of regulatory and reliability risk right as the company asks public markets to underwrite it.</p>
+      <p>The strategic read. The efficiency thesis is the interesting part for infrastructure watchers. If the frontier really does shift from raw scale toward capability per dollar, that rewards better utilization, smarter serving and inference efficiency over simply renting the largest possible cluster. That is a more nuanced demand picture than pure scale up, and it is the one a disciplined operator should plan around.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic's cost of capital and spending discipline are direct inputs to CoreWeave's demand durability, because a major customer that lists publicly becomes both better capitalized and more accountable to quarterly scrutiny. A successful IPO means more permanent capital behind one of the most compute hungry programs in the market, which is good for committed capacity. The "capability per dollar of compute" framing cuts both ways for a neocloud: if labs optimize hard for efficiency, raw GPU hours per unit of output could compress, but the practical effect so far has been that efficiency gains get reinvested into more usage and longer context, which expands total compute consumed. The watch item is whether Anthropic's post listing posture leans more toward owning its own footprint or continues to lean on merchant capacity like CoreWeave's, and how the Fable suspension affects its near term spend.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://techcrunch.com/2026/06/04/ahead-of-its-ipo-anthropics-daniela-amodei-shrugs-off-doubts-about-ais-returns/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://mlq.ai/news/anthropics-annualized-revenue-hits-47b-as-daniela-amodei-defends-ai-economics-ahead-of-ipo/" target="_blank" rel="noopener">MLQ News</a>
+        <a class="src" href="https://cryptobriefing.com/anthropic-ai-costs-ipo-plans/" target="_blank" rel="noopener">Crypto Briefing</a>
+        <a class="src" href="https://theaiinsider.tech/2026/06/09/anthropic-president-daniela-amodei-defends-ipo-push-as-revenue-hits-47b-annualised-run-rate/" target="_blank" rel="noopener">The AI Insider</a>
+        <a class="src" href="https://letsdatascience.com/news/anthropic-frames-leaner-ai-strategy-ahead-of-ipo-3fba750f" target="_blank" rel="noopener">Let's Data Science</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag business">Business</span>
+          <span class="tag models">Models</span>
+          <span class="src-count">3 sources</span>
+        </div>
+        <h3 class="headline">The enterprise scoreboard splits: RAMP data shows Anthropic passing OpenAI in business adoption, while IDC says only 19% of organizations use Claude extensively</h3>
+        <p class="tldr">Coverage landing around June 11 surfaced two readings of the same question. RAMP card spend data reportedly shows Anthropic adoption rising to about 34.4% of businesses by April versus OpenAI's 32.3%, the first crossover. IDC's survey, by contrast, found only 19% of organizations using Claude extensively against roughly 42% for OpenAI and 38% for Google, a much shallower penetration picture.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What the data says. The two datasets measure different things, which is the whole story. RAMP captures corporate card and spend signal, so it skews toward who is paying for at least some access. IDC's survey captures self reported depth of use, where "extensive" is a higher bar than "we have a subscription." Read together, the honest conclusion is that Anthropic has won broad commercial footprint and developer mindshare but has not yet converted that into deep, organization wide deployment at OpenAI and Google's scale. Treat all three percentages as reported survey and spend figures, not audited share.</p>
+      <p>The strategic read. This is a useful corrective to the narrative that Anthropic has simply "won" the enterprise. Breadth of adoption and depth of deployment are different races, and the gap between them is where churn risk lives. It also frames the Fable suspension as more than a safety footnote: enterprises evaluating depth of commitment just watched a vendor's newest models get switched off worldwide, which is exactly the kind of event that slows the move from pilot to production.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Which labs win deep enterprise deployment determines whose inference volume actually scales, and inference at production scale is the durable, recurring workload that underwrites serving capacity. Broad but shallow adoption generates bursty experimentation traffic; deep deployment generates the steady, high volume inference that justifies dedicated fleets. For CoreWeave the cleaner read is that a competitive, multi vendor enterprise market is structurally healthy, because it spreads demand across several of CoreWeave's customers rather than concentrating it in one. The risk to monitor is the reverse: if enterprises consolidate hard onto one or two providers' own clouds, merchant capacity sees less of that production inference.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.theregister.com/ai-and-ml/2026/06/11/claude-is-ready-for-its-corporate-close-up/5254565" target="_blank" rel="noopener">The Register</a>
+        <a class="src" href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" target="_blank" rel="noopener">VentureBeat</a>
+        <a class="src" href="https://www.mindstudio.ai/blog/anthropic-vs-openai-business-adoption-2026-ramp-data-2" target="_blank" rel="noopener">MindStudio</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag infra">Infra</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">4 sources</span>
+        </div>
+        <h3 class="headline">Nvidia says its Vera CPU is in full production with OpenAI, Anthropic and SpaceX as early adopters, and the Vera Rubin supply chain is twice the size of Grace Blackwell</h3>
+        <p class="tldr">At Computex in Taipei, Jensen Huang said the Vera CPU is in full production with early adoption by OpenAI, Anthropic and SpaceX, and that the Vera Rubin supply chain is roughly twice the size of Grace Blackwell. Nvidia also detailed the RTX Spark superchip, pairing a Blackwell RTX GPU with a 20 core Grace CPU over NVLink C2C for agentic AI on Windows PCs, with laptops and desktops expected to ship in fall 2026.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Recency note. The Computex keynote was on or around June 1, so this sits at the older edge of the window rather than being fresh this week. I am including it because the Vera Rubin production status and named early adopters are directly material to CoreWeave's chip roadmap and did not appear in prior editions. Treat the "twice the size of Grace Blackwell" supply chain claim and the named adopter list as Nvidia's own statements from the keynote.</p>
+      <p>What matters. Two distinct things got conflated in early coverage. The data center story is Vera Rubin moving into full production, which is the platform the largest buyers will deploy through 2027. The PC story is RTX Spark, an Arm plus Blackwell superchip aimed at turning Windows into an agentic AI client device, which is a different and more consumer facing bet. The data center half is the one that should hold CoreWeave's attention.</p>
+      <p>The strategic read. Naming OpenAI, Anthropic and SpaceX as early Vera adopters confirms that demand for the next generation platform is already committed at the very top of the buyer pyramid. A supply chain reportedly twice the scale of the prior generation is Nvidia signaling that it expects, and is provisioning for, a step change in volume. The skeptical note is that keynote supply chain claims are marketing until they show up as shipped systems, and full production does not mean broad availability.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>CoreWeave's competitive edge depends on early, large access to the newest Nvidia platforms, so Vera Rubin entering full production is the single most relevant hardware signal here. If the largest labs are the named early adopters, the question for CoreWeave is allocation: how much next generation capacity it can secure and how fast, relative to hyperscalers and the labs building their own. A supply chain twice the size of Grace Blackwell is encouraging for availability, but it also means the labs CoreWeave serves can more easily build their own Vera Rubin clusters, which is the standing tension in the neocloud model. The RTX Spark PC push is largely orthogonal to CoreWeave, except as a reminder that agentic inference is being pushed to the edge as well as the cloud, which over time could shift where some lighter inference runs.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/05/31/nvidias-new-chip-to-power-fresh-line-of-windows-laptops-by-dell-hp.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://www.tomshardware.com/laptops/nvidia-unveils-rtx-spark-superchip-at-computex-2026-new-platform-promises-to-turn-windows-into-an-agentic-ai-os-with-arm-cpu-blackwell-gpu-and-128gb-unified-memory" target="_blank" rel="noopener">Tom's Hardware</a>
+        <a class="src" href="https://cryptobriefing.com/nvidia-gtc-taipei-rtx-spark-launch/" target="_blank" rel="noopener">Crypto Briefing</a>
+        <a class="src" href="https://www.crnasia.com/news/2026/components-and-peripherals/three-key-takeaways-from-nvidia-at-computex-2026" target="_blank" rel="noopener">CRN Asia</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag models">Models</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">3 sources</span>
+        </div>
+        <h3 class="headline">Alibaba's Qwen3.7 Plus pushes a low cost multimodal GUI agent into general availability, undercutting frontier pricing</h3>
+        <p class="tldr">Alibaba's Qwen team made Qwen3.7 Plus generally available in early June, a multimodal agent model with a 1M token context that ingests images and video, grounds in on screen GUI actions and runs tool use and self iteration loops. Reported pricing of about $0.40 per million input and $1.60 per million output tokens is a fraction of frontier US pricing, though the model is proprietary and closed license.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>Recency note. General availability was reported around June 1, so like the Nvidia item this sits at the older edge of the window. It earns a place because it is a clean example of the agentic tooling trend Kyu tracks and because the price aggression is strategically relevant. Treat the ScreenSpot Pro score of about 79 and the per token pricing as reported benchmark and list figures.</p>
+      <p>What shipped. Qwen3.7 Plus is pitched as a GUI agent that can interpret screenshots and issue precise on screen actions, placing it in the same automation tier as Claude Computer Use and OpenAI's Operator, with vision and language fused from early in training rather than bolted on. The headline is the cost: roughly 60% cheaper than the text only Qwen3.7 Max released weeks earlier, and dramatically below US frontier multimodal pricing.</p>
+      <p>The strategic read. The competitive pressure here is on price, not just capability. A credible, cheap, agent capable multimodal model from Alibaba raises the floor for what enterprises expect to pay, which pressures frontier labs on margin even when their top models are better. The honest caveat is that closed license Chinese models face real adoption friction in Western enterprises on data governance and procurement grounds, so cheap does not automatically mean deployed in CoreWeave's core markets.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is mostly a competitive and pricing signal rather than a direct capacity story, since Qwen workloads largely run on Alibaba's own cloud rather than Western merchant GPUs. The relevance for CoreWeave is the trajectory of inference economics: aggressive Chinese pricing on agent capable multimodal models pushes the whole market toward cheaper inference per token, which over time compresses the revenue per GPU hour that providers can charge unless usage volume grows faster than price falls. The offsetting dynamic is that GUI agents and tool use loops are token heavy, multi step workloads, so cheaper per token can still mean more total compute consumed. For CoreWeave the durable read is that agentic inference patterns keep getting more capacity intensive even as unit prices drop.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://venturebeat.com/technology/alibabas-qwen3-7-plus-supports-text-video-and-imagery-inputs-at-low-cost-of-0-4-1-6-per-1m-token-but-its-proprietary" target="_blank" rel="noopener">VentureBeat</a>
+        <a class="src" href="https://mlq.ai/news/alibaba-launches-qwen37-plus-a-multimodal-agent-model-that-sees-screens-and-writes-code/" target="_blank" rel="noopener">MLQ News</a>
+        <a class="src" href="https://www.marktechpost.com/2026/06/02/alibabas-qwen-team-launches-qwen3-7-plus-adding-vision-deep-reasoning-tool-invocation-and-autonomous-iteration-on-the-bailian-platform/" target="_blank" rel="noopener">MarkTechPost</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag models">Models</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">2 sources</span>
+        </div>
+        <h3 class="headline">Gemini 3.5 Pro is still unshipped as of June 15, with general availability now narrowed to before June 30</h3>
+        <p class="tldr">Gemini 3.5 Pro, Google's flagship reasoning tier unveiled at I/O on May 19 with a targeted 2M token context and a Deep Think mode, remains unshipped as of June 15, with general availability now reported as expected before June 30. Gemini 3.5 Flash already shipped and is the default in AI Mode in Search, so it is specifically the Pro tier that competes with frontier rivals that is late.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is happening. This is now the third consecutive edition flagging the same slip, and the persistence is the signal. Google has shown it can ship and distribute the high volume Flash tier, but the flagship reasoning model that anchors competitive perception against Anthropic and OpenAI keeps not arriving, with the target now compressed into the back half of June. The 2M token context, Deep Think mode and expected roughly tenfold premium over Flash remain Google's stated targets for an unshipped model, so I am treating the specs and pricing as announced, not verified.</p>
+      <p>The strategic read. A few weeks of slip is not strategically decisive on its own, and every lab misses dates, especially when reasoning models are involved. But a multi week delay while rivals ship, ship into Search default, and in Anthropic's case get pulled by the government, reads as a credibility question on the flagship specifically. Google has the distribution and the TPU capital to absorb the delay; the open question is whether the eventual release recaptures usage share or simply arrives into a more crowded field.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is a competitive positioning read rather than a direct capacity story, because Gemini runs on Google's own TPU fleet, not merchant GPUs. The relevance for CoreWeave is the shape of the frontier race: the labs that ship the strongest models attract the most usage and therefore the most training and inference spend, and several of CoreWeave's key customers are racing for exactly that lead on Nvidia hardware. A field where multiple labs push 2M token, Deep Think style reasoning means heavier, longer context inference across the board, which raises the capacity intensity of the workloads CoreWeave is built to serve. Watch whether the eventual Pro release shifts usage among the GPU dependent labs.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://llm-stats.com/ai-news" target="_blank" rel="noopener">LLM Stats</a>
+        <a class="src" href="https://www.buildfastwithai.com/blogs/ai-news-today-june-15-2026" target="_blank" rel="noopener">BuildFastWithAI</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks</h2>
+
+  <div class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">Lex Fridman Podcast</span>
+      <span class="pod-date">recorded ~May 30 2026</span>
+    </div>
+    <p class="pod-title">EP.494 · Jensen Huang: NVIDIA, the $4 Trillion Company and the AI Revolution</p>
+    <p class="pod-guest">Guest: Jensen Huang, founder and CEO of NVIDIA · Host: Lex Fridman</p>
+    <div class="pod-detail">
+      <ul>
+        <li>The single most relevant listen for anyone underwriting the compute buildout: NVIDIA's CEO on where AI demand goes next, framed from the supplier that sits upstream of every story in this edition.</li>
+        <li>Expect Huang's case for why inference, not just training, is the larger long run market, which is the thesis that most directly supports neocloud economics.</li>
+        <li>Useful context for today's Vera Rubin story: how Huang frames the next generation platform ramp and the supply chain scale up behind it.</li>
+        <li>Worth treating Huang's framing as the bull case from the most interested party, and weighing it against the efficiency and capex skepticism running through the Anthropic and enterprise adoption stories above.</li>
+      </ul>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 0 8px;">Note: the episode number EP.494 and the approximate May 30 2026 recording date are from Spotify and aggregator listings, not the official feed. Takeaways are inferred from the guest and show format, not a verified transcript, so treat them as expectations rather than confirmed content.</p>
+      <a class="src" href="https://open.spotify.com/episode/0BGcaYvcDPkvBzFmkRI5uY" target="_blank" rel="noopener">Episode page</a>
+    </div>
+  </div>
+
+  <div class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">Dwarkesh Podcast</span>
+      <span class="pod-date">~Jun 4 2026</span>
+    </div>
+    <p class="pod-title">Most recent episode · see official archive for guest and title</p>
+    <p class="pod-guest">Host: Dwarkesh Patel</p>
+    <div class="pod-detail">
+      <ul>
+        <li>Dwarkesh remains the highest signal long form interview show for frontier AI questions, with recent guests spanning lab leaders, compute analysts and economists.</li>
+        <li>The show's running thread, what stays scarce and valuable as intelligence gets cheap, is the right conceptual frame for the durable scarcity question underneath every chip and data center story.</li>
+        <li>I am flagging this with low confidence on the exact current episode: aggregators list the latest drop around June 4 2026, but I could not verify the specific guest or title against the official feed.</li>
+        <li>Recommend confirming the current episode directly on the archive before citing it externally; do not rely on a paraphrased title from me.</li>
+      </ul>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 0 8px;">Note: I could not verify the exact latest episode title, guest or date from a primary source. The roughly June 4 2026 date is from aggregator listings only. Confirm on the official archive before external use.</p>
+      <a class="src" href="https://www.dwarkesh.com/podcast/archive" target="_blank" rel="noopener">Podcast archive</a>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals</h2>
+  <div class="signals">
+
+    <div class="signal">
+      <span class="handle">OpenAI / Sam Altman</span><span class="date">Jun 12 2026</span>
+      <span class="quote">Altman is set to visit South Korea on a two day trip, meeting Naver, Kakao and Samsung Electronics on AI cooperation, a week after Jensen Huang made a similar Korea trip. A signal that the Korea memory and manufacturing base is now a frontier lab priority, not just a chip story. Date and itinerary are from UPI's report.</span>
+      <a class="src" href="https://www.upi.com/Top_News/World-News/2026/06/12/openai-naver-nvidia/9631781312618/" target="_blank" rel="noopener">UPI</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Microsoft AI</span><span class="date">Jun 2 to 3 2026</span>
+      <span class="quote">At Build, Microsoft unveiled seven in house MAI models trained from scratch with zero distillation from OpenAI, led by MAI Thinking 1, a 35B active parameter reasoning model with a 256K context that Microsoft says blind raters prefer to Sonnet 4.6. A clear move to reduce OpenAI dependence. Build was June 2 to 3, so this is older context, not fresh this week.</span>
+      <a class="src" href="https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/" target="_blank" rel="noopener">Microsoft AI</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Jensen Huang &amp; Sam Altman</span><span class="date">early Jun 2026</span>
+      <span class="quote">Both walked back earlier warnings about AI driven entry level job losses, with Huang reportedly criticizing executives who use AI as cover for cuts. A notable softening of the labor disruption narrative from two of its loudest voices. Sourced from secondary reporting; verify exact quotes before external use.</span>
+      <a class="src" href="https://www.thenews.com.pk/latest/1403984-jensen-huang-sam-altman-walk-back-ai-job-loss-warnings" target="_blank" rel="noopener">The News</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">SpaceX / SPCX</span><span class="date">Jun 12 2026</span>
+      <span class="quote">Following the June 11 pricing at $135 per share we flagged Thursday, the combined SpaceX and xAI entity was set to begin trading June 12 as the largest listing in history. As the first frontier adjacent AI listing of this wave, SPCX's debut is the read through for Anthropic and OpenAI's own timelines. Confirm the actual trading print before citing.</span>
+      <a class="src" href="https://www.cnbc.com/2026/06/03/spacex-ipo-stock-price-roadshow-musk.html" target="_blank" rel="noopener">CNBC</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Anthropic</span><span class="date">Jun 13 2026</span>
+      <span class="quote">Anthropic's public statement on the Fable 5 and Mythos 5 suspension is itself the most important primary document of the week, since most coverage is downstream of it. Worth reading directly rather than through security blog summaries, given how unevenly the jailbreak mechanics are described elsewhere.</span>
+      <a class="src" href="https://simonwillison.net/2026/Jun/13/us-government-directive-to-suspend-access/" target="_blank" rel="noopener">via Simon Willison</a>
+    </div>
+
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <h2 class="section">Connected Sources</h2>
+  <div class="connect-note">
+    <strong>Gmail, Google Calendar and Slack are connected</strong> to this briefing. This edition was built entirely from public web research on external AI and tech developments, so no Gmail, Calendar or Slack content was queried or used as signal. When a story intersects your inbox, your schedule or a specific Slack channel, that linkage will be cited here explicitly.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · Mon Jun 15 2026 · Sources: Simon Willison, Snyk, Startup Daily, Cybersecurity News, Developers Digest, AlphaSignal, Undercode Testing, Bloomberg, Dataconomy, The Next Web, Yahoo News, Quartz, One News Page, TechCrunch, MLQ News, Crypto Briefing, The AI Insider, Let's Data Science, The Register, VentureBeat, MindStudio, CNBC, Tom's Hardware, CRN Asia, MarkTechPost, LLM Stats, BuildFastWithAI, UPI, Microsoft AI, The News, Lex Fridman Podcast, Dwarkesh Podcast.
+    <br /><br />
+    Caveats: The Fable 5 and Mythos 5 worldwide suspension, its June 12 timing and the Pliny attribution appear across multiple independent write ups and are treated as solid, but the exact jailbreak mechanics, the leaked prompt contents and the precise legal authority invoked are described unevenly across mostly secondary sources, so treat those details as reported, not confirmed; Anthropic has not, as far as verified, published the full directive text. The G7 summit attendance is well sourced; the voluntary commitments described by OpenAI's Chris Lehane are stated expectations, not agreed outcomes. Anthropic's roughly $47B run rate and approximately $100B compute commitment are reported figures not confirmed by Anthropic, and run rate is an annualization, not booked annual revenue; the "capability per dollar of compute" framing is attributed in interview coverage and the exact wording is unverified. The RAMP (34.4% vs 32.3%) and IDC (19% vs ~42% vs ~38%) figures are reported survey and spend data, not audited market share, and measure different things. The Nvidia Vera Rubin production status, named early adopters and "twice the size of Grace Blackwell" supply chain claim are Jensen Huang's Computex statements from around June 1, so this is older context, not fresh this week. Qwen3.7 Plus general availability, its ~79 ScreenSpot Pro score and ~$0.40/$1.60 per million token pricing are reported figures, and GA was around June 1. Gemini 3.5 Pro specs and the before June 30 target are Google's stated plans for a model still unshipped as of June 15. Podcast episode numbers, dates and takeaways are from aggregator and store listings, not verified transcripts; the Dwarkesh entry in particular could not be verified to a specific current episode and is flagged low confidence. The Altman Korea trip, Microsoft MAI models, the Huang and Altman job loss walk back, and the SPCX trading debut are included as quick signals with their original dates noted; several predate this week. No fabricated quotes, titles or URLs were used; items that could not be cross verified were caveated or downranked.
+  </footer>
+
+</div>
+<script>
+  function toggle(el, event) {
+    if (event && event.target && event.target.closest('a')) return;
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

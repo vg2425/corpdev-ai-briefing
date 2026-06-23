@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Victoria's AI &amp; Tech Briefing · June 11 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #ececf1;
+    --muted: #8a8a96;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d29c;
+    --pink: #f06292;
+    --red: #ef5350;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 22px 80px;
+  }
+  .hero {
+    border: 1px solid var(--border);
+    background: linear-gradient(140deg, rgba(124, 109, 245, 0.12), rgba(79, 195, 247, 0.06) 60%, transparent);
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+    margin-bottom: 22px;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .back-link { text-decoration: none; color: var(--blue); background: var(--surface-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.18s, color 0.18s, background 0.18s; white-space: nowrap; }
+  .back-link:hover { border-color: var(--purple); color: var(--purple); background: rgba(124, 109, 245, 0.08); }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+  }
+  h1.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 18px;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .pill strong { color: var(--purple); font-weight: 700; }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .focus-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-right: 4px;
+    align-self: center;
+    font-weight: 600;
+  }
+  .focus-tag {
+    font-size: 12.5px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+  .focus-tag.models     { background: rgba(124, 109, 245, 0.15); color: #b4a7ff; border: 1px solid rgba(124, 109, 245, 0.35); }
+  .focus-tag.infra      { background: rgba(79, 195, 247, 0.12); color: #95dafa; border: 1px solid rgba(79, 195, 247, 0.35); }
+  .focus-tag.agents     { background: rgba(102, 210, 156, 0.12); color: #a4e3c2; border: 1px solid rgba(102, 210, 156, 0.35); }
+  h2.section {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .story {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+  .story:hover { border-color: var(--purple); }
+  .story.open { border-color: var(--purple); }
+  .story-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+  }
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+  .story-body { flex: 1; min-width: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .tag.models       { background: rgba(124, 109, 245, 0.16); color: #b4a7ff; }
+  .tag.infra        { background: rgba(79, 195, 247, 0.14); color: #95dafa; }
+  .tag.agents       { background: rgba(102, 210, 156, 0.14); color: #a4e3c2; }
+  .tag.business     { background: rgba(240, 98, 146, 0.14); color: #f4a4bf; }
+  .tag.policy       { background: rgba(255, 183, 77, 0.14); color: #ffd093; }
+  .tag.research     { background: rgba(149, 218, 250, 0.14); color: #c4ebfa; }
+  .tag.security     { background: rgba(239, 83, 80, 0.14); color: #ffa39e; }
+  .badge-signal {
+    background: rgba(255, 183, 77, 0.18);
+    color: var(--amber);
+    border: 1px solid rgba(255, 183, 77, 0.4);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .src-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .headline {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .tldr {
+    font-size: 14.5px;
+    color: #c8c8d2;
+    margin: 0;
+  }
+  .chevron {
+    align-self: flex-start;
+    margin-top: 4px;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    font-size: 12px;
+  }
+  .story.open .chevron { transform: rotate(90deg); color: var(--purple); }
+  .detail {
+    display: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+  }
+  .story.open .detail { display: block; }
+  .detail p {
+    font-size: 14px;
+    color: #c8c8d2;
+    margin: 0 0 12px;
+  }
+  .why {
+    margin: 16px 0 12px;
+    padding: 14px 16px;
+    background: rgba(124, 109, 245, 0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+  }
+  .why-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .why p {
+    margin: 0;
+    color: #d8d8e3;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .src {
+    font-size: 11.5px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(79, 195, 247, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.18);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .src:hover { background: rgba(79, 195, 247, 0.18); border-color: rgba(79, 195, 247, 0.5); }
+  .pod {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.18s;
+  }
+  .pod:hover { border-color: var(--blue); }
+  .pod.open { border-color: var(--blue); }
+  .pod-head { display: flex; align-items: center; gap: 12px; }
+  .pod-show {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pod-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pod-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 6px 0 2px;
+  }
+  .pod-guest {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+  .pod-detail { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .pod.open .pod-detail { display: block; }
+  .pod-detail ul { margin: 0 0 10px; padding-left: 18px; }
+  .pod-detail li { font-size: 13.5px; color: #c8c8d2; margin-bottom: 6px; }
+  .pod-detail a.src { display: inline-block; margin-top: 4px; }
+  .signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .signal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .signal .handle {
+    color: var(--purple);
+    font-weight: 700;
+    font-size: 13px;
+    margin-right: 8px;
+  }
+  .signal .date {
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    margin-left: 6px;
+  }
+  .signal .quote {
+    color: #d8d8e3;
+    font-size: 13.5px;
+    display: block;
+    margin-top: 4px;
+  }
+  .signal .src {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
+  .connect-note {
+    background: linear-gradient(140deg, rgba(79, 195, 247, 0.08), rgba(124, 109, 245, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: #c8c8d2;
+    margin-top: 12px;
+  }
+  .connect-note strong { color: var(--blue); }
+  footer {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.7;
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+  @media (max-width: 540px) {
+    .wrap { padding: 24px 14px 60px; }
+    h1.title { font-size: 24px; }
+    .headline { font-size: 16px; }
+    .story { padding: 16px; }
+    .rank { min-width: 22px; }
+    .src-count { width: 100%; margin-left: 0; margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span>Thursday edition · Thu Jun 11 2026</div>
+      <a class="back-link" href="../index.html" title="Back to all editions">&larr; All editions</a>
+    </div>
+    <h1 class="title">Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">Twice weekly synthesis · prepared for Victoria Geh · CoreWeave context applied</p>
+    <div class="pills">
+      <span class="pill"><strong>8</strong> top stories</span>
+      <span class="pill"><strong>2</strong> podcast picks</span>
+      <span class="pill"><strong>5</strong> quick signals</span>
+      <span class="pill"><strong>55+</strong> sources reviewed</span>
+    </div>
+  </header>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="focus-tag models">LLM Model Releases</span>
+    <span class="focus-tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="focus-tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <h2 class="section">Top Stories · ranked by cross source frequency</h2>
+
+  <!-- 01 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">01</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag infra">Infra</span>
+          <span class="tag policy">Policy</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">7+ sources</span>
+        </div>
+        <h3 class="headline">China is drafting a roughly $295B plan to build a national AI data center grid on 80% domestic silicon, aiming to design Nvidia and AMD out of its compute base</h3>
+        <p class="tldr">Bloomberg reported on June 9 that Chinese agencies including the National Development and Reform Commission are drafting a blueprint to spend about 2 trillion yuan, roughly $295B, over five years on a network of interconnected computing hubs run mostly by China Mobile and China Telecom. The plan targets sourcing at least 80% of the chips and core technology from domestic suppliers like Huawei, which would effectively squeeze Nvidia and AMD out of the sovereign buildout.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is being reported. The draft would create a coordinated national grid of AI data centers rather than the current patchwork of provincial projects, with state carriers operating the bulk of capacity and interconnecting it. The defining feature is the 80% domestic content target, which follows May 2026 approvals for nine categories of Chinese designed AI chips from Huawei, Alibaba, Biren and Moore Threads for use in government and security sensitive deployments. Tom's Hardware frames the timeline around 2028 and flags that local chip production may not be able to keep up with the ambition. Bloomberg notes the plan is still in early discussion, so treat the dollar figure and the 80% target as drafted intent, not finalized policy.</p>
+      <p>Why it is more than a China story. This is the clearest signal yet that the world is splitting into two compute stacks, a Western stack anchored on Nvidia and a Chinese stack built to run without it. For Beijing the point is sovereignty and resilience against export controls. The honest caveat from the reporting itself is execution risk: domestic process nodes, yields and packaging still trail, so an 80% homemade grid is an aspiration that runs straight into the limits of local fabrication. If the target slips, the practical outcome could be a smaller, slower grid rather than the headline number.</p>
+      <p>The strategic read. Even partial success removes a large block of future demand from the merchant GPU market and hardens a parallel ecosystem of Chinese accelerators, frameworks and interconnect. It also raises the stakes on the Western side, because every dollar of sovereign Chinese capacity is a dollar that does not flow to Nvidia and the clouds that serve its chips, which concentrates Nvidia's growth even more tightly on US and allied buildouts.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>CoreWeave's addressable market is the Nvidia anchored Western and allied compute stack, and a Chinese grid built to exclude Nvidia does not directly compete for CoreWeave's customers. The second order effect is more important: as China walls off its own demand, Nvidia's growth concentrates on the exact US and allied buildouts that CoreWeave participates in, which should keep allocation tight and pricing firm for the operators with the largest Blackwell and Rubin commitments. The risk to watch is bifurcation maturing into a credible Chinese export alternative for third countries, because a cheap sovereign in a box stack from Huawei could eventually erode the global Nvidia footprint that underwrites neocloud economics. For now this is a multi year structural watch item, not a near term demand change.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.bloomberg.com/news/articles/2026-06-09/china-prepares-295-billion-plan-to-fund-nationwide-ai-buildout" target="_blank" rel="noopener">Bloomberg</a>
+        <a class="src" href="https://www.tomshardware.com/tech-industry/china-drafts-295-billion-plan-to-build-a-national-ai-data-center-grid-running-on-80-percent-domestic-chips" target="_blank" rel="noopener">Tom's Hardware</a>
+        <a class="src" href="https://techstartups.com/2026/06/09/china-unveils-295-billion-plan-to-build-a-nationwide-ai-data-center-network-and-reduce-reliance-on-u-s-chips/" target="_blank" rel="noopener">Tech Startups</a>
+        <a class="src" href="https://sherwood.news/markets/china-295-billion-ai-data-center-network-to-power-ai-buildout/" target="_blank" rel="noopener">Sherwood</a>
+        <a class="src" href="https://qz.com/china-ai-data-center-buildout-295-billion-huawei-chips-060926" target="_blank" rel="noopener">Quartz</a>
+        <a class="src" href="https://finance.yahoo.com/sectors/technology/articles/china-prepares-295-billion-plan-092350515.html" target="_blank" rel="noopener">Yahoo Finance</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">02</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag infra">Infra</span>
+          <span class="src-count">6 sources</span>
+        </div>
+        <h3 class="headline">SpaceX prices its IPO today at $135 a share, roughly a $1.77T valuation, and is set to begin trading June 12 as the largest listing in history</h3>
+        <p class="tldr">SpaceX, the combined SpaceX and xAI entity, priced its IPO after the close on June 11 at a fixed $135 per share and is set to open on the Nasdaq under SPCX on June 12, with a reported raise near $75B and a valuation around $1.77T. We flagged this as a pending deal on Monday; it is now live, and Anthropic and OpenAI remain the next legs of the same listing wave.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>The numbers, flagged. CNBC's reporting set the price at $135 per share on about 555.6 million shares, which works out to roughly $75B raised and a valuation near $1.77T, which would be the largest IPO ever by a wide margin. Several trackers cite a slightly lower $1.75T figure, so treat the exact valuation as $1.75T to $1.77T depending on share count and greenshoe. Musk retains supermajority voting control and Goldman Sachs leads the syndicate. As of midday June 11 trackers showed SPCX referenced at the $135 IPO price ahead of the open, which is the offer price, not a trading print.</p>
+      <p>Why an AI briefing tracks a rocket company. The listed entity is the merged SpaceX and xAI business, so Grok, the xAI model line and xAI's compute footprint now sit inside a public company. That makes SPCX a partial proxy for xAI's AI ambitions and ties a frontier lab's capital to public market sentiment for the first time. It also sets the template the AI labs proper are about to follow.</p>
+      <p>The cluster read. The entire US IPO market raised on the order of $45B in all of 2025 by the figures cited across this coverage, so a single $75B deal, with Anthropic confidentially filed and OpenAI reportedly preparing, is a stress test of public appetite for AI and space exposure. The skeptical framing still applies: listing into hot sentiment can be a way for insiders to crystallize value before the full capex bill lands, and a weak SPCX debut would chill the labs' own timelines.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>As the most established public neocloud, CoreWeave is a direct comparable that every AI and infrastructure prospectus in this wave gets read against, and the multiples the market assigns to SPCX and to the labs that follow will move CoreWeave's own equity narrative. More concretely, xAI sitting inside a freshly capitalized public company means more permanent capital behind one of the most compute hungry model programs, which is demand that has to be served somewhere. The concentration risk cuts both ways: CoreWeave leans on a small set of these same large AI counterparties, so their post listing cost of capital and spending discipline become direct inputs to demand durability, and a repricing of AI risk in public markets would hit CoreWeave too.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.cnbc.com/2026/06/03/spacex-ipo-stock-price-roadshow-musk.html" target="_blank" rel="noopener">CNBC (pricing)</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/20/spacex-ipo-live-updates.html" target="_blank" rel="noopener">CNBC (live)</a>
+        <a class="src" href="https://www.tradingkey.com/analysis/stocks/us-stocks/261904604-spacex-ipo-spcx-date-set-for-june-12-175-trillion-valuation-tradingkey" target="_blank" rel="noopener">TradingKey</a>
+        <a class="src" href="https://capital.com/en-int/market-updates/spacex-ipo-targets-11-06-2026" target="_blank" rel="noopener">Capital.com</a>
+        <a class="src" href="https://www.investing.com/equities/spacex" target="_blank" rel="noopener">Investing.com</a>
+        <a class="src" href="https://valueaddvc.com/blog/spacex-ipo-2026-everything-you-need-to-know-about-the-1-77-trillion-offering" target="_blank" rel="noopener">Value Add VC</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">03</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag business">Business</span>
+          <span class="tag infra">Infra</span>
+          <span class="src-count">5 sources</span>
+        </div>
+        <h3 class="headline">Meta cuts about 8,000 jobs this week to fund AI, redeploys up to 7,000 into new AI units, and guides 2026 capex to $125B to $145B</h3>
+        <p class="tldr">Meta began notifying roughly 8,000 employees, about 10% of staff, of layoffs framed explicitly as funding its AI push, while moving up to 7,000 workers into newly created AI teams such as Applied AI Engineering and an Agent Transformation group. The company guides 2026 capital expenditure to between $125B and $145B, more than twice its 2025 outlay, which works out to roughly $315M to $370M of infrastructure spend per day.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is happening. The cuts fall heaviest on engineering and product, and leadership has reportedly told staff that further reductions are possible later in the year. The mirror image is a hiring and reassignment push into AI specific org units, so the net story is a workforce being reshaped around AI rather than simply shrunk. Treat the exact 7,000 reassignment figure and the per day spend math as reported numbers derived from the capex guide, not Meta confirmed line items.</p>
+      <p>The capex is the headline for infrastructure. A $125B to $145B capital plan, most of it pointed at AI data centers and model training, puts Meta among the very largest sources of compute demand on the planet. The layoffs are the financing mechanism: cut operating headcount to protect margins while the capital line roughly doubles. That is a clear statement that Meta views frontier compute as the priority and is willing to take the cultural hit to pay for it.</p>
+      <p>The strategic read. The tension worth naming is that aggressive capex plus visible layoffs is exactly the pattern investors get nervous about, because it implies the spend is non negotiable while the returns are still unproven. Meta is betting that owning massive training and serving capacity is the durable moat. The bear case is that this is capital intensity in search of a product, and that a couple of soft quarters would force a hard look at the buildout.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Meta is primarily a build it yourself hyperscaler, so most of this capex flows into its own fleet rather than to neoclouds, and that is the direct competitive context CoreWeave operates against. The more useful read for CoreWeave is as a demand barometer: a $125B to $145B plan, paired with the Nvidia and SK hynix supply partnerships announced this period, confirms that the largest buyers are still accelerating not pausing, which keeps the entire Nvidia supply chain that CoreWeave depends on tight and validates the thesis that frontier compute demand is structural. The honest counterpoint is that hyperscaler self build at this scale is also the ceiling on how much overflow demand reaches merchant providers, so CoreWeave's edge stays in winning dedicated capacity from labs that do not want to build their own data centers.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://finance.yahoo.com/sectors/technology/articles/meta-layoffs-2026-8-000-114209703.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://www.indmoney.com/blog/us-stocks/meta-layoffs-what-8000-job-cuts-reveal-about-tech-layoffs-ai-capex-problem" target="_blank" rel="noopener">INDmoney</a>
+        <a class="src" href="https://tech-insider.org/meta-layoffs-8000-employees-135-billion-ai-capex-2026/" target="_blank" rel="noopener">Tech Insider</a>
+        <a class="src" href="https://www.cnbc.com/2026/05/18/metas-layoffs-starting-this-week-underscore-zuckerbergs-ai-reality-.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://nvidianews.nvidia.com/news/meta-builds-ai-infrastructure-with-nvidia" target="_blank" rel="noopener">NVIDIA (Meta partnership)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">04</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag infra">Infra</span>
+          <span class="tag business">Business</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">5 sources</span>
+        </div>
+        <h3 class="headline">OpenAI puts its frontier models and Codex on Oracle Cloud, letting enterprises pay with existing Oracle credits</h3>
+        <p class="tldr">OpenAI and Oracle announced, with coverage landing June 10 and 11, that OCI customers can apply eligible Oracle Universal Credits toward OpenAI models and Codex, accessing them inside their existing Oracle purchasing workflow. It is the next move in OpenAI's multicloud distribution push, ten days after the same models went generally available on AWS Bedrock.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What shipped. The deal lets Oracle enterprise customers consume OpenAI frontier models and the Codex coding agent against committed Oracle spend rather than a separate OpenAI contract, lowering procurement friction for the large enterprises that already run on OCI. It pairs naturally with Oracle's role as a major capacity provider inside the Stargate buildout, so Oracle is now both a place OpenAI trains and a channel through which OpenAI sells.</p>
+      <p>The pattern is the story. In the space of two weeks OpenAI has gone generally available on AWS and now monetizes through Oracle's credit system, on top of its longstanding Azure footprint. The clear posture is that OpenAI wants to be sold through every major enterprise cloud's existing commitment structure, meeting customers where their budgets already sit. For Oracle this keeps OCI relevant in the model layer without having to field a competitive in house frontier model.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>The signal that matters is multicloud distribution hardening into the default for frontier labs, which is the same logic that lets a specialist like CoreWeave win dedicated training and serving capacity even when the hyperscalers are in the frame, because no single cloud owns a lab's workloads. The double edge: routing OpenAI inference through Oracle and AWS credit systems keeps a growing share of enterprise inference inside hyperscaler marketplaces with their existing security and billing, which is convenience that can hold workloads on those clouds rather than flowing to merchant providers. CoreWeave's defensible ground stays in large dedicated clusters and high performance serving, not self serve marketplace inference, and Oracle deepening its OpenAI ties is also a reminder that CoreWeave's neocloud peers are not standing still.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://openai.com/index/openai-on-oracle-cloud/" target="_blank" rel="noopener">OpenAI</a>
+        <a class="src" href="https://www.tradingview.com/news/reuters.com,2026:newsml_FWN42I14M:0-openai-access-openai-models-and-codex-through-your-oracle-cloud-commitment/" target="_blank" rel="noopener">Reuters via TradingView</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/artificial-intelligence/2026/openai-teams-up-with-oracle-cloud" target="_blank" rel="noopener">StartupHub</a>
+        <a class="src" href="https://digg.com/tech/4bk72xzr" target="_blank" rel="noopener">Digg</a>
+        <a class="src" href="https://memeburn.com/openai-models-and-codex-are-now-generally-available-on-aws/" target="_blank" rel="noopener">Memeburn (AWS context)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">05</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag models">Models</span>
+          <span class="tag security">Security</span>
+          <span class="tag agents">Agents</span>
+          <span class="src-count">4 sources</span>
+        </div>
+        <h3 class="headline">Anthropic ships Claude Fable 5 to the public and Claude Mythos 5 to vetted cyberdefenders, leading with hard safety guardrails</h3>
+        <p class="tldr">On June 9 Anthropic released two Mythos class models: Claude Fable 5, a broadly available guardrailed version, and Claude Mythos 5, deployed through Project Glasswing to a limited set of vetted cyberdefenders in collaboration with the US government. Fable 5 blocks high risk queries in areas like cybersecurity, biology and chemistry, falling back to Claude Opus 4.8, and Anthropic says external red teams found no universal jailbreaks in over 1,000 hours of testing.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What shipped. Fable 5 is pitched as strong at software engineering, knowledge work and vision, priced at a reported $10 per million input tokens and $50 per million output tokens, and included on Pro, Max, Team and Enterprise plans at no extra cost through June 22 before moving to usage credits. Anthropic says early data shows at least 95% of Fable sessions running entirely on the model's own responses, with the guardrail fallback engaging on the rest. Treat the token prices and the 95% figure as Anthropic reported numbers until independently checked.</p>
+      <p>The Mythos 5 split is the strategic move. Rather than ship its most capable model openly, Anthropic is gating Mythos 5 to vetted defenders through Project Glasswing alongside the US government, while giving the public a deliberately constrained Fable 5. That is a two tier safety architecture: maximum capability where it can be supervised, a fenced version everywhere else. Notably, with this launch Anthropic now requires 30 day retention on all traffic, including for enterprises that previously had zero retention agreements, stating the data is used only to defend against novel jailbreaks and reduce false positives, not for training. That retention change is a real enterprise procurement consideration, not a footnote.</p>
+      <p>The strategic read. This lands days after the Pentagon and Anthropic standoff we covered Monday, and it sharpens the same picture: Anthropic is doubling down on a safety forward brand and government cyberdefense partnerships even as it draws red lines elsewhere. Whether that posture wins or loses commercial ground depends on whether enterprise and government buyers ultimately pay a premium for trust or route to less constrained rivals.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Anthropic is one of CoreWeave's most important customers and one of the largest demand engines in the AI infrastructure economy, so any expansion of its model lineup is directly relevant to the workloads CoreWeave hosts. A new public model included across Anthropic's paid tiers, plus a gated Mythos 5 for cyberdefense, both translate into more inference and more serving capacity that has to run on GPUs somewhere. The agentic framing matters too, because Claude's coding and agent workloads are long context, multi step and tool heavy, which are the most capacity intensive inference patterns and the ones that reward dedicated high performance fleets. The watch item is how much of this growth lands on merchant capacity like CoreWeave's versus Anthropic's own committed cloud footprint, and whether the new 30 day retention requirement creates friction with security sensitive enterprise customers.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://techcrunch.com/2026/06/09/anthropics-claude-fable-5-is-a-version-of-mythos-the-public-can-access-today/" target="_blank" rel="noopener">TechCrunch</a>
+        <a class="src" href="https://www.cnbc.com/2026/06/09/anthropic-mythos-claude-fable-5.html" target="_blank" rel="noopener">CNBC</a>
+        <a class="src" href="https://finance.yahoo.com/markets/crypto/articles/anthropic-claude-mythos-launches-today-142844796.html" target="_blank" rel="noopener">Yahoo Finance</a>
+        <a class="src" href="https://letsdatascience.com/news/anthropic-releases-guardrailed-claude-fable-5-and-mythos-5-a70328f9" target="_blank" rel="noopener">Let's Data Science</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">06</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="badge-signal">🔥 High Signal</span>
+          <span class="tag security">Security</span>
+          <span class="tag policy">Policy</span>
+          <span class="src-count">7+ sources</span>
+        </div>
+        <h3 class="headline">OpenAI bans China-linked accounts that used ChatGPT to seed US opposition to AI data centers and tariffs</h3>
+        <p class="tldr">In a report published June 10, OpenAI said it banned China-linked accounts behind two covert influence operations, "Data Center Bandwagon" and "Tech and Tariffs," that used ChatGPT to generate posts, comments and cartoons. One thread specifically pushed the narrative that AI data centers raise household electricity prices and strain local grids. OpenAI said the campaigns were small, ran from late 2025 into early 2026 and had little measurable engagement.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What was found. OpenAI's threat intelligence report attributes the activity to China-linked actors and describes two clusters: Data Center Bandwagon, aimed at portraying AI data centers as harmful to American households, and Tech and Tariffs, producing short political commentary and cartoons critical of US trade and technology policy. OpenAI stresses the operations were low scale and largely failed to gain traction, which is an important caveat against overreading the threat.</p>
+      <p>Why the data center angle is notable. The targeting of data center social license is the part that should get the infrastructure industry's attention. Whether or not this particular campaign moved opinion, it confirms that the cost, power draw and local impact of AI data centers are now contested political terrain that hostile actors see as worth amplifying. That sits directly alongside today's top story on China's own $295B buildout, which is a useful reminder that the data center is simultaneously a sovereignty asset at home and a propaganda target abroad.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>CoreWeave's business depends on building and powering data centers in real communities, so the politicization of data center electricity use and grid strain is a direct reputational and permitting risk, regardless of who is amplifying it. The honest read is that the underlying grievances, real power demand and local cost pressure, are genuine even if a foreign influence op tried to exploit them, so the durable lesson for any large operator is to get ahead of community and grid concerns with transparency on power sourcing and local benefit. The encouraging part is that OpenAI is now actively policing and disclosing misuse of its own platform, which is the kind of governance maturity that helps the whole sector keep its social license. This is a watch item on the operating environment, not a demand signal.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.aljazeera.com/economy/2026/6/11/openai-says-china-based-actors-stoking-opposition-to-ai-data-centres" target="_blank" rel="noopener">Al Jazeera</a>
+        <a class="src" href="https://www.startuphub.ai/ai-news/artificial-intelligence/2026/openai-flags-china-ai-influence-ops" target="_blank" rel="noopener">StartupHub</a>
+        <a class="src" href="https://cryptobriefing.com/openai-bans-china-linked-chatgpt-influence-campaigns/" target="_blank" rel="noopener">Crypto Briefing</a>
+        <a class="src" href="https://www.ibtimes.sg/openai-bans-china-linked-accounts-using-chatgpt-us-data-center-tariff-influence-campaigns-87770" target="_blank" rel="noopener">IBTimes</a>
+        <a class="src" href="https://www.shopifreaks.com/openai-bans-china-linked-accounts-that-used-chatgpt-to-seed-influence-campaigns-over-us-data-centers-and-tariffs/" target="_blank" rel="noopener">Shopifreaks</a>
+        <a class="src" href="https://telanganatoday.com/china-linked-actors-used-chatgpt-to-influence-us-ai-and-tariff-debates-says-openai-report" target="_blank" rel="noopener">Telangana Today</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">07</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag agents">Agents</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">4 sources</span>
+        </div>
+        <h3 class="headline">The agentic commerce wave gets concrete: ring fenced AI trading and spending agents move from demo to product</h3>
+        <p class="tldr">A cluster of launches over the past two weeks pushed agentic AI from concept toward live financial action: Robinhood rolled out Agentic Trading and an Agentic Credit Card that let AI agents transact inside ring fenced accounts with hard spending limits, while MetaMask opened early access to an Agent Wallet on June 8 that lets agents execute onchain trades under mandatory security checks. The common thread is the Model Context Protocol as the connective layer, plus explicit guardrails like instant shutoff and capped exposure.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What shipped. Robinhood's Agentic Trading lets an agent execute stock trades within a dedicated account, and its Agentic Credit Card gives agents a virtual card with a user set limit, both wired through an official MCP server with real time alerts and instant shutoff. MetaMask's Agent Wallet, in early access from June 8, lets agents trade across EVM chains and DeFi primitives behind mandatory checks. Treat these as early product launches with limited real world track records, not proven at scale.</p>
+      <p>The strategic read. The interesting shift is architectural: rather than giving an agent open ended access to your money, these products fence the agent into a constrained account with explicit limits and a kill switch. That is the pattern that makes agentic commerce plausibly safe enough to ship, and it standardizes on MCP as the interface between agents and real world services. The skeptical view is that letting autonomous software move money is exactly where small reliability failures become expensive, so adoption will hinge on whether the guardrails hold under adversarial conditions, not on the demos.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>Agentic workloads are the most capacity intensive form of inference, because an agent that plans, calls tools, checks results and retries consumes far more tokens and far more sustained compute than a single chat turn. As agents move from chat to live financial and commerce actions, the per task compute footprint grows, and that is structurally good for the GPU fleets that serve it. The nuance for CoreWeave is that much of this consumer agent inference will run on the model providers' own surfaces rather than land directly on a neocloud, so the cleaner read is directional: the agentic shift raises total inference demand across the labs that are CoreWeave's customers, which feeds the dedicated training and serving capacity CoreWeave competes to host.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://www.thestreet.com/investing/stocks/robinhood-hood-stock-ceo-launches-bold-agentic-ai-trading-feature" target="_blank" rel="noopener">TheStreet (Robinhood)</a>
+        <a class="src" href="https://aiagentstore.ai/ai-agent-news/this-week" target="_blank" rel="noopener">AI Agent Store</a>
+        <a class="src" href="https://agentic.ai/news" target="_blank" rel="noopener">Agentic.ai News</a>
+        <a class="src" href="https://nvidianews.nvidia.com/news/enterprise-software-leaders-build-ai-agents-with-nvidia" target="_blank" rel="noopener">NVIDIA (enterprise agents)</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="story" onclick="toggle(this, event)">
+    <div class="story-head">
+      <div class="rank">08</div>
+      <div class="story-body">
+        <div class="meta">
+          <span class="tag models">Models</span>
+          <span class="tag business">Business</span>
+          <span class="src-count">3 sources</span>
+        </div>
+        <h3 class="headline">Gemini 3.5 Pro is still unshipped as of June 11, leaving Google's flagship reasoning tier in preview while rivals ship</h3>
+        <p class="tldr">Gemini 3.5 Pro, unveiled at Google I/O on May 19 with a targeted 2M token context and a Deep Think reasoning mode, remains in limited Vertex preview as of June 11, with general availability still pegged loosely to sometime in June. Gemini 3.5 Flash shipped and is now the default in AI Mode in Search, but the Pro tier that competes most directly with Claude Opus 4.8 and OpenAI's frontier models has not arrived.</p>
+      </div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="detail">
+      <p>What is happening. At I/O, Sundar Pichai effectively asked the audience to wait another month, and that promise is now near its deadline with no firm shipping date. Pro targets a 2M token context, a Deep Think mode and frontier multimodal, with pricing expected around ten times Flash, roughly a reported $15 per million input and $60 per million output tokens. These remain Google's stated targets for an unshipped model, so I am treating the specs and pricing as announced, not verified.</p>
+      <p>The strategic read. This is the second consecutive edition flagging the same slip, and the persistence is the signal. Flash shipping and going into Search default shows Google can move the high volume tier, but the flagship reasoning model is the one that anchors competitive perception against Anthropic and OpenAI, and a multi week delay while rivals ship reads as a credibility question. The honest counterweight is that launch timing slips constantly across every lab and a few weeks is not strategically decisive on its own; Google has the distribution and the TPU capital to absorb it.</p>
+      <div class="why">
+        <span class="why-label">Why It Matters for CoreWeave</span>
+        <p>This is a competitive positioning read rather than a direct capacity story, since Gemini runs on Google's own TPU fleet rather than merchant GPUs. The relevance for CoreWeave is the shape of the frontier race: the labs that ship the strongest models attract the most usage and therefore the most training and inference spend, and several of CoreWeave's key customers are racing for exactly that lead on Nvidia hardware. A field where multiple labs push 2M token, Deep Think style reasoning means heavier, longer context inference across the board, which raises the capacity intensity of the workloads CoreWeave is built to serve. Watch whether the eventual Pro release shifts usage share among the GPU dependent labs.</p>
+      </div>
+      <div class="sources">
+        <a class="src" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" target="_blank" rel="noopener">Google Blog</a>
+        <a class="src" href="https://www.techtimes.com/articles/317919/20260606/google-gemini-35-pro-nears-june-launch-2-million-token-context-deep-think-reasoning.htm" target="_blank" rel="noopener">Tech Times</a>
+        <a class="src" href="https://wavespeed.ai/blog/posts/gemini-3-5-pro-coming-next-month/" target="_blank" rel="noopener">WaveSpeed</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- PODCAST PICKS -->
+  <h2 class="section">Podcast Picks</h2>
+
+  <div class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">Invest Like the Best</span>
+      <span class="pod-date">Jun 9 2026</span>
+    </div>
+    <p class="pod-title">EP.477 · How to Invest Through Technology Cycles</p>
+    <p class="pod-guest">Guest: Alex Sacerdote, founder of Whale Rock Capital · Host: Patrick O'Shaughnessy</p>
+    <div class="pod-detail">
+      <ul>
+        <li>Sacerdote runs a technology focused fund managing more than $17B, so the conversation is a practitioner's framework for distinguishing durable platform shifts from hype cycles, which is directly applicable to sizing the AI infrastructure trade.</li>
+        <li>Expect discussion of how to underwrite capital intensive technology bets when the spend is certain but the returns are not, the exact tension running through the Meta capex and AI IPO stories in this edition.</li>
+        <li>A useful counterweight to pure narrative: a long only and hybrid investor's view of where AI value actually accrues across the stack, from chips to models to applications.</li>
+        <li>Worth a listen for anyone modeling the AI buildout from a markets seat rather than an operator seat.</li>
+      </ul>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 0 8px;">Note: episode number EP.477 and the June 9 2026 date are from the Apple Podcasts listing. Takeaways are inferred from the episode title and guest profile, not a verified transcript, so treat them as expectations rather than confirmed content.</p>
+      <a class="src" href="https://podcasts.apple.com/am/podcast/alex-sacerdote-how-to-invest-through-technology-cycles/id1154105909?i=1000771830675" target="_blank" rel="noopener">Episode page</a>
+    </div>
+  </div>
+
+  <div class="pod" onclick="toggle(this, event)">
+    <div class="pod-head">
+      <span class="pod-show">Dwarkesh Podcast</span>
+      <span class="pod-date">Jun 4 2026</span>
+    </div>
+    <p class="pod-title">What Remains Scarce After AGI?</p>
+    <p class="pod-guest">Guests: Alex Imas and Phil Trammell · Host: Dwarkesh Patel</p>
+    <div class="pod-detail">
+      <ul>
+        <li>The framing question is economic rather than technical: if AI automates most cognitive labor, what stays scarce and therefore valuable, which is the right lens for thinking about long run pricing power in compute and energy.</li>
+        <li>Trammell's work on the economics of transformative AI tends to push on growth dynamics and what bottlenecks remain when intelligence itself is cheap, with physical inputs like power and land as candidate constraints.</li>
+        <li>Imas brings a behavioral and incentives angle, useful for thinking about how human decision making and institutions absorb, or resist, rapid automation.</li>
+        <li>A more conceptual listen than the news this week, but it directly informs the durable scarcity question underneath every data center and chip buildout story.</li>
+      </ul>
+      <p style="font-size:12.5px;color:var(--muted);margin:0 0 8px;">Note: the June 4 2026 date and the guest pairing are from podcast aggregator listings rather than the official feed; the episode title is paraphrased from those listings. Confirm against the official archive before external citation.</p>
+      <a class="src" href="https://www.dwarkesh.com/podcast/archive" target="_blank" rel="noopener">Podcast archive</a>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <h2 class="section">Quick Signals</h2>
+  <div class="signals">
+
+    <div class="signal">
+      <span class="handle">Andrej Karpathy (Anthropic)</span><span class="date">announced May 19, ongoing</span>
+      <span class="quote">Karpathy is now at Anthropic building a team focused on using Claude to accelerate pretraining research, a notable talent shift away from OpenAI. Included as ongoing context, not a new June post; the original move was reported May 19, so the exact current status should be confirmed before external citation.</span>
+      <a class="src" href="https://www.cnbc.com/2026/05/19/anthropic-hires-openai-cofounder-andrej-karpathy-former-tesla-ai-lead.html" target="_blank" rel="noopener">CNBC</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">Google / Gemini</span><span class="date">Jun 10 2026</span>
+      <span class="quote">Google is bringing Gemini into the 2026 FIFA World Cup through a partnership with Argentina's national team, covering training analysis, performance breakdowns and real time fan experiences. A consumer distribution play that puts Gemini in front of a global sports audience.</span>
+      <a class="src" href="https://techstartups.com/2026/06/10/top-tech-news-today-june-10-2026/" target="_blank" rel="noopener">Tech Startups</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">xAI / Grok</span><span class="date">Jun 9 2026</span>
+      <span class="quote">Gopuff and the SpaceX and xAI entity launched Go, an AI shopping assistant inside the Gopuff app powered by Grok text, audio and image models. A concrete consumer deployment of Grok days before the SPCX listing. Sourced from xAI's news page; verify the exact launch date there.</span>
+      <a class="src" href="https://x.ai/news" target="_blank" rel="noopener">xAI News</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">SpaceX</span><span class="date">Jun 10 2026</span>
+      <span class="quote">SpaceX is reportedly accelerating plans to test space based AI computing infrastructure, with demonstration missions now targeted for late 2027. Early stage and speculative, but a signal that orbital compute is moving from whitepaper to roadmap. Treat the 2027 timeline as a reported target.</span>
+      <a class="src" href="https://techstartups.com/2026/06/10/top-tech-news-today-june-10-2026/" target="_blank" rel="noopener">Tech Startups</a>
+    </div>
+
+    <div class="signal">
+      <span class="handle">PhysicsX</span><span class="date">Jun 8 2026</span>
+      <span class="quote">London engineering AI firm PhysicsX closed an oversubscribed $300M Series C at a reported roughly $2.4B valuation, led by Temasek with NVIDIA, Siemens and Applied Materials among participants. A signal that physical world and simulation AI is drawing serious capital. Single primary source seen, so treat the valuation as reported.</span>
+      <a class="src" href="https://asanify.com/blog/news/industrial-physics-ai-june-11-2026/" target="_blank" rel="noopener">Asanify Digest</a>
+    </div>
+
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <h2 class="section">Connected Sources</h2>
+  <div class="connect-note">
+    <strong>Gmail, Google Calendar and Slack are connected</strong> to this briefing. This edition was built entirely from public web research on external AI and tech developments, so no Gmail, Calendar or Slack content was queried or used as signal. When a story intersects your inbox, your schedule or a specific Slack channel, that linkage will be cited here explicitly.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · Thu Jun 11 2026 · Sources: Bloomberg, Tom's Hardware, Tech Startups, Sherwood, Quartz, Yahoo Finance, CNBC, TradingKey, Capital.com, Investing.com, Value Add VC, INDmoney, Tech Insider, NVIDIA Newsroom, OpenAI, Reuters via TradingView, StartupHub, Digg, Memeburn, TechCrunch, Let's Data Science, Al Jazeera, Crypto Briefing, IBTimes, Shopifreaks, Telangana Today, TheStreet, AI Agent Store, Agentic.ai, Google Blog, Tech Times, WaveSpeed, xAI, Asanify, Invest Like the Best, Dwarkesh Podcast.
+    <br /><br />
+    Caveats: China's $295B AI data center plan is reported by Bloomberg as an early stage draft with an 80% domestic content target and a roughly 2028 horizon, so the figure and the timeline are drafted intent, not finalized policy. SpaceX IPO figures ($135 per share, about $75B raised, roughly $1.75T to $1.77T valuation) are the offer terms with pricing on June 11 and trading expected June 12 under SPCX; intraday SPCX references at $135 reflect the offer price, not a trading print. Meta's 7,000 reassignment figure and the per day capex math are reported numbers derived from the $125B to $145B 2026 guide, not Meta confirmed line items. The OpenAI Oracle deal was covered June 10 and 11; the AWS Bedrock link is included as context for the multicloud pattern. Anthropic's Fable 5 token prices ($10 per million input, $50 per million output), the 95% on model session figure and the new 30 day retention requirement are Anthropic reported and should be verified against Anthropic's own documentation before external use; references to Fable 5 moving to usage credits after June 22 are forward looking. OpenAI says its China linked influence operations were small scale with little engagement, so the threat should not be overread. Gemini 3.5 Pro specs and pricing are Google's stated targets for a model that remains unshipped as of June 11. Podcast episode numbers, dates and takeaways are from aggregator and store listings, not verified transcripts. The Karpathy item is ongoing context from a May 19 report, not a new June post. The PhysicsX raise was seen in a single news digest, so the $300M and roughly $2.4B valuation are reported figures pending a primary source. No fabricated quotes, titles or URLs were used; items that could not be cross verified were caveated or downranked.
+  </footer>
+
+</div>
+<script>
+  function toggle(el, event) {
+    if (event && event.target && event.target.closest('a')) return;
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
