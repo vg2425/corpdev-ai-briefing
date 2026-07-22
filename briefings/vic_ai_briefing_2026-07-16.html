@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — July 16 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Thursday, July 16 2026 · Thursday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">8 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">50+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">IBM craters 25 percent, its worst day since the 1980s, after warning that AI hardware spending is eating software and mainframe budgets</div>
+        <p class="tldr">IBM preannounced weak second quarter results on July 14, sending the stock down more than 25 percent, reportedly its worst single day on record. Management attributed the miss to customers diverting spend away from IBM software, consulting and mainframes toward AI servers and memory chips, with a severe memory shortage forcing buyers to prioritize hardware.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The reported figures put second quarter revenue near 17.2 billion dollars against a consensus around 17.86 billion, with adjusted EPS around 2.93 versus roughly 3.02 expected. CEO Arvind Krishna's framing is the part that matters: clients are spending less on IBM's traditional stack and more on their own AI hardware and memory, and a memory chip shortage that is pushing prices up is forcing customers to fund servers and storage first and defer software, consulting and mainframe purchases. The full earnings report was scheduled for July 22, so these are preliminary numbers.</p>
+          <p>This is the first large, market moving instance of AI infrastructure spend visibly cannibalizing an incumbent's core business rather than adding to it. The AI capex wave has been narrated as purely additive; IBM is a concrete counterexample where the same budget dollar is moving from legacy software into GPUs, servers and HBM. It also ties the memory shortage directly to enterprise buying behavior, which connects to the SK Hynix and TSMC supply stories running through recent editions.</p>
+          <p>Skeptic's note: a preannouncement is not the final report, and a 25 percent drop bakes in a lot of narrative that one quarter cannot fully justify. IBM has company specific problems that predate AI, and blaming a broad industry shift is convenient for a management team that missed. Treat the "AI is stealing our budget" explanation as management's characterization until the July 22 detail confirms the mix shift.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is a double edged read. The bullish half is that enterprise budget is visibly migrating toward AI compute and memory, which is the exact demand pool CoreWeave monetizes, and IBM is effectively confirming that customers would rather buy AI hardware than legacy software. The cautionary half is the mechanism: a memory shortage severe enough to reorder corporate purchasing is the same HBM scarcity that inflates the bill of materials on every GPU CoreWeave deploys. If component costs are high enough to distort enterprise buying, they are high enough to pressure neocloud unit economics too. Watch memory pricing as a cost input, not just a demand signal.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.cnbc.com/2026/07/14/ibm-warns-second-quarter-earnings-fell-short-of-expectations.html">CNBC</a>
+          <a href="https://finance.yahoo.com/markets/stocks/article/ibm-stock-closes-down-more-than-25-after-preannounced-earnings-results-150605880.html">Yahoo Finance</a>
+          <a href="https://fortune.com/2026/07/15/ibm-stock-price-crash-25-percent-analyst-reaction/">Fortune</a>
+          <a href="https://www.forbes.com/sites/petercohan/2026/07/15/ibm-stock-loses-67-billion--causes-and-recovery-outlook/">Forbes</a>
+          <a href="https://www.fool.com/investing/2026/07/15/ibm-what-its-earnings-misses-say-about-the-state-o/">Motley Fool</a>
+          <a href="https://moneymorning.com/2026/07/15/ibm-stock-crash-q2-warning-ai-software-budget-shift-july-2026">Money Morning</a>
+          <a href="https://www.technology.org/2026/07/15/ibm-shares-fall-25-after-warning-that-ai-spending-is-draining-software-budgets/">Technology.org</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: revenue (about 17.2 billion), EPS (about 2.93), the consensus figures, the "worst day since 1968 / worse than October 1987" framing and the roughly 67 billion dollar market cap loss all come from coverage of a preannouncement, not the final July 22 report. Krishna's budget shift explanation is management's characterization. Verify against IBM's filed results.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag policy">Policy</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">New York becomes the first US state to pause new hyperscale data centers, freezing permits for up to a year</div>
+        <p class="tldr">Governor Kathy Hochul signed an executive order on July 14 creating the nation's first statewide moratorium on new hyperscale data centers, pausing state environmental permits for up to a year while New York writes a data center regulatory framework. The pause applies to new projects expected to draw more than 50 megawatts, and coverage notes four hyperscale facilities already operate in state with applications pending for 39 more.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Hochul framed the move around power and cost, saying these facilities "consume enormous amounts of power, truly threatening to outpace our grid's capacity" and drive up costs for local ratepayers. The order directs the Department of Public Service to develop a Generic Environmental Impact Statement for data centers so future projects meet consistent standards, and the moratorium holds while that work is done, reported as up to a year.</p>
+          <p>This is the regulatory expression of the power constraint that the EIA and the AI bubble warnings flagged in prior editions. When a large state with meaningful load pauses the single fastest growing category of electricity demand, it converts "grid can't keep up" from a forecast into a permitting reality. It also sets a template other states can copy, which is the real risk: not one moratorium, but a spreading pattern of siting friction in exactly the populous, grid constrained regions where demand is highest.</p>
+          <p>Skeptic's note: this is a one year pause tied to writing rules, not a ban, and New York was already a hard place to site large loads. The 39 pending applications suggest developers still want in. The honest read is that the binding constraint on the buildout is shifting from chips and capital to power and permits, and that favors whoever already holds interconnection and firm supply.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Siting and power are moving to the center of the competitive map, and this cuts in CoreWeave's favor at the margin. Capacity that is already energized, interconnected and permitted becomes more valuable when new greenfield hyperscale supply gets frozen in major jurisdictions. The flip side is execution risk on any CoreWeave pipeline that runs through states now flirting with moratoria, and rising political scrutiny of ratepayer impact that every large operator will have to answer. The strategic takeaway reinforces the recurring thesis: locked in power and interconnection are the durable moat, and regulatory friction raises the option value of sites secured early.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.governor.ny.gov/news/first-statewide-moratorium-new-hyperscale-data-centers-launched-governor-kathy-hochul">NY Governor</a>
+          <a href="https://www.cnbc.com/2026/07/14/new-york-ai-data-center-ban.html">CNBC</a>
+          <a href="https://insideclimatenews.org/news/14072026/new-york-first-data-center-moratorium/">Inside Climate News</a>
+          <a href="https://www.marketplace.org/story/2026/07/15/new-york-pauses-data-centers-over-water-and-power-concerns">Marketplace</a>
+          <a href="https://www.news10.com/news/governor-kathy-hochul-hits-pause-on-ai-data-centers/">News10</a>
+          <a href="https://www.dailykos.com/stories/2026/7/15/800070381/environment/new-york-democrats-pause-data-centers/">Daily Kos</a>
+          <a href="https://www.localsyr.com/news/local-news/lysander-project-paused-as-hochul-imposes-a-one-year-freeze-on-hyperscale-data-centers/">LocalSYR</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the 50 megawatt threshold, the up to one year duration, and the "four operating, 39 pending" counts come from the Governor's office and coverage. Confirm the executive order text before citing specific thresholds externally.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">Nvidia and Japan launch what they call the world's first national physical AI infrastructure, anchored by a Vera Rubin AI factory</div>
+        <p class="tldr">During Jensen Huang's July 16 visit to Tokyo, Nvidia and a coalition of Japanese government and industry partners announced a national physical AI initiative, including a Vera Rubin AI factory reported at 13,750 Vera CPUs and 27,500 Rubin GPUs. Nvidia also introduced Cosmos 3 Edge, a roughly 4 billion parameter world model built on Nemotron that runs on edge GPUs and Jetson for on device robot perception and action.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The coalition is the story. Fujitsu, Hitachi, Kawasaki Heavy Industries, FANUC, Kubota, NEC, SoftBank, Sony and Yaskawa are named among partners intending to join the Cosmos coalition and build physical AI on Nvidia's stack, with Kawasaki and Nvidia set to co develop AI robots for shipbuilding. Huang pitched it as a "once in a generation opportunity for Japan" to reinvent manufacturing. This is sovereign AI plus industrial robotics wrapped into one buildout, and it lands the day before Xi Jinping headlines Shanghai's WAIC, so the geopolitical framing is deliberate.</p>
+          <p>Two distinct demand vectors here. The Vera Rubin AI factory is a concrete, named next generation GPU deployment at national scale, which is a data point on where Nvidia's newest silicon is landing and how fast. Cosmos 3 Edge is the software lever that seeds an entire robotics and industrial ecosystem onto Nvidia hardware, from cloud training down to Jetson at the edge, which is how Nvidia converts a one time factory sale into recurring platform lock in.</p>
+          <p>Skeptic's note: "world's first national physical AI infrastructure" is Nvidia and partner marketing, and coalitions announced as "intend to join" are softer than signed commitments. The GPU and CPU counts come from the launch materials, not an independent audit. Sovereign AI deals are also a way for Nvidia to book demand that is politically durable but not necessarily incremental to global capacity. Real, but read the superlatives as positioning.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Two things stand out. First, sovereign and national AI factories are a competing model for where large GPU fleets get built and owned: nation states and their industrial champions increasingly stand up captive capacity rather than renting from neoclouds, which is demand that may never reach a merchant provider. Second, the physical AI and robotics wave that Cosmos 3 seeds is a genuinely new inference workload class, training world models and running embodied agents, that expands the total compute pie CoreWeave can address if it positions for it. The competitive question is whether CoreWeave rides the demand expansion or watches sovereign captives absorb it.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.cnbc.com/2026/07/16/nvidia-reveals-new-ai-model-and-expands-japans-physical-ai-ecosystem.html">CNBC</a>
+          <a href="https://blogs.nvidia.com/blog/japan-ecosystem-2026/">NVIDIA Blog</a>
+          <a href="https://www.globenewswire.com/news-release/2026/07/16/3328258/0/en/japan-government-industrial-leaders-and-nvidia-launch-the-world-s-first-national-ai-infrastructure.html">GlobeNewswire</a>
+          <a href="https://www.digitimes.com/news/a20260716VL213/nvidia-japan-kawasaki-toyota-industrial-manufacturing.html">DigiTimes</a>
+          <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/nvidia-cashes-in-on-sovereign-ai-setting-sights-on-japan-for-latest-tie-up">Nikkei Asia</a>
+          <a href="https://www.manilatimes.net/2026/07/16/business/foreign-business/nvidia-to-co-develop-ai-shipbuilding-robots-in-japan/2385719">Manila Times</a>
+          <a href="https://nvidianews.nvidia.com/news/japans-robotics-and-manufacturing-leaders-build-on-nvidia-cosmos-to-advance-physical-ai-frontier">NVIDIA Newsroom</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the Vera Rubin factory GPU and CPU counts (27,500 and 13,750), the "world's first national" claim, the partner list and the "intend to join" language all come from Nvidia and partner announcements. Cosmos 3 Edge's 4 billion parameter figure is from Nvidia. Treat as vendor framing pending independent confirmation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">TSMC posts record Q2 profit and guides Q3 higher, with AI now roughly two thirds of revenue</div>
+        <p class="tldr">TSMC reported record second quarter results reported around July 16, with revenue near 40 billion dollars and net profit up roughly 77 percent year over year, well above estimates. High performance computing, the AI and data center segment, is reported at about 66 percent of revenue, and management guided third quarter revenue to roughly 44.6 to 45.8 billion dollars.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The headline numbers reported across coverage: Q2 revenue around 40.2 billion dollars, up about 36 percent year over year, net income and EPS up about 77.4 percent, gross margin near 67.7 percent, and June monthly revenue up roughly 68 percent year over year. The Q3 guide near 45 billion dollars at the midpoint implies the AI demand curve is still steepening, not flattening. HPC at about two thirds of revenue means TSMC is now, in effect, an AI infrastructure company that also makes phone chips.</p>
+          <p>This is the clean upstream read on the entire buildout. TSMC fabricates the leading edge logic for Nvidia, AMD, the hyperscaler custom chips and the merchant challengers, so its order book is the least filtered signal on whether AI compute demand is real and accelerating. A record quarter with a raised guide is the supply side confirming the demand side, and it directly rebuts the "the buildout is topping" version of the bubble thesis, at least for this quarter.</p>
+          <p>Skeptic's note: the exact revenue, margin and growth figures vary slightly across outlets and I am reporting the reported numbers, not audited filings I read directly. A single strong quarter and an optimistic guide are also exactly what you see at cycle peaks. TSMC's own utilization and margins are near records, which leaves less room for upside surprise and more downside if any large customer trims orders.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>TSMC is the most reliable leading indicator CoreWeave has for the trajectory of GPU supply and, by extension, deliverable capacity. A record quarter with a raised guide says the silicon that fills CoreWeave's data centers is being produced in rising volume, which supports the multi year demand thesis behind its backlog. The nuance is pricing: near record utilization and 67 percent gross margins mean the foundry has pricing power, and that cost ultimately flows through Nvidia into the price CoreWeave pays per GPU. Strong TSMC is good for volume and validation, and a reminder that input costs are not softening.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262033904-tsmc-q2-profit-77-percent-record-hightradingkey">TradingKey</a>
+          <a href="https://www.techpowerup.com/350807/tsmc-reports-record-q2-2026-earning-results">TechPowerUp</a>
+          <a href="https://investor.tsmc.com/english/quarterly-results/2026/q2">TSMC Investor Relations</a>
+          <a href="https://www.indmoney.com/blog/us-stocks/tsmc-stock-revenue-record-explained-tsm-margin-valuation-analysis">INDmoney</a>
+          <a href="https://finance.yahoo.com/markets/stocks/articles/tsmc-q2-earnings-preview-why-190000466.html">Yahoo Finance</a>
+          <a href="https://phemex.com/blogs/tsmc-record-revenue-earnings-ai">Phemex</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: revenue (about 40.2 billion), the 77.4 percent profit growth, 36 percent revenue growth, 67.7 percent gross margin, the 66 percent HPC share and the Q3 guide all come from earnings coverage. Confirm against TSMC's official release before external use; figures vary modestly across outlets.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="tag policy">Policy</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">Xi Jinping to headline Shanghai's World AI Conference on July 17, elevating China's bid to set global AI governance</div>
+        <p class="tldr">China's foreign ministry confirmed on July 13 that President Xi Jinping will attend and deliver the opening keynote at the 2026 World Artificial Intelligence Conference in Shanghai on July 17, his first in person appearance since the event began in 2018. The conference runs July 17 to 20 and is expected to push a proposed World AI Cooperation Organization headquartered in Shanghai.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The signal is the personal appearance. A head of state keynoting an AI conference for the first time is a statement that Beijing sees AI governance as a domain to lead, not just participate in. Coverage frames the centerpiece as a proposed World AI Cooperation Organization, a China led multilateral body for AI rules, positioned as an alternative to Western led governance forums. Organizers cite more than 140 forums, 1,400 guests and 300 plus product debuts, including hardware like Huawei's Atlas systems.</p>
+          <p>The timing against Nvidia's Japan launch and Google's rumored Gemini 3.5 Pro date is not coincidental. July 17 is shaping up as a split screen: Western frontier model and sovereign compute news on one side, a Chinese governance and hardware showcase on the other. For anyone tracking the compute supply chain, the subtext is export controls, domestic Chinese silicon and whether a parallel non Western AI stack is consolidating.</p>
+          <p>Skeptic's note: state summits generate declarations, not necessarily durable institutions, and a proposed cooperation organization is a proposal until it has members and authority. Attendance figures and product debut counts are organizer numbers. The meaningful thing to watch is not the keynote language but any concrete moves on Chinese domestic chips and governance that follow.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is indirect but strategically important. A hardening two bloc AI world, with China building domestic silicon and its own governance regime, reinforces the value of Western aligned, export compliant compute capacity, which is CoreWeave's home turf. It also raises the salience of where models are trained and served for data governance and sovereignty reasons, a tailwind for providers that can offer jurisdictional control. The risk vector is second order: escalating governance fragmentation and export dynamics that reshape the global GPU supply chain CoreWeave depends on.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.mfa.gov.cn/eng/xw/wsrc/202607/t20260713_11980695.html">China MFA</a>
+          <a href="https://www.scmp.com/tech/article/3360404/xi-jinping-attend-world-ai-conference-first-time-china-elevates-tech-push">SCMP</a>
+          <a href="https://news.cgtn.com/news/2026-07-13/Xi-to-attend-and-address-opening-ceremony-of-2026-World-AI-Conference-1OKgsIkkofu/p.html">CGTN</a>
+          <a href="https://sputnikglobe.com/20260716/xi-jinping-to-address-global-ai-governance-summit-in-shanghai-1124454500.html">Sputnik</a>
+          <a href="https://moderndiplomacy.eu/2026/07/14/waic-2026-chinas-ai-governance-model-vs-the-west/">Modern Diplomacy</a>
+          <a href="https://georgechen.substack.com/p/preview-waic-2026-showcases-xis-keynote">George Chen (preview)</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the WAICO proposal, the 140 forums / 1,400 guests / 300 product debut figures, and product specifics come from Chinese state media and event previews. Treat governance claims as stated intent, not enacted policy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag policy">Policy</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">Future of Life Institute's 2026 AI Safety Index tops out at C plus, and finds labs walking back safety pledges</div>
+        <p class="tldr">The Future of Life Institute's Summer 2026 AI Safety Index, widely recirculated around July 15, gave Anthropic the highest overall grade at only C plus, with OpenAI and Google DeepMind at C and xAI, DeepSeek and Mistral effectively failing. A central finding is that several leading labs have quietly weakened or dropped earlier commitments to halt development if certain red lines appeared.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The index scores nine labs across domains including risk assessment, transparency, governance and whether they honor their own safety frameworks. Anthropic reportedly leads five of six domains on relatively strong transparency and governance, while OpenAI leads risk assessment on a broader evaluation suite. No company earned an A or B. The report specifically flags that leading labs have softened pledges to pause development at red lines, citing Anthropic dropping an earlier commitment framing in February as an example.</p>
+          <p>The useful signal is directional, not the letter grades. An independent scorecard that even the best performer only clears at C plus, and that documents commitments being quietly relaxed, is evidence that competitive pressure is outrunning voluntary safety governance. That is the empirical case behind the state level regulation trend, and it is the gap that laws like Illinois SB 315 and any future rules aim to close with external audits.</p>
+          <p>Skeptic's note: the Future of Life Institute is an advocacy organization with a defined point of view on AI risk, and letter grades compress contested judgments into a single tidy number that invites more weight than the methodology may bear. The labs dispute framings like this routinely. Read it as a structured, transparent argument about safety governance trends, not an objective audit.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Infrastructure providers are not graded here, but the trend matters for the operating environment. If independent scorecards keep showing safety governance lagging capability, the political case for binding regulation strengthens, and that regulation lands first on the labs that are CoreWeave's largest customers. Compliance obligations on developers tend to flow downstream into requirements on their infrastructure partners for logging, security posture and jurisdictional control. The read for CoreWeave is that treating compliance and security readiness as product features, not overhead, is increasingly a commercial advantage as scrutiny rises.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://futureoflife.org/ai-safety-index-summer-2026/">Future of Life Institute</a>
+          <a href="https://time.com/article/2026/07/07/ai-safety-rankings-openai-anthropic-meta/">TIME</a>
+          <a href="https://www.axios.com/2026/07/07/report-ai-safety-pledges">Axios</a>
+          <a href="https://seekingalpha.com/news/4611964-google-anthropic-openai-lead-ai-safety-index-spacexai-receives-f">Seeking Alpha</a>
+          <a href="https://www.mitsloanme.com/article/anthropic-tops-2026-ai-safety-index-but-no-ai-firm-earns-above-a-c/">MIT Sloan ME</a>
+          <a href="https://finance.biggo.com/news/5ba203b5-e561-442c-9467-0b98ab270d5d">BigGo Finance</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the specific grades, the "leads five of six domains" detail and the February pledge example come from the index and coverage of it. The Future of Life Institute is an advocacy body; treat the grades as its assessment, not a neutral standard. The report itself appears dated early July and was recirculated mid month.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">5+ sources</span>
+        </div>
+        <div class="headline">Anthropic pulls Monzo co founder Tom Blomfield onto its compute team, extending an aggressive talent run</div>
+        <p class="tldr">Tom Blomfield, co founder of Monzo and GoCardless and a Y Combinator partner, said on July 13 that he is taking a leave of absence from YC to join Anthropic's compute team under co founder and Chief Compute Officer Tom Brown. He framed compute as one of the most important problems to solve as the industry enters early recursive self improvement, extending Anthropic's 2026 hiring run.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The specific detail worth noting is where he landed: not research or product, but compute. A serial fintech founder joining a frontier lab explicitly to work on securing and scaling compute is a tell about where Anthropic sees its binding constraint. It fits a broader 2026 pattern of Anthropic hiring senior operators and scientists, with coverage this year also citing Nobel laureate John Jumper and Berkeley's Jelani Nelson among additions.</p>
+          <p>The strategic read: the frontier labs increasingly compete on compute access and efficiency as much as on model architecture, and they are staffing accordingly. Blomfield's stated framing, that compute availability becomes central as recursive self improvement begins, is the lab's worldview, that the bottleneck on capability is increasingly physical infrastructure rather than ideas. That is the same thesis that underwrites Anthropic's custom chip talks with Samsung and its multi vendor compute strategy across Trainium, TPUs and Nvidia.</p>
+          <p>Skeptic's note: a single senior hire is a weak signal on its own, and executive moves get more coverage than they deserve. There is also a separate, less well confirmed claim circulating that Andrej Karpathy joined Anthropic; I could not cleanly verify that in this pass and one source dates it to May, so treat the Karpathy claim as unconfirmed. The Blomfield move to the compute team is the solid, dated item here.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>When a top lab dedicates senior leadership specifically to compute, it underscores that securing and optimizing infrastructure is now a first order strategic function for CoreWeave's customer set, not a procurement afterthought. That is broadly validating for specialized providers, since labs that treat compute as existential are labs that sign large, long dated capacity commitments. The nuance is that the same seriousness drives labs toward custom silicon and multi vendor strategies that reduce dependence on any single supplier, so the relationship is partner and counterparty at once.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.pymnts.com/personnel/2026/anthropic-recruits-monzo-co-founder-to-tackle-compute-issues/">PYMNTS</a>
+          <a href="https://techfundingnews.com/monzo-co-founder-tom-blomfield-takes-leave-from-y-combinator-to-join-anthropic/">Tech Funding News</a>
+          <a href="https://aiweekly.co/alerts/anthropic-pulls-monzo-founder-tom-blomfield-onto-compute-team">AI Weekly</a>
+          <a href="https://www.cryptopolitan.com/anthropic-taps-monzo-co-founder/">Cryptopolitan</a>
+          <a href="https://www.tipranks.com/news/anthropic-poaches-monzo-co-founder-tom-blomfield-in-latest-ai-talent-raid">TipRanks</a>
+          <a href="https://www.benzinga.com/markets/private-markets/26/07/60423745/partner-at-y-combinator-takes-leave-of-absence-to-join-anthropic">Benzinga</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the reporting line to Tom Brown as Chief Compute Officer and the "recursive self improvement" framing come from coverage and Blomfield's own statement. The related claim that Andrej Karpathy joined Anthropic is not cleanly verified and is deliberately not treated as fact here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">08</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6 sources (all secondary)</span>
+        </div>
+        <div class="headline">Google's Gemini 3.5 Pro still targets July 17, but every headline spec remains a leak, not a confirmed launch</div>
+        <p class="tldr">Coverage continues to point to July 17 for Gemini 3.5 Pro general availability after a ground up rebuild, with a reported 2 million token context window and a Deep Think reasoning mode. As of this window Google has not confirmed the date, the context window or pricing, and no model card or API listing had appeared publicly, so this remains a leak driven expectation.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This item carries over from the July 13 edition, and the notable development is that it is still not confirmed. Reporting says Google scrapped the prior Gemini 2.5 Pro architecture after finding structural failures in recursive tool calling and SVG generation, and rebuilt from scratch, which is why the timeline slipped to July 17. The recurring capability claims, a very large context window and an inference time reasoning mode, are consistent across coverage but sourced to leaks and unnamed insiders.</p>
+          <p>If it ships on the 17th it collides with Nvidia's Japan launch and Xi's WAIC keynote, making that date the densest AI news day of the summer. The substance to watch is whether the context window and Deep Think claims survive contact with an official model card, and what the actual pricing is, since a rebuild aimed at fixing tool calling and agentic reliability is exactly the kind of upgrade that matters more for real workloads than benchmark scores.</p>
+          <p>Skeptic's note: I am flagging this as low confidence on purpose. A widely repeated target date is not a launch, Google has already slipped this model once, and the specs are unverified. I am including it because the date is imminent and the story is high salience, not because the details are confirmed. Do not treat any spec here as fact.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>The durable point is directional and holds regardless of the exact launch date: frontier labs keep making individual queries more compute intensive through larger context windows and inference time reasoning, which structurally lifts inference demand. The direct CoreWeave benefit is muted because Google serves Gemini on its own TPUs and captive data centers, so this is confirmation of the demand trend rather than a workload CoreWeave would host. Watch it as a read on where model capability, and therefore per query compute, is heading across the industry.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm">TechTimes</a>
+          <a href="https://finance.biggo.com/news/6f0c6bb2-795f-4c57-9d09-6db691d7638a">BigGo Finance</a>
+          <a href="https://startupfortune.com/google-delays-gemini-35-pro-launch-to-july-17-after-scrapping-its-base-model/">Startup Fortune</a>
+          <a href="https://www.geeky-gadgets.com/gemini-3-5-pro-delayed-again/">Geeky Gadgets</a>
+          <a href="https://coursiv.io/blog/gemini-3-5-pro">Coursiv</a>
+          <a href="https://inews.zoombangla.com/google-gemini-3-5-pro-delay-july-2026/">Zoombangla</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the July 17 date, the 2 million token context window, Deep Think and the architecture rebuild are all from third party reporting and unnamed sources. No official Google announcement, model card or API listing confirmed these as of this pass. Low confidence; verify against Google's own release.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCAST PICKS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">DWARKESH PODCAST</div>
+    <div class="ep">Grant Sanderson (3Blue1Brown) on AI progress in mathematics</div>
+    <div class="who">Reported released June 30 2026 · Host: Dwarkesh Patel · math and the shape of AI progress</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>This remains the most recent Dwarkesh episode I could verify; I found no new July episode indexed in this pass, so I am carrying it forward honestly rather than inventing one.</li>
+        <li>Relevant lens: math is a domain with cheap, unambiguous verification, which is exactly where autonomous agents and reasoning models improve fastest. That connects to the Gemini Deep Think and agentic reliability themes above, since the tasks that scale first are the ones a model can grade itself on.</li>
+        <li>Flagging honestly: takeaways are inferred from the episode description and Sanderson's known focus, not from listening in this pass. Confirm specifics before citing.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://www.dwarkesh.com/podcast/archive">Listen (Dwarkesh Podcast archive)</a> · date per search listings; content not independently confirmed.</p>
+    </div>
+  </div>
+
+  <div class="pod">
+    <div class="show">BG2 POD</div>
+    <div class="ep">Satya Nadella and Sam Altman on the multi trillion dollar AI buildout</div>
+    <div class="who">Host: Brad Gerstner and Bill Gurley · exact release date not confirmed in this pass · compute buildout economics</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>BG2 is the most infrastructure literate of the major investor podcasts, and this episode with Microsoft's Satya Nadella and OpenAI's Sam Altman is framed around the scale and economics of the AI compute buildout, the exact terrain CoreWeave operates in.</li>
+        <li>Most relevant question for CoreWeave: how the largest buyers of compute think about the pace, financing and returns of the buildout, which is the demand side of CoreWeave's backlog thesis and the counterweight to the IBM and bubble warnings above.</li>
+        <li>Flagging honestly: I am pointing to this based on listings, and I could not confirm a precise release date in this pass, so treat it as a pointer, not a dated summary. Verify the episode and date on the feed before relying on it.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://podcasts.apple.com/us/podcast/bg2pod-with-brad-gerstner-and-bill-gurley/id1727278168">Listen (BG2 on Apple Podcasts)</a> · episode confirmed via listings; exact date not verified.</p>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <div class="section-title">Quick Signals</div>
+
+  <div class="sig">
+    <span class="h">Jensen Huang (Nvidia, Tokyo remarks)</span><span class="d">July 16 2026</span>
+    <p>"The next frontier of AI is in the physical world, and this is a once in a generation opportunity for Japan," Huang said at Nvidia's Japan AI ecosystem event, adding that Japan "invented modern manufacturing" and can "reinvent it for the age of intelligent industries." The framing behind the sovereign physical AI push in story 03. <a href="https://www.cnbc.com/2026/07/16/nvidia-reveals-new-ai-model-and-expands-japans-physical-ai-ecosystem.html">via CNBC</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">@sama vs @elonmusk</span><span class="d">reported July 12 2026</span>
+    <p>Altman and Musk sparred publicly on X after Apple's suit against OpenAI, with Altman reportedly writing that "there are a lot of benchmarks that suggest 5.6 sol is the best model in the world right now, but the most reliable way to tell is that elon is obsessed with me again." One exchange reportedly drew over 11 million views. Personality theater, but it tracks the OpenAI vs xAI model race. <a href="https://www.cnbc.com/2026/07/12/elon-musk-and-sam-altman-spar-.html">via CNBC</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">OpenAI (hardware report)</span><span class="d">reported July 14 2026</span>
+    <p>Reporting describes OpenAI's first device as a screenless, portable smart speaker with a camera and sensors, powered by ChatGPT and designed to feel "alive," now reportedly not expected until 2027. Notably, Apple has asked a court for an injunction that could block OpenAI hardware amid the trade secret suit, tying the device story to the litigation. <a href="https://9to5mac.com/2026/07/14/report-openais-first-device-will-be-a-portable-speaker-with-a-camera-and-other-sensors/">via 9to5Mac</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">OpenAI (policy report)</span><span class="d">reported July 2 2026, resurfaced July 14</span>
+    <p>OpenAI is reported to have floated giving the US government a 5 percent stake, worth roughly 42.6 billion dollars at its reported 852 billion valuation, modeled on the Alaska Permanent Fund, with a broader idea that all major US AI firms allot 5 percent to a public vehicle. Described as conceptual and very early. A sign of how entangled frontier AI and the state are becoming. <a href="https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html">via CNBC</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Helsing (funding)</span><span class="d">reported July 13 2026</span>
+    <p>German defense AI company Helsing reportedly raised 1.8 billion dollars, with JPMorgan Chase, Lightspeed and Iconiq among lead investors. Defense AI is now attracting mega rounds on par with frontier labs, a distinct and growing slice of AI compute demand. <a href="https://techstartups.com/2026/07/13/venture-capital-startup-funding-roundup-july-13-2026-accel-general-catalyst-sequoia-intel-capital-khosla-ventures-and-nvidia-ventures/">via Tech Startups</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Anthropic and Samsung (report)</span><span class="d">reported early July 2026</span>
+    <p>Anthropic is reported to be in early talks with Samsung to build a custom Claude inference chip on a 2nm process, while keeping AWS Trainium, Google TPUs and Nvidia GPUs central. Coverage cites OpenAI's Jalapeño inference chip showing roughly 50 percent cost savings versus standard GPU inference in early testing as the backdrop. Another data point on labs diversifying silicon. <a href="https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/">via TechCrunch</a></p>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <div class="connected">
+    <strong style="color:var(--text);">Connected sources.</strong> Gmail, Google Calendar, and Slack are configured connectors for this briefing. This was an automated, unattended run focused on public web research, and no personal email, calendar, or Slack channel signal was incorporated. No Slack channels were read in this pass. To fold in Slack channel context or calendar items in future runs, authorize those connectors in claude.ai connector settings.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · July 16 2026 · Main sources: CNBC, Yahoo Finance, Fortune, Forbes, Motley Fool, Money Morning, Technology.org, NY Governor's Office, Inside Climate News, Marketplace, News10, Daily Kos, LocalSYR, NVIDIA Newsroom and Blog, GlobeNewswire, DigiTimes, Nikkei Asia, Manila Times, TradingKey, TechPowerUp, TSMC Investor Relations, INDmoney, Phemex, China MFA, SCMP, CGTN, Sputnik, Modern Diplomacy, Future of Life Institute, TIME, Axios, Seeking Alpha, MIT Sloan ME, BigGo Finance, PYMNTS, Tech Funding News, AI Weekly, Cryptopolitan, TipRanks, Benzinga, TechTimes, Startup Fortune, Geeky Gadgets, Coursiv, 9to5Mac, Tech Startups, TechCrunch, Dwarkesh Podcast, and BG2 Pod.
+    <span class="cav">Uncertainty flags: IBM's figures are from a preannouncement, not the final July 22 report, and the "AI stealing budgets" framing is management's; the NY moratorium thresholds and counts are from the Governor's office and coverage; Nvidia's Japan GPU counts and "world's first" claim are vendor framing; TSMC's exact figures vary across outlets and are not read from filings here; the WAIC governance items are stated intent from Chinese state media; the FLI Safety Index grades are an advocacy body's assessment, not a neutral standard; the Karpathy to Anthropic claim is unverified and is not treated as fact; and Gemini 3.5 Pro's July 17 date and every spec are leaks, not a confirmed Google launch. Podcast picks are the most recent verifiable episodes, with dates as listed and content not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
