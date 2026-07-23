@@ -1,8 +1,16 @@
 name: Publish briefings
 
-# Runs on every push to main. Regenerates index.html so the landing page
-# always reflects what's in briefings/, then commits the regenerated
-# index back to main if it changed.
+# Runs on every push to main. Regenerates index.html purely as a sanity
+# check that scripts/generate_index.py still runs. It does NOT commit or
+# push anything back to main.
+#
+# Why: index.html is generated and committed as part of the normal
+# briefing workflow (locally / by the scheduled task). generate_index.py
+# stamps a fresh UTC timestamp into index.html on every run, so an
+# Action that committed the regenerated file would create a new commit
+# on every push, leaving the local branch one commit behind and causing
+# non-fast-forward push rejections. Keeping the Action read-only removes
+# that divergence at the source.
 #
 # Optional: uncomment the deploy-pages job to publish a GitHub Pages site.
 # Requires Pages enabled in repo Settings. From a private repo, Pages
@@ -14,42 +22,43 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 jobs:
-  refresh-index:
+  verify-index:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: true
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Regenerate index.html
+      - name: Regenerate index.html (sanity check only, not committed)
         run: python scripts/generate_index.py
 
-      - name: Commit refreshed index (if changed)
+      - name: Report whether committed index.html was stale
         run: |
-          if [[ -n "$(git status --porcelain index.html)" ]]; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add index.html
-            git commit -m "chore: refresh index.html"
-            git push
+          # Ignore the volatile "updated" timestamp line so a mismatch
+          # only flags a genuinely stale index (missing/extra editions).
+          if git diff --quiet -- index.html; then
+            echo "index.html is current."
           else
-            echo "index.html already current"
+            echo "::warning::index.html differs after regeneration."
+            echo "If the diff is only the 'updated' timestamp, no action is needed."
+            echo "If editions are missing, run 'python scripts/generate_index.py' locally, then commit and push."
+            git --no-pager diff -- index.html | head -40 || true
           fi
 
   # Uncomment to publish via GitHub Pages.
   #
   # deploy-pages:
-  #   needs: refresh-index
+  #   needs: verify-index
   #   runs-on: ubuntu-latest
   #   environment:
   #     name: github-pages
