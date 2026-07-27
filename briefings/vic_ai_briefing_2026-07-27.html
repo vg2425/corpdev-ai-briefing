@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — July 27 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Monday, July 27 2026 · Monday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">7 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">46+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">9+ sources</span>
+        </div>
+        <div class="headline">Big Tech Q2 earnings push 2026 AI capex toward 725 billion dollars, and the market punished the spend</div>
+        <p class="tldr">Alphabet opened the week on July 22 with 24 percent revenue growth and 82 percent cloud growth, but the headline was capex: 44.9 billion dollars in the quarter, a raised full year guide to 195 to 205 billion dollars, and free cash flow that turned negative for the first time since its 2004 IPO. Meta lifted its 2026 capex outlook to 125 to 145 billion dollars and Microsoft guided to roughly 190 billion dollars for the year ahead of its July 29 report. Coverage put combined hyperscaler AI capex around 725 billion dollars for 2026, up roughly 77 percent year over year, and by Friday July 24 Alphabet shares had fallen more than 7 percent, their worst day in over a year.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This is the single most important read of the week for anyone in merchant compute, because it is the demand curve stated out loud by the four companies that set it. Alphabet's cloud backlog reportedly reached 514 billion dollars, roughly 60 percent of the quarter's technical infrastructure spend went to servers, and management began recognizing revenue from selling its own TPU systems into customer data centers, a new hardware line that ramps mostly in 2027. Meta and Microsoft both cited higher component pricing, especially memory, as a reason costs climbed, with Microsoft flagging roughly 25 billion dollars of its 190 billion dollar figure as component price impact.</p>
+          <p>The more interesting signal is the market reaction. For most of this cycle investors rewarded capex as a proxy for AI ambition. This week they did the opposite: Alphabet's negative free cash flow and the guidance raise triggered the sell off, and by July 26 the framing in the financial press had shifted to a market in revolt over AI spending. That is a change in psychology, not yet a change in spending, but it is the first crack in the reflexive bid under infrastructure names.</p>
+          <p>Skeptic's note: revenue growth and the capex figures are reported earnings, so they are relatively firm, but the 725 billion dollar combined total is an aggregate assembled by outlets across four companies with different fiscal calendars, and Microsoft had not yet reported as of this writing. The 195 to 205 billion dollar and 125 to 145 billion dollar figures are forward guidance, which slips. Treat the direction as confirmed and the precise totals as provisional.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>The bullish read is direct: the customers and rivals that anchor CoreWeave's world just told the market they intend to spend three quarters of a trillion dollars on AI infrastructure this year, and supply, not demand, is still the binding constraint, with Microsoft again flagging capacity shortfalls through 2026. That is the backdrop that fills contracted backlog. The threat is two sided. First, the same earnings show hyperscalers building and even selling their own capacity, including Google now booking TPU system sales into customer data centers, which is captive supply and vertical competition. Second, if the market has really turned on capex, the cost of capital for every debt funded buildout, CoreWeave's included, gets more expensive at exactly the moment the model depends on cheap financing.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://finance.biggo.com/news/US_GOOGL_2026-07-22">BigGo Finance</a>
+          <a href="https://www.cnbc.com/2026/07/22/google-earnings-q2-goog-live-updates.html">CNBC</a>
+          <a href="https://www.investing.com/news/company-news/alphabet-q2-2026-slides-24-revenue-growth-cloud-surges-despite-capex-93CH-4807148">Investing.com</a>
+          <a href="https://www.fierce-network.com/cloud/google-cloud-surges-alphabets-ai-capex-problem-grows">Fierce Network</a>
+          <a href="https://valueaddvc.com/blog/alphabet-205b-ai-capex-guidance-2026-what-googles-q2-earnings-raise-actually-buys">Value Add VC</a>
+          <a href="https://fortune.com/2026/07/26/big-tech-earnings-meta-microsoft-apple-amazon-market-revolt-ai-spending/">Fortune</a>
+          <a href="https://stocktwits.com/news-articles/markets/equity/microsoft-meta-and-google-just-silenced-ai-spending-critics-in-one-earnings-night-as-big-tech-capex-swells-to-725-b/cZBtCIgReEx">Stocktwits</a>
+          <a href="https://finance.yahoo.com/markets/stocks/articles/capex-focus-microsoft-stock-ahead-185832048.html">Yahoo Finance</a>
+          <a href="https://marketwise.com/investing/ai-demand-big-tech-earnings-spending/">MarketWise</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the 725 billion dollar combined capex figure is an aggregate across four companies compiled by outlets, not a single reported number; Microsoft's roughly 190 billion dollar figure and Meta's 125 to 145 billion dollar range are forward guidance; Alphabet's 514 billion dollar backlog and negative 5.9 billion dollar free cash flow are from earnings coverage. Confirm against each company's official release before external use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Nvidia and SK Group unveil a 500 billion dollar plus AI data center and memory push, with CoreWeave named among the first to run Vera Rubin</div>
+        <p class="tldr">On July 24 Nvidia and South Korea's SK Group announced an initiative valued at more than 500 billion dollars spanning large scale AI data centers and next generation memory. SK Telecom plans a 2 gigawatt AI data center built on Nvidia's Vera Rubin platform and SK Hynix HBM4, with the first facility due online in 2027, and Nvidia said it would invest 1 billion dollars into Korean cloud firm Naver. Separately, Nvidia's roadmap materials named CoreWeave, alongside Lambda, Nebius and Nscale, among the Nvidia Cloud Partners set to deploy Vera Rubin based instances.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Two things are happening at once. The SK announcement is Nvidia locking down HBM4 memory supply, the component every outlet this week named as the reason capex is climbing, while seeding another 2 gigawatts of Vera Rubin demand into a friendly national champion. The Naver investment is the same playbook at smaller scale: put equity into a cloud that buys your chips. This is Nvidia extending its by now familiar circular financing model, where it invests in the buyers of its own hardware, into Korea's memory and cloud stack.</p>
+          <p>For CoreWeave specifically, being named on Nvidia's Vera Rubin launch list matters. It confirms CoreWeave stays in the small club of neocloud partners that get early access to Nvidia's newest platform, which is the entire basis of its differentiation against generic hosts. Early access to Rubin is how a merchant cloud keeps a performance and availability edge over the crowd.</p>
+          <p>Skeptic's note: the 500 billion dollar figure is a headline initiative value spanning many years and multiple parties, not a signed contract or a spent number, and megadeal totals in this space routinely bundle memory, data centers and speculative future phases to reach a round number. The SK Telecom 2 gigawatt facility is targeted for 2027, so it is a plan, not capacity. The CoreWeave Vera Rubin naming is from Nvidia roadmap coverage; treat it as a positioning signal rather than a booked order.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>The clear positive is that CoreWeave remains inside Nvidia's inner circle for the Vera Rubin generation, which protects its core pitch of newest silicon, fastest. Nvidia's willingness to underwrite demand through equity, as with Naver and its own prior commitments to CoreWeave, is also the financing tailwind that keeps the neocloud model liquid. The threat sits in the same announcement: a 2 gigawatt Nvidia data center inside SK Telecom, plus a funded Naver, means more sovereign and hyperscale scale capacity coming online worldwide that competes for the same Rubin allocation and the same customers, and it shows Nvidia is happy to seed rivals to CoreWeave wherever it helps sell chips.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.investing.com/news/stock-market-news/nvidia-sk-group-unveil-500-billionplus-ai-data-centers-initiative-memory-partnership-4812652">Reuters via Investing.com</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/nvidia-sk-group-unveil-500-235343258.html">Yahoo Finance</a>
+          <a href="https://www.usnews.com/news/top-news/articles/2026-07-24/nvidia-sk-group-unveil-500-billion-plus-ai-data-centers-initiative-memory-partnership">US News</a>
+          <a href="https://www.tradingview.com/news/cryptobriefing:7978523f4094b:0-nvidia-and-sk-group-unveil-500b-ai-data-centers-initiative-reshaping-the-global-compute-landscape/">TradingView</a>
+          <a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer">Nvidia Newsroom</a>
+          <a href="https://www.datacenterdynamics.com/en/news/nvidia-updates-data-center-product-roadmap-following-lpu-launch-at-gtc-2026/">DCD</a>
+          <a href="https://www.datacenterknowledge.com/data-center-hardware/data-center-hardware-highlights-july-2026">Data Center Knowledge</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the 500 billion dollar plus initiative value spans multiple years and parties and is not a signed or spent figure; the SK Telecom 2 gigawatt facility and 1 billion dollar Naver investment are announced but not yet built; the CoreWeave Vera Rubin partner naming comes from Nvidia roadmap coverage. Verify against Nvidia and SK official releases before external use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">AMD commits up to 5 billion dollars to Anthropic for 2 gigawatts of MI450 GPUs, striking at Nvidia's near monopoly</div>
+        <p class="tldr">On July 22 AMD and Anthropic announced a strategic partnership under which Anthropic will deploy up to 2 gigawatts of AMD Instinct MI450 series GPUs starting in the first half of 2027, with AMD making an equity investment of up to 5 billion dollars in Anthropic. The two also launched a multi year engineering collaboration to use Claude to accelerate AMD's ROCm software stack, which is the historic weak point that has kept AMD chips behind Nvidia in practice.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The pattern here is the same circular financing that defines this cycle: a chipmaker takes equity in a lab that then commits to buy its chips. What makes this one meaningful is the software half. AMD's problem has never been raw silicon, it has been that ROCm lags Nvidia's CUDA, so accelerators sit idle or underused. Pointing Claude at ROCm development is an attempt to close that gap with the labs' own best coding model, and if it works it makes the MI450 a genuine second source rather than a discount alternative.</p>
+          <p>For Anthropic this is the same procurement strategy visible in its reported SpaceX and Meta compute talks: assemble a deliberately multi vendor compute portfolio across Nvidia, AWS Trainium, Google TPUs and now AMD, so no single supplier holds pricing power over an existential input. Compute access is being treated as a balance sheet and contracts problem, not just a modeling problem.</p>
+          <p>Skeptic's note: this is confirmed by AMD's own investor relations release, so the deal itself is firm, but the up to 5 billion dollars is an equity commitment ceiling and the 2 gigawatts of MI450 is a 2027 deployment target, not installed capacity. Whether ROCm actually reaches CUDA parity is the open question the announcement cannot answer. Treat the intent as real and the outcome as unproven.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>A credible second GPU source is a genuine positive for CoreWeave over time, because it loosens the Nvidia supply chokehold and can lower the cost per chip that flows through to CoreWeave's capex. If Claude driven ROCm work makes MI450 fleets truly competitive, a neocloud can diversify its own hardware and pricing. The threat is nearer term and specific: this deal routes 2 gigawatts of next generation AMD capacity directly to Anthropic rather than through a merchant cloud, another example of a frontier lab contracting silicon straight from the vendor and building its own footprint, which is demand that never touches CoreWeave's fleet.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus">AMD Investor Relations</a>
+          <a href="https://www.cnbc.com/2026/07/22/amd-anthropic-ai-chip-investment.html">CNBC</a>
+          <a href="https://www.tomshardware.com/tech-industry/amd-to-supply-anthropic-with-2-gigawatts-of-instinct-mi450-gpus">Tom's Hardware</a>
+          <a href="https://mlq.ai/news/amd-commits-up-to-5-billion-to-anthropic-will-deploy-2gw-of-instinct-mi450-gpus/">MLQ</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/amd-commits-5-billion-anthropic-195336439.html">Yahoo Finance</a>
+          <a href="https://www.techtimes.com/articles/321397/20260723/amd-bets-5-billion-anthropic-fix-one-thing-holding-back-its-ai-chips.htm">TechTimes</a>
+          <a href="https://thenextweb.com/news/amd-anthropic-5-billion-investment-2gw-helios-mi450">TheNextWeb</a>
+          <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262047368-amd-anthropic-ai-cpu-gpu-nvda-instinct-mi450-tradingkey">TradingKey</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the deal is confirmed by AMD's investor relations release, but the up to 5 billion dollars is an equity commitment ceiling and the 2 gigawatts of MI450 is a first half 2027 deployment target, not installed capacity. ROCm parity with CUDA is an aspiration, not a demonstrated result.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag policy">Policy &amp; Power</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">OpenAI unveils Project Camellia, a 3.2 gigawatt, 30 billion dollar self built data center in Georgia</div>
+        <p class="tldr">On July 22 OpenAI announced Project Camellia, a four building, roughly 1,400 acre data center campus in Effingham County, Georgia near Savannah. Coverage describes at least 20 billion dollars in private investment and total project cost potentially exceeding 30 billion dollars at full scale, with Georgia Power delivering 3.2 gigawatts in phases between 2028 and 2032 under a 25 year agreement. It is described as OpenAI's first campus it will design and build itself, and it drew immediate local backlash, with hundreds of residents confronting officials at a packed community meeting.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The strategic message is vertical integration. Until now OpenAI has leased and partnered for capacity, including through Stargate and Microsoft. Designing and building its own campus, and locking a 25 year, 3.2 gigawatt power agreement directly with a utility, is OpenAI deciding that at its scale it should own the physical layer rather than rent it. The power commitment is arguably the bigger story than the building: securing multi gigawatt electricity for decades is now the hardest part of the buildout, and OpenAI negotiated this one largely in secret before the public found out.</p>
+          <p>The backlash is a real variable, not color. Community opposition, water use concerns and ratepayer anger are becoming a genuine gating factor on where and how fast these campuses get built, and it ties directly to the White House ratepayer pledge covered below.</p>
+          <p>Skeptic's note: the dollar figures range widely across outlets, from a 20 billion dollar private investment floor to a more than 30 billion dollar full scale ceiling, which tells you these are estimates, not a filed budget. Power delivery is phased out to 2032, so this is a decade long plan whose later phases are contingent. Treat the ambition as confirmed and the numbers and timeline as provisional.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is mostly a threat signal, and a clarifying one. When the largest single buyer of frontier compute decides to design, build and power its own campus, it is choosing to internalize the exact function merchant clouds sell. Every gigawatt OpenAI self builds is a gigawatt it does not rent. The bullish counterpoint is timing and specialization: Camellia does not deliver power until 2028 to 2032, so OpenAI still needs leased capacity now, and self building at this scale is brutally hard, which is precisely why a specialist like CoreWeave exists. The deeper lesson for CoreWeave is that the moat is shifting from GPUs to secured power, and the companies that lock long term electricity win.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://mlq.ai/news/openai-unveils-32gw-project-camellia-data-center-campus-in-effingham-county-georgia/">MLQ</a>
+          <a href="https://constructionreviewonline.com/project-camellia-openai-plans-30-billion-3-2-gigawatt-data-center-near-savannah-georgia/">Construction Review</a>
+          <a href="https://www.techtimes.com/articles/321460/20260724/openai-locks-32-gigawatts-georgia-data-center-despite-public-backlash.htm">TechTimes</a>
+          <a href="https://qz.com/openai-data-center-georgia-savannah-project-camellia-072226">Quartz</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/openai-spending-30-billion-mega-150500763.html">Yahoo Finance</a>
+          <a href="https://www.hngn.com/articles/272276/20260722/openai-plans-20-billion-georgia-data-center-its-first-self-built-campus.htm">HNGN</a>
+          <a href="https://www.digitalapplied.com/blog/openai-project-camellia-30b-georgia-compute-buildout">Digital Applied</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: dollar figures range from a 20 billion dollar private investment floor to a more than 30 billion dollar full scale ceiling across outlets; the 3.2 gigawatt power delivery is phased to 2028 through 2032 and later phases are contingent. These are estimates, not a filed budget.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">CoreWeave backed data center prices a 3.5 billion dollar junk bond for its Helios campus in West Texas</div>
+        <p class="tldr">On July 22 Bloomberg reported that Galaxy Digital planned a debut junk bond sale of about 3.5 billion dollars to fund a data center tied to CoreWeave, and the notes reportedly priced on July 23 with the deal slated to close July 28 and mature August 1 2031. Proceeds fund the Helios Data Center campus in Dickens County, West Texas, where CoreWeave has agreed to lease the IT load under long term contracts. Morgan Stanley and Goldman Sachs ran the offering.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This is the CoreWeave financing model in miniature, and it is worth watching precisely because it is not on CoreWeave's own balance sheet. A partner, Galaxy Digital, raises high yield debt against a specific campus, and CoreWeave signs a long term lease that gives bondholders the contracted cash flow they underwrite against. It is how the neocloud sector converts signed capacity commitments into buildable capital without CoreWeave carrying every dollar of construction risk directly.</p>
+          <p>The junk bond label is the tell. This is high yield, asset backed financing whose economics depend on CoreWeave honoring long term leases and on GPU demand staying strong enough to keep the campus full. One outlet this week framed the deal around the tight construction math and the hundreds of millions of dollars at stake in hitting delivery milestones, which is the real risk in these structures: timing and execution, not headline demand.</p>
+          <p>Skeptic's note: the 3.5 billion dollar size, the July 23 pricing and the July 28 close are from reporting, and pricing terms can move up to the moment of settlement. The structure concentrates risk on lease performance and delivery timelines. Treat the deal as real and in motion, and the exact terms as reported rather than settled.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is the most CoreWeave specific item of the week and it cuts both ways. Bullish: a debut 3.5 billion dollar bond pricing shows capital markets will still fund CoreWeave anchored campuses at scale, and the off balance sheet structure lets CoreWeave expand faster than its own equity would allow. Threat: it is junk rated, so the whole edifice rests on the durability of CoreWeave's long term leases and on demand staying hot, and if the market's fresh skepticism about AI capex, visible in this week's Alphabet sell off, raises high yield spreads, the cost of exactly this kind of financing goes up across CoreWeave's growth plan.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.bloomberg.com/news/articles/2026-07-22/coreweave-backed-data-center-plans-3-5-billion-junk-bond-sale">Bloomberg</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/coreweave-backed-data-center-plans-140649288.html">Yahoo Finance</a>
+          <a href="https://crypto.news/galaxy-digital-targets-3-5b-junk-bond-sale-to-expand-texas-ai-data-center/">crypto.news</a>
+          <a href="https://blockonomi.com/galaxy-digital-glxy-stock-inside-the-3-5b-bond-offering-for-texas-ai-data-center/">Blockonomi</a>
+          <a href="https://simplywall.st/stocks/us/software/nasdaq-crwv/coreweave/news/coreweave-crwv-locks-in-galaxy-digitals-35-billion-texas-dat">Simply Wall St</a>
+          <a href="https://finance.biggo.com/news/d6c4100e-5624-4f42-9a61-6d3e5649d588">BigGo Finance</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the 3.5 billion dollar size, the July 23 pricing, the July 28 close and the August 1 2031 maturity are from reporting and can move before settlement. The structure concentrates risk on CoreWeave lease performance and construction timelines.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Notable</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag policy">Policy &amp; Power</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">White House accuses Moonshot of distilling Anthropic's Fable to build Kimi K3, and Treasury threatens sanctions</div>
+        <p class="tldr">On July 22 White House OSTP Director Michael Kratsios publicly accused Moonshot AI of large scale covert distillation of Anthropic's Fable model to build Kimi K3, and alleged Moonshot accessed banned Nvidia Blackwell chips through Thailand based infrastructure. Treasury Secretary Scott Bessent separately threatened sanctions and possible Entity List additions, and the Bureau of Industry and Security reportedly opened an investigation. Kimi K3's open weights, previewed in the last edition, arrived around July 27.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This is the geopolitics of the open weight story from the last edition catching up to it. Kimi K3 shipped as the strongest open weight model to date and beat frontier closed models on a coding board, and the US response is now to allege the capability was stolen through distillation and smuggled chips rather than earned. If it leads to sanctions or Entity List placement, it would restrict how US enterprises can legally touch a leading open weight model, which is a policy variable that bears directly on inference demand.</p>
+          <p>The credibility of the allegation is genuinely contested. No supporting logs or evidence have been made public, and independent researchers have publicly questioned whether distillation can even explain K3's capabilities given that only about 16 days separated Fable 5's July 1 return to general availability from K3's July 17 launch. That is a short window to distill and train a frontier scale model, which is why several observers are skeptical.</p>
+          <p>Skeptic's note: this is a government accusation without published evidence, not a finding, and Moonshot has not responded to the specifics. The chip smuggling and distillation claims are serious but unproven, and the compressed timeline cuts against the technical story. Treat the political and regulatory risk as real and the underlying factual claim as unverified.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>The near term effect is a chill on the open weight inference demand that most benefits merchant GPU clouds. If the strongest open weight model carries sanctions risk, US enterprises hesitate to self host it, and self hosting large open models on rentable fleets is precisely the demand CoreWeave monetizes. The offsetting read is that hostility to Chinese models can steer that same demand toward US models and US infrastructure, and a compliance heavy environment favors trusted domestic clouds over sending data to a Chinese API. Net, this raises the political temperature around exactly the workloads that fill neocloud capacity.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://techcrunch.com/2026/07/22/treasury-threatens-sanctions-after-white-house-claims-moonshot-distilled-anthropics-fable/">TechCrunch</a>
+          <a href="https://cyberscoop.com/white-house-accuses-moonshot-ai-anthropic-model-distillation/">CyberScoop</a>
+          <a href="https://thehill.com/policy/technology/5984510-white-house-moonshot-ai-anthropic-nvidia/">The Hill</a>
+          <a href="https://www.vktr.com/ai-news/white-house-accuses-chinas-moonshot-ai-of-stealing-anthropics-fable/">VKTR</a>
+          <a href="https://www.digitalapplied.com/blog/white-house-ostp-moonshot-fable-5-distillation-accusation">Digital Applied</a>
+          <a href="https://www.techtimes.com/articles/321551/20260725/kimi-k3-open-weights-arrive-sunday-self-hosting-cuts-china-data-risk-api-never-can.htm">TechTimes</a>
+          <a href="https://www.gncrypto.news/news/white-house-accuses-moonshot-ai-distilling-anthropic-fable-kimi-k3/">GN Crypto</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: this is a government accusation with no published evidence, disputed by independent researchers on timeline grounds, and Moonshot has not addressed the specifics. The chip smuggling and distillation claims are unproven. Treat regulatory risk as real and the factual claim as unverified.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Notable</span>
+          <span class="tag policy">Policy &amp; Power</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">4+ sources</span>
+        </div>
+        <div class="headline">White House gathers utilities and data center developers for a nonbinding Ratepayer Protection Pledge as the grid tightens</div>
+        <p class="tldr">On July 23 the White House announced fresh commitments from power utilities and data center developers under a Ratepayer Protection Pledge, a voluntary initiative meant to keep AI driven electricity demand from raising household and business power bills by having corporations bear the cost of new infrastructure. It lands as reporting warns data centers could consume 9 to 17 percent of US electricity by 2030, and as tech firms secure dedicated generation, including Google's plan to restart the Duane Arnold nuclear plant in Iowa by 2029.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Power, not silicon, is increasingly the real constraint on the AI buildout, and this is Washington acknowledging the political cost. As multi gigawatt campuses like OpenAI's Project Camellia get announced, the affordability backlash from ordinary ratepayers is becoming a gating factor on approvals and timelines. A nonbinding pledge is a signal that the administration wants the industry to self police pricing before mandatory rules arrive.</p>
+          <p>The parallel move by hyperscalers is to secure their own generation, which is why Google is reviving a shuttered nuclear plant and why long term utility agreements now headline data center announcements. Whoever locks firm, affordable, low carbon power at multi gigawatt scale controls the pace of the buildout.</p>
+          <p>Skeptic's note: the pledge is explicitly voluntary and nonbinding, so its real world effect on either power bills or buildout speed is unproven. The 9 to 17 percent of US electricity by 2030 figure is a projection with a wide range, and the Duane Arnold restart targets 2029, which is a plan subject to regulatory approval. Treat this as a policy signal, not a binding constraint yet.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Power availability and power cost are now core to CoreWeave's unit economics and its ability to expand, so anything that shapes how quickly and cheaply gigawatts come online is material. The bullish read is that federal attention plus utility commitments could smooth the permitting and generation path that every campus depends on. The threat is that if ratepayer politics harden into mandatory cost shifting onto data center operators, the effective cost of power for a compute heavy business like CoreWeave rises, and local opposition of the kind OpenAI just met in Georgia can delay the exact sites CoreWeave and its partners need.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.bloomberg.com/news/articles/2026-07-23/trump-expands-ai-data-center-pledge-in-bid-to-ease-power-costs">Bloomberg</a>
+          <a href="https://money.usnews.com/investing/news/articles/2026-07-13/white-house-to-rally-utilities-data-centers-over-ai-power-costs">US News</a>
+          <a href="https://qz.com/ai-data-centers-gigawatt-power-grid-strain-051126">Quartz</a>
+          <a href="https://pandaily.com/ai-computing-power-global-power-grids-limit-jul2026">Pandaily</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the Ratepayer Protection Pledge is voluntary and nonbinding; the 9 to 17 percent of US electricity by 2030 range is a projection; the Google Duane Arnold nuclear restart targets 2029 and is subject to regulatory approval.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCAST PICKS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">BG2 POD</div>
+    <div class="ep">AI capex, the earnings reaction, and the compute buildout economics</div>
+    <div class="who">Hosts: Brad Gerstner and Bill Gurley · the demand side of the buildout</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>BG2 is the most infrastructure literate of the major investor podcasts, and its recurring AI capex segment is the exact terrain of this week's Big Tech earnings and the market's turn against the spend. I could not verify a specific new episode by date in this pass, so I am pointing to the show rather than asserting an episode I did not confirm.</li>
+        <li>Most relevant thread for this week: how the largest financiers of compute read the Alphabet sell off and the 725 billion dollar capex figure, which is the demand and cost of capital context behind the CoreWeave bond and the Nvidia and AMD deals above.</li>
+        <li>Flagging honestly: I am pointing to this from the show feed and did not confirm a July episode or listen in this pass. Verify the latest episode and date on the feed before relying on specifics.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://www.bg2pod.com/">Listen (BG2 Pod)</a> · episode and date not independently confirmed this pass.</p>
+    </div>
+  </div>
+
+  <div class="pod">
+    <div class="show">DWARKESH PODCAST</div>
+    <div class="ep">Grant Sanderson (3Blue1Brown) on AI progress in mathematics</div>
+    <div class="who">Reported released June 30 2026 · Host: Dwarkesh Patel · math and the shape of AI progress</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>This remains the most recent Dwarkesh episode I could verify in this pass. I found no newer July episode indexed, so I am carrying it forward honestly rather than inventing one.</li>
+        <li>Relevant lens for this week: math and code are domains with cheap, unambiguous verification, which is exactly where reasoning and coding models improve fastest. That connects to the Kimi K3 coding result and the distillation dispute above, since the tasks that scale first are the ones a model can grade itself on.</li>
+        <li>Flagging honestly: takeaways are inferred from the episode description and Sanderson's known focus, not from listening in this pass. Confirm specifics before citing.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://www.dwarkesh.com/podcast/archive">Listen (Dwarkesh Podcast archive)</a> · date per search listings; content not independently confirmed.</p>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <div class="section-title">Quick Signals</div>
+
+  <div class="sig">
+    <span class="h">Nvidia and Naver (funding)</span><span class="d">July 24 2026</span>
+    <p>As part of the SK Group announcement, Nvidia said it would invest about 1 billion dollars into Korean cloud firm Naver to roughly triple a facility and add 200 megawatts of AI compute. Another instance of Nvidia taking equity in the buyers of its own chips, and more sovereign scale capacity coming online outside the merchant clouds. <a href="https://finance.yahoo.com/technology/ai/articles/nvidia-sk-group-unveil-500-235343258.html">via Reuters and Yahoo</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Z.AI all Chinese chip data center (Bloomberg)</span><span class="d">reported July 20 2026</span>
+    <p>Bloomberg reported that Chinese lab Z.AI completed a large data center it intends to run entirely on domestic AI chips to train models. A data point on how fast China is standing up a self sufficient hardware stack under US export limits, which is the same theme as the Kimi K3 chip smuggling allegation above. <a href="https://www.bloomberg.com/news/articles/2026-07-20/z-ai-completes-giant-data-center-with-chinese-chips-to-train-ai">via Bloomberg</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Google TPU system sales (earnings)</span><span class="d">July 22 2026</span>
+    <p>Google Cloud began recognizing revenue from selling its own TPU systems into customer data centers in Q2, a new hardware line that ramps mostly in 2027. Worth watching closely: it is a hyperscaler placing captive silicon directly into third party sites, which competes with the merchant GPU model on its own turf. <a href="https://www.investing.com/news/company-news/alphabet-q2-2026-slides-24-revenue-growth-cloud-surges-despite-capex-93CH-4807148">via Investing.com</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Microsoft earnings on deck</span><span class="d">July 29 2026</span>
+    <p>Microsoft reports fiscal Q4 on July 29, with capex expected above 40 billion dollars for the quarter and roughly 190 billion dollars for the fiscal year, and Azure guided to 39 to 40 percent growth amid continued AI capacity shortfalls. The next read on whether the market's fresh capex skepticism deepens. <a href="https://finance.yahoo.com/markets/stocks/articles/capex-focus-microsoft-stock-ahead-185832048.html">via Yahoo Finance</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Correction from the tape</span><span class="d">flag</span>
+    <p>Several aggregators recirculated older AMD, DeepSeek and Emergent items this week alongside genuinely new July 22 to 24 news. The AMD and Anthropic deal is confirmed as July 22 via AMD's investor relations page, but the DeepSeek inference chip and Emergent funding items trace to earlier July, so I am not presenting them as this week's news. Misdated recycling remains common in the daily roundups. <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-23-2026">context via BuildFastWithAI roundup</a></p>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <div class="connected">
+    <strong style="color:var(--text);">Connected sources.</strong> Gmail, Google Calendar, and Slack are configured connectors for this briefing. This was an automated, unattended run focused on public web research, and no personal email, calendar, or Slack channel signal was incorporated. No Slack channels or inboxes were read in this pass. To fold in Slack channel context or calendar items in future runs, authorize those connectors for unattended use in claude.ai connector settings.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · July 27 2026 · Main sources: BigGo Finance, CNBC, Investing.com, Fierce Network, Value Add VC, Fortune, Stocktwits, Yahoo Finance, MarketWise, Reuters, US News, TradingView, Nvidia Newsroom, Data Center Dynamics, Data Center Knowledge, AMD Investor Relations, Tom's Hardware, MLQ, TechTimes, TheNextWeb, TradingKey, Construction Review, Quartz, HNGN, Digital Applied, Bloomberg, crypto.news, Blockonomi, Simply Wall St, TechCrunch, CyberScoop, The Hill, VKTR, GN Crypto, Pandaily, BuildFastWithAI, BG2 Pod, and Dwarkesh Podcast.
+    <span class="cav">Uncertainty flags: the roughly 725 billion dollar combined hyperscaler capex figure is an aggregate compiled across four companies with different fiscal calendars, and Microsoft had not yet reported as of this writing; Alphabet's 514 billion dollar backlog, 44.9 billion dollar quarterly capex, 195 to 205 billion dollar guidance and negative 5.9 billion dollar free cash flow are from earnings coverage; Meta's 125 to 145 billion dollar and Microsoft's roughly 190 billion dollar figures are forward guidance; the Nvidia and SK Group 500 billion dollar plus initiative, the SK Telecom 2 gigawatt facility, the 1 billion dollar Naver investment and the CoreWeave Vera Rubin partner naming are announced or from roadmap coverage, not signed or spent; the AMD and Anthropic deal is confirmed by AMD's investor relations release, but the up to 5 billion dollars is a commitment ceiling and the 2 gigawatts of MI450 is a first half 2027 target; OpenAI's Project Camellia figures range from 20 billion to over 30 billion dollars and power is phased to 2028 through 2032; the CoreWeave and Galaxy Digital 3.5 billion dollar junk bond terms and dates are from reporting and can move before settlement; the White House distillation and chip smuggling allegations against Moonshot are a government accusation with no published evidence and are disputed by independent researchers; and the Ratepayer Protection Pledge is voluntary and nonbinding while the 9 to 17 percent of US electricity by 2030 range is a projection. Podcast picks are the most recent I could point to this pass, with episodes and dates not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
