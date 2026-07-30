@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — July 30 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Thursday, July 30 2026 · Thursday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">7 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">45+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">Microsoft and Meta report on the same night and the market splits them: capex discipline is rewarded, a rising capex floor is punished</div>
+        <p class="tldr">On July 29 Microsoft and Meta reported within hours of each other and the reaction told the story of the new AI capex regime. Microsoft posted about 90 billion dollars in revenue, roughly 18 percent growth, with Azure again near the top of its guided range and quarterly capex reported around 35.8 billion dollars, more than double the year ago quarter. Crucially it framed its calendar 2026 capex envelope as holding rather than blowing out, and the stock jumped roughly 8 percent after hours. Meta beat on revenue at about 60.8 billion dollars, up 28 percent, but earnings per share of 6.18 dollars missed, free cash flow collapsed about 91 percent to under 800 million dollars, operating margin fell to 31 percent from 43 percent, and it lifted the floor of its 2026 capex range to 130 to 145 billion dollars. Meta shares fell roughly 9 to 10 percent after hours. Amazon reports after the close on July 30.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This is the same theme that opened Monday's edition, now sharpened into a rule. For most of this cycle the market rewarded capex as a proxy for AI ambition. As of this week it rewards capex that comes with visible return and a stable envelope, and it punishes capex that keeps rising while cash flow falls. Microsoft did not spend less, it spent more, but it signaled the 2026 total was not running away and paired the spend with accelerating cloud. Meta spent heavily, raised the floor, and showed free cash flow near zero, and it got sold. The lesson for anyone financing compute is that the cost of capital now depends on how the spend is narrated, not just how large it is.</p>
+          <p>Amazon on July 30 is the tiebreaker. Consensus points to AWS around 40 billion dollars for the quarter with growth possibly reaccelerating toward the low thirties in percent, and full year capex guidance already drifting up toward the low 200 billions of dollars on higher memory pricing. If AWS reaccelerates and the capex guide is framed as demand led, it reinforces the Microsoft read. If the guide jumps without matching cloud growth, it validates the Meta read.</p>
+          <p>Skeptic's note: revenue, margin and free cash flow are reported results and are relatively firm, but the exact capex figures vary across coverage, with different outlets citing different calendar 2026 totals for Microsoft, and the after hours moves are intraday snapshots that can reverse by the next session. Treat the direction, discipline rewarded and undisciplined spend punished, as the confirmed signal and the precise numbers as provisional until the filings settle.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>The bullish read is that demand is intact and the hyperscalers are still spending record sums on the exact capacity CoreWeave rents out, with Microsoft again near the top of its cloud guide despite capacity constraints. The threat is about financing, and it is specific. CoreWeave's growth model runs on debt raised against contracted leases, so the cost of that debt is set by exactly the sentiment shift on display this week. A market that now punishes a rising capex floor and thin free cash flow is a market that will demand higher yields on GPU backed and data center bonds, which is why CoreWeave had to sweeten a loan this week, covered below. Microsoft's discipline is the good scenario for CoreWeave, Meta's reaction is the warning.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.cnbc.com/2026/07/29/microsoft-aces-earnings-call-while-meta-frustration-grows-do-we-just-need-to-be-a-bit-more-patient.html">CNBC</a>
+          <a href="https://moneymorning.com/2026/07/30/magnificent-7-weekly-report-july-30-2026">Money Morning</a>
+          <a href="https://www.fool.com/investing/2026/07/29/is-microsoft-a-buy-after-its-latest-earnings-report/">Motley Fool</a>
+          <a href="https://www.investing.com/news/company-news/meta-q2-2026-slides-revenue-surges-28-as-ai-spending-pressures-margins-93CH-4821943">Investing.com</a>
+          <a href="https://www.techtimes.com/articles/322139/20260729/meta-q2-beats-revenue-while-legal-charges-ai-spending-destroy-free-cash-flow.htm">TechTimes</a>
+          <a href="https://thenextweb.com/news/meta-q2-2026-earnings-free-cash-flow-ai-capex">TheNextWeb</a>
+          <a href="https://www.stocktitan.net/news/META/meta-reports-second-quarter-2026-hkjfhayj8l0v.html">StockTitan</a>
+          <a href="https://www.geekwire.com/2026/amazon-earnings-preview-wall-street-looks-for-more-cloud-growth-as-ai-spending-hits-a-record/">GeekWire</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: revenue, margin and free cash flow are reported results; exact calendar 2026 capex totals for Microsoft differ across outlets; the roughly 8 percent and 9 to 10 percent after hours moves are intraday snapshots that can reverse. Amazon's July 30 figures are consensus estimates, not results, as of this writing. Confirm against each company's official release before external use.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Nvidia is reported as the mystery tenant behind Hut 8's Texas data center lease worth up to 50 billion dollars, and it could sublease to neoclouds</div>
+        <p class="tldr">On July 27 and 28 the Financial Times, followed by Reuters and others, reported that Nvidia is the unnamed tenant behind two 15 year leases at Hut 8's 1 gigawatt Beacon Point campus in Nueces County, near Corpus Christi, Texas. The base term value is about 19.6 billion dollars, rising to as much as 50.2 billion dollars if three five year renewal options are exercised. The site is designed around Nvidia's DSX reference architecture, will deliver about 704 megawatts of IT capacity at full build out backed by 1,000 megawatts of utility capacity, and is expected to energize in the first quarter of 2027. The most important detail for the neocloud sector: Nvidia could sublease the property to the neocloud partners that buy its GPUs and sell AI cloud computing.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Read plainly, this is Nvidia moving one more step down the stack. It already designs the chips, the systems and the reference data center architecture, and it already takes equity in the clouds that buy its hardware. Now it is reported to be signing the real estate and power lease itself and positioning to sublease that capacity to its cloud partners. That makes Nvidia not just the supplier but potentially the landlord and capacity aggregator for the neocloud tier.</p>
+          <p>There are two ways to read the sublease angle, and they are genuinely opposed. Either Nvidia is de risking the buildout for partners like CoreWeave by securing power and shell capacity they can then fill with GPUs, which is a tailwind, or Nvidia is inserting itself as the counterparty that controls the capacity and the allocation, which shifts pricing power toward Nvidia and away from the clouds. The same move can be a gift or a leash depending on the terms, which are not public.</p>
+          <p>Skeptic's note: Nvidia's role as tenant is from FT reporting citing people familiar with the deal, and neither Nvidia nor Hut 8 has confirmed it, with Reuters explicitly unable to verify independently. The 50.2 billion dollar figure is a ceiling that only materializes if every renewal option is exercised over decades; the base commitment is about 19.6 billion dollars. Treat the deal and its scale as reported, not confirmed, and the sublease to neoclouds as a stated possibility, not an announced arrangement.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This sits right on top of CoreWeave's business model. The bullish case is that a Nvidia anchored, power secured campus that neoclouds can sublease lowers the hardest parts of expansion, land and power, for exactly the partners Nvidia favors, and CoreWeave is on Nvidia's favored list. The threat is structural: if Nvidia becomes the entity that leases the building, secures the power and then parcels capacity to clouds, it captures the scarce inputs, land, interconnection and allocation, that a merchant cloud's differentiation depends on, and it can steer that capacity among competing neoclouds at will. A supplier that is also your landlord has more leverage over your economics than a supplier alone.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://finance.yahoo.com/technology/ai/articles/nvidia-reportedly-signs-50-billion-192803623.html">Yahoo Finance</a>
+          <a href="https://thenextweb.com/news/nvidia-50bn-texas-data-centre">TheNextWeb</a>
+          <a href="https://www.gurufocus.com/news/8982176/nvidia-nvda-signs-50-billion-lease-with-hut-8-for-texas-data-center">GuruFocus</a>
+          <a href="https://www.brecorder.com/news/40432141/nvidia-behind-50-billion-lease-on-texas-data-center-ft-reports">Business Recorder</a>
+          <a href="https://www.tradingview.com/news/reuters.com,2026:newsml_L6N43U08B:0-nvidia-behind-50-billion-lease-on-texas-data-center-ft-reports/">Reuters via TradingView</a>
+          <a href="https://europeanbusinessmagazine.com/nvidia-texas-lease/">European Business Magazine</a>
+          <a href="https://nai500.com/blog/2026/07/nvidia-s-50b-texas-lease-sends-ai-bet-into-overdrive/">NAI 500</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: Nvidia's role as tenant is from FT reporting and is unconfirmed by Nvidia or Hut 8, with Reuters unable to verify independently; the up to 50.2 billion dollar value requires all renewal options to be exercised over decades while the base commitment is about 19.6 billion dollars; the sublease to neoclouds is a reported possibility, not an announced deal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Nvidia is in talks to backstop OpenAI's roughly 500 billion dollar, 10 gigawatt Ohio data center with up to 250 billion dollars of financing</div>
+        <p class="tldr">Reported July 26 through 28 by Bloomberg, the Wall Street Journal, CNBC and others: Nvidia is in talks to provide up to roughly 250 billion dollars in financing guarantees for a 10 gigawatt OpenAI data center campus in southern Ohio, developed by SoftBank subsidiary SB Energy on a decommissioned uranium enrichment site south of Columbus. Including chips, total project cost could exceed 500 billion dollars, which would make it the largest data center project announced to date by power capacity. Coverage says the 250 billion dollars covers lease and construction financing but not the chips, for which Nvidia is separately reported to be in talks to help fund purchases of up to about 350 billion dollars. A first phase of about 800 megawatts is targeted for 2028, with dedicated on site natural gas generation.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>This is the circular financing pattern of the cycle taken to its logical extreme. Nvidia sells the chips, guarantees the financing to build the site that houses the chips, and helps fund the customer's purchase of the chips. The scale, potentially over half a trillion dollars including silicon, is the point: it is a bet large enough that it can only be justified if AI demand keeps compounding for years, and it is being underwritten by the one company with the most to gain from that assumption being true.</p>
+          <p>The structural signal that matters here is the same one from Monday's OpenAI Project Camellia item and this week's Hut 8 story. The frontier labs and Nvidia are increasingly assembling and financing their own gigawatt scale capacity directly, with power secured up front, rather than renting it from merchant clouds. When the buyer, the chipmaker and the developer are all inside one financing structure, there is less room for an independent cloud to sit in the middle.</p>
+          <p>Skeptic's note: every outlet frames this as talks that are not final and could be scrapped, and the numbers, 250 billion dollars of guarantees, up to 350 billion dollars for chips, over 500 billion dollars all in, are reported ranges, not signed terms. A 10 gigawatt campus with on site gas generation and first power in 2028 is a multi year plan whose later phases are contingent. Treat the intent and the direction as real and every figure and date as provisional.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is mostly a threat read, and it compounds the Hut 8 and Camellia stories into a trend. The more Nvidia and OpenAI can finance and build their own capacity directly, the less of the largest buyer's demand ever routes through a merchant cloud. The bullish counterpoint is timing and risk transfer: first power is not until 2028, OpenAI still needs leased capacity in the interim, and a project this size concentrates enormous execution and financing risk that specialists are built to absorb. There is also a subtler positive, that Nvidia's willingness to guarantee financing at this scale is the same underwriting instinct that has kept capital flowing to CoreWeave. The risk is that Nvidia's balance sheet increasingly favors the very largest, most captive projects over independent clouds.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.cnbc.com/2026/07/27/nvidia-and-openai-in-talks-for-up-to-250-billion-dollar-ai-backstop.html">CNBC</a>
+          <a href="https://www.bloomberg.com/news/articles/2026-07-26/nvidia-in-talks-on-250-billion-backing-for-openai-hub-wsj-says">Bloomberg</a>
+          <a href="https://www.datacenterdynamics.com/en/news/nvidia-considers-250bn-backstop-for-openais-planned-10gw-ohio-data-center-report/">DCD</a>
+          <a href="https://www.forbes.com/sites/tylerroush/2026/07/27/nvidia-and-openai-discussing-500-billion-data-center-heres-what-we-know/">Forbes</a>
+          <a href="https://www.techpowerup.com/351120/nvidia-and-openai-reportedly-discuss-usd-250-billion-deal-for-10-gigawatt-ohio-data-center">TechPowerUp</a>
+          <a href="https://qz.com/nvidia-openai-ohio-data-center-financing-072726">Quartz</a>
+          <a href="https://www.aljazeera.com/economy/2026/7/27/nvidia-plans-250bn-push-to-bolster-openais-infrastructure-ambitions">Al Jazeera</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: this is reported as talks that are not final and could be scrapped; the 250 billion dollar guarantee, the up to 350 billion dollar chip funding and the over 500 billion dollar all in figure are reported ranges, not signed terms; the 10 gigawatt campus and 2028 first power are a multi year plan with contingent later phases.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">CoreWeave sweetens the yield on a 2.6 billion dollar Anthropic linked loan and wins Flow Traders, while the stock sits at a 52 week low</div>
+        <p class="tldr">This was CoreWeave's own week in miniature and it cut both ways. On July 29 Bloomberg reported CoreWeave raised the yield on a roughly 2.6 billion dollar loan tied to expanding compute capacity for customers including Anthropic, sweetening terms to win over investors who have grown wary of AI related debt as bubble worries mount. On July 28 CoreWeave announced Flow Traders selected it as primary cloud provider to train foundation models for AI driven quantitative trading, following a competitive multi node evaluation. Against that, CoreWeave shares hit a fresh 52 week low, down roughly 30 percent over the month, amid a broad neocloud valuation contraction and competitive anxiety about Meta selling its own compute. CoreWeave reports second quarter results on August 11.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The loan repricing is the single most direct read this week on CoreWeave's cost of capital, and it confirms the thesis from story one. CoreWeave did not fail to raise the money; it raised it at a higher yield. That is the sentiment shift on AI capex showing up as a real number in CoreWeave's own financing stack. The whole neocloud model depends on borrowing cheaply against contracted leases, so a higher demanded yield on an Anthropic linked facility is a small but concrete tax on growth, arriving in the same week the public markets punished Meta for spending without visible returns.</p>
+          <p>The Flow Traders win is the counterweight and it is a healthy one. It is a new logo outside the handful of mega customers, won on a competitive technical evaluation of multi node training performance, which is exactly the differentiation CoreWeave sells. Diversifying beyond a short list of anchor tenants is precisely what the market wants to see given the concentration risk that has driven the sell off.</p>
+          <p>Skeptic's note: the 2.6 billion dollar loan size and the yield increase are from Bloomberg reporting and the final terms settle at pricing; the Flow Traders deal is confirmed via CoreWeave's own newsroom and investor relations but the contract value and committed capacity were not disclosed; the 30 percent monthly drawdown and 52 week low are market moves, not fundamentals. The August 11 earnings print is the real test of whether spend is converting to GAAP profit.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is the most CoreWeave specific item of the week and it is a clean illustration of the bull and bear cases colliding. Bullish: capital markets still fund CoreWeave anchored capacity, and CoreWeave is still winning competitive new customers on performance, both signs the core business works. Threat: the price of that capital just went up, the stock is at a 52 week low, and the overhang is a real competitor in Meta plus a market that has turned skeptical on exactly the debt funded, high capex model CoreWeave embodies. The August 11 earnings and any commentary on lease durability and customer concentration will matter more than usual.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.bloomberg.com/news/articles/2026-07-29/coreweave-boosts-yield-on-2-6-billion-loan-tied-to-anthropic">Bloomberg</a>
+          <a href="https://www.coreweave.com/news/flow-traders-selects-coreweave-to-power-foundation-model-training-for-ai-driven-quantitative-trading">CoreWeave Newsroom</a>
+          <a href="https://investors.coreweave.com/news/news-details/2026/Flow-Traders-Selects-CoreWeave-to-Power-Foundation-Model-Training-for-AI-Driven-Quantitative-Trading/default.aspx">CoreWeave IR</a>
+          <a href="https://www.gurufocus.com/news/8982879/coreweave-crwv-chosen-by-flow-traders-for-ai-cloud-services-amid-valuation-challenges">GuruFocus</a>
+          <a href="https://www.benzinga.com/trading-ideas/movers/26/07/60772397/coreweave-stock-hits-new-52-week-low-whats-driving-the-neocloud-selloff">Benzinga</a>
+          <a href="https://www.benzinga.com/trading-ideas/movers/26/07/60734642/coreweave-shares-fall-30-in-a-month-as-ai-cloud-valuations-contract">Benzinga</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/coreweave-announces-date-second-quarter-200500527.html">Yahoo Finance</a>
+          <a href="https://www.roi-nj.com/2026/07/28/tech/coreweave-selected-by-flow-traders-for-ai-driven-quantitative-trading-platform/">ROI-NJ</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the 2.6 billion dollar loan size and the yield increase are from Bloomberg reporting and settle at pricing; the Flow Traders contract value and committed capacity were not disclosed; the roughly 30 percent monthly drawdown and 52 week low are market moves. CoreWeave reports Q2 on August 11.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Notable</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">Meta Compute overhang deepens as neocloud stocks slide, with Meta itself raising capacity that could compete with the clouds it rents from</div>
+        <p class="tldr">The competitive cloud that Meta first signaled on July 1, an internal unit called Meta Compute meant to lease surplus AI training and inference capacity plus hosted model access to outside enterprises, remained a live overhang on neocloud valuations this week. Coverage tied part of CoreWeave's and Nebius's monthly slide to fresh worry that Meta may open internal compute to external clients, at a moment when Meta is spending 130 to 145 billion dollars on infrastructure in 2026 and generating more compute than its own workloads absorb. One important limiter reported earlier: Meta reportedly does not have the right to resell capacity it leases from CoreWeave to third parties through 2032.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The logic is the AWS origin story repeated. A company builds so much infrastructure for itself that the excess becomes a product, and an internal cost center turns into an external revenue line. At Meta's spending scale the excess is enormous, and unlike a neocloud Meta did not fund its fleet with GPU collateralized debt, so it can price aggressively without the same financing overhang. That is the part that genuinely threatens the merchant model: a competitor with a comparable fleet and a lower cost of capital.</p>
+          <p>The counter is that the threat is easy to overstate and the timeline is unclear. Meta Compute has been reported and previewed rather than fully commercialized, its customer base and pricing are unproven, and the reported inability to resublease CoreWeave leased capacity through 2032 blunts how fast Meta can bring product to market. This is a real structural risk, but this week it moved stocks more than it moved contracts.</p>
+          <p>Skeptic's note: the core Meta Compute reporting traces to July 1 and has been recirculated in the weeks since, so treat this as an ongoing overhang, not a new July 29 announcement. The scale claims and the 2032 resale limitation are from reporting, and Meta has not published Meta Compute pricing, availability or customer wins. The stock reaction is real; the commercial reality is still forming.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Meta is both a major CoreWeave customer and, through Meta Compute, a potential direct competitor, which makes this the most uncomfortable competitive story for CoreWeave. Threat: a hyperscale fleet sold without neocloud style debt undercuts CoreWeave on cost of capital, and a customer becoming a competitor is the worst kind of concentration risk. Bullish counterpoints: the reported inability to resell CoreWeave leased capacity through 2032 protects existing contracts, Meta's cloud is unproven commercially, and if anything Meta standing up a cloud validates that merchant GPU demand is large and durable. The number to watch is whether Meta signs external Meta Compute customers, not whether the story moves the stock.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://finance.yahoo.com/technology/ai/articles/meta-building-cloud-business-sell-131712263.html">Yahoo Finance / Reuters</a>
+          <a href="https://mlq.ai/news/meta-unveils-meta-compute-cloud-business-to-sell-excess-ai-infrastructure-to-outside-customers/">MLQ</a>
+          <a href="https://www.techtimes.com/articles/319486/20260701/meta-enters-ai-cloud-market-neocloud-rivals-coreweave-nebius-crater.htm">TechTimes</a>
+          <a href="https://www.fool.com/investing/2026/07/06/meta-platforms-is-entering-the-neocloud-business-h/">Motley Fool</a>
+          <a href="https://www.cnbc.com/2026/07/01/meta-stock-cloud-ai-compute.html">CNBC</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/nebius-coreweave-iren-tumble-meta-162444225.html">Yahoo Finance</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: the core Meta Compute reporting traces to July 1 and has been recirculated, so this is an ongoing overhang, not a new July 29 announcement; the scale claims and the reported 2032 resale limitation are from reporting; Meta has not published Meta Compute pricing, availability or external customer wins.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Notable</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">Anthropic ships Claude Opus 5, a step up on the Opus tier that reportedly approaches frontier intelligence at half the price</div>
+        <p class="tldr">On July 24 Anthropic released Claude Opus 5, priced at 5 dollars per million input tokens and 25 dollars per million output tokens, the same as the prior Opus 4.8. Coverage describes a step change for the Opus tier that comes close to the frontier intelligence of Claude Fable 5 at roughly half the price, with reported gains on coding and agentic evaluations and one third party index placing it at the top of its intelligence ranking. It landed the same week rivals had less to show: Bloomberg reported earlier in July that Google's Gemini 3.5 Pro was months behind schedule, and OpenAI's GPT-5.6 family reached general availability on July 9.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The pricing is the story. Holding the price flat while materially raising capability on the Opus tier pushes down the cost of frontier grade intelligence, and that is the variable that drives inference volume. Cheaper capable models get used more, and more usage is more tokens served, which is more compute demanded. For anyone selling GPU time, a strong model at a flat price is a demand tailwind, not a threat.</p>
+          <p>The competitive subtext matters too. Anthropic shipping a frontier class model on schedule while Gemini 3.5 Pro reportedly slips reinforces the picture of Anthropic as a lab whose compute appetite keeps growing, which is directly relevant given Anthropic's deliberately multi vendor compute strategy across Nvidia, cloud silicon and the AMD deal from Monday's edition, and given that CoreWeave is financing capacity specifically tied to Anthropic, as story four shows.</p>
+          <p>Skeptic's note: the benchmark and index scores are from Anthropic's own materials and third party sites, not independently reproduced here, and vendor reported evaluation numbers reliably flatter the vendor. Opus 5 launched July 24, so it is not brand new as of this Thursday edition; it appears here because it is the most consequential model release of the window and was not carried in Monday's edition. Treat the capability gains as reported and the exact benchmark figures as provisional.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>A stronger, flat priced Opus tier is a demand positive for merchant compute, because it lowers the effective cost of frontier intelligence and pulls inference volume onto GPU fleets. The Anthropic connection is the sharpest angle: Anthropic is a growing, multi sourced compute buyer and CoreWeave is already raising capital tied to Anthropic capacity, so a well received Opus 5 that drives Anthropic usage feeds demand CoreWeave is positioned to serve. The only real caution is the mirror image of Monday's AMD story, that Anthropic's multi vendor strategy means not all of that growth flows through any single cloud.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.anthropic.com/news/claude-opus-5">Anthropic</a>
+          <a href="https://techcrunch.com/2026/07/24/anthropic-launches-opus-5/">TechCrunch</a>
+          <a href="https://siliconangle.com/2026/07/24/anthropic-launches-claude-opus-5-efficiency-safety-improvements/">SiliconANGLE</a>
+          <a href="https://en.wikipedia.org/wiki/Claude_(language_model)">Wikipedia</a>
+          <a href="https://llm-stats.com/llm-updates">LLM-Stats</a>
+          <a href="https://thursdai.news/releases/2026-07">ThursdAI</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: benchmark and intelligence index scores come from Anthropic's own materials and third party sites and are not independently reproduced here; Opus 5 launched July 24, so it is not new as of this edition. Treat capability claims as reported and exact figures as provisional.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Notable</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">4+ sources</span>
+        </div>
+        <div class="headline">Opus 5 reshuffles the coding agent leaderboard, and the Cursor and xAI tie up leaves the sector's model neutrality in question</div>
+        <p class="tldr">In late July refresh rankings of AI coding agents, Claude Code moved to the top on the strength of Claude Opus 5 and per subagent model control, with OpenAI's Codex reported dropping to second. Cognition's consolidation of its stack under the Devin brand continued, with a cloud agent available from lower paid tiers and local and cloud agents unified in one board view. Separately, commentary flagged real uncertainty from the reported SpaceX and xAI orbit around Cursor: whether Cursor stays model neutral or gets pulled toward Grok.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The agentic coding layer is where model quality turns into sustained, high intensity inference, because these agents run long, multi step, tool using sessions rather than single prompts. When a new flagship like Opus 5 tops the leaderboards, it pulls agent workloads toward whichever model wins, and those workloads are unusually compute heavy per task. The competitive reshuffling among Claude Code, Codex and the Devin stack is therefore a leading indicator of where a meaningful slice of inference demand flows next.</p>
+          <p>The Cursor and xAI question is the structural one worth tracking. If leading coding tools become captive to a single model provider, the market fragments into vertically integrated stacks, model plus tool plus, increasingly, compute. That is the same verticalization visible in the infrastructure stories above, now showing up at the application layer.</p>
+          <p>Skeptic's note: coding agent rankings are opinionated and vary widely by source and by benchmark, so no single leaderboard is authoritative, and the Claude Code top placement here is from third party roundups, not a neutral standard. The Cursor and xAI relationship and its implications are commentary and reporting, not a confirmed product change. Treat the direction, agentic coding as a growing and consolidating compute sink, as the durable signal.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Agentic tooling is the demand engine most aligned with merchant GPU economics, because long running agents consume far more inference per user than chat, and that is the workload that fills rentable fleets. The bullish read is straightforward: whichever coding agents win, the aggregate compute they pull is rising, and that is CoreWeave's market. The threat is verticalization. If the strongest tools bundle their own model and eventually their own compute, as the xAI and Cursor question hints, more of that inference could run inside integrated stacks rather than on neutral clouds. CoreWeave benefits most from a world where the best tools stay model and cloud neutral.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://marissaharcourt.substack.com/p/the-best-ai-coding-tools-in-july">Marissa Harcourt (Substack)</a>
+          <a href="https://lushbinary.com/blog/ai-coding-agents-comparison-cursor-windsurf-claude-copilot-kiro-2026/">Lushbinary</a>
+          <a href="https://levelop.dev/blog/the-best-ai-coding-agents-in-2026-a-practical-ranking-for-working-developers">Levelop</a>
+          <a href="https://www.marktechpost.com/2026/06/10/ai-coding-agents-development-platforms-2026/">MarkTechPost</a>
+        </div>
+        <p class="caveat" style="margin-top:10px;">Flag: coding agent rankings are opinionated and vary by source and benchmark; the Claude Code top placement is from third party roundups, not a neutral standard; the Cursor and xAI implications are commentary and reporting, not a confirmed product change.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCAST PICKS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">BG2 POD</div>
+    <div class="ep">Big Tech earnings, the capex split, and the cost of capital for compute</div>
+    <div class="who">Hosts: Brad Gerstner and Bill Gurley · the demand and financing side of the buildout</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>BG2 remains the most infrastructure and markets literate of the major investor podcasts, and this week's split reaction to Microsoft and Meta, capex discipline rewarded and a rising capex floor punished, is exactly its recurring terrain.</li>
+        <li>Most relevant thread for this edition: how the financiers of compute read the sentiment shift that just raised the yield on CoreWeave's Anthropic linked loan, which is the cost of capital context behind stories one and four.</li>
+        <li>Flagging honestly: I could not verify a specific new episode by date in this pass, so I am pointing to the show feed rather than asserting an episode I did not confirm. Verify the latest episode and date on the feed before relying on specifics.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://www.bg2pod.com/">Listen (BG2 Pod)</a> · episode and date not independently confirmed this pass.</p>
+    </div>
+  </div>
+
+  <div class="pod">
+    <div class="show">DWARKESH PODCAST</div>
+    <div class="ep">Recent episodes on AI progress, compute, and the economics of scaling</div>
+    <div class="who">Host: Dwarkesh Patel · long form interviews on where AI progress is really going</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>Dwarkesh remains the best long form venue for the underlying question behind every infrastructure story here: whether AI capability keeps compounding fast enough to justify half a trillion dollar campuses like the reported OpenAI Ohio project.</li>
+        <li>Relevant lens for this week: the gap between reported model gains, such as Opus 5 approaching frontier intelligence at half the price, and the capex the market is now scrutinizing. If capability per dollar keeps improving, the spend looks rational; if it plateaus, this week's skepticism spreads.</li>
+        <li>Flagging honestly: I could not verify a specific new July 2026 episode by date in this pass, so I am pointing to the archive rather than inventing an episode. Confirm the latest episode and date on the feed before citing.</li>
+      </ul>
+      <p style="font-size:12px;color:var(--muted);"><a class="inline" href="https://www.dwarkesh.com/podcast">Listen (Dwarkesh Podcast)</a> · latest episode and date not independently confirmed this pass.</p>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <div class="section-title">Quick Signals</div>
+
+  <div class="sig">
+    <span class="h">Amazon earnings after the close</span><span class="d">July 30 2026</span>
+    <p>Amazon reports Q2 after the close on July 30, with AWS consensus near 40 billion dollars and possible reacceleration toward the low thirties in percent, and full year capex already drifting up toward the low 200 billions of dollars on higher memory pricing. It is the tiebreaker between this week's Microsoft read, discipline rewarded, and Meta read, rising floor punished. <a href="https://www.geekwire.com/2026/amazon-earnings-preview-wall-street-looks-for-more-cloud-growth-as-ai-spending-hits-a-record/">via GeekWire</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Nvidia funds Naver and a Korean superintelligence push (context)</span><span class="d">reported July 24 to 28 2026</span>
+    <p>Following the SK Group announcement in Monday's edition, coverage continued to describe Nvidia taking equity in the buyers of its own chips, including the roughly 1 billion dollar Naver stake. It is the same circular financing instinct now visible in the Hut 8 lease and the reported OpenAI Ohio backstop above. <a href="https://techstartups.com/2026/07/28/top-tech-news-today-july-28-2026-amazon-amd-google-microsoft-nvidia-openai-origin-energy-verizon-more/">via Tech Startups roundup</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Nuclear power becomes the buildout's real constraint</span><span class="d">reported through July 26 2026</span>
+    <p>Every major AI buyer, Microsoft, Google, Amazon and Meta, has now signed at least one nuclear deal in 2026, together committing to nearly 10 gigawatts, with the first nuclear electrons for an AI data center expected in 2027 from the Three Mile Island Unit 1 restart. Secured, firm power at gigawatt scale is increasingly the moat, ahead of chips. <a href="https://www.forbes.com/sites/kensilverstein/2026/07/26/the-ai-boom-is-making-nuclear-power-bankable-again/">via Forbes</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Gemini 3.5 Pro reportedly slips</span><span class="d">reported July 16 2026</span>
+    <p>Bloomberg reported earlier in July that Google's Gemini 3.5 Pro was months behind schedule and short of internal goals. If accurate, it is part of why Anthropic's on time Opus 5 stood out this window, and it bears on which labs' compute appetites grow fastest. Carried as context, not new this week. <a href="https://llm-stats.com/llm-updates">via LLM-Stats tracker</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Date discipline note from the tape</span><span class="d">flag</span>
+    <p>Several items circulating this week are older than the daily roundups imply. The Meta Compute cloud story traces to July 1, Claude Opus 5 launched July 24, and the Gemini 3.5 Pro delay was reported July 16. The genuinely new July 27 to 30 developments are the Microsoft and Meta earnings reactions, the Hut 8 lease reporting, the reported OpenAI Ohio backstop, and CoreWeave's loan repricing and Flow Traders win. Misdated recycling remains common. <a href="https://techstartups.com/2026/07/28/top-tech-news-today-july-28-2026-amazon-amd-google-microsoft-nvidia-openai-origin-energy-verizon-more/">context via Tech Startups roundup</a></p>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <div class="connected">
+    <strong style="color:var(--text);">Connected sources.</strong> Gmail, Google Calendar, and Slack are configured connectors for this briefing. This was an automated, unattended run focused on public web research, and no personal email, calendar, or Slack channel signal was incorporated. No Slack channels or inboxes were read in this pass. To fold in Slack channel context or calendar items in future runs, authorize those connectors for unattended use in claude.ai connector settings.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · July 30 2026 · Main sources: CNBC, Money Morning, Motley Fool, Investing.com, TechTimes, TheNextWeb, StockTitan, GeekWire, Yahoo Finance, GuruFocus, Business Recorder, Reuters via TradingView, European Business Magazine, NAI 500, Bloomberg, Data Center Dynamics, Forbes, TechPowerUp, Quartz, Al Jazeera, CoreWeave Newsroom and IR, Benzinga, ROI-NJ, MLQ, Anthropic, TechCrunch, SiliconANGLE, Wikipedia, LLM-Stats, ThursdAI, Marissa Harcourt, Lushbinary, Levelop, MarkTechPost, Tech Startups, BG2 Pod, and Dwarkesh Podcast.
+    <span class="cav">Uncertainty flags: Microsoft and Meta revenue, margin and free cash flow are reported results, but exact calendar 2026 capex totals for Microsoft differ across outlets and the after hours stock moves are intraday snapshots; Amazon's July 30 figures are consensus estimates, not results, as of this writing; Nvidia's role as tenant behind the Hut 8 Beacon Point lease is FT reporting unconfirmed by either company, with the up to 50.2 billion dollar value contingent on renewal options over decades against a roughly 19.6 billion dollar base, and the sublease to neoclouds a reported possibility; the Nvidia and OpenAI Ohio project is reported as unfinalized talks with 250 billion dollars of guarantees, up to 350 billion dollars of chip funding and an over 500 billion dollar all in figure all provisional; CoreWeave's 2.6 billion dollar loan size and yield increase are from Bloomberg reporting and settle at pricing while the Flow Traders contract value was not disclosed; the Meta Compute story traces to July 1 and is an ongoing overhang, not a new announcement, and the reported 2032 resale limitation is from reporting; Claude Opus 5 launched July 24 and its benchmark and index scores come from Anthropic and third party sites, not independently reproduced; coding agent rankings are opinionated and vary by source; and the nuclear and Naver items are carried as context. Podcast picks are the shows I could point to this pass, with specific episodes and dates not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
