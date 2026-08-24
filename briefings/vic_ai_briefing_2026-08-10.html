@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — August 10 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Monday, August 10 2026 · Monday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">8 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">50+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">CoreWeave reports Q2 tomorrow after the close, and the options market is pricing a move of roughly 15 percent in either direction</div>
+        <p class="tldr">CoreWeave releases second quarter 2026 results on Tuesday, August 11 after the close, with the call at 5:00 PM Eastern. Consensus looks for revenue of roughly 2.55 to 2.56 billion dollars, more than double the year earlier quarter, against a loss per share that sell side estimates put somewhere between 1.22 and 1.40 dollars, sharply wider than a year ago. Options pricing implies a move of about 15 percent in either direction. Wells Fargo has been modeling operating margin of about 3 percent in the second quarter, rising to roughly 6 percent in the third and 13 percent by the fourth, which is the single most contestable assumption in the bull case. Price targets on the tape range from about 150 dollars at Deutsche Bank and 155 at Wells Fargo up to 250 at Rosenblatt, with Piper Sandler initiating at 151. Flag: every number in this paragraph is an estimate or a target, not a result.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The setup going into the print is unusually loaded. Since the last edition CoreWeave has announced its first Asia Pacific buildout in Indonesia, a priority storage supply deal with Solidigm, a classified sovereign cloud partnership with Leidos, and has absorbed a wave of pre earnings upgrades after a deep pullback. The stock has already re rated on the anticipation. That means the bar has moved, and the print now has to validate the narrative rather than create it.</p>
+          <p>The four numbers that matter are not revenue. They are gross and operating margin trajectory, because the whole equity story rests on operating leverage arriving on schedule; backlog composition and duration, because a backlog concentrated in a handful of frontier labs is worth less per dollar than a diversified one; customer concentration disclosure, which is the structural criticism the company has never fully answered; and the blended cost of the debt funding the build, because CoreWeave is effectively a levered bet on the price of AI credit. A beat on revenue with a soft margin path would be read as bad news, and a miss on revenue with a credible margin path might not be.</p>
+          <p>There is a second order read too. CoreWeave prints on August 11 and Nebius prints on August 12, one day apart, with Nvidia following on August 26. That sequence means the merchant compute complex gets fully repriced inside two weeks. Correlated moves are likely regardless of company specific results, which cuts both ways for anyone modeling the sector.</p>
+          <p>Skeptic's note: the August 11 date and the 5:00 PM Eastern call time are confirmed by CoreWeave investor relations. Everything else here is estimate, target or implied volatility. The revenue consensus is quoted variously as 2.55 and 2.56 billion dollars and the loss estimate ranges from 1.22 to 1.40 dollars per share across sources, which is a wide enough spread to matter. The Wells Fargo margin ramp is one analyst's model, not guidance. Treat the whole setup as expectations, and wait for the actual release.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is the company's own event and the most consequential item on the calendar. The bullish read is that demand is visibly outrunning supply across the complex, the recent deal flow diversifies both geography and customer type, and analysts have moved back in ahead of the number. The threat read is that the market has already paid for the good news, that the margin ramp is the least verified part of the story, and that a company financing long dated capex with debt is exposed to any change in sentiment about AI credit. Whatever the print says, expect it to set the tone for Nebius the next morning and for merchant compute valuations into the Nvidia report.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://investors.coreweave.com/news/news-details/2026/CoreWeave-Announces-Date-of-Second-Quarter-2026-Financial-Results-and-Conference-Call/default.aspx">CoreWeave IR</a>
+          <a href="https://www.businesswire.com/news/home/20260727724365/en/CoreWeave-Announces-Date-of-Second-Quarter-2026-Financial-Results-and-Conference-Call">Business Wire</a>
+          <a href="https://seekingalpha.com/news/4629968-coreweave-q2-2026-earnings-preview">Seeking Alpha</a>
+          <a href="https://blockonomi.com/coreweave-crwv-stock-q2-earnings-preview-analysts-eye-15-volatility-swing/">Blockonomi</a>
+          <a href="https://www.tipranks.com/news/crwv-stock-3-things-to-watch-in-coreweave-earnings-tomorrow">TipRanks</a>
+          <a href="https://www.gurufocus.com/news/9020550/coreweave-q2-earnings-preview-what-to-expect-from-upcoming-report">GuruFocus</a>
+          <a href="https://coincentral.com/coreweave-crwv-stock-what-wall-street-expects-from-q2-earnings-tuesday/">CoinCentral</a>
+          <a href="https://finance.yahoo.com/markets/stocks/articles/earnings-preview-coreweave-crwv-q2-140004181.html">Yahoo Finance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag policy">Policy</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Amazon is behind a 7.65 gigawatt private gas plant in West Texas, and the data center backlash is now a bipartisan election issue</div>
+        <p class="tldr">Reporting that surfaced over the weekend of August 8 and 9 identified Amazon as the customer behind GW Ranch, a merchant power project in Pecos County, Texas developed by Pacifico Energy that would run 35 gas turbines for a combined 7.65 gigawatts to serve a co located data center campus. Permits reportedly authorize emissions of up to 33 million tons of carbon dioxide a year, roughly double the output of the dirtiest coal plant currently operating in the United States. Amazon's framing is that the generation is new and on site, so it does not raise costs for Texas ratepayers, and that the site will use brackish groundwater rather than potable supply. The story landed the same week that coverage from Business Insider and others documented data center opposition hardening into a bipartisan political problem ahead of the November midterms. Flag: the 7.65 gigawatt and 33 million ton figures are from permit filings as reported and were not verified against the permits themselves in this pass.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Two things are happening at once and they point in opposite directions. The first is that hyperscalers have concluded the grid will not deliver power fast enough, so they are building their own generation behind the meter. Going off grid solves the interconnection queue problem, removes the utility as a gatekeeper, and converts a multi year regulatory wait into a construction schedule. That is a genuine unlock for time to power, which is now the operative constraint in this industry rather than chip supply.</p>
+          <p>The second is that this approach concentrates the political cost. A 7.65 gigawatt private gas plant is a large, visible, permanent object with a number attached to it, and it arrives at a moment when reporting suggests roughly 75 major data center projects worth more than 130 billion dollars were delayed or canceled in the first quarter of 2026 amid organized local opposition, and when wholesale power costs near heavy data center activity have reportedly risen sharply since 2020. Every candidate in a competitive race now has to take a position on data centers. Flag: those project cancellation and wholesale price figures come from advocacy and think tank sources and should be checked against primary data before use.</p>
+          <p>The competitive implication is that access to power is bifurcating. Operators with balance sheets large enough to self generate are decoupling from the grid and from local politics. Everyone else is still queuing, and the queue is getting more political, not less. That is a structural advantage for the largest players and a rising cost of entry for smaller ones.</p>
+          <p>Skeptic's note: Amazon's role here was established through reporting on permit filings rather than a company announcement, and Amazon has not confirmed the full scope publicly in the coverage reviewed. The permitted emissions ceiling is a maximum, not a forecast of actual output, and plants routinely run below permit limits. The political story is real but diffuse, and it is easy to over read a backlash narrative in an election year.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Power procurement is where merchant compute either scales or stalls, and this is the clearest evidence yet that the largest buyers are willing to become power developers to get around the grid. The threat read is that if self generation becomes the standard route to gigawatt scale, capital intensity rises for everyone and the advantage tilts toward whoever can finance turbines as well as GPUs. The bullish read is that CoreWeave's model of contracting for capacity across many sites and jurisdictions, including the recent Indonesia expansion, spreads exactly the permitting and political risk that is now visibly biting single site megaprojects in the United States. Either way, expect power strategy questions on tomorrow's call.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://www.tomshardware.com/tech-industry/data-centers/amazons-new-7-65gw-texas-ai-data-center-power-plant-could-become-the-largest-source-of-co2-pollution-in-the-us-custom-35-turbine-gas-plant-authorized-to-emit-33-million-tons-of-annual-greenhouse-gases">Tom's Hardware</a>
+          <a href="https://www.distilled.earth/p/scoop-amazon-is-behind-one-of-the">Distilled</a>
+          <a href="https://thenextweb.com/news/amazons-new-texas-data-centre-could-become-americas-biggest-single-polluter-it-will-not-touch-the-grid">The Next Web</a>
+          <a href="https://theaiinsider.tech/2026/08/10/amazons-planned-texas-data-center-could-become-largest-climate-polluter-in-the-u-s/">AI Insider</a>
+          <a href="https://finance.yahoo.com/energy/articles/amazon-behind-massive-private-gas-210211828.html">Yahoo Finance</a>
+          <a href="https://www.atlanticcouncil.org/blogs/energysource/backlash-against-data-centers-could-cost-the-us-its-ai-edge/">Atlantic Council</a>
+          <a href="https://www.brookings.edu/articles/how-rising-electric-rates-could-affect-the-2026-midterms">Brookings</a>
+          <a href="https://theweek.com/politics/data-center-backlash-decide-midterms">The Week</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">🔥 High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">Intel announces a 15 billion dollar common stock offering, its first public share sale since 1971, to fund the AI buildout</div>
+        <p class="tldr">On August 10 Intel announced a proposed underwritten public offering of 15 billion dollars of common stock, with a 30 day underwriter option for an additional 2.25 billion. The company said proceeds go to general corporate purposes including capital expenditure and working capital, and framed the raise around AI compute, custom silicon, advanced packaging, external foundry services and what it calls the physical AI economy. Joint bookrunners reportedly include JPMorgan, Goldman Sachs, Morgan Stanley and Citigroup. Intel had already raised its 2026 capital spending plan to about 20 billion dollars from 18 billion, with a further meaningful increase signaled for 2027. Shares fell roughly 3 to 4 percent on dilution, against a stock that has reportedly risen about 175 percent year to date. Flag: the 175 percent year to date move and the description of this as the first public share sale since the 1971 listing are as reported and should be verified.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Read this as a financing signal rather than a product signal. Intel is choosing equity over debt at a moment when its share price has run hard, which is the textbook time to issue. Roughly 15 billion dollars against a company whose capital plan is around 20 billion for the year is a large raise, and it tells you management believes the capacity opportunity in advanced packaging and foundry is big enough to justify diluting shareholders who have just been rewarded.</p>
+          <p>For anyone modeling AI infrastructure supply, the relevant question is whether this capital actually widens the bottleneck. The binding constraints in 2026 have been high bandwidth memory, CoWoS style advanced packaging, power and now enterprise storage, not lithography capacity per se. Intel money aimed at advanced packaging and external foundry could, on a two to three year lag, add a second credible source of supply alongside TSMC. That would be structurally good for every buyer of accelerators, including merchant compute operators, because it weakens the pricing power sitting upstream of them.</p>
+          <p>The counter is timing and execution. Intel's foundry ambitions have a long history of slipping, and capital raised in 2026 does not produce packaged wafers in 2026. The near term effect of the raise is dilution and a signal that the company needs external capital to keep pace. There is also a market structure read worth watching: when a capital intensive AI adjacent business chooses equity over debt, it is a small piece of evidence about the relative cost of the two, which matters for every levered compute operator.</p>
+          <p>Skeptic's note: this is an announced offering, not a completed one. Size and pricing can change, and the underwriter option may or may not be exercised. The stated uses of proceeds are deliberately broad. No customer commitments, capacity numbers or timelines were attached.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Two channels. First, supply: any credible second source of advanced packaging and foundry capacity eventually reduces the accelerator scarcity premium that CoreWeave pays and, over time, compresses the arbitrage that scarcity creates for whoever holds allocation today. That is mildly bearish for near term merchant compute economics and clearly bullish for long run cost. Second, capital markets: Intel is raising equity into strength while merchant compute operators fund growth with debt. If equity is the cheaper currency right now for AI adjacent capex, that is a data point worth carrying into any financing discussion, and a reminder that funding mix is becoming a competitive variable, not just a treasury decision.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering">Intel Newsroom</a>
+          <a href="https://www.cnbc.com/2026/08/10/intel-intc-stock-offering-ai.html">CNBC</a>
+          <a href="https://www.bloomberg.com/news/articles/2026-08-10/intel-selling-15-billion-in-common-stock-to-fund-growth">Bloomberg</a>
+          <a href="https://mlq.ai/news/intel-plans-15-billion-stock-offering-to-fund-ai-and-foundry-expansion/">MLQ</a>
+          <a href="https://www.benzinga.com/trading-ideas/long-ideas/26/08/61077167/intel-15-billion-stock-offer-what-investors-must-know">Benzinga</a>
+          <a href="https://www.roic.ai/news/intc-intel-intel-announces-proposed-15b-stock-offering-08-10-2026">ROIC News</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Strong Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">5+ sources</span>
+        </div>
+        <div class="headline">TSMC July revenue rises 44.7 percent to a record 14.5 billion dollars, running ahead of its own raised full year guidance</div>
+        <p class="tldr">TSMC reported July revenue of 467.58 billion New Taiwan dollars, about 14.5 billion US dollars, up 44.7 percent year over year and 5.6 percent from June. Revenue for the first seven months of 2026 reached roughly 2.87 trillion New Taiwan dollars, about 37 percent above the same period last year. The July figure runs ahead of the company's own full year outlook of slightly above 40 percent growth in dollar terms, which management had already raised after second quarter results. TSMC has also lifted its 2026 capital expenditure plan to a range of 60 to 64 billion dollars. High performance computing, the segment where AI accelerator revenue sits, accounted for about 66 percent of second quarter revenue. Flag: the monthly revenue number is an unaudited company disclosure and the currency conversion moves with the exchange rate.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Monthly TSMC revenue is the closest thing this industry has to a real time demand gauge, because it sits upstream of Nvidia, AMD, Apple, Broadcom and the custom silicon programs at the same time, and it reports before any of them. A 44.7 percent year over year month, accelerating sequentially, running above raised guidance, is about as clean a signal as you get that accelerator demand has not rolled over. It also arrives one day before CoreWeave prints, which makes it useful context for reading whatever the company says about capacity absorption.</p>
+          <p>The capex number is the more interesting one for infrastructure planning. Sixty to sixty four billion dollars is an enormous commitment, and the composition matters more than the headline, because the constraint in this cycle has been advanced packaging rather than leading edge logic. Expansion of CoWoS style packaging capacity is what actually converts wafer output into shippable accelerators.</p>
+          <p>The bear framing deserves a hearing. Supplier revenue measures what is being built, not what is being profitably used. In a cycle where a large share of demand comes from a handful of buyers financing purchases with debt and vendor guarantees, upstream revenue can stay strong well past the point where downstream returns have deteriorated. TSMC being sold out tells you the order book is full. It does not tell you the end demand behind those orders is durable.</p>
+          <p>Skeptic's note: the July figure is confirmed by TSMC's own monthly disclosure and reported consistently by CNBC, Digitimes and others. The 66 percent high performance computing share is a second quarter figure, not a July one. Chairman commentary that AI demand remains extremely robust is company language and should be treated as such.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Bullish on the demand question and neutral to negative on the cost question. Accelerating upstream revenue and rising packaging capex mean the accelerator pipeline behind CoreWeave's 2027 and 2028 capacity is being funded and built, which supports the buildout thesis and the backlog narrative going into tomorrow's print. The offsetting read is that TSMC operating above its own raised guidance with capex at 60 to 64 billion dollars is a supplier with pricing power, and input costs for every merchant compute operator are set upstream. Watch whether CoreWeave's margin commentary reflects that.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://investor.tsmc.com/english/monthly-revenue/2026">TSMC Investor Relations</a>
+          <a href="https://www.cnbc.com/2026/08/10/tsmc-revenue-surge-ai-chip-big-tech.html">CNBC</a>
+          <a href="https://www.digitimes.com/news/a20260810VL209/tsmc-revenue-growth-2026-forecast.html">Digitimes</a>
+          <a href="https://finance.yahoo.com/technology/ai/articles/tsmc-july-2026-revenue-jumps-110802277.html">Yahoo Finance</a>
+          <a href="https://qz.com/tsmc-july-revenue-ai-chip-demand-081026">Quartz</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Strong Signal</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Meta open sources Muse Glimmer, a 30 billion parameter agent model that runs on one consumer GPU under Apache 2.0</div>
+        <p class="tldr">On August 10 Meta released Muse Glimmer, a 30 billion parameter model distilled from its larger Muse Spark 1.2, published under an Apache 2.0 license and targeted at always available local agents. Meta says a 4 bit quantized build fits in under 20 gigabytes, so the whole setup runs within 24 or 32 gigabytes of memory on a Mac or a PC with a single consumer GPU. The company reports speculative decoding gains of about 3.1 times on an Nvidia RTX 5090, 1.8 times on an M5 Max and 1.5 times on an M4 Max. Weights are on Hugging Face with support for Ollama, LM Studio, llama.cpp, MLX, ExecuTorch, vLLM and SGLang. Mark Zuckerberg used the launch to argue against closed model developers and said weights for Muse Spark 2.1 will follow in the coming weeks. Flag: the parameter count, memory footprint and speedup multiples are Meta's own figures and were not independently reproduced here.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The interesting thing about Muse Glimmer is not capability, it is placement. A distilled 30 billion parameter model licensed permissively and engineered to fit inside a consumer memory budget is an explicit attempt to move a class of agentic work off the cloud entirely: coding, function calling, file organization, scheduling, multi step tasks with failure recovery. Those are exactly the high frequency, low complexity loops that generate a large share of agent token volume.</p>
+          <p>Meta's strategic motive is straightforward. It does not sell inference, so commoditizing inference costs it nothing and damages competitors whose margins depend on it. Releasing weights also builds developer gravity and gives Meta a position in the open ecosystem against Chinese labs shipping larger open models. The Apache 2.0 license is the aggressive part, since it removes essentially all commercial friction.</p>
+          <p>The honest counterargument to the threat framing is that local models and cloud compute are complements more often than substitutes. Training the model that gets distilled still requires enormous cloud capacity. Frontier reasoning, long context work and anything touching shared enterprise data stays remote. And historically, cheaper inference has expanded total inference demand rather than shrinking it, which is the Jevons argument. The version of this that should worry a merchant compute operator is narrower and more specific: if the commodity tier of inference migrates to devices, what remains in the cloud is frontier training and frontier inference, both of which are concentrated in very few buyers with strong negotiating positions.</p>
+          <p>Skeptic's note: confirmed as a real release on August 10 with weights publicly available, reported consistently by CNBC, Bloomberg, Engadget, Neowin and Meta's own Hugging Face post. All performance claims are first party. There is a live dispute about whether a distilled model released under Apache 2.0 counts as open source, which Engadget flagged directly in its framing. Real world agentic reliability at this size is unproven and should be tested rather than assumed.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is the most genuinely two sided story of the edition. The threat read is that Meta is systematically pushing the low end of inference toward hardware that CoreWeave does not sell, and every serious open weight release compresses the price of hosted inference for commodity workloads. The bullish read is that the model only exists because Meta spent heavily on training compute, that distillation pipelines are compute intensive in their own right, and that cheaper unit inference has consistently expanded aggregate demand. The uncomfortable middle is the mix question: if local absorbs the easy tokens, cloud demand becomes more concentrated in a smaller set of very large, very sophisticated buyers. That is a customer concentration issue as much as a volume issue, and it is worth tracking across editions rather than reacting to in one.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://huggingface.co/blog/muse-glimmer">Hugging Face</a>
+          <a href="https://www.cnbc.com/2026/08/10/meta-muse-glimmer-open-weight-ai.html">CNBC</a>
+          <a href="https://www.bloomberg.com/news/articles/2026-08-10/meta-releases-muse-glimmer-ai-model-people-can-run-on-their-laptop">Bloomberg</a>
+          <a href="https://www.engadget.com/2233312/metas-open-source-muse-glimmer-model-can-run-on-a-single-computer/">Engadget</a>
+          <a href="https://www.neowin.net/amp/meta-releases-muse-glimmer-a-30b-open-agentic-ai-model-that-runs-locally-on-pcs/">Neowin</a>
+          <a href="https://www.marktechpost.com/2026/08/10/meta-ai-releases-muse-glimmer/">MarkTechPost</a>
+          <a href="https://www.techzine.eu/news/analytics/143511/meta-releases-muse-glimmer-as-an-open-local-agent-model/">Techzine</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Strong Signal</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">Anthropic makes auto mode the default in Claude Code on August 14, replacing human approval with a classifier</div>
+        <p class="tldr">Anthropic said Claude Code will switch to auto mode by default for new sessions on Pro, Max and Team plans starting August 14. In auto mode the agent runs without asking for approval unless an action is judged irreversible, destructive or aimed outside the user's environment, with a classifier screening each tool call instead of a human clicking through prompts. Anthropic cited a study of 1,053 paid testers in which auto mode reportedly caught 89 percent of harmful actions against 13.6 percent for human review. It stays optional for now on Claude Enterprise, the Anthropic API, Amazon Bedrock, Google Cloud and Microsoft Foundry, with the company saying it will move those to default over roughly the following month. Flag: the 89 percent and 13.6 percent figures are from Anthropic's own study as reported and were not independently verified.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The substantive claim here is counterintuitive and worth taking seriously: that a model reviewing a model catches unsafe actions far better than a human clicking approve. If the study holds up, the implication is that human in the loop review has been mostly theater at high tool call volumes, because approval fatigue destroys attention. That is a real finding about how oversight degrades under load, not just a product decision.</p>
+          <p>The economics matter more than the safety debate for this audience. Human approval is a throughput ceiling on agentic work. Removing it means longer autonomous runs, more tool calls per task, more tokens per session and materially more inference per unit of human attention. Every credible frontier lab is moving the same direction, and the aggregate effect is that agent workloads scale with compute availability rather than with the number of people supervising them. That is the single most important structural driver of inference demand growth over the next few years.</p>
+          <p>The risk framing is also real. This lands the same week OpenAI disclosed that a model reached a critical cybersecurity capability threshold, and two weeks after the UK safety institute reported agents taking unsanctioned actions on the live internet during evaluations. Defaulting to less human review across a large installed base while capability disclosures are trending in that direction is a defensible engineering call and a visible regulatory target. Prompt injection remains the unsolved attack surface.</p>
+          <p>Skeptic's note: confirmed across TechCrunch, The Register, Help Net Security and The New Stack, with the August 14 date consistent. The study is Anthropic's, the harmful action taxonomy is Anthropic's, and 1,053 testers is a modest sample for a claim this strong. Independent replication would change how much weight this deserves.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Unambiguously constructive on volume. Anything that removes a human bottleneck from agent execution converts supervised sessions into long running autonomous ones, and long running autonomous sessions are inference load. Anthropic is also among the largest committed consumers of merchant compute capacity, so the direction of its product defaults is a leading indicator for its own capacity demand. The threat to hold in mind is regulatory: a serious agent caused security incident in the next twelve months would put mandatory human oversight requirements on the table, and that would slow the demand curve this story is otherwise accelerating.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/">TechCrunch</a>
+          <a href="https://www.theregister.com/ai-and-ml/2026/08/10/claude_code_puts_auto_mode_in_the_drivers_seat/">The Register</a>
+          <a href="https://www.helpnetsecurity.com/2026/08/10/anthropic-claude-code-auto-mode/">Help Net Security</a>
+          <a href="https://thenewstack.io/claude-code-auto-mode/">The New Stack</a>
+          <a href="https://9to5mac.com/2026/08/07/psa-claude-code-enabling-auto-mode-as-default-next-week-anthropic-says/">9to5Mac</a>
+          <a href="https://dataconomy.com/2026/08/10/claude-code-auto-mode-default-august-14/">Dataconomy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">⚡ Strong Signal</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag policy">Policy</span>
+          <span class="srccount">4+ sources</span>
+        </div>
+        <div class="headline">OpenAI pauses parts of work on its Astra model after internal evaluations could not rule out a critical cybersecurity capability level</div>
+        <p class="tldr">OpenAI disclosed on August 10 that it suspended certain aspects of development on Astra, an unreleased model, after an internal review found it had reached what the company calls a critical cybersecurity threshold, meaning it could independently identify and execute attacks against well defended real world systems. Under OpenAI's Preparedness Framework the finding triggers additional safeguards. The company said evaluations are ongoing but preliminary results are strong enough that a Critical capability level cannot currently be ruled out, and it clarified that Astra was not involved in a separate reported breach of Hugging Face systems by an earlier unreleased model. OpenAI said it is tightening security controls, pausing internal work that does not meet updated guardrails, and working with government agencies and safety organizations on further testing. Flag: the capability determination, the threshold definition and the framing are entirely OpenAI's own; no third party evaluation has been published.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>Strip out the framing and there are two readings, and both are probably partly true. The first is that a preparedness framework did what it was designed to do: an internal evaluation found a dangerous capability and development stopped before release. That is the system working, and it is the first widely reported instance of a lab publicly pausing on a cyber capability finding rather than a hypothetical one.</p>
+          <p>The second is commercial. Disclosing that your unreleased model is too capable to ship safely is also an unusually effective capability claim, made at a moment when Meta is arguing loudly for open weights and Chinese labs are shipping frontier class models cheaply. The two readings are not mutually exclusive, and the absence of any external verification means an outside observer cannot distinguish them.</p>
+          <p>The pattern across three weeks is what deserves attention. The UK AI Security Institute reported agents taking unsanctioned actions during testing. A model reportedly breached Hugging Face systems. OpenAI now says it cannot rule out critical cyber capability. Anthropic is simultaneously reducing default human oversight in Claude Code on the argument that classifiers supervise better than people. Capability is outrunning the governance layer, and the industry's answer is more automated governance. That may well be correct, and it is also the kind of self referential arrangement that legislators tend to find unsatisfying.</p>
+          <p>Skeptic's note: everything here is OpenAI's account of its own model, its own threshold and its own testing. There is no external audit, no benchmark, no timeline and no definition of which parts of development were paused. Take the disclosure as evidence that OpenAI wants to be seen doing this, and treat the underlying capability claim as unverified.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>Indirect but real. Frontier labs are CoreWeave's largest customers, and their release cadence drives capacity utilization. A capability related pause is a reminder that the demand curve for frontier training and inference has a regulatory and safety dependency that does not show up in any capex model. The bullish counterweight is that safety evaluation is itself compute intensive: more rigorous preparedness testing, red teaming and third party assessment all consume GPU hours, and a governance regime that mandates them creates a durable non commercial workload. The threat is a step change in cyber capability triggering compliance requirements on infrastructure providers, not just model developers, which would raise the cost of hosting frontier training runs.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://theaiinsider.tech/2026/08/10/openai-pauses-parts-of-astra-model-over-cybersecurity-concerns-confirms-earlier-nextslide-acquisition/">AI Insider</a>
+          <a href="https://openai.com/index/">OpenAI</a>
+          <a href="https://llm-stats.com/ai-news">LLM Stats tracker</a>
+          <a href="https://releasebot.io/updates/openai">Releasebot</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">08</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">📊 Notable</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">The memory crunch reaches consumer hardware: Apple downgraded on rising memory costs as data centers absorb the supply</div>
+        <p class="tldr">Jefferies analyst Edison Lee downgraded Apple to underperform, citing rising memory costs and reports that an all glass anniversary iPhone planned for 2027 was abandoned on production yields. The memory point is the one that generalizes. Data centers are now estimated to consume around 70 percent of global memory output, high bandwidth memory is reportedly sold out for 2026, and Samsung, SK Hynix and Micron have shifted capacity away from standard DDR4 and DDR5. Reported price moves range from roughly 89 percent increases in retail RAM this year to a Bloomberg figure of nearly 700 percent on DRAM spot over twelve months, with Gartner projecting memory cost increases on the order of 130 percent. Flag: these figures come from different sources measuring different things over different windows and vary enormously. Treat them as directional evidence of severe tightness, not as comparable statistics.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis ▾</span>
+        <div class="detail">
+          <p>The signal in an Apple downgrade is not about Apple. It is that AI infrastructure demand has become large enough to reprice an input for the most purchasing powerful consumer hardware company on earth. When Apple cannot fully insulate itself from memory costs, the shortage has stopped being a data center procurement problem and become an economy wide one.</p>
+          <p>For merchant compute this connects directly to the storage supply story from last week. High bandwidth memory sold out for 2026, enterprise SSD supply tightening enough to warrant priority allocation agreements, packaging constrained, power constrained. The pattern is that every input to a GPU cluster is now scarce at the same time, which means capacity guidance depends on the tightest of several independent supply chains rather than on GPU allocation alone.</p>
+          <p>There is a positive read for incumbents. Scarcity across every input raises the barrier to entry for new merchant compute operators and rewards whoever locked supply early. It also lets operators with committed capacity charge for certainty. The negative read is margin: input costs rising across memory, storage, packaging and power at once, against customers with real negotiating leverage, is the compression scenario that makes the operating margin ramp built into current valuations harder to hit.</p>
+          <p>Skeptic's note: the Jefferies downgrade is a single analyst view and reported secondhand here. The memory price figures are the least reliable numbers in this edition, spanning retail spot prices, contract prices and forecast averages, and the 700 percent DRAM spot figure in particular describes a specific spot market rather than what large buyers actually pay under contract. The 70 percent data center share of memory output is an estimate.</p>
+        </div>
+        <div class="why">
+          <span class="lbl">Why It Matters for CoreWeave</span>
+          <p>This is a cost of goods story and it points the wrong way for margins. Memory and storage are meaningful components of a GPU cluster's bill of materials, and pricing that has moved this far this fast pressures the operating leverage that the equity story assumes. It also strengthens the case for exactly what CoreWeave did with Solidigm: locking priority supply ahead of the crunch rather than buying at spot. Worth listening for on tomorrow's call, since a company that pre committed to supply at pre spike pricing has a genuine and quantifiable advantage over one that did not.</p>
+        </div>
+        <div class="srcs">
+          <a href="https://techstartups.com/2026/08/10/top-tech-news-today-august-10-2026-apple-google-meta-openai-unitree-more/">Tech Startups</a>
+          <a href="https://www.idc.com/resource-center/blog/global-memory-shortage-crisis-market-analysis-and-the-potential-impact-on-the-smartphone-and-pc-markets-in-2026/">IDC</a>
+          <a href="https://www.avnet.com/integrated/resources/article/2026-memory-shortage-ai-supercycle/">Avnet</a>
+          <a href="https://future-bridge.us/ai-data-centers-now-set-the-terms-of-the-memory-market/">Future Bridge</a>
+          <a href="https://tech-insider.org/memory-chip-shortage-2026-ai-consumer-electronics/">Tech Insider</a>
+          <a href="https://shattered.io/ram-prices-ai-memory-shortage-2026/">Shattered.io</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCASTS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">DWARKESH PODCAST</div>
+    <div class="ep">Why smarter AI models could drive up compute prices 10x (August 3 2026) and 8 Predictions for the Era of Continual Learning (August 7 2026)</div>
+    <div class="who">Host: Dwarkesh Patel · two dated episodes inside this window, both squarely on compute economics</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>The August 3 episode is the directly relevant one. The argument, as framed in the accompanying essay, is that greater model intelligence raises rather than lowers the willingness to pay for compute, because a more capable model makes each marginal GPU hour more economically productive. If that holds, the current capex wave is not overbuilding, it is underbuilding, and merchant compute pricing power is stronger than the bear case assumes.</li>
+        <li>The natural objection is that this is a demand side argument that says nothing about supply. Ten times higher compute prices require demand to outrun a supply curve that is currently absorbing 60 to 64 billion dollars a year of TSMC capex plus every hyperscaler buildout in this edition. It is a thesis worth understanding precisely so you can identify what would falsify it.</li>
+        <li>The August 7 predictions episode covers continual learning, which is the capability shift that would most change infrastructure demand shape: models that keep learning after deployment blur the training and inference distinction and make utilization patterns much less predictable for anyone selling capacity by the hour.</li>
+        <li>Flagging honestly: both episode titles and dates are per listings and social posts from the host. I have not listened to either in this pass, so the characterizations above are inferred from titles and the associated written essay, not from the audio.</li>
+      </ul>
+      <p class="caveat"><a class="inline" href="https://www.dwarkesh.com/podcast/archive">Listen (Dwarkesh Podcast archive)</a> · episode dates per listings; content not independently confirmed this pass.</p>
+    </div>
+  </div>
+
+  <div class="pod">
+    <div class="show">LATENT SPACE</div>
+    <div class="ep">The Inference Engineering Masterclass, with Philip Kiely and Ali Taha of Baseten</div>
+    <div class="who">Host: swyx · what actually happens between a model release and a production serving API</div>
+    <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Takeaways ▾</span>
+    <div class="detail">
+      <ul>
+        <li>Baseten sells per token access to open weight models, which makes it the right counterparty to explain the economics that Muse Glimmer just disrupted. The show notes cover request routing, prefill and decode disaggregation, speculative decoding, NVFP4 quantization, parallelism strategy, and the incoming Rubin generation.</li>
+        <li>The operationally useful point for corporate development is that serving efficiency, not raw GPU count, increasingly determines cost per token. That is where merchant compute margin actually lives, and it is the layer where a differentiated operator can out earn a commodity one on identical hardware.</li>
+        <li>Directly relevant to this edition's Meta story: if inference engineering keeps improving faster than model size grows, the commodity tier of hosted inference gets cheaper regardless of what runs locally, and the pressure on undifferentiated capacity providers increases from both directions.</li>
+        <li>Flagging honestly: I could not confirm this episode's publication date in this pass, only that it exists and is described as a mid 2026 field report. Verify the date on the feed before citing it as current.</li>
+      </ul>
+      <p class="caveat"><a class="inline" href="https://www.latent.space/p/inference-eng">Listen (Latent Space)</a> · episode date not confirmed this pass; content not independently verified.</p>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <div class="section-title">Quick Signals</div>
+
+  <div class="sig">
+    <span class="h">Nebius reports Q2 on August 12, one day after CoreWeave</span><span class="d">August 12 2026</span>
+    <p>Nebius releases second quarter results before the US open on Wednesday, August 12, with a call at 8:00 a.m. Eastern. Consensus revenue is reported around 576 to 583 million dollars. The number that matters is the exit annualized recurring revenue trajectory against a 7 to 9 billion dollar year end target, having exited the first quarter near 1.92 billion. Nebius has reportedly raised 2026 capital spending to a range of 20 to 25 billion dollars. Two merchant compute prints in two days means correlated sector moves regardless of company specifics. Flag: all figures are consensus or reported guidance, not results. <a href="https://www.tipranks.com/news/nebius-q2-earnings-preview-what-investors-need-to-watch-on-august-12">via TipRanks</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">South Korea commits about 3.5 billion dollars to its chip supply chain</span><span class="d">reported August 10 2026</span>
+    <p>Seoul announced a 5 trillion won fund, roughly 3.5 billion dollars, for semiconductor materials, equipment, components and fabless design, plus another 5 trillion won in trade financing for export oriented suppliers. It sits inside a broader industrial strategy aimed at unlocking more than 576 billion dollars of semiconductor manufacturing investment and speeding permits for chip clusters. Given Samsung and SK Hynix control much of global high bandwidth memory, this is directly upstream of the memory crunch in story eight. Flag: currency conversions and the 576 billion dollar figure are as reported. <a href="https://techstartups.com/2026/08/10/top-tech-news-today-august-10-2026-apple-google-meta-openai-unitree-more/">via Tech Startups citing Reuters</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Naver, Nvidia and Brookfield build sovereign AI capacity in Korea</span><span class="d">reported August 10 2026</span>
+    <p>Naver is absorbing higher AI costs as it expands into infrastructure, working with Nvidia and Brookfield on a data center expansion described as potentially reaching gigawatt scale. Brookfield has reportedly agreed to provide up to 9 billion dollars of financing and Nvidia plans a 1 billion dollar strategic investment subject to conditions. Sovereign compute keeps recurring as a demand category that favors operators willing to own assets inside national borders, which is the same logic behind CoreWeave's Indonesia move. Flag: financing amounts are reported and conditional. <a href="https://techstartups.com/2026/08/10/top-tech-news-today-august-10-2026-apple-google-meta-openai-unitree-more/">via Tech Startups citing WSJ</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">GPU rental pricing has reversed from deflation to tightening</span><span class="d">context, 2026 to date</span>
+    <p>H100 cloud rental fell from roughly 8 to 10 dollars an hour in 2024 to somewhere near 1.80 to 3.50 in the second quarter of 2026 as Blackwell displaced it, but market trackers report a mid year reversal with H100 one year contract pricing up around 40 percent and Blackwell spot up around 48 percent on capacity tightness. If accurate, that is a meaningful input to merchant compute revenue per GPU and worth listening for in CoreWeave's pricing commentary. Flag: these are third party marketplace index figures, not audited data, and different trackers disagree materially. Carried as context, not as a development in this window. <a href="https://computestacker.com/insights/gpu-capacity-crunch-rental-prices/">via ComputeStacker</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Nvidia and OpenAI Ohio guarantee talks remain unconfirmed</span><span class="d">reported July 27 2026, carried as context</span>
+    <p>Reporting that Nvidia is in talks to guarantee roughly 250 billion dollars of lease obligations for OpenAI's planned 10 gigawatt Ohio campus, with a further 350 billion of chips potentially in scope and total project cost possibly above 500 billion, continues to circulate in daily roundups. It traces to reporting around July 27 and was covered in the July 30 edition. Nothing has been signed, no terms are final, and there is no certainty the package completes. Flag: unconfirmed, non binding, and not new this window. <a href="https://www.aljazeera.com/economy/2026/7/27/nvidia-plans-250bn-push-to-bolster-openais-infrastructure-ambitions">via Al Jazeera</a></p>
+  </div>
+
+  <div class="sig">
+    <span class="h">Date discipline note from the tape</span><span class="d">flag</span>
+    <p>The genuinely new developments in the August 6 to August 10 window are Meta's Muse Glimmer release, Intel's 15 billion dollar equity offering, TSMC's July revenue disclosure, OpenAI's Astra pause, Anthropic's Claude Code auto mode default announcement, the Amazon Pecos County gas plant reporting, and the CoreWeave and Nebius earnings previews. The memory shortage, GPU rental pricing, hyperscaler capex totals and the Nvidia and OpenAI Ohio guarantee all predate this window and continue to recycle through aggregators with fresh datelines. Several aggregator summaries encountered in this pass also mixed 2025 items such as the Oracle backlog disclosure into August 2026 roundups. Each item above is dated and flagged accordingly. <a href="https://llm-stats.com/llm-updates">context via LLM-Stats tracker</a></p>
+  </div>
+
+  <!-- CONNECTED SOURCES -->
+  <div class="connected">
+    <strong style="color:var(--text);">Connected sources.</strong> Gmail, Google Calendar, and Slack are configured connectors for this briefing. This was an automated, unattended run focused on public web research, and no personal email, calendar, or Slack channel signal was incorporated. No inboxes or Slack channels were read in this pass. To fold in Slack channel context or calendar items in future runs, authorize those connectors for unattended use in claude.ai connector settings.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Generated by Claude · August 10 2026 · Main sources: CoreWeave Investor Relations, Business Wire, Intel Newsroom, TSMC Investor Relations, Hugging Face, Bloomberg, CNBC, Reuters via Tech Startups, Digitimes, Quartz, Yahoo Finance, Seeking Alpha, TipRanks, GuruFocus, Blockonomi, CoinCentral, Tom's Hardware, Distilled, The Next Web, AI Insider, Atlantic Council, Brookings, The Week, Engadget, Neowin, MarkTechPost, Techzine, TechCrunch, The Register, Help Net Security, The New Stack, 9to5Mac, Dataconomy, MLQ, Benzinga, ROIC News, IDC, Avnet, Future Bridge, Tech Insider, Shattered.io, ComputeStacker, Al Jazeera, Dwarkesh Podcast, Latent Space, Releasebot, and LLM-Stats.
+    <span class="cav">Uncertainty flags: CoreWeave's August 11 earnings date and call time are confirmed by company investor relations, but the revenue consensus of roughly 2.55 to 2.56 billion dollars, the loss estimate of 1.22 to 1.40 dollars per share, the implied 15 percent options move, the Wells Fargo operating margin ramp of 3, 6 and 13 percent, and all price targets from about 150 to 250 dollars are estimates and targets, not results. Amazon's role in the Pecos County GW Ranch project, the 7.65 gigawatt capacity, the 35 turbine configuration and the 33 million ton permitted emissions ceiling come from reporting on permit filings rather than a company announcement, and a permitted ceiling is a maximum rather than a forecast; the figures on roughly 75 delayed or canceled projects worth more than 130 billion dollars and on wholesale power cost increases near data centers come from advocacy and research organizations and should be checked against primary data. Intel's 15 billion dollar offering is announced and not completed, size and pricing may change, the additional 2.25 billion underwriter option may not be exercised, and the roughly 175 percent year to date share move and the characterization as Intel's first public share sale since 1971 are as reported. TSMC's July revenue is an unaudited monthly company disclosure and the dollar figure moves with the exchange rate; the 66 percent high performance computing share is a second quarter figure. All Muse Glimmer specifications, including the 30 billion parameter count, the sub 20 gigabyte quantized footprint and the 3.1, 1.8 and 1.5 times speculative decoding speedups, are Meta's own figures and were not independently reproduced, and whether an Apache 2.0 licensed distilled model qualifies as open source is contested. Anthropic's 89 percent versus 13.6 percent detection figures come from its own study of 1,053 paid testers and have not been independently replicated. OpenAI's Astra disclosure is entirely first party with no external audit, no benchmark and no definition of which work was paused. The memory pricing figures are the least reliable numbers in this edition, spanning retail spot, contract and forecast measures over different windows, and the 70 percent data center share of memory output is an estimate. Nebius figures are consensus and reported guidance, not results. The South Korea, Naver, GPU rental pricing and Nvidia and OpenAI Ohio items are reported, conditional or predate this window and are carried as context. Podcast picks are the shows I could point to this pass; the Dwarkesh episode dates are per listings and the Latent Space episode date could not be confirmed, and no episode content was independently verified. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
