@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — October 29 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Thursday, October 29 2026 &#183; Thursday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">7 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">45+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+    <span class="tag policy">Power &amp; Policy</span>
+    <span class="tag markets">Markets</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">10+ sources</span>
+        </div>
+        <div class="headline">Microsoft blamed its capex shortfall on delayed third party GPU capacity, pushed some of it into the first half of 2027 and trimmed its 2026 capex view, and CoreWeave, Nebius and IREN sold off even as Azure grew 48 percent</div>
+        <p class="tldr">Microsoft reported fiscal Q1 2027 results on October 28. Azure revenue, disclosed in dollars for the first time under the narrower September definition, was 33.2 billion dollars, up 48 percent in constant currency against Microsoft's own guide of 44 to 45 percent. Total revenue was 92.3 billion dollars, up 19 percent. Capex including finance leases was 45.2 billion dollars against an outlook of more than 50 billion dollars and a reported analyst average of about 50.7 billion dollars. CFO Amy Hood said, per CNBC, that "some third party capacity deliveries we expected in Q1 were delayed" and that delays at third party GPU providers will push some capacity into the first half of 2027. CNBC reports calendar 2026 capex guidance moved to about 170 billion dollars from about 175 billion dollars, with more than 50 billion dollars expected in the December quarter. Hood did not name the providers. In overnight and premarket trading CoreWeave fell roughly 5 to 6 percent, Nebius about 6 percent, IREN about 5 percent and Applied Digital about 4 percent, while Microsoft rose about 4 percent after hours. Flag: the 170 billion dollar figure and the Hood quotes are from CNBC and other press accounts of the call; no full transcript was read. Flag: reported drops for CoreWeave range from just under 5 percent to 6.1 percent depending on outlet and time stamp.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The market read is simple: Microsoft spent less than expected and said outside suppliers were late, and Microsoft is the largest disclosed neocloud customer. The more useful read is in the mechanics. Microsoft's capex line now excludes a growing share of leases because it extended data center building lives to 25 years in July, which pushes more new leases into operating lease treatment. Its 10-Q shows 6.5 billion dollars of new operating lease assets in the quarter against 1.4 billion dollars a year earlier, and 364.6 billion dollars of leases signed but not yet commenced, up from 329.1 billion dollars at the end of June. That is a large contracted pipeline for third party capacity, and it does not show up in the headline capex number that traders are reacting to.</p>
+          <p>Demand is not the issue. Hood has said demand exceeds supply, Azure beat its own guide for at least the fifth straight quarter by StockTitan's count, and the December quarter Azure guide is reported at 49 to 50 percent. Commercial RPO was 677 billion dollars, up 73 percent year on year but roughly flat sequentially, which Microsoft has warned would be volatile because of large OpenAI contracts signed last year. The constraint Hood described is delivery: GPUs, power and buildings arriving later than planned at partners.</p>
+          <p>Skeptic's note: confirmed from Microsoft materials as summarised by StockTitan are Azure revenue and growth, total revenue, the 45.2 billion dollar capex figure, RPO, the lease reclassification and the uncommenced lease balance. Reported from the call through CNBC and others, not checked against a transcript: the delay language, the first half 2027 timing, the cut to about 170 billion dollars and the December quarter capex figure. TipRanks framed the shift as into the second half of Microsoft's fiscal year, which is the same calendar window but worded differently. Nothing ties the delay to CoreWeave specifically; the selloff is guilt by association.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: this lands on the one thing the credit market already doubts, execution on delivery. If CoreWeave is among the late providers, revenue recognition slips while interest and depreciation do not, and a customer with Microsoft's leverage will use delays to renegotiate price or timing. Even if CoreWeave is not the laggard, the narrative "neoclouds cannot deliver on time" raises its cost of capital the week before Q3 results. Bull read: Microsoft is not cutting demand, it is waiting for supply, and 364.6 billion dollars of signed but uncommenced leases says the hyperscaler is still outsourcing at scale. Late capacity is still contracted capacity. Corporate development priority: be ready on November 10 to state plainly which Microsoft deliveries are on schedule, what slipped and why, because analysts will ask, and silence will be read as confirmation.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.cnbc.com/2026/10/28/microsoft-msft-q1-earnings-report-2027.html">CNBC, results</a>
+            <a href="https://www.cnbc.com/2026/10/28/neocloud-stocks-drop-after-microsoft-revises-capex-down.html">CNBC, neoclouds</a>
+            <a href="https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html">CNBC, capex snag</a>
+            <a href="https://www.stocktitan.net/articles/microsoft-q1-fiscal-2027-earnings-azure-growth-ai-spending">StockTitan</a>
+            <a href="https://www.microsoft.com/en-us/investor/earnings/fy-2027-q1/press-release-webcast">Microsoft IR</a>
+            <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm">Microsoft 10-Q (SEC)</a>
+            <a href="https://www.tipranks.com/news/why-are-coreweave-nebius-and-iren-stocks-tumbling-in-pre-market-today-oct-29">TipRanks</a>
+            <a href="https://finance.yahoo.com/markets/stocks/articles/crwv-nbis-iren-apld-stocks-033548877.html">Stocktwits via Yahoo</a>
+            <a href="https://seekingalpha.com/news/4659874-coreweave-neocloud-stocks-drop-after-microsoft-capex-misses-estimates">Seeking Alpha</a>
+            <a href="https://www.heygotrade.com/en/news/microsoft-cloud-beat-backs-rebound-lower-capex-hits-coreweave-and-neocloud-stocks-msft-crwv/">Gotrade</a>
+            <a href="https://www.benzinga.com/news/26/10/62680566/microsoft-q1-2027-earnings-call-transcript">Benzinga transcript</a>
+            <a href="https://www.webpronews.com/microsoft-azure-revenue-33-billion-q1-fy27-earnings">WebProNews</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">9+ sources</span>
+        </div>
+        <div class="headline">Google Cloud revenue doubled to 30.7 billion dollars with a 561 billion dollar backlog, and Alphabet said it began renting third party compute at the end of Q3 and will ramp it in Q4, but negative free cash flow sent the stock and the neoclouds lower</div>
+        <p class="tldr">Alphabet's Q3 8-K shows revenue of 127.6 billion dollars, up 25 percent, and GAAP diluted EPS of 2.12 dollars, depressed by an 8.7 billion dollar equity securities loss that coverage attributes mainly to its SpaceX stake. Google Cloud revenue rose 103 percent to 30.7 billion dollars with operating income of about 11.1 billion dollars; cloud backlog reached 561 billion dollars, of which about 55 percent is expected to be recognised over 24 months. Search and other revenue grew 12 percent, down from 17 percent, and missed consensus by about 1.6 billion dollars, which Alphabet tied to AI Mode. Capex was 51.4 billion dollars against a reported 55.1 billion dollar consensus; 2026 guidance was held at 195 to 205 billion dollars, with a "significant" increase signalled for 2027. Free cash flow was about negative 9.1 billion dollars, a second negative quarter. Per call transcripts, Alphabet started using third party compute capacity at the very end of Q3 to relieve supply constraints and will ramp it in Q4, with near term margin pressure. Shares fell about 10 percent after hours; CoreWeave was down about 6 percent and Nebius about 6.5 percent premarket. Flag: the third party compute language comes from transcript summaries, not a full transcript read, and no provider was named. Flag: after hours declines are reported between 7 and 10.4 percent.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Two things that matter to CoreWeave pull in opposite directions. Operationally, the biggest TPU owner in the world just said it cannot build fast enough and is buying outside capacity, a step it previewed in July and has now begun. A 561 billion dollar backlog growing faster than internal build is exactly the gap merchant GPU clouds exist to fill. Financially, Alphabet has now posted two quarters of negative free cash flow, and the market punished it for that more than it rewarded 103 percent cloud growth. Investors are signalling that capex funded growth is being priced on cash, not bookings, which is the same lens being applied to CoreWeave.</p>
+          <p>Combined with Microsoft, the overnight message to neocloud equity was "hyperscalers are spending less than expected this quarter," which is literally true and strategically misleading. Both companies undershot capex estimates on timing, while both reaffirmed or signalled higher multi year spend and both cited supply constraints. The neocloud selloff is a reaction to the near term print, not to a change in the demand curve.</p>
+          <p>Skeptic's note: revenue, EPS and the equity loss are confirmed against the 8-K as cited by FinanceFeeds. Cloud backlog, the 55 percent recognition window, capex, free cash flow and 2027 language are from Alphabet's release and call as relayed by several outlets. The SpaceX attribution of the equity loss is from coverage, not verified in the filing. Whether any of the third party capacity is GPU based, as opposed to TPU hosting by partners, was not disclosed.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: Google is now a confirmed buyer of outside compute, and CoreWeave was reported in 2025 to be in discussions to supply Google capacity (Flag: not reconfirmed in this run), so a Q4 ramp is a potential volume tailwind. A cloud business growing over 100 percent with a 24 month recognition window on half of a 561 billion dollar backlog will need bridge capacity for several quarters. Threat read: Google is also selling TPUs to third parties and onto OCI from 2027, so its bridge buying may be temporary and may favour partners hosting Google silicon. And the market's focus on free cash flow is a direct read across to CoreWeave's own negative free cash flow. Corporate development priority: determine whether CoreWeave is in Google's Q4 ramp and on what tenor, since a short bridge contract and a multi year take or pay are very different credit stories.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.sec.gov/Archives/edgar/data/0001652044/000165204426000080/googexhibit991q32026.htm">Alphabet 8-K (SEC)</a>
+            <a href="https://financefeeds.com/google-cloud-doubles-but-search-triggers-alphabet/">FinanceFeeds</a>
+            <a href="https://www.cnbc.com/2026/10/28/alphabet-googl-earnings-q3-2026.html">CNBC, results</a>
+            <a href="https://www.cnbc.com/2026/10/29/alphabet-google-search-ai-earnings.html">CNBC, search</a>
+            <a href="https://www.stocktitan.net/articles/alphabet-q3-2026-earnings-google-cloud-doubles-search-slows">StockTitan</a>
+            <a href="https://convergedigest.com/alphabet-q3-2026-google-cloud-ai-infrastructure-revenue/">Converge Digest</a>
+            <a href="https://www.fool.com/earnings/call-transcripts/2026/10/29/alphabet-googl-q3-2026-earnings-call-transcript/">Motley Fool transcript</a>
+            <a href="https://www.benzinga.com/news/26/10/62679903/alphabet-q3-2026-earnings-call-transcript">Benzinga transcript</a>
+            <a href="https://www.investing.com/news/stock-market-news/alphabets-9bn-cash-burn-drags-neocloud-stocks-lower-4982385">Investing.com, neoclouds</a>
+            <a href="https://qz.com/google-microsoft-ai-spending-estimates-miss-neocloud-stocks-102926">Quartz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Oracle capped new capital markets funding at 20 billion dollars through fiscal 2030 and targeted 225 billion dollars of revenue, while making Vera Rubin NVL72 generally available on OCI with a multi gigawatt expansion plan</div>
+        <p class="tldr">At its October 28 Investor Day, Oracle committed to limit additional capital markets funding for its fiscal 2027 to 2030 investment cycle to 20 billion dollars, currently expected as 10 billion dollars of equity and 10 billion dollars of gross debt, excluding refinancing and on top of a 20 billion dollar at the market equity raise completed in fiscal Q1 2027. It set a fiscal 2030 revenue target of more than 225 billion dollars, positive free cash flow in the second half of fiscal 2028 and net debt to adjusted EBITDA below 3.5 times in fiscal 2029. Shares rose about 11 percent per InvestingLive. A day earlier at Oracle AI World, NVIDIA and Oracle announced Vera Rubin NVL72 and Vera CPUs are generally available on OCI and that OCI Superclusters on Vera Rubin will expand to multi gigawatt scale, with HGX Rubin NVL8 to follow. Flag: whether vendor financing, customer supplied hardware or prepayments count against the 20 billion dollar cap is not stated, per one analysis. Flag: the 11 percent move is from a single outlet.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Oracle is CoreWeave's closest analogue in the credit market: a heavy AI capex builder whose bonds have traded as a proxy for AI infrastructure risk. Its answer to that pressure was a hard, public cap on new funding, and the equity rallied. The skeptic's question is what fills the gap. Terrain Labs notes the 20 billion dollar cap is smaller than the 28.5 billion dollars of capex Oracle spent in the August quarter alone. The rest has to come from operating cash flow, customer prepayments, partner or vendor financing and off balance sheet structures, which is precisely where the cap's definitions are silent.</p>
+          <p>Skeptic's note: the cap, revenue target, free cash flow timing and leverage target are confirmed in Oracle's release and 8-K. The Vera Rubin availability and expansion are from NVIDIA and Oracle press materials; "multi gigawatt" has no date or megawatt figure attached. The stock reaction is from one outlet; CNBC separately reported Oracle shares were among those hit after the Microsoft print.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: Oracle just showed the market rewards a credible, bounded funding plan, and CoreWeave could borrow the playbook on November 10 by stating a ceiling on unsecured issuance and a dated path to free cash flow. Oracle self constraining also limits how fast it can absorb incremental AI demand, which can leave share for others. Threat read: Oracle is the most aggressive competitor for the same large lab contracts, now with Vera Rubin generally available and TPUs arriving in 2027, and a stronger balance sheet narrative makes it the safer counterparty in a lab's eyes. Corporate development priority: benchmark CoreWeave's Vera Rubin availability timing against OCI's announcement, since customers will.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://investor.oracle.com/investor-news/news-details/2026/Oracle-Investor-Day-2026-Accelerating-Value-Creation/default.aspx">Oracle IR</a>
+            <a href="https://www.sec.gov/Archives/edgar/data/0001341439/000119312526435853/d75538dex991.htm">Oracle 8-K (SEC)</a>
+            <a href="https://www.prnewswire.com/news-releases/oracle-investor-day-2026-accelerating-value-creation-302922564.html">PR Newswire</a>
+            <a href="https://investinglive.com/stocks/icymi-oracle-jumps-around-11-on-225bn-2030-revenue-goal-and-20bn-cap-on-new-funding/">InvestingLive</a>
+            <a href="https://terrainlabs.substack.com/p/orcl-oracle-new-debt-20ji">Terrain Labs</a>
+            <a href="https://www.stocktitan.net/articles/oracle-stock-investor-day-2026-20-billion-funding-cap">StockTitan</a>
+            <a href="https://nvidianews.nvidia.com/news/nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure">NVIDIA newsroom</a>
+            <a href="https://www.oracle.com/news/announcement/ai-world-nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-2026-10-27/">Oracle newsroom</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">The next three weeks decide the narrative: Amazon reports tonight, CoreWeave on November 10, Anthropic's roadshow may start the week of November 9, and NVIDIA reports November 17</div>
+        <p class="tldr">Amazon reports Q3 after the close today, October 29, with the call at 5 p.m. ET. Previews put AWS consensus at roughly 45.4 to 45.6 billion dollars, up about 37 to 38 percent, with Bank of America at 40 percent and Wedbush near 41 percent; AWS backlog was 496 billion dollars at June and 2026 cash capex guidance was raised to about 220 billion dollars. CoreWeave announced on October 27 that it will report Q3 on Tuesday, November 10 at 5 p.m. ET. Bloomberg reports Anthropic could start its IPO roadshow as early as the week of November 9 with a debut before Thanksgiving, after its public S-1 on October 26. NVIDIA will report fiscal Q3 2027 on November 17. StockTitan reports the Fed held rates at 3.75 to 4 percent on October 28. Flag: AWS estimates differ by source and are consensus approximations. Flag: Anthropic timing is press reporting, not a company or SEC date. Flag: the Fed decision was confirmed by one source in this run.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Amazon tonight is the last hyperscaler print before CoreWeave's, and the question for CoreWeave is the same one Microsoft and Alphabet raised: is the constraint supply or demand, and is the buyer leaning on outside capacity? AWS has historically used the least third party GPU capacity of the big three and is pushing Trainium, so a strong AWS print with heavy Trainium commentary is a modest negative for merchant GPU demand, while any mention of external capacity would be a positive surprise.</p>
+          <p>Anthropic's roadshow matters because its S-1 disclosed hundreds of billions of dollars of compute commitments (covered in the prior edition). A successful IPO strengthens the credit of one of the largest compute buyers; a stumble would hit every supplier's backlog quality. NVIDIA's November 17 print will reset expectations for GPU supply timing, directly relevant to Microsoft's complaint about late third party capacity.</p>
+          <p>Skeptic's note: CoreWeave's date is from its own release and NVIDIA's from GlobeNewswire. Amazon's date and estimates come from multiple previews. The Anthropic roadshow timing is Bloomberg reporting relayed by trackers. A countdown site lists a different CoreWeave date of November 16 and says it is unconfirmed; the company date is November 10.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>CoreWeave reports into a tape that has just been told hyperscalers are spending slower and suppliers are late. Bull read: three hyperscalers reaffirming multi year spending and supply constraints, plus a funded Anthropic, is the best possible backdrop for converting backlog into financing. Threat read: if Amazon also undershoots capex and NVIDIA flags supply timing, CoreWeave becomes the place where the market prices the whole delay. Corporate development priority: prepare a delivery schedule disclosure and a funding plan that can stand on its own, rather than relying on peers to set the tone.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://investors.coreweave.com/news/news-details/2026/CoreWeave-Announces-Date-of-Third-Quarter-2026-Financial-Results-and-Conference-Call/default.aspx">CoreWeave IR</a>
+            <a href="https://www.geekwire.com/2026/amazon-earnings-preview-aws-is-booked-up-and-wall-street-wants-to-know-what-comes-next/">GeekWire</a>
+            <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262242086-amazon-q3-earnings-preview-aws-amzn-tradingkey">TradingKey</a>
+            <a href="https://www.proactiveinvestors.com/companies/news/1100857/amazon-q3-preview-aws-acceleration-expected-to-lead-the-way-1100857.html">Proactive Investors</a>
+            <a href="https://news.alphastreet.com/amazon-com-amzn-q3-2026-preview-eps-est-1-96-reports-october-29/amp/">AlphaStreet</a>
+            <a href="https://www.tradingview.com/news/zacks:f22780672094b:0-amazon-amzn-q3-earnings-preview-aws-growth-takes-center-stage/">Zacks via TradingView</a>
+            <a href="https://globenewswire.com/news-release/2026/10/28/3390809/0/en/nvidia-sets-conference-call-for-third-quarter-financial-results.html">NVIDIA via GlobeNewswire</a>
+            <a href="https://leverageshares.com/us/anthropic-ipo-tracker/">Leverage Shares, Anthropic tracker</a>
+            <a href="https://www.stocktitan.net/articles/fed-rate-decision-october-28-2026">StockTitan, Fed</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">The DOJ is asking whether NVIDIA's roughly 13 billion dollar Hugging Face purchase would give it control of a key AI model distribution point, folding the deal into its broader NVIDIA conduct probe</div>
+        <p class="tldr">Reuters reported on October 28, citing sources, that the Justice Department is inquiring how NVIDIA's purchase of Hugging Face, valued at about 12.9 billion dollars and expected to close in the first half of 2027, would affect AI competition. The questions reportedly sit inside a years long investigation of NVIDIA's conduct covering acquisitions, investments and sales practices; Bloomberg reported last month that DOJ was also examining NVIDIA's roughly 20 billion dollar Groq licensing deal. NVIDIA declined to comment and DOJ declined to discuss specific matters. NVIDIA shares fell about 1.2 percent to 215.38 dollars. Flag: the inquiry is sourced to anonymous people; an inquiry is not a lawsuit or a finding. Flag: the deal's announcement month is given as September by most outlets and August by Benzinga.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>NVIDIA has spent the past year moving up and down the stack: SchedMD for cluster scheduling, Run:ai for orchestration, Groq for inference silicon, Hugging Face for model distribution, plus capacity prepayments and investments in its own customers. Each step makes NVIDIA more of a platform and less of a component supplier. The DOJ's reported interest is in the same thing CoreWeave's customers should care about, namely whether the company that allocates scarce GPUs also controls the software and distribution layers that determine which clouds models land on first.</p>
+          <p>Skeptic's note: confirmed are that Reuters published the report and that NVIDIA and DOJ declined comment. Everything about DOJ's questions comes from unnamed sources. US antitrust posture under the current administration has been permissive on AI deals, and DOJ's own statement emphasised prioritising "Super Intelligence" advancement, so a block is far from the base case.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: antitrust attention on NVIDIA's vertical reach makes it harder for NVIDIA to favour its own or a few preferred clouds through software and distribution, which protects independent GPU clouds' access. NVIDIA is also a CoreWeave investor and partner, and regulatory pressure may make it more careful to treat merchant clouds even handedly. Threat read: if scrutiny chills NVIDIA's willingness to backstop neoclouds through investments, capacity guarantees or utilisation floors, one of CoreWeave's support channels in a tight credit market weakens. Corporate development priority: track whether the conduct probe extends to NVIDIA's investments in and commitments to its cloud customers, since that is where CoreWeave would be directly exposed.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.investing.com/news/stock-market-news/exclusiveus-doj-is-inquiring-about-nvidias-purchase-of-hugging-face-sources-say-4980450">Reuters via Investing.com</a>
+            <a href="https://www.cnbc.com/2026/10/28/doj-questions-nvidias-12point9-billion-hugging-face-deal.html">CNBC</a>
+            <a href="https://www.bloomberg.com/news/articles/2026-10-28/doj-inquires-about-nvidia-s-hugging-face-deal-reuters-says">Bloomberg</a>
+            <a href="https://thenextweb.com/news/doj-nvidia-hugging-face-deal-antitrust-inquiry">The Next Web</a>
+            <a href="https://www.benzinga.com/markets/tech/26/10/62684670/nvidia-faces-doj-scrutiny-over-12-9-billion-hugging-face-deal-amid-concerns-about-unfair-ai-advantage-report">Benzinga</a>
+            <a href="https://finance.yahoo.com/technology/ai/articles/nvidia-faces-doj-antitrust-scrutiny-202028682.html">Yahoo Finance</a>
+            <a href="https://www.heygotrade.com/en/news/nvidia-nvda-stock-news-october-29-2026/">Gotrade</a>
+            <a href="https://www.marketbeat.com/instant-alerts/price-nvidia-nasdaq-nvda-stock-price-down-12-should-you-sell-2026-10-28/">MarketBeat</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="srccount">10+ sources</span>
+        </div>
+        <div class="headline">Google shipped Gemini 4 Carbon, built for agent runs lasting days, to cyber defenders first, and Genie 4 to testers, while OpenAI's GPT-6.1 Terra went live on October 26, correcting the prior edition</div>
+        <p class="tldr">Google's October 28 blog post introduces Gemini 4 Carbon, two weeks after Gemini 4 Argon, claiming the top score of 59 on the Artificial Analysis Intelligence Index v5.0, 88.2 percent on SEC-bench Pro and 54.8 percent on ExploitGym, and internal runs "for days" on multi step engineering tasks. Access starts with a subset of cyber defenders through Google's Fairwind program and US government pre release testing; developer and consumer availability has no date. Introductory pricing is 2 dollars per million input tokens and 10 dollars per million output tokens, rising to 4 and 20 dollars afterwards. Vals AI ranks it second of 29 models on its index. On October 27 Google DeepMind announced Genie 4, a world model with native audio and up to two minutes of scene consistency, in research preview for trusted testers. OpenAI released GPT-6.1 Terra on October 26 per OpenAI's post and 9to5Mac, a mid tier computer use model in ChatGPT, Codex and the API at 50 percent lower prices than GPT-5.6 Terra. Correction: the October 28 edition described GPT-6.1 Terra as unreleased; it had launched two days earlier. Flag: all benchmark figures are vendor reported.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The compute relevant signal is in the deployment pattern rather than the scores. Google is shipping frontier models every two weeks, gating the strongest to a vetted audience, and marketing agents that run for days. Long horizon agents multiply inference tokens per task by orders of magnitude, and gated rollouts mean the heavy usage is still ahead of us. OpenAI is going the other way on price, cutting Terra's API cost in half, which also expands usage. Both point to rising inference demand, which is the workload most likely to be outsourced to merchant clouds.</p>
+          <p>Skeptic's note: Carbon's release date, access policy, pricing and benchmark claims are confirmed on Google's blog. Vals AI provides one independent ranking. Genie 4's details are from Google DeepMind and TechCrunch; there is no launch date or pricing. Terra's release is confirmed by OpenAI's post and several outlets; its benchmark claims are OpenAI's. The "Gemini 4 Carbon" pricing conflict across outlets is resolved by Google's footnote: 2 and 10 dollars is introductory, 4 and 20 dollars thereafter.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: days long agent runs and half price mid tier models are both inference demand multipliers, and inference is the most portable workload for a GPU cloud. Threat read: Google trains and serves Gemini on its own TPUs, so Gemini's success adds demand to Google's stack, not CoreWeave's, and it raises the bar for the labs that are CoreWeave's customers, compressing their pricing power and therefore their ability to pay. Corporate development priority: watch whether OpenAI's Terra price cut is matched by Anthropic and others, since a price war at the model layer eventually reaches compute contract renewals.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/">Google blog, Carbon</a>
+            <a href="https://www.engadget.com/2300677/google-gemini-carbon-promises-significant-leap-in-ai-coding-and-cybersecurity/">Engadget</a>
+            <a href="https://www.investing.com/news/stock-market-news/google-unveils-gemini-4-carbon-with-advanced-cybersecurity-features-4980345">Investing.com</a>
+            <a href="https://www.vals.ai/models/google_gemini-4-carbon">Vals AI</a>
+            <a href="https://wccftech.com/googles-gemini-4-carbon-mogs-every-other-model-on-nearly-every-benchmark-performs-over-10x-better-than-any-publicly-available-model-when-generating-high-quality-security-patches/">Wccftech</a>
+            <a href="https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/">Google DeepMind, Genie 4</a>
+            <a href="https://techcrunch.com/2026/10/27/googles-genie-4-world-model-adds-audio-more-realistic-worlds-and-real-time-steering/">TechCrunch</a>
+            <a href="https://x.com/OpenAI/status/2114780711664398349">OpenAI on X</a>
+            <a href="https://9to5mac.com/2026/10/26/openai-upgrades-chatgpt-and-codex-with-new-gpt-6-1-terra-model/">9to5Mac</a>
+            <a href="https://openrouter.ai/openai/gpt-6.1-terra">OpenRouter</a>
+            <a href="https://seekingalpha.com/news/4657460-openai-unveils-new-ai-model-gptminus-6_1-terra">Seeking Alpha</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">NERC's board adopted the first five reliability standards for "computational loads," requiring planners to study data center impacts and operators to disclose how their facilities respond to grid disturbances</div>
+        <p class="tldr">NERC's Board of Trustees adopted the standards in a special meeting on October 26, after a final ballot on October 14, as phase one of its large loads action plan. The standards direct transmission planners to study the reliability impact of new computational loads and require data center operators to disclose facility responses to grid disturbances. NERC will file them with FERC, which had directed a filing by December 31, 2026; they are not enforceable in the US until FERC approves them and phased compliance begins. Further standards on load performance, event reporting and model quality are in development. Flag: compliance dates and penalties were not found in the coverage reviewed.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>This is the reliability counterpart to the FERC PJM ruling covered in the prior edition. FERC sent the "who pays" question back to states; NERC is now defining "how a data center must behave on the grid." AI training clusters can swing power draw sharply and drop off the grid in a disturbance, which grid operators treat as a reliability risk. Disclosure today usually becomes ride through and performance requirements tomorrow, which means equipment, controls and potentially onsite storage.</p>
+          <p>Skeptic's note: the adoption, dates and content are confirmed by the American Public Power Association, RTO Insider and Daily Energy Insider. The obligations are not yet binding, and the next phase of standards, which will matter more for capital cost, is still in development.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: as an operator in many leased sites, CoreWeave will need disturbance response data from landlords and its own systems, and future performance standards could add retrofit costs or slow energisation at new campuses. Bull read: operators that can demonstrate grid friendly behaviour, through flexible load or battery buffering, may get faster interconnection, and a common standard reduces utility by utility uncertainty. Corporate development priority: add NERC compliance readiness to site and lease diligence, especially for facilities energising after 2027.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.publicpower.org/periodical/article/board-trustees-nerc-adopts-foundational-computational-load-reliability-standards">APPA</a>
+            <a href="https://www.publicpower.org/periodical/article/nercs-computational-loads-reliability-standards-implementation-plans-advance">APPA, implementation</a>
+            <a href="https://www.rtoinsider.com/149724-nerc-trustees-approve-large-loads-standards/">RTO Insider</a>
+            <a href="https://dailyenergyinsider.com/news/54283-nerc-board-adopts-reliability-standards-for-computational-loads/">Daily Energy Insider</a>
+            <a href="https://www.techrepublic.com/article/news-ai-data-centers-grid-reliability-standards/">TechRepublic</a>
+            <a href="https://www.sheppard.com/insights/blogs/ferc-directs-nerc-to-file-reliability-standards-that-apply-to-data-centers">Sheppard Mullin</a>
+            <a href="https://www.forbes.com/sites/guneyyildiz/2026/10/28/data-center-grid-flexibility-must-be-proven-not-promised/">Forbes, flexibility</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCASTS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">ODD LOTS (BLOOMBERG)</div>
+    <div class="ep">AI Agents Are Already Changing the Price of Goods &#183; listed October 26 2026</div>
+    <div class="who">Hosts Tracy Alloway and Joe Weisenthal with Lindsay Owens of the Groundwork Collaborative.</div>
+    <ul>
+      <li>The listing describes a discussion of consumer shopping agents and the argument that they can steer buyers toward higher priced items.</li>
+      <li>Relevant to the agentic theme: if agents become a commercial channel with their own economics, agent usage, and therefore inference demand, grows independently of chatbot usage, and regulation of agent behaviour becomes a factor for the labs that buy compute.</li>
+      <li>Note: date and description are taken from the Apple Podcasts and Bloomberg video listings. No audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="pod">
+    <div class="show">WILLIAM BLAIR INSIGHTS</div>
+    <div class="ep">The Rise of Neoclouds: Powering the Next Phase of AI &#183; listed October 2026</div>
+    <div class="who">William Blair research podcast on the neocloud market.</div>
+    <ul>
+      <li>The listing cites a base case in which the global neocloud market grows from roughly 25 billion dollars in 2026 to about 250 billion dollars by 2031.</li>
+      <li>A useful counterweight to the Gartner consolidation forecast in the prior edition, and a sell side framing of market size to test against CoreWeave's own TAM assumptions. Flag: the market size figures are William Blair estimates.</li>
+      <li>Note: the page shows inconsistent dates (October 15 and October 23). No audio was listened to and content is not independently confirmed.</li>
+      <li>Excluded: an Odd Lots episode with DRW's Don Wilson on GPU markets surfaced as October 2026 but traces to September 29 2025.</li>
+    </ul>
+  </div>
+
+  <div class="connected">
+    <strong>Connected sources.</strong> This edition was produced as an unattended scheduled run working entirely from public web research. No Gmail, Calendar, Slack, Drive, PitchBook or meeting connector was read. Items were found through web search and direct page fetches, cross checked against at least two independent outlets where possible, and dated against the publisher's page or URL rather than an aggregator. The prior edition is dated October 28 (a Wednesday run), so this window is short, covering roughly October 26 through the morning of October 29, and avoids repeating stories already covered unless there was new information. CNBC, Bloomberg, Quartz, Motley Fool and the Alphabet SEC exhibit returned empty pages on fetch, and the fetch tool was briefly rate limited, so several items rely on search summaries, StockTitan's and FinanceFeeds' readings of primary filings, and syndications. Amazon's Q3 results were not yet released at the time of this run. Recycled or misdated items excluded as news: the Odd Lots Don Wilson GPU episode (September 2025), a MarketBeat "first 100 billion dollar quarter" piece about Alphabet's Q3 2025, a December 2025 CoreWeave Department of Energy item, and an undated Motley Fool CoreWeave rally piece about an earlier Meta expansion.
+  </div>
+
+  <footer>
+    Generated by Claude &#183; October 29 2026 &#183; Main sources: SEC EDGAR (Alphabet, Microsoft, Oracle), Microsoft Investor Relations, Oracle Investor Relations, CoreWeave Investor Relations, Google blog, Google DeepMind, NVIDIA newsroom, OpenAI, CNBC, Bloomberg, Reuters (via Investing.com), StockTitan, FinanceFeeds, TipRanks, Seeking Alpha, Stocktwits, Gotrade, Benzinga, Motley Fool, Investing.com, Quartz, Converge Digest, WebProNews, InvestingLive, Terrain Labs, PR Newswire, GlobeNewswire, GeekWire, TradingKey, Proactive Investors, AlphaStreet, Zacks, Leverage Shares, The Next Web, Yahoo Finance, MarketBeat, Engadget, Vals AI, Wccftech, TechCrunch, 9to5Mac, OpenRouter, APPA, RTO Insider, Daily Energy Insider, TechRepublic, Sheppard Mullin, Forbes, Apple Podcasts, William Blair.
+    <span class="cav">Uncertainty flags: On Microsoft, Azure, revenue, capex, RPO and lease figures are from company materials as summarised by StockTitan, but the third party delay quotes, first half 2027 timing, the cut to about 170 billion dollars and the December quarter capex figure come from press accounts of the call, and no provider was named. Neocloud share moves differ by outlet and time stamp. On Alphabet, revenue, EPS and the equity loss match the 8-K as cited, but the third party compute language is from transcript summaries, the SpaceX attribution is coverage, and after hours declines are reported between 7 and 10.4 percent. On Oracle, the funding cap and targets are confirmed, but how the cap treats vendor financing and prepayments is unstated and the 11 percent move is single sourced; "multi gigawatt" Vera Rubin scale has no date. On the calendar, Amazon estimates are consensus approximations, Anthropic's roadshow timing is press reporting, and the Fed decision rests on one source. On NVIDIA, the DOJ inquiry rests on anonymous sourcing and the deal announcement month differs by outlet. On models, all benchmark scores are vendor reported, and the prior edition's statement that GPT-6.1 Terra was unreleased is corrected here. On power, NERC standards are adopted but not yet FERC approved, and compliance dates were not found. Podcast details come from listings and content was not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
