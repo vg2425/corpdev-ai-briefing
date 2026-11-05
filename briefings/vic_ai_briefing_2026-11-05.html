@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — November 5 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Thursday, November 5 2026 &#183; Thursday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">7 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">45+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag policy">Power &amp; Policy</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag markets">Markets</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">10+ sources</span>
+        </div>
+        <div class="headline">Texas elected a governor who has promised a moratorium on all data center approvals, voters restricted data centers in at least 38 jurisdictions, and CoreWeave's 2031 bonds traded as low as 79.5 cents while Microsoft and Amazon rose</div>
+        <p class="tldr">Democrat Gina Hinojosa beat Greg Abbott on November 3 and takes office January 19 with a Democratic Texas House. In an October 22 video she said "When I am governor I will issue a moratorium, a ban, on all data center approvals until laws can be passed by the Legislature," per the Texas Tribune. Her platform also calls for union labor requirements, water protections, an end to NDAs on projects and an end to the state sales tax break. This lands on top of Abbott's existing pause on TCEQ permits and ERCOT grid connections pending an audit, with ERCOT reports expected December 10. Nationally, Redbud Consulting counted 33 restrictive results among 45 local measures by the morning of November 4, and several Ohio cities voted to ban sites above 25 megawatts. Governors elect in Ohio (Amy Acton) and Georgia (Keisha Lance Bottoms) also campaigned on slowing construction, per Bloomberg. In credit, Bloomberg reported CoreWeave's unsecured 2031 notes traded as low as 79.5 cents on the dollar on November 4, with the 2030 and 2032 notes yielding above 15 percent. GuruFocus reports CRWV closed at 48.42 dollars, a 52 week low, after falling 8.6 percent on November 2 and rising 7.2 percent on November 3 per Trefis. Implicator reports Amazon rose about 7 percent and Microsoft about 5.5 percent in morning trading the same day. Flag: CoreWeave's November 4 move is reported as roughly 4 percent (CNBC, morning), 7.2 percent (Bloomberg, 10:24 a.m.), about 1.3 percent (Implicator, later quote) and nearly 10 percent at close (GuruFocus); confirm the close against an exchange print. Flag: the 38 jurisdiction and 33 of 45 tallies are from a consultancy count relayed by Implicator.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The market priced this as a neocloud problem, and the reasoning is sound in direction even if the magnitude is not yet knowable. A permitting moratorium hurts whoever needs new approvals, new grid interconnections and new tax incentives to hit 2027 and 2028 delivery dates. Hyperscalers with existing campuses, entitled land and balance sheets can redirect capacity to other states or densify existing sites. A debt funded builder whose financing is sized to specific megawatts on specific dates has less room. That is why the Bloomberg bond move matters more than the equity move: credit investors are repricing delivery risk on collateral, and 15 percent yields are distressed territory for a company that will need to keep refinancing.</p>
+          <p>Several counterweights keep this from being a clean bear case. Nomura, cited by Seeking Alpha and Simply Wall St, expects the bigger impact from 2028 because 2027 capacity is largely already under construction, and one report says projects already under construction would reportedly be exempt from a permit freeze. Hinojosa's own powers are limited: Daybreak Wire's analysis says a governor can pause state permits by order, but the tax break, local veto rights and grid cost allocation need the Legislature, which convenes January 12. She also supported data center tax breaks in 2023, per Implicator. Outside Texas, the "backlash" read can overreach: Florida elected Byron Donalds, who backed development, and Iowa's governor elect opposed a moratorium. OpenAI's reported plan to rebrand its sites as "compute campuses" (Axios via TechRadar, confirmed as preferred term by an OpenAI spokesperson to Business Insider) shows the industry treating this as a public relations fight it expects to keep having.</p>
+          <p>Skeptic's note: confirmed are the election results, Hinojosa's on record moratorium pledge, Abbott's existing pause, and Bloomberg's bond prints. Not confirmed is any enacted statewide ban, its scope (approvals only, or interconnections too), whether projects in construction are exempt, and how many gigawatts are actually exposed. Estimates range from Wells Fargo's 27 percent of planned US capacity in Texas to GLJ Research's 13 gigawatts "immediately exposed," and Goldman economists' 45 percent national figure for short term moratoria is a scenario, not a forecast.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: CoreWeave leases capacity at Galaxy's Helios campus in West Texas and has other Texas exposure, so the market will now apply a political discount to every Texas megawatt in the backlog and to the collateral behind the 2030 to 2032 notes. Higher spreads compound the problem Nadella flagged last week: concentrated customers plus expensive debt plus delivery risk. Bull read: if new approvals freeze, already energized and permitted capacity becomes scarcer and more valuable, which favors operators with sites already built or under construction. The moratorium also pressures labs to buy from whoever can deliver now. Corporate development priority for November 10: disclose Texas megawatts by status (energized, under construction, permitted, pre permit), name any sites that are exempt under the existing TCEQ pause, and show the non Texas pipeline. Without that, investors will assume the worst case.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://finance.yahoo.com/technology/ai/articles/coreweave-bonds-hit-lows-texas-154016333.html">Bloomberg via Yahoo Finance</a>
+            <a href="https://www.texastribune.org/2026/11/04/data-center-texas-pause-gina-hinojosa-governor-policies/">Texas Tribune</a>
+            <a href="https://www.implicator.ai/voters-data-center-bans-oracle-tencent-lease/">Implicator</a>
+            <a href="https://www.cnbc.com/2026/11/04/ai-stocks-texas-governor-data-centers.html">CNBC (Nov 4)</a>
+            <a href="https://www.cnbc.com/2026/11/05/ai-data-centers-midterms-capacity.html">CNBC (Nov 5)</a>
+            <a href="https://www.gurufocus.com/news/9171481/coreweave-crwv-shares-drop-nearly-10-amid-texas-data-center-permitting-concerns">GuruFocus</a>
+            <a href="https://www.trefis.com/stock/crwv/articles/622656/what-is-behind-the-move-in-coreweave-stock/2026-11-04">Trefis</a>
+            <a href="https://seekingalpha.com/news/4664474-ai-stocks-tied-to-texas-data-center-boom-slide-after-hinojosa-win">Seeking Alpha</a>
+            <a href="https://simplywall.st/stocks/us/software/nasdaq-crwv/coreweave/news/coreweave-crwv-faces-texas-data-center-moratorium-risk-after">Simply Wall St</a>
+            <a href="https://www.datacenterdynamics.com/en/news/texas-governor-elect-gina-hinojosa-promises-continued-data-center-moratorium-further-legislation/">DCD</a>
+            <a href="https://daybreakwire.com/politics/hinojosa-data-center-moratorium-governor-powers/">Daybreak Wire</a>
+            <a href="https://techradar.com/pro/openai-wants-to-rebrand-data-centers-as-compute-campuses-to-try-and-win-people-over">TechRadar (OpenAI "compute campuses")</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">5+ sources</span>
+        </div>
+        <div class="headline">Riot leased its entire 910 megawatt Corsicana, Texas campus to an unnamed "Frontier AI Lab" on a 15 year powered land lease worth about 28 billion dollars, with the tenant owning and operating its own compute</div>
+        <p class="tldr">Per Riot's November 4 earnings release filed with the SEC, the lease is triple net, covers 910 megawatts of critical IT capacity, carries about 1.8 billion dollars of average annual rent including escalators, and rises to about 54 billion dollars if both five year extensions are exercised. Rent is payable on the full 910 megawatts regardless of utilization. Delivery is 400 megawatts in September 2027, 200 megawatts in January 2028 and 310 megawatts in July 2028. The structure is the notable part: Riot delivers land, power and powered pads; the tenant "will procure, install, own, and operate the modular compute deployment" and bears operating costs including power. Capital is about 6 million dollars per IT megawatt (about 5.5 billion dollars total), with Riot funding 2 million dollars per megawatt and reimbursing the tenant for the other 4 million in phases, funded with non recourse project debt or, failing that, as a rent credit. Riot says the tenant is the same lab that signed its Rockdale lease earlier this year. Riot's 10-Q dates the lease to October 28. Flag: the tenant is undisclosed; a podcast transcript previously linked Rockdale to Anthropic, which is unconfirmed. Flag: contract value, NOI margin and yield on cost are Riot's own figures.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>This is a template that bypasses the neocloud layer. A frontier lab is renting powered land directly from a former bitcoin miner and putting its own modular compute on it. There is no GPU cloud intermediary earning a spread on the hardware, no colocation operator building the shell, and the lab controls the stack. Riot's capital outlay is roughly half a Tier 3 build, which is why it can promise no new equity. Global Data Center Hub's Q3 review makes the same point at the industry level, describing labs becoming direct buyers of capacity.</p>
+          <p>It is also a Texas deal signed days before an election that may freeze new data center approvals. Riot's site is already energized for mining, which may help if a moratorium targets new interconnections, but the first phase does not deliver until September 2027 and the lab is carrying construction and political risk on its own compute. The tenant also agreed to rent on the full 910 megawatts regardless of utilization, a strong signal of demand conviction or of how scarce powered land has become.</p>
+          <p>Skeptic's note: confirmed are the signed lease, its term, phasing, capital split and Riot's reported totals in an SEC exhibit. Not confirmed are the tenant's identity, its credit support, whether project debt on "comparable market terms" will be available after this week's credit repricing, and whether a Hinojosa moratorium would touch phases two and three.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: the largest buyers are learning to self provision. If labs can rent powered pads and run their own modular racks, CoreWeave's role narrows to the parts of the stack labs do not want to own: fleet operations, software, financing and speed. Every powered land lease signed directly is capacity that did not go through a neocloud. Bull read: powered land is the scarce input, and leases like this validate the value of energized sites, which CoreWeave also controls through its own campuses and partners. Labs that self provision still need burst and short term capacity (see story 03), and operating a 900 megawatt fleet is hard. Corporate development angle: this is a structure CoreWeave could offer or acquire into, either as a powered shell landlord to labs or by partnering with miners that have energized Texas sites and no operating capability.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.sec.gov/Archives/edgar/data/0001167419/000110465926122368/riot-ex99d1.htm">Riot 8-K Ex. 99.1 (SEC)</a>
+            <a href="https://www.sec.gov/Archives/edgar/data/0001167419/000110465926122417/riot-20260930x10q.htm">Riot 10-Q (SEC)</a>
+            <a href="https://www.implicator.ai/voters-data-center-bans-oracle-tencent-lease/">Implicator</a>
+            <a href="https://www.globaldatacenterhub.com/p/q3-2026-ai-labs-became-direct-buyers">Global Data Center Hub</a>
+            <a href="https://www.gurufocus.com/stock/RIOT/transcripts/9023136">GuruFocus (Riot Q2 call)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Anthropic's amended S-1 discloses about 895 billion dollars of compute and infrastructure commitments and a Q3 swing back to an operating loss, driven partly by 5 billion dollars of short term compute that "currently costs significantly more" than its long term deals</div>
+        <p class="tldr">The S-1/A, filed November 2, adds third quarter results. Yahoo Finance reports Q3 revenue of about 17 billion dollars (up from 11.6 billion in Q2) and a 567 million dollar operating loss after a 974 million dollar Q2 operating profit. About 70 billion dollars of commitments come due within 12 months and about 447.5 billion before the end of 2030. Largest disclosed counterparties per Yahoo's chart: Broadcom equipment leases about 161.2 billion dollars, Google 121.3 billion, SpaceX's AI unit up to 120.5 billion, Amazon 110 billion, Microsoft 44.9 billion, Nscale up to 44.6 billion and Lambda 41.3 billion. A further 125 to 150 billion dollars of planned Google TPU capacity and more than 20 billion dollars with AMD have no fixed commitment and are excluded. Filing Insights reports that Nscale charges only for delivered capacity and that about 34.9 billion dollars of the Lambda contract ends if Lambda cannot secure its facility lease. Anthropic also estimates 5 to 7 percent of nine month revenue came from customers breaking its usage or commercial terms. The price range and share count remain blank. Flag: revenue and loss figures are from Yahoo Finance's read of the filing, not a direct read of the S-1/A in this run. Flag: Nscale and Lambda terms are from a Substack analysis of the filing.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Two things in this filing matter directly to a GPU cloud. First, the demand signal: Anthropic says it books compute 12 to 18 months ahead, demand outran that plan, and it paid a premium for 5 billion dollars of short term capacity in a single quarter. That is the spot and short term market neoclouds sell into, and it shows a top lab paying up for speed. Second, the counterparty terms: the neocloud contracts that are visible are written to protect Anthropic. Nscale is paid only on delivery and Lambda's contract largely falls away if its lease falls through. That is the opposite of the take or pay certainty debt markets assume when they lend against neocloud backlogs.</p>
+          <p>The scale of the obligations, about seven times Anthropic's roughly 132 billion dollars of cash and short term investments per Yahoo, also makes the IPO a credit event for the whole supply chain. If the offering prices well, counterparties get a better funded customer. If it slips, every lender to a lab dependent builder will reprice. Roadshow timing remains press reporting; the earliest start under the 15 day rule is around November 10.</p>
+          <p>Skeptic's note: confirmed are the filing date, the 895.4 billion dollar headline, the near term and 2030 buckets, and that price range and share count are blank. Interpretive figures such as compute cost as a share of revenue and the "239x backlog" framing circulating on FourWeekMBA are third party calculations. CoreWeave does not appear among the largest named counterparties in Yahoo's chart; this run did not search the full filing for CoreWeave references.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: a frontier lab disclosed that it is short capacity and paying premium prices for near term compute, the exact product CoreWeave can deliver fastest from energized fleet. That is pricing power evidence ahead of November 10. Threat read: the disclosed neocloud contracts show labs pushing delivery and lease risk onto providers, and Anthropic's biggest commitments sit with Broadcom, Google, SpaceX and Amazon rather than with GPU clouds. If CoreWeave is pitching Anthropic, expect "pay on delivery" and lease contingent termination terms to be the starting point. Corporate development action: pull the full S-1/A and search for CoreWeave, then benchmark CoreWeave's own contract protections against the Nscale and Lambda terms before the call.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm">Anthropic S-1/A (SEC)</a>
+            <a href="https://finance.yahoo.com/markets/article/anthropics-new-ipo-filing-puts-its-computing-bill-near-900-billion-151830444.html">Yahoo Finance</a>
+            <a href="https://filinginsights.substack.com/p/anthropics-amended-s-1-adds-a-third">Filing Insights</a>
+            <a href="https://www.unite.ai/anthropic-details-long-term-compute-commitments-in-amended-ipo-filing/">Unite.ai</a>
+            <a href="https://www.ghacks.net/2026/11/03/anthropics-revised-ipo-filing-reports-33-2-billion-in-nine-month-revenue-and-895-billion-in-compute-commitments/">gHacks</a>
+            <a href="https://fourweekmba.com/ai-anthropics-compute-bills-past-a-year-are-239x-its-backlog/">FourWeekMBA</a>
+            <a href="https://leverageshares.com/us/anthropic-ipo-tracker/">Leverage Shares (IPO tracker)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">7+ sources</span>
+        </div>
+        <div class="headline">Microsoft declined an option to more than double its Texas contract with Nscale, worth "tens of billions" per the FT, after exiting Nscale's Loughton, UK deal over power delays</div>
+        <p class="tldr">The Financial Times reported, and Reuters relayed on November 4 and 5 citing one source, that Microsoft will not exercise an option to expand its Texas agreement with Nscale. The source said the existing Texas contract is unaffected, the decision was made several months ago before Nscale filed for its IPO in September, and it has no impact on Nscale's total contract value of about 103 billion dollars disclosed in the IPO filing. Separately, Computing reported Microsoft terminated its agreement for Nscale's Loughton, Essex site after grid officials indicated power may not arrive until the 2030s. Nscale's 2025 announcements described the Texas site at about 240 megawatts with a Microsoft option for roughly 700 more from late 2027. Neither company commented on the record. Flag: the option value is the FT's characterisation; the 700 megawatt and 1.2 gigawatt figures circulating come from secondary outlets and were not confirmed against Nscale's filing.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Read with Microsoft's October 28 comments, the pattern is consistent: Microsoft wants outside capacity now, is willing to walk from capacity that arrives late or on uncertain power, and does not want to grow optionality with a single neocloud supplier. The "decided months ago" framing is meant to reassure Nscale's IPO investors, but it also means Microsoft's appetite for incremental neocloud commitments was already cooling before its capex print. Last week's reporting that NVIDIA is discussing guarantees on Nscale construction debt for an Anthropic site now looks more like support for a supplier whose anchor customer is narrowing its exposure.</p>
+          <p>Skeptic's note: confirmed is that the FT and Reuters reported the decision from a source and that Microsoft exited Loughton. Not confirmed is the precise size of the forgone option, whether Microsoft has passed on similar options with other providers, and whether any of that capacity has been redirected to another neocloud.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: an expansion option is exactly the kind of contingent upside that sits in neocloud pipelines and investor models, and Microsoft just showed it will let those lapse. Analysts will ask CoreWeave whether any Microsoft options or extensions are outstanding and how many are at risk. Bull read: the UK exit was about power arriving in the 2030s, not demand. Providers with energized capacity in 2027 are still in a seller's market, and capacity Microsoft no longer wants from Nscale may be offered to labs that do. Corporate development priority: map which CoreWeave contracts carry customer options versus firm commitments and be ready to describe that split on November 10.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.investing.com/news/stock-market-news/microsoft-rejects-multibilliondollar-ai-deal-with-uks-nscale-ft-reports-5002300">Reuters via Investing.com</a>
+            <a href="https://wmbdradio.com/2026/11/04/microsoft-rejects-multibillion-dollar-ai-deal-with-uks-nscale-ft-reports/">Reuters via WMBD</a>
+            <a href="https://stocktwits.com/news-articles/markets/equity/after-pulling-deal-for-nscale-s-uk-data-center-microsoft-rejects-texas-expansion-option/cNG1X30R9En">Stocktwits</a>
+            <a href="https://computing.co.uk/news/2026/ai/microsoft-exits-nscale-deal-ipo-at-risk">Computing</a>
+            <a href="https://www.globalbankingandfinance.com/microsoft-rejects-multibillion-dollar-ai-deal-uks-nscale-ft/">Global Banking &amp; Finance</a>
+            <a href="https://fourweekmba.com/ai-microsoft-said-to-reject-option-to-expand-nscale-texas-deal/">FourWeekMBA</a>
+            <a href="https://www.theenergymag.com/news/2025-10-15/nscale-ai-microsoft-ionic">The Energy Mag (2025 deal terms)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">6+ sources</span>
+        </div>
+        <div class="headline">AMD's data center revenue nearly doubled to 8.5 billion dollars on the first MI450 sales, it guided Q4 to about 17 billion dollars, and said Anthropic, Meta, Microsoft, OpenAI and OCI are already running on Helios racks</div>
+        <p class="tldr">AMD reported Q3 revenue of 13.377 billion dollars on November 3, up 45 percent and above the top of its August range. Data center revenue was 8.546 billion dollars, up 97 percent year over year and 27 percent sequentially, about 64 percent of total, per CloudNews.tech's read of the 8-K. Lisa Su said growth should accelerate in Q4 as Helios racks and "Venice" EPYC ramp. Q4 guidance is about 17 billion dollars plus or minus 3 percent, roughly 66 percent growth at the midpoint. AMD booked a 1.097 billion dollar loss on the fair value of warrants issued to "certain customers," and free cash flow fell to 554 million dollars as inventory rose by almost 3 billion. Transcript summaries say management expects 2027 revenue growth above 80 percent with server revenue doubling. Flag: the 2027 outlook comes from call summaries, not the press release. Flag: AMD does not split GPU from CPU revenue, so Instinct's share is not disclosed.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The headline is that a credible second source of rack scale accelerators is now shipping in volume to the same lab and hyperscaler customers NVIDIA serves. The warrant charge is the tell on how AMD got there: it is paying customers in equity to commit, which echoes the OpenAI warrant structure announced in 2025. Those warrants are worth more as AMD's stock rises, so the GAAP drag grows with success. The inventory and receivables build ahead of a 17 billion dollar quarter is consistent with a real ramp, but it also concentrates execution risk in Q4.</p>
+          <p>Skeptic's note: confirmed are Q3 revenue, segment revenue, the warrant loss, free cash flow and the Q4 guide from the 8-K as reported by CloudNews.tech and multiple outlets. The customer list running Helios is AMD's statement; "running models and workloads" does not quantify deployment scale. The 2027 growth targets are management commentary.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: a second supplier at rack scale improves CoreWeave's bargaining position with NVIDIA on price and allocation, and gives it a way to win customers who want AMD capacity without owning it. Riot notes AMD itself is a data center tenant, a reminder that AMD is building its own capacity relationships. Threat read: if hyperscalers and labs qualify Helios directly, the "NVIDIA allocation" advantage that helped neoclouds is diluted, and AMD's warrant deals give it a lever to pull customers toward its own stack. Corporate development question: whether CoreWeave should stand up a meaningful MI450 offering in 2027 and, if so, whether AMD would pay with warrants or credits as it has for others.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.sec.gov/Archives/edgar/data/0000002488/000000248826000188/q32026991.htm">AMD 8-K (SEC)</a>
+            <a href="https://cloudnews.tech/amd-posts-13-377-billion-in-q3-revenue-guides-to-17-billion-for-q4/">CloudNews.tech</a>
+            <a href="https://www.fool.com/earnings/call-transcripts/2026/11/04/amd-amd-q3-2026-earnings-call-transcript/">Motley Fool transcript</a>
+            <a href="https://www.investing.com/news/transcripts/earnings-call-transcript-amd-tops-q3-2026-estimates-as-stock-jumps-after-hours-93CH-4996894">Investing.com</a>
+            <a href="https://hothardware.com/news/amd-pace-top-intel-revenue-first-time-after-crushing-q3">HotHardware</a>
+            <a href="https://www.tradingkey.com/news/presentation/262272421-">TradingKey</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="srccount">8+ sources</span>
+        </div>
+        <div class="headline">Oracle filed to raise 20 billion dollars in simultaneous stock and bond offerings, and the FT reports it then scrapped Tencent's roughly 7 billion dollar lease of about 100,000 chips in Southeast Asia under US pressure</div>
+        <p class="tldr">On November 2 Oracle filed concurrent offerings of 10 billion dollars of common stock and 10 billion dollars of senior notes in six tranches maturing 2029 to 2046, using the full 20 billion dollar cap on new capital markets funding through fiscal 2030 that it set at its investor day. The offerings are independent of each other. Oracle shares fell on the filing (reports range from 3.5 percent premarket per Reuters to about 7 percent per TIKR), then rose 5.8 percent on November 3 per Trefis, and CoreWeave rose 7.2 percent the same day. On November 4 the FT reported that Oracle canceled Tencent's five year lease for about 100,000 advanced AI chips in Southeast Asian data centers after US officials raised concerns; Guangdong officials separately urged Tencent to back domestic chips. Oracle, Tencent and the White House did not respond to Reuters, which could not verify the report. Flag: final pricing and size of the Oracle offerings were not confirmed in this run. Flag: the Tencent cancellation is single source (FT) reporting.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Oracle using its entire multi year issuance cap in one week tells you how much capital the build needs and how quickly the window can close. The market's relief rally the next day, which spilled into CoreWeave, suggests investors reward a clear funding plan even when it is dilutive. The Tencent item is the more novel policy signal: overseas leasing of advanced chips to Chinese firms reportedly remains legal under current rules, yet Washington appears to have stopped a large deal through informal pressure. That makes the regulatory perimeter for offshore GPU leasing uncertain without any rule change.</p>
+          <p>Skeptic's note: confirmed is the November 2 filing structure and use of proceeds language. The share moves vary by source and session. The Tencent cancellation, the US role and the Guangdong request rest on the FT's unnamed sources and have not been confirmed by any party.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: equity investors accepted a large dilutive raise from an AI capacity builder and bid the stock up, which is a constructive precedent if CoreWeave needs to mix in equity to defend its credit. Oracle freeing 100,000 chips of committed capacity in Asia may also loosen supply in that region. Threat read: Oracle is now funded and competing for the same lab and enterprise contracts at a lower cost of capital. The Tencent episode means any CoreWeave international or sovereign deal with an end customer that has China ties carries political cancellation risk even when it is lawful. Corporate development action: add a "US government informal objection" risk factor to diligence on any non US capacity deal and review existing offshore customer exposure.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.thestar.com.my/tech/tech-news/2026/11/02/oracle-to-offer-10-billion-in-bonds">The Star (Reuters)</a>
+            <a href="https://www.tikr.com/blog/oracle-sinks-7-on-20-billion-stock-and-bond-sale-to-fund-ai-buildout">TIKR</a>
+            <a href="https://fourweekmba.com/ai-oracle-files-to-sell-10b-of-stock-and-10b-of-bonds-at-once/">FourWeekMBA</a>
+            <a href="https://www.trefis.com/stock/crwv/articles/622656/what-is-behind-the-move-in-coreweave-stock/2026-11-04">Trefis</a>
+            <a href="https://thenextweb.com/news/oracle-cancels-tencent-ai-chip-lease">The Next Web (FT)</a>
+            <a href="https://ground.news/article/oracle-cancels-7b-ai-chip-lease-with-tencent-amid-us-concerns-ft-orcl-nyse">Ground News</a>
+            <a href="https://www.implicator.ai/sources-oracle-has-scrapped-7b-five-year-deal-lease-100k/">Implicator</a>
+            <a href="https://www.tomshardware.com/tech-industry/data-centers/tencent-scores-100-000-offshore-ai-chip-deal-with-oracle-for-usd7-billion-despite-climbing-prices-per-hour-costs-estimated-to-be-43-percent-under-standard-h100-rental-rates">Tom's Hardware (original deal)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="srccount">10+ sources</span>
+        </div>
+        <div class="headline">Moonshot published weights for its 2.8 trillion parameter Kimi K3.1 Pro, OpenAI's agents produced working exploits for 948 Linux kernel flaws for about 1.2 million dollars, and OpenAI and Meta each bought a coding agent startup</div>
+        <p class="tldr">Kimi K3.1 Pro weights landed on Hugging Face (moonshotai/Kimi-K3.1-Pro) on November 4 as promised at the October 23 API launch: about 2.8 trillion total and 104 billion active parameters, a 1 million token context, and a 1.56 terabyte download that reportedly needs about eight NVIDIA B300s to serve. The license reportedly requires a separate agreement for companies above 20 million dollars of revenue that host it as a service. Tencent launched Hy4, a 770 billion parameter model with computer use, through its products on November 4 per TechNode. OpenAI published an autonomous security pipeline that found 2,308 candidate Linux kernel flaws and built working local privilege escalation exploits for 948, at about 1.21 million dollars of API spend, and announced it will acquire Pierre Computer Company, whose code navigation tech already runs in Codex; Axios framed it as a step toward challenging GitHub. Meta acquired Conductor, which runs several coding agents in parallel; its cloud service shuts November 20. Flag: Hy4 was first released as a preview with open weights on August 28; the November item is a broader product launch, not a new model debut. Flag: Kimi parameter counts are vendor reported and the license summary was not checked against the license text; one source dates the upload to November 2. Flag: OpenAI's exploit counts are self reported.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The compute angle in each item is direct. A near frontier open weight model that needs a full B300 node just to load is a hosting product, not a laptop download, and Moonshot's revenue threshold license pushes large hosts into a commercial deal. OpenAI's Linux run shows agentic workloads that are long, parallel and tool heavy, and priced at roughly 1,279 dollars per working exploit, which is the kind of sustained inference demand that keeps fleets busy. The two acquisitions show the coding agent layer consolidating into the labs and Meta, which means more agent traffic routed to first party infrastructure.</p>
+          <p>Counterpoint on demand: Apple reportedly cut some engineers' daily AI budgets from 300 to 200 dollars (Bloomberg via The Neuron), and Uber said only four rides were booked by AI agents in its busiest October week (TechCrunch). Enterprise cost discipline and thin consumer agent adoption are the bear case on how fast agent inference grows.</p>
+          <p>Skeptic's note: confirmed are the Kimi weights repository, OpenAI's research post and acquisition announcement, and TechCrunch's confirmation of the Conductor deal. Benchmarks, parameter counts and the B300 serving estimate are vendor or third party claims.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: Kimi K3.1 Pro is a ready made workload for GPU clouds. Enterprises that want a near frontier open model but cannot run a 1.56 terabyte, multi B300 deployment need a host, and CoreWeave can offer it with B300 capacity and a signed Moonshot hosting agreement if required. Long running security and coding agents are steady inference load. Threat read: Chinese open weights at this scale invite export and procurement scrutiny, so hosting them may carry policy risk with US government and sovereign customers. Coding agents consolidating into OpenAI and Meta pull that traffic toward first party data centers. Corporate development action: confirm the Kimi license terms for a hosted offering and assess whether US public sector customers would object.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://huggingface.co/moonshotai/Kimi-K3.1-Pro">Hugging Face (Kimi K3.1 Pro)</a>
+            <a href="https://startupfortune.com/moonshot-ai-releases-full-weights-for-28-trillion-parameter-kimi-k31-pro/">Startup Fortune</a>
+            <a href="https://runtimewire.com/article/moonshot-ai-kimi-k3-1-pro-weights">Runtime Wire</a>
+            <a href="https://letsdatascience.com/news/moonshot-releases-kimi-k31-pro-api-open-weights-due-nov-4-786e160c">Let's Data Science</a>
+            <a href="https://technode.com/2026/11/04/tencent-launches-hy4-with-vision-and-computer-use-capabilities/">TechNode (Hy4)</a>
+            <a href="https://datanorth.ai/news/tencent-releases-hy4-preview">DataNorth (Hy4 Aug preview)</a>
+            <a href="https://openai.com/index/a-thousand-fewer-paths-to-root/">OpenAI (Linux research)</a>
+            <a href="https://openai.com/index/openai-to-acquire-pierre/">OpenAI (Pierre)</a>
+            <a href="https://www.axios.com/2026/11/04/openai-pierre-computer-github">Axios (Pierre)</a>
+            <a href="https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/">TechCrunch (Conductor)</a>
+            <a href="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-thursday-november-5-2026/">The Neuron</a>
+            <a href="https://techcrunch.com/2026/11/04/almost-no-one-uses-ai-agents-to-book-their-uber-company-says/">TechCrunch (Uber)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCASTS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">TECH FIELD DAY PODCAST</div>
+    <div class="ep">The AI Infrastructure Boom is a GPU Bubble &#183; listed about November 4 2026</div>
+    <div class="who">Alastair Cooke with Frederic Van Haren, Brandon Whichard and James Urquhart.</div>
+    <ul>
+      <li>Per the listing, the panel debates whether spending on GPU clusters is sustainable and how the lines are blurring between training and inference and between hyperscalers and neoclouds. Recorded ahead of AI Infrastructure Field Day 6 (November 4 to 5).</li>
+      <li>Useful as a practitioner level bear case on GPU utilisation and depreciation, the two assumptions underneath every neocloud debt model, in the same week credit markets repriced CoreWeave.</li>
+      <li>Note: exact air date is not stated on the listing and is inferred from a "one day ago" marker. No audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="pod">
+    <div class="show">TECHCRUNCH EQUITY</div>
+    <div class="ep">Building on open source AI: Hugging Face's policy chief on the costs, risks and trade offs &#183; listed about November 4 2026</div>
+    <div class="who">TechCrunch hosts with Irene Solaiman, Hugging Face.</div>
+    <ul>
+      <li>Per The Neuron's November 5 digest, Solaiman discusses how startups should evaluate open models, including security risks and the cost of maintaining the surrounding software.</li>
+      <li>Relevant to story 07: the economics of choosing a hosted open weight model like Kimi K3.1 Pro over a frontier API is the buyer decision behind any CoreWeave open model hosting offer.</li>
+      <li>Note: date and content come from a third party digest; a search did not independently surface the episode page. No audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="connected">
+    <strong>Connected sources.</strong> This edition was produced as an unattended scheduled run working entirely from public web research. No Gmail, Calendar, Slack, Drive, PitchBook or meeting connector was read. Items were found through web search and direct page fetches, cross checked against at least two independent outlets where possible, and dated against the publisher's page, SEC filing or URL rather than an aggregator. The window covers the afternoon of November 2 (after the prior Monday edition) through the morning of November 5, and avoids repeating Monday's stories unless there was new information. Several fetches were rate limited, and CNBC, Bloomberg and FT pages were not read directly; their reporting is cited through Yahoo Finance syndication, Reuters and other outlets. Recycled or misdated items excluded or flagged: a "Google commits 15 billion dollars to Malaysian data centers" item, which appears to conflate Google's May 2024 RM9.4 billion (about 2 billion dollar) commitment with its RM15.04 billion economic impact estimate and was excluded; a "Meta raised 9 billion euros in a debut euro bond" item, which could not be confirmed beyond one newsletter and resembles Alphabet's May 2026 euro deal, and was excluded; Tencent Hy4, presented by trackers as a November 4 debut, which was first released as a preview on August 28; and the Sanders and Ocasio-Cortez data center moratorium bill, which dates to March 2026 and has no new action this week. CoreWeave's CrowdStrike partnership expansion (November 2) was noted but not ranked.
+  </div>
+
+  <footer>
+    Generated by Claude &#183; November 5 2026 &#183; Main sources: SEC EDGAR (Riot, Anthropic, AMD), Bloomberg (via Yahoo Finance), Texas Tribune, CNBC, Reuters (via Investing.com, WMBD, The Star), Financial Times (via Reuters, The Next Web), Yahoo Finance, Implicator, Trefis, GuruFocus, Seeking Alpha, Simply Wall St, Data Center Dynamics, Daybreak Wire, TechRadar, Global Data Center Hub, Filing Insights, Unite.ai, gHacks, FourWeekMBA, Leverage Shares, Computing, Stocktwits, Global Banking &amp; Finance, The Energy Mag, CloudNews.tech, Motley Fool, Investing.com, HotHardware, TradingKey, TIKR, Ground News, Tom's Hardware, Hugging Face, Startup Fortune, Runtime Wire, Let's Data Science, TechNode, DataNorth, OpenAI, Axios, TechCrunch, The Neuron, Tech Field Day.
+    <span class="cav">Uncertainty flags: On the election, CoreWeave's November 4 share move differs by source and time of day, the 38 jurisdiction and 33 of 45 counts are a consultancy tally relayed secondhand, no statewide Texas moratorium has been enacted, and exposure estimates (27 percent, 13 gigawatts, 45 percent) are analyst scenarios. On Riot, the tenant is undisclosed, any link to Anthropic is unconfirmed, and contract value, NOI and yield are company figures. On Anthropic, Q3 revenue and operating loss are from Yahoo Finance's read of the S-1/A, the Nscale and Lambda terms come from a Substack analysis, and roadshow and listing dates are press reports. On Nscale, the option value is the FT's characterisation from one source and megawatt figures are secondary. On AMD, the 2027 outlook is from call summaries and GPU revenue is not broken out. On Oracle, offering pricing was not confirmed, share moves vary by source, and the Tencent cancellation is single source FT reporting. On models, parameter counts, license terms and benchmarks are vendor or third party reported, Kimi's upload date differs by source, and OpenAI's exploit counts are self reported. Podcast details come from listings and third party digests with approximate dates, and content was not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
