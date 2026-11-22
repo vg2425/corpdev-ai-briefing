@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — November 16 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Monday, November 16 2026 &#183; Monday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">8 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">60+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag markets">Markets</span>
+    <span class="tag policy">Power &amp; Policy</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">13 sources</span>
+        </div>
+        <div class="headline">Jensen Huang resigns as Nvidia CEO and leaves the board; CFO Colette Kress becomes interim CEO, Harvey Jones becomes the first board chair, and Kress hosts tomorrow's Q3 call with the stock below 4 trillion dollars</div>
+        <p class="tldr">Nvidia's press release dated November 12 states that Huang "has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately." Kress serves as interim CEO while remaining CFO, the board is searching for a permanent successor among internal and external candidates, and Harvey C. Jones (former Synopsys CEO, director since 1993) is the company's first chair. The release says operations, customer commitments and the product roadmap "continue without interruption" and confirms Q3 fiscal 2027 results on Tuesday, November 17, at about 1:20 p.m. PT. Per CNBC and Bloomberg, shares fell as much as 14 percent intraday on November 12 before closing about 4 percent lower, fell another 2.01 percent on November 13 to 162.85 dollars, and closed below 4 trillion dollars of market value for the first time since July 2025. The stock lost about 13 percent on the week, its sixth straight weekly decline. Flag: the SEC 8&#8209;K is dated November 11 while the press release is dated November 12; coverage calls it an ouster, the company calls it a resignation.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Thursday's edition described a board meeting that had not yet decided anything. It decided within hours. The sequence now runs from Huang's November 8 admission and the board's statement of confidence, through the NYT and WSJ reports of November 11, to the resignation the next day. Yahoo Finance reports allegations of a third relationship emerged afterward, and that Huang, general counsel Tim Teter and Commerce Secretary Howard Lutnick are expected to testify before both chambers of Congress over the next month on conduct and export policy. Baird's Tristan Gerra wrote Thursday that the episode "hasn't hit its bottom yet," listing possible further senior departures, H200 write downs, channel revenue adjustments, litigation, and customers making contingency plans that could cost share in 2029.</p>
+          <p>The earnings bar is Nvidia's own guide of 108 billion dollars, plus or minus 2 percent, with a 74 percent gross margin, per previews from FourWeekMBA and MarketPulse; consensus is about 108.8 billion dollars and options imply a move of about 10.6 percent. Yahoo Finance's tech editor argues the quarter and the next are already locked in by contracted sales, so the real tests are the Q4 guide, how Kress frames the deal book, and receivables, which Yahoo reports rose to 63 billion dollars with collection stretching from about 45 to 60 days. On the day of the resignation, AMD and Broadcom each rose more than 5 percent while Nvidia backed neoclouds fell, which Yahoo calls the "Bank of Nvidia" trade unwinding.</p>
+          <p>Skeptic's note: confirmed facts are the resignation, the interim appointment, the new chair, the earnings date and the share price moves. The third relationship, the congressional testimony schedule, successor shortlists and any claim about the substance of the espionage allegations remain reported, not established. A Sherwood item naming a different interim co CEO and CFO contradicts every other source and is excluded. Flag: intraday lows differ across outlets (11, 12 and 14 percent); weekly market value lost is reported as about 570 billion dollars (Yahoo) and roughly 1.6 to 1.7 trillion dollars since the October peak (CNBC).</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: CoreWeave is the most directly exposed public company to a change in Nvidia's posture. Yahoo's count of Nvidia's filings puts roughly 65 billion dollars of commitments into renting back cloud capacity from providers including CoreWeave, alongside a 3.3 billion dollar equity stake plus about 2 billion dollars more. Huang personally championed allocation and financing support for neoclouds; Kress signed off on those deals as CFO, but a permanent successor chosen under congressional and export scrutiny may be less willing to keep writing them. CRWV fell 8.57 percent on November 12. Bull read: Rubin and Blackwell supply is contracted, the interim CEO is the person who structured the existing commitments, and the board explicitly promised customer commitments continue. If Nvidia's leadership vacuum pushes hyperscalers toward AMD and custom silicon, a merchant cloud that can operate multiple accelerator generations at scale is a hedge buyers may value. Ask for tomorrow's call: any change in language on cloud partner capacity agreements or "customer financings."</p>
+          </div>
+          <div class="srcs">
+            <a href="https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition">Nvidia press release</a>
+            <a href="https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvda-20261111.htm">Nvidia 8&#8209;K</a>
+            <a href="https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html">CNBC (live)</a>
+            <a href="https://www.cnbc.com/2026/11/13/nvidia-nvda-stock-jensen-huang-transition.html">CNBC (below 4T)</a>
+            <a href="https://www.cnbc.com/2026/11/13/nvidia-stock-jensen-affair-ai.html">CNBC (sixth week)</a>
+            <a href="https://www.bloomberg.com/news/articles/2026-11-12/nvidia-market-value-sinks-below-4-trillion-after-huang-resigns">Bloomberg</a>
+            <a href="https://www.forbes.com/sites/fionariley/2026/11/12/nvidia-sinks-11-at-open-after-jensen-huang-resigns-pushing-market-cap-below-microsoft/">Forbes</a>
+            <a href="https://www.fool.com/coverage/stock-market-today/2026/11/12/stock-market-today-nov-12-nvidia-shares-slide-on-reports-of-ceo-jensen-huang-s-resignation/">Motley Fool</a>
+            <a href="https://finance.yahoo.com/markets/article/the-bank-of-nvidia-just-lost-its-banker--heres-where-the-ai-trade-is-exposed-215638010.html">Yahoo Finance (Bank of Nvidia)</a>
+            <a href="https://finance.yahoo.com/markets/article/nvidias-first-post-jensen-earnings-and-anthropics-ipo-what-to-watch-this-week-110000732.html">Yahoo Finance (week ahead)</a>
+            <a href="https://www.manilatimes.net/2026/11/13/business/foreign-business/nvidia-board-to-decide-ceos-future/2468353">Manila Times</a>
+            <a href="https://fourweekmba.com/ai-nvidias-q3-guide-is-108b-12-above-q2-what-17-nov-tests/">FourWeekMBA (preview)</a>
+            <a href="https://www.marketpulse.com/markets/nvidia-nvda-q3-earnings-preview-ai-spending-risks-and-governance-concerns-threaten-major-uptrend/">MarketPulse (preview)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">9 sources</span>
+        </div>
+        <div class="headline">CoreWeave's investment grade loan of at least 4 billion dollars, backed by chips and a Meta contract and led by Morgan Stanley and MUFG, could start marketing this week; the stock gave back part of its post earnings rally</div>
+        <p class="tldr">Bloomberg reported on November 11 that CoreWeave is in talks to raise at least 4 billion dollars through an investment grade loan backed by GPUs and a Meta Platforms contract, with Meta's credit profile expected to carry the rating. TheStreet (November 13) adds that Morgan Stanley and MUFG are leading, the deal is not final, and marketing could begin as early as the week of November 16, citing Seeking Alpha. CFO Nitin Agrawal guided on the November 10 call that the next contract backed loan should yield 7 to 7.5 percent at current rates. The same banks arranged the March 8.5 billion dollar IG facility, whose fixed tranche priced near 5.9 percent per CoreWeave's release. Intrator also told CNBC he canceled his planned 10b5&#8209;1 share sale program. Per Yahoo Finance, CRWV fell 8.57 percent on November 12 and about 6 percent on November 13 but still finished the week up about 15 percent. Flag: the loan size, lead banks and Meta collateral are from Bloomberg's unnamed sources; CoreWeave has not announced the facility.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>This is the first concrete instance of the "DDTL in the coming weeks" management promised on Tuesday's call, and the customer behind it answers one question the call left open. TheStreet's arithmetic: total debt rose from about 21 billion dollars at end 2025 to roughly 47 billion dollars at September 30; Q3 interest expense of 846 million dollars was about four times operating income; borrowing 4 billion dollars at 7.5 percent instead of about 15 percent on unsecured paper saves roughly 300 million dollars a year. Because the weighted cost of debt is already 7.9 percent, the loan mainly stops that figure rising rather than lowering it.</p>
+          <p>Also new since Thursday: on November 9 CoreWeave announced a multi year agreement for Wayve to train its autonomous driving foundation models on Blackwell capacity, expanding from Weights &amp; Biases into CoreWeave Cloud. Terms were not disclosed. It is a small but useful physical AI logo that diversifies away from the lab and hyperscaler concentration.</p>
+          <p>Skeptic's note: confirmed facts are the call guidance, the canceled sale plan (Intrator on CNBC), the March facility terms and the Wayve release. Everything about the new loan is reported. The pricing test is the point: TheStreet notes a print above 7.5 percent would tell you lenders want more cushion even with Meta behind the contract, which matters more after this week's rate move (story 04). Flag: Robotics and Automation News dates the Wayve agreement to November 15; the CoreWeave release is dated November 9.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: a Meta anchored IG loan arriving days after the Huang shock shows the asset level financing channel is open independently of Nvidia's balance sheet, which is the right answer to the "Bank of Nvidia" fear in story 01. It also reinforces customer diversification beyond Microsoft and OpenAI. Threat read: each contract backed facility ties more of the capital stack to single counterparty credit, and TheStreet flags that the March loan runs to 2032 while GPUs depreciate far faster than the aircraft and buildings this structure was borrowed from. With the 10 year near 5.15 percent, "7 to 7.5 percent at current rates" may already be stale. For corporate development: track final spread versus the March fixed tranche, amortization profile against GPU useful life, and whether the Meta contract is the same one disclosed in backlog.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.thestreet.com/investing/coreweave-debt-chip-backed-loan">TheStreet</a>
+            <a href="https://www.bloomberg.com/news/articles/2026-11-11/coreweave-plans-to-raise-at-least-4-billion-in-high-grade-loan">Bloomberg</a>
+            <a href="https://seekingalpha.com/news/4671100-coreweave-seeks-at-least-4b-in-high-grade-loan-financing---report">Seeking Alpha</a>
+            <a href="https://www.cnbc.com/2026/11/11/coreweave-ceo-election-data-center-buildout.html">CNBC (Intrator)</a>
+            <a href="https://investors.coreweave.com/news/news-details/2026/CoreWeave-Closes-Landmark-8-5-Billion-Financing-Facility-Achieving-First-Investment-Grade-Rated-GPU-backed-Financing/default.aspx">CoreWeave (March facility)</a>
+            <a href="https://coreweave.com/news/coreweave-to-power-wayves-ai-driver-training-in-multi-year-agreement">CoreWeave (Wayve release)</a>
+            <a href="https://thenextweb.com/news/wayve-coreweave-ai-driver-training-deal">TNW (Wayve)</a>
+            <a href="https://finance.yahoo.com/markets/stocks/articles/coreweave-crwv-faces-fresh-risk-042335689.html">Yahoo Finance (Nov 13 move)</a>
+            <a href="https://roboticsandautomationnews.com/2026/11/15/coreweave-partners-with-wayve-to-accelerate-ai-training-for-autonomous-vehicles/107148">Robotics &amp; Automation News (misdated)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">9 sources</span>
+        </div>
+        <div class="headline">Anthropic prices Wednesday and trades Thursday under "ANT"; Nvidia's up to 10 billion dollar anchor order now carries Huang risk, and the filing's roughly 895 billion dollars of compute commitments name Broadcom, Google, SpaceX's AI unit, Amazon, Microsoft, Nscale and Lambda at the top</div>
+        <p class="tldr">Per Yahoo Finance, Anthropic announced Thursday that it will price on Wednesday, November 18 and begin Nasdaq trading Thursday, November 19, on the unchanged 70 to 78 dollar range for 825 million shares. Yahoo reports Nvidia and Alphabet each plan up to 10 billion dollars of the 26 billion dollar private placement at the IPO price, with the rest from Broadcom, Micron, Microsoft and others, and that nine month revenue through September 30 was 33.2 billion dollars. The November 2 amended S&#8209;1, per Yahoo's read, lists about 895 billion dollars of commitments, nearly all compute and data centers, about 70 billion dollars due within a year; the largest disclosed are Broadcom equipment leases (161.2 billion dollars), Google (121.3), SpaceX's AI unit (up to 120.5), Amazon (110.0), Microsoft (44.9), Nscale (up to 44.6) and Lambda (41.3). Q3 revenue was about 17 billion dollars with a 567 million dollar operating loss, after Anthropic bought 5 billion dollars of short term compute that "currently costs significantly more" than long term deals. Flag: the 895 billion dollar figure comes from the November 2 filing and predates this window; one outlet's claim of six times oversubscription, citing Semafor, has a single source.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The Huang exit changes the optics of the strategic tranche more than its economics. Pure AI and Yahoo both note that Nvidia's commitment is struck at the IPO price, so a weak open leaves the Nvidia anchor underwater in the first week of an interim CEO. The All-In hosts (podcast pick below) framed the IPO as a bundling play, with Anthropic shipping sheets, whiteboards and meeting tools against SaaS incumbents. The filing's own disclosures cut the other way on quality of revenue: Anthropic estimates 5 to 7 percent of nine month revenue came from customers violating its usage or commercial terms and that enforcement may slow growth, and price cuts trimmed about 600 million dollars from Q3 revenue.</p>
+          <p>Skeptic's note: confirmed facts are the range, share count, pricing and trading dates as announced, and the filed commitment and revenue figures. Strategic placement sizes per company are as described in the prospectus by Yahoo, not independently read here. Oversubscription multiples and the final price are unknown until Wednesday. Flag: Asia Times headlined the deal as "priced at 78 dollars" while its body says pricing is still ahead; treat as speculative.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: CoreWeave is not among the seven largest disclosed commitments in Yahoo's chart, while two neocloud peers (Nscale and Lambda) each show more than 40 billion dollars. That is a direct share of wallet signal from the most capital rich lab coming to market, and Thursday's edition already noted CoreWeave's relationship with Anthropic could not be reconfirmed. Bull read: Anthropic ran out of booked capacity in Q3 and paid a premium for short term compute, exactly the scarcity priced market CoreWeave described at more than 40 million dollars per megawatt per year; about 64 billion dollars of primary proceeds plus 26 billion dollars of strategic money will be spent largely on compute in 2027 and 2028. Ask: confirm whether CoreWeave's April 2026 Anthropic agreement sits inside the "other" commitments line and its size relative to Nscale and Lambda.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://finance.yahoo.com/markets/article/nvidias-first-post-jensen-earnings-and-anthropics-ipo-what-to-watch-this-week-110000732.html">Yahoo Finance (week ahead)</a>
+            <a href="https://finance.yahoo.com/markets/article/anthropics-new-ipo-filing-puts-its-computing-bill-near-900-billion-151830444.html">Yahoo Finance (commitments)</a>
+            <a href="https://www.cnbc.com/2026/11/10/anthropic-sets-price-range-of-70-to-78-in-upcoming-ipo.html">CNBC</a>
+            <a href="https://techcrunch.com/2026/11/10/anthropic-sets-ipo-price-range-of-70-to-78-per-share-to-reach-an-implied-valuation-of-1-404-trillion/">TechCrunch</a>
+            <a href="https://qz.com/anthropic-ipo-price-range-share-cornerstone-investors-111426">Quartz</a>
+            <a href="https://pureai.com/articles/2026/11/12/anthropic-ipo-faces-a-new-backdrop-as-huang-leaves-nvidia.aspx">Pure AI</a>
+            <a href="https://opentools.ai/news/anthropic-ipo-1-4-trillion-valuation-six-times-oversubscribed">OpenTools (single source claim)</a>
+            <a href="https://asiatimes.com/2026/11/anthropic-ipo-the-age-of-miracles-priced-at-78-a-share/">Asia Times (speculative headline)</a>
+            <a href="https://pureai.com/articles/2026/04/13/coreweave-and-anthropic-sign-multi-year-deal.aspx">Pure AI (April CoreWeave deal)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">The bond market stops cushioning the AI trade: the 10 year jumps about 30 basis points to roughly 5.15 percent, hot PPI follows hot CPI, a December 9 hike is priced near certainty, and a 62 stock chip basket loses more than 650 billion dollars in two days</div>
+        <p class="tldr">Per Yahoo Finance's November 14 analysis, the 10 year Treasury yield rose about 30 basis points on the week to about 5.15 percent and the 5 year about 33 basis points, the largest weekly rises since April 2025. On October 22 to November 6 the 10 year fell on every down day for chips; this week it rose on all three. Producer prices rose 6.5 percent year over year, the fastest pace in nearly four years, after Tuesday's hot CPI and Governor Waller opening the door to 50 basis points. Polymarket odds of a December 9 hike reached about 98 percent with about 10 percent for 50 basis points, and futures now price about two quarter point hikes by March 2027. A Yahoo basket of 62 chip stocks lost more than 650 billion dollars from Wednesday's close through Friday, though the SOX still ended the week up about 8 percent. Flag: hike probabilities vary by venue and timestamp (CME FedWatch near 99 percent on November 10 per one outlet; Kalshi lower in an undated snapshot).</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The mechanism matters more than the level. For a month, every chip selloff made traders doubt the Fed would hike, so bonds rallied and partly offset equity losses. That hedge broke this week: chips and bonds fell together. For leveraged infrastructure, that is the worse regime, because the cost of capital rises at the same moment collateral values and equity cushions shrink. The Fed's October 28 minutes land Wednesday, between Nvidia's print and Anthropic's pricing.</p>
+          <p>Skeptic's note: confirmed facts are the published yield closes, the CPI and PPI prints and the market moves. Hike probabilities are market implied and change daily. The 650 billion dollar figure is Yahoo's own basket, not an index.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: CoreWeave's DDTLs price as spreads over SOFR, and management's 7 to 7.5 percent guide for the next loan was "at current rates." Two more hikes priced by March, plus a 5 percent plus 10 year, raise both floating coupons and the discount rate on a long dated backlog; Q4 interest expense is already guided to 1.05 to 1.15 billion dollars. Bull read: tighter money hurts subscale rivals with unsecured or high yield funding more than the scaled operator with IG customer backed facilities, which accelerates the consolidation Thursday's edition described. Ask: share of DDTL principal that is fixed or hedged versus floating, and sensitivity of 2027 interest expense to 50 basis points.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://finance.yahoo.com/markets/article/the-bond-market-just-turned-on-the-ai-trade--and-chip-stocks-lost-more-than-650-billion-in-two-days-chart-of-the-day-131855807.html">Yahoo Finance (chart of the day)</a>
+            <a href="https://finance.yahoo.com/markets/article/nvidias-first-post-jensen-earnings-and-anthropics-ipo-what-to-watch-this-week-110000732.html">Yahoo Finance (PPI, calendar)</a>
+            <a href="https://finimize.com/content/wall-street-looked-past-a-fed-pause-and-back-to-december">Finimize</a>
+            <a href="https://www.noradarealestate.com/blog/interest-rates-hike-odds-december-2026-jump-85-after-feds-recent-decision/">Norada (FedWatch history)</a>
+            <a href="https://kalshi.com/fed-rate-odds">Kalshi</a>
+            <a href="https://stockwirex.com/?p=55671">StockWireX</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8 sources</span>
+        </div>
+        <div class="headline">Data center capital splits by credit quality: Blackstone's BXDC pays 5 billion dollars for 75 percent of 13 AWS powered shells at a 7 percent cap rate, while QTS cuts a debt sale by more than half and Oracle linked loans trade near 90 cents</div>
+        <p class="tldr">Blackstone Digital Infrastructure Trust announced today, November 16, that it will buy 75.1 percent of two joint ventures with AWS owning 13 newly built powered shells, valued at about 5 billion dollars, per its statement and an 8&#8209;K. AWS keeps 25 percent and leases back all 13 buildings triple net for an initial 12 years, extendable to 32, at an initial cap rate of 7 percent; closing is expected in Q4. CEO Nick Pell said the hyperscaler sale leaseback channel "doubles our total addressable market." Separately, Bloomberg reported on November 13 that Blackstone's QTS cut a planned private debt raise from about 800 million to about 300 million dollars after some investors balked at pricing, per TNW. Earlier reporting relayed by FourWeekMBA puts about 18 billion dollars of loans tied to Oracle's New Mexico campus at 89 to 91 cents on the dollar with syndication stalled, and Reuters reported on November 9 that some banks are reluctant to add neocloud exposure. Flag: QTS and Oracle loan details come from Bloomberg and Reuters via secondary outlets; campus locations for the AWS deal are named in some coverage (Indiana, Mississippi) but not in Blackstone's statement per TNW.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The pattern is consistent across the week: capital is abundant for assets leased to AAA style tenants and scarce for anything that looks like project or sponsor risk. A 7 percent cap rate on AWS shells is roughly where CoreWeave says its next customer backed loan will yield, which is a useful cross check: lenders are pricing a Meta backed GPU loan and an AWS backed building lease at similar returns, despite very different asset lives. AWS, meanwhile, is recycling capital out of finished shells to fund new builds, the hyperscaler version of the prepayment and recontracting engine CoreWeave described.</p>
+          <p>Skeptic's note: confirmed facts are the BXDC transaction terms from the company statement and filing. The QTS downsizing, Oracle loan quotes and bank reluctance are reported through unnamed sources. The BXDC deal is a sale leaseback of existing powered shells, not new capacity.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: the market is drawing a bright line between investment grade backed infrastructure and everything else, and CoreWeave is deliberately moving its funding to the right side of that line (story 02). A deep sale leaseback bid for powered shells is also an exit route for CoreWeave's own owned sites if it wants to recycle real estate capital into GPUs. Threat read: hyperscalers selling shells at 7 percent and redeploying the cash expands their own capacity in 2027 and 2028, competing for the same power and the same lab customers; and if lenders are balking at even Blackstone's QTS paper, smaller colocation partners CoreWeave depends on for powered shell delivery may struggle to fund, which is a schedule risk. Ask: which of CoreWeave's third party landlords have upcoming refinancings.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.blackstone.com/news/press/blackstone-digital-infrastructure-trust-announces-5-billion-acquisition-of-stabilized-data-center-portfolio/">Blackstone statement</a>
+            <a href="https://www.stocktitan.net/sec-filings/BXDC/8-k-blackstone-digital-infrastructure-trust-inc-reports-material-even-f5f9639ff146.html">BXDC 8&#8209;K (StockTitan)</a>
+            <a href="https://thenextweb.com/news/blackstone-bxdc-aws-data-centres-5bn">TNW</a>
+            <a href="https://casrai.org/news/blackstone-bxdc-aws-five-billion-data-center-jv-2026">CASRAI</a>
+            <a href="https://www.bloomberg.com/news/articles/2026-11-13/blackstone-s-qts-is-cutting-ai-debt-sale-by-more-than-half">Bloomberg (QTS)</a>
+            <a href="https://fourweekmba.com/ai-oracle-project-jupiter-debt-syndication-site-tied-financing/">FourWeekMBA (Oracle loans)</a>
+            <a href="https://fourweekmba.com/ai-some-lenders-said-to-balk-at-ai-debt-even-with-backstops/">FourWeekMBA (Reuters summary)</a>
+            <a href="https://www.newsbytesapp.com/news/business/banks-investors-curb-lending-to-ai-firms-after-nasdaq-100-drop/tldr">NewsBytes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">7 sources</span>
+        </div>
+        <div class="headline">Cerebras posts its first positive core net income, cloud revenue up 265 percent, and guides to roughly tripling revenue in 2027; shares jump about 18 percent after hours</div>
+        <p class="tldr">Cerebras reported Q3 on November 12. Per its 8&#8209;K and CNBC: GAAP revenue of 210.8 million dollars, up 55 percent; core revenue of 230.9 million dollars, up 70 percent, above the roughly 214.7 million dollar consensus; GAAP cloud and other services revenue of 141.9 million dollars, up 265 percent. Core net income was about 30 million dollars, the first positive figure as a public company, while the core operating margin was minus 14 percent. Q4 core revenue guidance is 310 to 330 million dollars with a 47 to 49 percent core gross margin, FY2026 core revenue 940 to 960 million dollars, and management expects revenue to triple in 2027 (about 2.85 billion dollars by CNBC's math). Cash, restricted cash and securities totaled 7.8 billion dollars. Investing.com reported shares up about 17.8 percent after hours from a 97.75 dollar close. Flag: adjusted EPS is reported as plus 12 cents by CNBC and minus 67 cents by Investing.com; the basis was not reconciled here.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Cerebras is now mostly a cloud business: two thirds of GAAP revenue is cloud and services, and hardware margin fell to 31 percent on final shipments under an older, lower priced contract, per GuruFocus's call summary. The 2027 tripling is the inference thesis stated plainly: a non Nvidia architecture selling tokens and capacity rather than chips. It reported the same day Huang resigned, and it was one of the few AI infrastructure names to rise.</p>
+          <p>Skeptic's note: confirmed facts are the 8&#8209;K figures and guidance. "Core" metrics are company defined and exclude items that GAAP includes. The 2027 outlook is a management expectation. Cash of 7.8 billion dollars largely reflects IPO and follow on proceeds rather than operating cash generation.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: Cerebras is a direct competitor for inference dollars, especially the low latency agent workloads that frontier labs and enterprises are now routing across vendors, and it can price on its own silicon without Nvidia's margin. A leadership vacuum at Nvidia makes alternative architectures easier for procurement teams to justify. Bull read: at under 1 billion dollars of 2026 revenue, Cerebras remains a fraction of CoreWeave's scale (13.0 to 13.3 billion dollars guided), and its growth confirms inference demand is outrunning supply across architectures. Strategic angle for corporate development: offering non Nvidia accelerators as a managed service is a hedge worth costing if customers start asking for multi vendor capacity.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.sec.gov/Archives/edgar/data/0002021728/000162828026073366/cbrsannouncesfinancialresu.htm">Cerebras 8&#8209;K</a>
+            <a href="https://www.cnbc.com/2026/11/12/cerebras-systems-cbrs-q3-earnings-report-2026.html">CNBC</a>
+            <a href="https://www.investing.com/news/transcripts/earnings-call-transcript-cerebras-tops-guidance-in-q3-2026-shares-jump-after-hours-93CH-5023671">Investing.com (transcript)</a>
+            <a href="https://www.fool.com/earnings/call-transcripts/2026/11/13/cerebras-cbrs-q3-2026-earnings-call-transcript/">Motley Fool (transcript)</a>
+            <a href="https://www.gurufocus.com/news/9196897/cerebras-systems-inc-cbrs-q3-2026-earnings-call-highlights-record-revenue-first-positive-net-income-and-a-2027-revenue-triple-on-the-horizon">GuruFocus</a>
+            <a href="https://www.digitimes.com/news/a20261113VL231/cerebras-2026-performance-earnings-revenue.html">DigiTimes</a>
+            <a href="https://finance.yahoo.com/markets/article/the-bank-of-nvidia-just-lost-its-banker--heres-where-the-ai-trade-is-exposed-215638010.html">Yahoo Finance (sector moves)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">Fermi America swaps a terminated TensorWave lease for a nonbinding 600 megawatt agreement with an unnamed investment grade hyperscaler and a 200 million dollar prepayment in Texas</div>
+        <p class="tldr">Alongside Q3 results on November 12, Fermi America disclosed a 600 megawatt power agreement for Project Matador with an undisclosed investment grade hyperscaler, backed by a 200 million dollar upfront prepayment, per its earnings slides on Investing.com and secondary coverage. The arrangement is nonbinding; Fermi said it is working toward a definitive lease "in the coming days or weeks." Its earlier lease with neocloud TensorWave terminated on November 10. The campus targets up to 17 gigawatts long term on about 8,400 acres. Crypto Briefing reports the counterparty is Amazon reviving earlier talks. Flag: the hyperscaler's identity is reported, not confirmed; the agreement is not a signed lease.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The swap is the story in miniature: a neocloud tenant falls away and a hyperscaler steps in with cash up front. It also lands in a Texas still operating under Governor Abbott's August 3 directive requiring PUCT and ERCOT verification before new data center interconnections proceed, and a Governor elect who campaigned on a pause. That directive is three months old and not new this week; it is relevant context for any Texas site that is not already fully permitted.</p>
+          <p>Skeptic's note: confirmed facts are Fermi's own disclosures of a nonbinding agreement and prepayment and the TensorWave termination. The counterparty, the timeline to a definitive lease and whether the 600 megawatts can clear the Texas verification process are open. Fermi's 17 gigawatt figure is a long term site potential, not contracted capacity.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: hyperscalers with IG balance sheets are now outbidding neoclouds for the large powered campuses neoclouds used to anchor, and they can prepay. If Amazon is the counterparty, it adds Texas capacity aimed at the same 2028 window CoreWeave says it has not yet brought to market. Bull read: CoreWeave told analysts most of its Texas power is online or fully permitted, and a neocloud lease collapsing at Fermi shows why counterparties prefer scaled operators with delivery records. Watch whether TensorWave's capacity need resurfaces as a sublease or acquisition opportunity.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.investing.com/news/company-news/fermi-america-q3-2026-slides-600-mw-hyperscaler-deal-anchors-17-gw-plan-93CH-5022538">Investing.com (Fermi slides)</a>
+            <a href="https://casrai.org/news/fermi-matador-600mw-letter-intent-2026">CASRAI</a>
+            <a href="https://dev.to/jeevanthi_surya_05f6cfc58/hyperscaler-pledges-200-million-up-front-for-600-mw-at-fermis-project-matador-2cj2">DEV Community</a>
+            <a href="https://cryptobriefing.com/amazon-revives-deal-fermi-america-rick-perry">Crypto Briefing (Amazon report)</a>
+            <a href="https://www.globaldatacenterhub.com/p/rowans-15b-raise-softbank-grab-185b">Global Data Center Hub</a>
+            <a href="https://www.gibsondunn.com/what-governor-abbotts-data-center-audit-directive-means-for-ercot-and-the-batch-zero-study-process/">Gibson Dunn (Aug directive)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">08</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">9 sources</span>
+        </div>
+        <div class="headline">The planner and executor split spreads: Meta ships Muse Ember at 10 cents per million input tokens for agent subtasks, Meta and OpenAI keep buying developer tools, and "Gemini 4 Hydrogen" shows up on trackers before Google confirms it</div>
+        <p class="tldr">Meta released Muse Ember on November 9 as a closed weight model on the Meta Model API (muse&#8209;ember&#8209;1.0) and in Muse Code, with a 1 million token context, up to 512K output, and pricing of 0.10 dollars input and 0.50 dollars output per million tokens, per The New Stack and the Vercel AI Gateway listing. Meta positions it as the executor for high volume agent work (reading files, running tests, targeted fixes) with Muse Wonder doing the planning. On M&amp;A, TNW reports Meta bought Conductor, whose app runs multiple coding agents in parallel, for Meta Superintelligence Labs (first reported by Axios November 4), and that OpenAI agreed to buy Pierre Computer and, more recently, AI travel agent Odessia. Two model trackers list a "Gemini 4 Hydrogen" release dated November 12 or 13, but Google has not announced a model by that name and no Hydrogen model ID appears in AI Studio or the Gemini API per secondary checks. Flag: Ember's benchmark comparisons are Meta's own; the Hydrogen entries trace to an October 27 post on X and tester reports, and should be treated as unconfirmed.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Last week's Fable 5.2 and Gemini 4 Carbon launches pushed the same architecture from the top: an expensive frontier model orchestrates and audits while cheap models do parallel work. Ember is the other half of that design from a third lab, priced for the executor role. Conductor's product is the developer side of the same pattern. When per token prices for execution fall to dimes, the number of calls per task rises sharply, which is how inference demand grows even as prices compress.</p>
+          <p>Skeptic's note: confirmed facts are Ember's availability, model ID, context window and list price, and the Conductor and Pierre acquisitions confirmed by the companies. Ember performance figures are vendor reported. Conductor terms were not disclosed. One tracker (Opper) also lists entries dated after today, which undermines its dating generally; its Qwen4&#8209;Max entry for November 16 was not independently confirmed.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: executor models at 10 cents per million tokens multiply call volume and favour high throughput, low latency serving, which is what CoreWeave's managed and serverless inference sells; Forge's agent tooling (Agent Lens, Sandboxes) sits directly in this workflow. Threat read: Meta serves Ember on its own infrastructure, Google serves Carbon on TPUs, and the labs buying developer tools are building closed loops in which the inference layer is captive. Third party inference demand grows fastest for open weight models and for labs without their own fleet, so watch which executor models are released with open weights.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://thenewstack.io/meta-muse-ember-launch/">The New Stack</a>
+            <a href="https://letsdatascience.com/news/meta-releases-muse-ember-a-low-cost-model-for-agent-executio-7b564cff">Let's Data Science</a>
+            <a href="https://vercel.com/ai-gateway/models/muse-ember.md">Vercel AI Gateway</a>
+            <a href="https://ai-tldr.dev/releases/meta-muse-ember/index.md">AI TLDR</a>
+            <a href="https://thenextweb.com/news/meta-acquires-conductor-ai-coding-agents-superintelligence-labs">TNW (Conductor)</a>
+            <a href="https://www.axios.com/2026/11/04/openai-pierre-computer-github">Axios (Pierre)</a>
+            <a href="https://thenextweb.com/news/openai-acquires-odessia-ai-travel-agent">TNW (Odessia)</a>
+            <a href="https://kie.ai/blog/what-is-gemini-4-hydrogen">Kie.ai (Hydrogen status)</a>
+            <a href="https://llmgateway.io/timeline">LLM Gateway tracker</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCASTS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">ALL-IN PODCAST</div>
+    <div class="ep">Jensen OUT as Nvidia CEO: "Spy" Scandal, Export Restrictions, Market Impact &#183; November 14 2026</div>
+    <div class="who">Jason Calacanis, Chamath Palihapitiya, David Sacks, David Friedberg. About 85 minutes.</div>
+    <ul>
+      <li>Per a Podwise AI summary, the hosts argue the main risk from Huang's exit is slower chip iteration and the possible closing of the "Bank of Nvidia" that supplied capital and guarantees to data center buildouts, the same exposure story 01 flags for CoreWeave.</li>
+      <li>They discuss successor candidates (Ian Buck internally; Rene Haas and Nikesh Arora externally) and devote a segment to Anthropic's IPO as a winner take all enterprise bundling play.</li>
+      <li>Flag: the hosts' claims about leaked intelligence and the lack of a defensive briefing are opinion and could not be verified; the summary spells the businesswoman's surname differently from news coverage. Note: content comes from an AI generated summary; no audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="pod">
+    <div class="show">BLOOMBERG PODCASTS</div>
+    <div class="ep">US Voters Put the AI Data Center Boom on Notice &#183; listed November 8 2026</div>
+    <div class="who">Bloomberg podcast network (hosts and guests not shown in the listing reviewed).</div>
+    <ul>
+      <li>A podcast aggregator lists this episode on November 8, covering how the midterm results turned data center siting into a voter issue, relevant to the Texas and congressional policy backdrop in stories 05 and 07.</li>
+      <li>Pairs with Sharp Tech's November 6 episode "America Votes Against Data Centers," which per its listing covers the Texas moratorium debate and hyperscaler bottlenecks.</li>
+      <li>Note: this episode predates the current window; it was the most relevant verifiable non All&#8209;In episode found. Topic is taken from the listing title only; no audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="connected">
+    <strong>Connected sources.</strong> This edition was produced as an unattended scheduled run working entirely from public web research. No Gmail, Calendar, Slack, Drive, PitchBook or meeting connector was read. Items were found through web search and direct page fetches, cross checked against at least two independent outlets where possible, and dated against the publisher's page, filing or release rather than an aggregator. The window covers Thursday, November 12 (after the prior edition) through the morning of Monday, November 16, and avoids repeating Thursday's stories unless there was new information. Primary documents read directly: Nvidia's CEO transition release, CoreWeave's Wayve release, and full articles from TheStreet, TNW and Yahoo Finance. CNBC, NPR, Bloomberg, the FT and the WSJ could not be read in full here (fetch errors or paywalls), so their reporting is cited through search excerpts and secondary outlets. Recycled, misdated or unverified items excluded or flagged: the Wayve agreement redated to November 15 by one outlet (released November 9); Anthropic's 895 billion dollar commitment total, which comes from its November 2 filing; Governor Abbott's Texas interconnection directive (August 3) resurfacing in this week's coverage; Gemini 4 Hydrogen listed as released by trackers without a Google announcement; a Sherwood item naming a different Nvidia interim CEO; a single source "six times oversubscribed" Anthropic claim; an Asia Times headline implying the IPO already priced; and searches for a Cisco November earnings report, an Azure outage this month and a new OpenAI compute deal this week, none of which returned verifiable current items.
+  </div>
+
+  <footer>
+    Generated by Claude &#183; November 16 2026 &#183; Main sources: Nvidia press release and 8&#8209;K, CNBC, Bloomberg (direct and via TheStreet, TNW, Yahoo), Yahoo Finance, Forbes, Motley Fool, Manila Times, Fortune, FourWeekMBA, MarketPulse, Morningstar, TheStreet, Seeking Alpha, CoreWeave releases, TNW, Robotics &amp; Automation News, TechCrunch, Quartz, Pure AI, OpenTools, Asia Times, Finimize, Norada, Kalshi, StockWireX, Blackstone, StockTitan, CASRAI, NewsBytes, Reuters (via FourWeekMBA), Cerebras 8&#8209;K, Investing.com, GuruFocus, DigiTimes, DEV Community, Crypto Briefing, Global Data Center Hub, Gibson Dunn, The New Stack, Let's Data Science, Vercel, AI TLDR, Axios, Kie.ai, LLM Gateway, Opper, Podwise, podcast aggregators.
+    <span class="cav">Uncertainty flags: On Nvidia, the 8&#8209;K and press release carry different dates, intraday declines are reported at 11, 12 and 14 percent, market value lost is measured over different windows, the third relationship and congressional testimony schedule are reported rather than confirmed, and earnings guidance and options implied moves come from previews. On CoreWeave, the size, lead banks and Meta collateral of the new loan come from Bloomberg's unnamed sources, its pricing is a management expectation at rates that have since risen, and the Wayve date is misreported by one outlet. On Anthropic, the commitment total predates this window, per company placement sizes are as relayed by Yahoo, and oversubscription is single source. On rates, hike probabilities differ by venue and timestamp and the chip basket loss is Yahoo's own measure. On credit, QTS, Oracle loan quotes and bank reluctance are reported via secondary outlets. On Cerebras, adjusted EPS is reported as plus 12 and minus 67 cents and the 2027 outlook is management guidance. On Fermi, the agreement is nonbinding and the counterparty is unconfirmed. On models, Ember benchmarks are vendor reported and Gemini 4 Hydrogen is unconfirmed. Podcast details come from listings and AI generated summaries, and content was not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
