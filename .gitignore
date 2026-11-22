@@ -17,3 +17,6 @@ venv/
 *.log
 *.tmp
 drafts/
+
+# Written by scripts/auto_push.ps1 on every run (read by the Cowork run)
+.push_status

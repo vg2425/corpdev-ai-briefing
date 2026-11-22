@@ -6,28 +6,34 @@ Private archive of Victoria's twice weekly AI and Tech briefings, prepared in Co
 
 ```
 corpdev-ai-briefing/
-  index.html              Landing page linking to every edition
-  briefings/              One HTML file per edition
+  index.html                  Landing page linking to every edition
+  briefings/                  One HTML file per edition
     vic_ai_briefing_YYYY-MM-DD.html
   scripts/
-    generate_index.py     Rebuilds index.html from the briefings/ folder
-  .github/workflows/      Reserved for the bi weekly automation (see below)
+    generate_index.py         Rebuilds index.html from the briefings/ folder
+    auto_push.ps1             Commits new briefings and pushes main (Windows)
+    install_auto_push.ps1     Registers the scheduled task that runs auto_push.ps1
+  .github/workflows/
+    publish.yml               Read only sanity check on index.html
+  docs/AUTOMATION.md          How the automation works and how to fix it
 ```
 
 ## How a new edition gets added
 
-1. Cowork generates the next briefing as `briefings/vic_ai_briefing_YYYY-MM-DD.html`.
-2. Run `python scripts/generate_index.py` to refresh the landing page.
-3. Commit and push. The Monday and Thursday cadence is the default.
+Nothing to do by hand. Two pieces, kept separate:
 
-## Bi weekly automation (next step)
+1. **Cowork writes the files.** A Cowork scheduled task runs Monday and Thursday mornings, writes `briefings/vic_ai_briefing_YYYY-MM-DD.html` and runs `python scripts/generate_index.py`. Its sandbox cannot reach GitHub, so it does not push.
+2. **A Windows scheduled task commits and pushes.** `corpdev-ai-briefing auto push` runs `scripts/auto_push.ps1` every 30 minutes and at logon. It clears lock files the sandbox leaves in `.git/`, makes one `briefing: YYYY-MM-DD` commit per new edition, rebases on `origin/main` and pushes.
 
-Two cleanly separated pieces:
+Each run writes one line to `.push_status` in the repo root (time, result, HEAD, last push), so the Cowork run and you can see the last push at a glance. The full log is `%LOCALAPPDATA%\corpdev-ai-briefing\auto_push.log`.
 
-1. **Generation** runs inside Cowork on a schedule (Mon and Thu mornings) and writes the new HTML file into this folder.
-2. **Publishing** is handled by a small GitHub Actions workflow placed in `.github/workflows/publish.yml` that, on each push to `main`, regenerates `index.html` and (optionally) deploys to GitHub Pages.
+To add an edition manually, drop the file into `briefings/`. The next task run commits and pushes it. To push right away, run:
 
-See `docs/AUTOMATION.md` for the full plan once it's wired up.
+```
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\auto_push.ps1
+```
+
+See `docs/AUTOMATION.md` for setup, troubleshooting and the GitHub credential setup.
 
 ## Sharing
 
