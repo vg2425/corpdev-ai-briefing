@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victoria's AI &amp; Tech Briefing — November 23 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171a;
+    --surface-2: #1f1f24;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --muted: #9a9aa5;
+    --purple: #7c6df5;
+    --blue: #4fc3f7;
+    --amber: #ffb74d;
+    --green: #66d19e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, #1b1730 0%, #17171a 60%);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 26px 30px;
+    margin-bottom: 22px;
+  }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 10px 2px rgba(124,109,245,0.8);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .backlink {
+    color: var(--blue);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .backlink:hover { color: var(--purple); border-color: var(--purple); }
+  h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Focus bar */
+  .focus {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 0 0 26px;
+  }
+  .focus .tag { font-size: 12px; }
+  .focus-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; align-self: center; margin-right: 4px;
+  }
+
+  .section-title {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 34px 0 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--purple); }
+  .card-head { display: flex; align-items: flex-start; gap: 12px; }
+  .rank {
+    font-size: 20px; font-weight: 800; color: var(--purple);
+    line-height: 1.2; min-width: 30px;
+  }
+  .card-body { flex: 1; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--muted); border: 1px solid var(--border);
+  }
+  .tag.models { color: #b9adf9; border-color: #3a3468; background: #211d3a; }
+  .tag.infra { color: #7fd6f9; border-color: #24485a; background: #102731; }
+  .tag.agents { color: #8ee6b6; border-color: #24503c; background: #10281d; }
+  .tag.policy { color: #f5c78a; border-color: #5a4524; background: #2a2010; }
+  .tag.markets { color: #f59ab0; border-color: #5a2436; background: #2a1018; }
+  .signal {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    color: var(--amber); background: #2a2010; border: 1px solid #5a4524;
+  }
+  .srccount { font-size: 11px; color: var(--muted); margin-left: auto; }
+  .headline { font-size: 18px; font-weight: 700; margin: 2px 0 8px; letter-spacing: -0.01em; }
+  .tldr { color: var(--text); margin: 0 0 10px; }
+  .toggle {
+    color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer;
+    user-select: none; display: inline-block; margin-bottom: 2px;
+  }
+  .toggle:hover { color: var(--purple); }
+  .detail { display: none; margin-top: 10px; }
+  .detail.open { display: block; }
+  .detail p { margin: 0 0 10px; color: #cfcfd6; font-size: 14px; }
+  .why {
+    border-left: 3px solid var(--purple);
+    background: var(--surface-2);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0 10px;
+  }
+  .why .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); font-weight: 700; display: block; margin-bottom: 4px; }
+  .why p { margin: 0; font-size: 13px; color: #d8d8de; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .srcs a {
+    font-size: 11px; color: var(--blue); text-decoration: none;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 3px 10px; transition: border-color 0.2s;
+  }
+  .srcs a:hover { border-color: var(--blue); }
+  .caveat { color: var(--amber); font-size: 12.5px; }
+
+  /* podcast + signals */
+  .pod { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; transition: border-color 0.2s; }
+  .pod:hover { border-color: var(--blue); }
+  .pod .show { font-size: 12px; color: var(--blue); font-weight: 700; letter-spacing: 0.05em; }
+  .pod .ep { font-size: 16px; font-weight: 700; margin: 3px 0; }
+  .pod .who { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .pod ul { margin: 8px 0 0; padding-left: 18px; }
+  .pod li { font-size: 13.5px; color: #cfcfd6; margin-bottom: 5px; }
+
+  .sig { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; transition: border-color 0.2s; }
+  .sig:hover { border-color: var(--purple); }
+  .sig .h { font-size: 13px; font-weight: 700; color: var(--purple); }
+  .sig .d { font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .sig p { margin: 5px 0 0; font-size: 13.5px; color: #cfcfd6; }
+  .sig a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .sig a:hover { text-decoration: underline; }
+
+  .connected {
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-top: 22px;
+    font-size: 13px; color: var(--muted);
+  }
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--muted);
+  }
+  footer .cav { color: var(--amber); margin-top: 8px; display: block; }
+  a.inline { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-top">
+      <div class="eyebrow"><span class="dot"></span> Monday, November 23 2026 &#183; Monday edition</div>
+      <a class="backlink" href="../index.html">&larr; All editions</a>
+    </div>
+    <h1>Victoria's AI &amp; Tech Briefing</h1>
+    <p class="subtitle">The developments in models, infrastructure, and agents that actually move CoreWeave's world, cross verified and ranked by signal.</p>
+    <div class="pills">
+      <span class="pill">8 stories</span>
+      <span class="pill">2 podcast picks</span>
+      <span class="pill">45+ sources</span>
+    </div>
+  </div>
+
+  <!-- FOCUS BAR -->
+  <div class="focus">
+    <span class="focus-label">Focus</span>
+    <span class="tag infra">AI Infrastructure &amp; Chips</span>
+    <span class="tag markets">Markets</span>
+    <span class="tag policy">Power &amp; Policy</span>
+    <span class="tag models">LLM Model Releases</span>
+    <span class="tag agents">Agentic AI &amp; Tooling</span>
+  </div>
+
+  <!-- TOP STORIES -->
+  <div class="section-title">Top Stories</div>
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">01</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="srccount">9 sources</span>
+        </div>
+        <div class="headline">Nvidia falls 14 percent to 125.53 dollars after Reuters reports an SEC enforcement inquiry into its accounting, a day after California's attorney general served an investigative subpoena; Bessent's 10 day clock on the board runs out around November 25</div>
+        <p class="tldr">Reuters reported on November 20, citing two people briefed on the matter, that SEC enforcement staff are examining potential accounting issues at Nvidia. The SEC declined to comment and Reuters could not determine when the inquiry opened or exactly what it covers; coverage ties it to Nvidia's 2025 switch from billing location to customer headquarters in its geographic revenue table, which removed a Singapore line that had reached about 22 percent of revenue. The Wall Street Journal reported the probe also examines whether disclosures misled investors. On November 19, California Attorney General Rob Bonta served Nvidia with an investigative subpoena covering whether chips or confidential information reached China and whether the company misled investors, per AP, CBS and TechCrunch. Nvidia closed November 20 at 125.53 dollars, down 14.01 percent, per the Motley Fool's quote panel, and lost about 22.9 percent on the week per one market data site. Flag: the SEC inquiry is sourced to unnamed people; neither the SEC nor Nvidia has confirmed it.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Thursday's edition treated the Huang exit as a governance and financing story. This week it became a regulatory one on three fronts at once: a federal securities inquiry, a state investigation that Bonta described to Politico as a first step, and Treasury Secretary Bessent's November 15 demand that the board explain within 10 days whether it ignored warning signs that chips sold to Singapore shell companies ended up in China. Nvidia also told its earnings call on November 17 that it had stopped shipping H200s to China despite holding some licenses, per TechCrunch, and Q4 guidance already assumes no China data center compute revenue. Nvidia has said its board hired Wachtell Lipton and former acting US Attorney Joon Kim for an internal review on November 10. The board still has no permanent CEO; the 8&#8209;K sets no deadline, and reports differ on whether a search firm has been formally engaged.</p>
+          <p>Skeptic's note: confirmed facts are the subpoena (announced by Bonta's office), the share price move, and the 2025 change in the geographic revenue basis, which Nvidia disclosed. The SEC inquiry and its scope are reported only. An accounting professor quoted by Fortune said of the reporting change, "Nothing is illegal. It's disclosed." An inquiry is not a finding, and Nvidia settled its last SEC accounting matter in 2003 without admitting wrongdoing. The roughly November 25 deadline is derived from Bessent's November 15 remarks and is approximate.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: Nvidia is CoreWeave's sole GPU supplier, a major shareholder and the counterparty on capacity backstop agreements. A regulator questioning how Nvidia books and attributes revenue invites the same scrutiny of circular arrangements, including Nvidia's investments in and rent back agreements with its customers, and story 02's foundation pledge lands squarely in that frame. Distraction at the top of Nvidia, while it is "disciplined and selective" about neocloud support, raises the odds of slower decisions on allocation and guarantees. Bull read: none of this touches demand for Vera Rubin, and a supplier under regulatory pressure has every incentive to favour large, compliant, US headquartered customers with clean end users. Ask: an inventory of every commercial link to Nvidia (equity, backstops, rent back, foundation compute) with how each is disclosed, so the team can answer lender and auditor questions before they are asked.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.investing.com/news/economy-news/exclusiveus-secs-nvidia-probe-is-examining-potential-accounting-issues-sources-say-5042460">Reuters via Investing.com</a>
+            <a href="https://finance.yahoo.com/markets/article/nvidia-stock-extends-25-trillion-rout-as-sec-probe-reportedly-investigates-its-accounting-194945274.html">Yahoo Finance</a>
+            <a href="https://www.newsnationnow.com/business/nvidia-accounting-under-sec-investigation-sources-say/">NewsNation</a>
+            <a href="https://abcnews.com/Technology/wireStory/california-attorney-general-subpoenas-nvidia-chips-former-ceos-138308129">AP via ABC News</a>
+            <a href="https://techcrunch.com/2026/11/20/california-ag-subpoenas-nvidia-over-worries-about-huangs-ties-with-china/">TechCrunch (subpoena)</a>
+            <a href="https://www.cbsnews.com/sanfrancisco/news/california-nvidia-subpoena-jensen-huang-affair-alleged-chinese-spy/">CBS San Francisco</a>
+            <a href="https://fortune.com/2026/11/12/nvidia-changed-earnings-report-format-singapore-revenue-megaspeed-probe-colette-kress/">Fortune (revenue table)</a>
+            <a href="https://www.aljazeera.com/news/2026/11/15/us-treasury-chief-calls-for-outsider-to-lead-embattled-tech-firm-nvidia">Al Jazeera (Bessent)</a>
+            <a href="https://techcrunch.com/2026/11/17/nvidia-is-abandoning-china-after-jensen-huangs-ouster/">TechCrunch (H200 halt)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">02</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">8 sources</span>
+        </div>
+        <div class="headline">CoreWeave briefly trades below its 40 dollar IPO price on November 20 before a 9 to 11 percent premarket bounce today; Venturo discloses a 30 million dollar bond purchase and Bloomberg reports Huang's foundation committed 350 million dollars of CoreWeave compute</div>
+        <p class="tldr">CRWV closed November 19 at 44.91 dollars, down 6.1 percent, then fell about 12 percent on November 20 with a 52 week low of 39.28 dollars, per TheStreet and TipRanks; BeInCrypto and TradingView report a brief move below the 40 dollar March 2025 IPO price. TipRanks reports CRWV, IREN and Nebius up about 9 to 11 percent in premarket trading on November 23. Bloomberg reported co&#8209;founder and CSO Brian Venturo bought 30 million dollars face value of the 9.75 percent unsecured notes due October 1, 2031, which traded near 80 cents in early November; Venturo said on LinkedIn he will hold to maturity. Separately, Bloomberg reported on November 19 that the Jen&#8209;Hsun and Lori Huang Foundation's tax filing shows a 350 million dollar commitment to rent CoreWeave compute for its Computing Initiative for Open Science, of which 108.3 million dollars had been spent per an earlier Nvidia filing. Flag: total debt is reported as about 47 billion dollars (TheStreet) and 66.2 billion dollars (TipRanks) for the same September 30 date; the gap likely reflects lease and other obligations and should be reconciled to the 10&#8209;Q by CoreWeave Treasury or IR.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The stock has now round tripped its entire public life and sits about 79 percent below the June 2025 peak of 187 dollars. The drivers are the ones flagged in the last two editions: Q3 net interest of 846 million dollars, a Q4 interest guide of 1.05 to 1.15 billion dollars, a 709 million dollar quarterly net loss and Baird's estimate that CoreWeave may need another 30 billion dollars in 2027. The bull material has not changed either: a 132.5 billion dollar backlog, 168 percent revenue growth, price increases of 25 percent in July and 10 percent later in the quarter, and management's expectation of about 9 billion dollars of customer prepayments within three months, per TipRanks. Sell side dispersion is wide: Bernstein reiterated Sell with a 54 dollar target on November 19, Barclays cut to 85 dollars, Goldman to 101 dollars, while the TipRanks average sits near 104 to 107 dollars. The Meta backed IG loan reported by Bloomberg on November 11 still has no confirmed launch.</p>
+          <p>Skeptic's note: confirmed facts are the closing prices and Venturo's own LinkedIn statement; his purchase price was not disclosed and likely well below face. The 350 million dollar figure comes from Bloomberg's read of a foundation tax filing; CoreWeave told Bloomberg the foundation "is not a user of the compute." Founder share sales of about 3.3 billion dollars since IPO (over 1.2 billion dollars by Venturo) are from TipRanks and Bloomberg data and were described by CoreWeave as prearranged. Premarket moves are not closes.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: trading at the IPO price with unsecured bonds near a 15 to 16 percent yield effectively closes the equity and unsecured channels, which management has already said it will not use at current rates; everything now runs through contract backed DDTLs and prepayments. The foundation pledge is under 3 percent of 2026 revenue but is the worst possible optics this week, a Huang linked entity routing Nvidia stock wealth into CoreWeave revenue while the SEC looks at Nvidia's disclosures. Bull read: an insider buying unsecured paper at a discount is a credible signal on solvency, and the operational story (Vera Rubin, MLPerf, backlog) is intact. Ask: confirm the foundation contract is disclosed consistently as related party or not, and prepare a one page reconciliation of the 47 versus 66 billion dollar debt figures before lenders cite the larger one.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.thestreet.com/investing/debt-heavy-coreweave-350m-jensen-huang-charity">TheStreet (foundation)</a>
+            <a href="https://www.bloomberg.com/news/articles/2026-11-19/jensen-huang-s-charity-committed-350-million-to-coreweave">Bloomberg (foundation)</a>
+            <a href="https://www.tipranks.com/news/coreweave-stock-plunges-toward-its-40-ipo-price-as-66-2-billion-debt-load-rattles-ai-investors">TipRanks (Nov 20)</a>
+            <a href="https://www.tipranks.com/news/why-are-neocloud-stocks-coreweave-iren-and-nebius-rallying-in-premarket-today-november-23">TipRanks (Nov 23 premarket)</a>
+            <a href="https://beincrypto.com/coreweave-stock-below-ipo-price/">BeInCrypto</a>
+            <a href="https://www.tradingview.com/news/binance_news:8cba9012f094b:0-coreweave-briefly-falls-below-40-ipo-price-as-debt-concerns-resurface/">TradingView</a>
+            <a href="https://www.tikr.com/blog/bad-move-coreweaves-co-founder-bought-its-bonds-to-show-hes-never-been-more-confident">TIKR (Venturo)</a>
+            <a href="https://www.theglobeandmail.com/investing/markets/markets-news/motley/8926879/stock-market-today-nov-19-coreweave-falls-as-profit-taking-follows-anthropic-ipo-pricing-above-range/">Motley Fool via Globe and Mail (Nov 19)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">03</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="srccount">7 sources</span>
+        </div>
+        <div class="headline">Commerce's new interim final rule requires licenses for advanced chips to Indonesia, Malaysia, Singapore, Thailand and Brazil and for third country data centers serving Chinese companies; US headquartered firms are exempt with monthly reporting, and Moonshot reportedly cancels a 150 million dollar Indonesian B300 contract</div>
+        <p class="tldr">Per NBC News, TNW and CNBC, BIS issued an interim final rule (text released around November 16, effective November 19 per reporting) with two parts. First, exporters need a license to ship covered advanced chips to Indonesia, Malaysia, Singapore, Thailand and Brazil, with US headquartered companies exempt if they file monthly reports. Second, data centers in third countries that serve companies headquartered in China, Macau or other D:5 countries above 12 million aggregate TPP, roughly 750 H100 equivalents, need a license; facilities already serving large Chinese customers have 90 days, putting the practical deadline in February. The Information, as relayed by several outlets, reports Moonshot AI cancelled a 150 million dollar contract to rent B300 capacity through an Indonesian data center. Trump and Xi met in Shenzhen on November 19 with no change to chip access; Bessent said the H200 remains the most advanced chip China can buy with licenses. Flag: the release date, exact TPP trigger wording and the US headquarters exemption should be checked against the Federal Register text; this item slightly predates the window but was not covered Thursday.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The rule closes the remote access route that Southeast Asian neoclouds had built around Chinese demand, and it arrives as Bessent publicly blames Commerce for loose enforcement. CNBC reported on November 19 that Commerce had approved sales of more than 879,000 AI chips to China, which keeps congressional pressure high. Maybank expects delays and higher costs for Indonesian builds rather than an end to them. Accounts conflict on whether Moonshot has already signed a replacement contract with another regional provider or is still looking, including in Europe, where CNBC reported on November 5 that it had offered 30 to 50 percent premiums upfront.</p>
+          <p>Skeptic's note: confirmed facts are the existence of the rule and its broad structure as described by multiple outlets. The Moonshot cancellation is single sourced to The Information. Enforcement intensity, and whether "serving" means actual or potential access, differ across summaries.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: as a US headquartered operator, CoreWeave appears to qualify for the reporting exemption on shipments into Indonesia, while local and Chinese linked competitors for the same Jakarta capacity lose their largest demand source; that should improve its bargaining power with colocation landlords and push regional enterprise and sovereign demand toward compliant clouds. Threat read: CoreWeave announced in August three Indonesian sites totaling 360 megawatts for 2028, its only APAC footprint, and TipRanks flags it as the neocloud most exposed to the rule. Monthly reporting, KYC on end users and a softer Indonesian demand base add cost and slow the ramp. Ask: legal confirmation that the Indonesia program falls under the US headquarters exemption, the customer screening process for the 12 million TPP threshold, and whether any Indonesian pipeline assumed Chinese headquartered tenants.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.nbcnews.com/tech/tech-news/us-closes-loophole-let-chinese-companies-use-top-ai-chips-rcna609634">NBC News</a>
+            <a href="https://thenextweb.com/news/us-remote-access-ai-chips-rule-china-singapore-malaysia">TNW</a>
+            <a href="https://www.cnbc.com/2026/11/18/nvidia-us-ai-chip-export-controls-data-centers-.html">CNBC (Southeast Asia)</a>
+            <a href="https://en.sedaily.com/world/2026/11/23/us-chip-export-rules-jolt-southeast-asias-data-center-boom">Seoul Economic Daily</a>
+            <a href="https://letsdatascience.com/news/moonshot-ai-reportedly-scraps-150-million-nvidia-blackwell-d-c4f4c35a">Moonshot cancellation (via The Information)</a>
+            <a href="https://defensenews.com/global/asia-pacific/2026/11/20/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says">Defense News (Shenzhen)</a>
+            <a href="https://www.datacenterknowledge.com/data-center-construction/coreweave-s-global-ai-infrastructure-push-reaches-asia-pacific">Data Center Knowledge (CoreWeave Indonesia)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">04</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128293; High Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">The Nasdaq drops 5.28 percent on November 20 and more than 10 percent on the week, erasing its 2026 gains; the S&amp;P 500 enters a correction, Broadcom falls 12 percent on an unconfirmed Google chip cut report and AMD falls 13 percent after a Hunterbrook short report</div>
+        <p class="tldr">Per the Motley Fool's November 20 wrap, the S&amp;P 500 fell 3.70 percent to 6,910 after a seven day losing streak and entered a technical correction, the Nasdaq Composite fell 5.28 percent to 22,618 and the Dow fell 1.93 percent to 48,147. StockTitan reports no week since the one ending March 20, 2020 brought a bigger drop. Broadcom fell about 12.2 percent on unconfirmed reports that Google would cut next year's chip shipments, Micron about 13.9 percent and AMD about 13.25 percent, the last a day after Hunterbrook, which disclosed a short, alleged AMD firmware was found in servers from blacklisted Chinese maker IEIT; AMD said the claims misrepresent its relationships. The 10 year yield slipped to about 4.91 percent. TipRanks reports chips and neoclouds rebounding in premarket today. Flag: the Google chip cut report was not traced to a named outlet in this run, and similar TPU volume rumours circulated in August.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Thursday's edition described bonds and chips falling together. Friday broke that pattern: yields fell about 15 basis points from the 5.06 to 5.09 percent range as money fled to defensives, which suggests the selling is now about AI earnings risk rather than rates. Hunterbrook itself says its records do not on their own establish an export violation. A Broadcom move on a Google rumour matters because it is the first sign in this drawdown of investors questioning custom silicon volumes, not just GPU pricing.</p>
+          <p>Skeptic's note: index levels and closes are confirmed via market data. Single stock percentages vary slightly by outlet. The "worst week since 2020" framing comes from one aggregator; the Fool's "more than 10 percent this week" for the Nasdaq is consistent with it. Premarket rebounds often fade.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: a correction that hits the whole AI complex, including hyperscalers and memory, tightens every financing window CoreWeave needs in Q1, and lenders who are already selective (story 07) will price the drawdown into spreads. Bull read: if Google is trimming TPU volumes, that is marginally positive for Nvidia GPU demand at neoclouds, and a falling 10 year helps SOFR linked debt at the margin. Ask: refresh the Q1 2027 financing calendar against a scenario where equity stays near the IPO price for a quarter.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.fool.com/coverage/stock-market-today/2026/11/20/stock-market-today-nov-20-stocks-plunge-as-ai-trade-unwinds/">Motley Fool (Nov 20)</a>
+            <a href="https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026">StockTitan</a>
+            <a href="https://www.heygotrade.com/en/news/amd-amd-stock-news-november-23-2026/">Gotrade (AMD)</a>
+            <a href="https://www.zerohedge.com/geopolitical/short-seller-comes-amds-china-problem-read-fine-print">ZeroHedge (Hunterbrook fine print)</a>
+            <a href="https://finimize.com/content/amd-slides-after-report-flags-china-linked-server-ties">Finimize (AMD response)</a>
+            <a href="https://www.tipranks.com/news/why-are-ai-chip-stocks-nvidia-intel-amd-are-surging-in-premarket-today-november-23">TipRanks (Nov 23 chips)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">05</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">Anthropic opens at 111.50 dollars, closes its debut at 97.17 dollars, then falls 8.5 percent to 88.91 dollars on Friday; the junk rating and roughly 900 billion dollars of compute commitments stay in focus</div>
+        <p class="tldr">Forbes, Deadline and Technology.org report ANT closed its November 19 debut at 97.17 dollars, up about 17 percent on the 83 dollar offer, after opening at 111.50 dollars and trading as low as about 92.72 dollars. Yahoo Finance put the closing value near 1.27 trillion dollars. The Motley Fool's quote panel shows ANT at 88.91 dollars on November 20, down 8.5 percent, still above the offer. TipRanks reports ANT higher in premarket today. Bloomberg's read of the filing puts future obligations for compute, buildings and power near 900 billion dollars; KBRA rates Anthropic BB+, one notch below investment grade, and the FT reported Blackstone now expects a high junk rating after the IPO. Flag: total proceeds including a 26 billion dollar private placement are cited as 107.3 billion dollars by one outlet and were not checked against the final prospectus.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The debut answered the demand question and then the tape answered the valuation question: a 34 percent pop faded to 7 percent above offer within two sessions during the worst week for tech in six years. Nvidia's strategic tranche, bought at 83 dollars, remains slightly in the money. Reuters reported some bankers complained Anthropic and SpaceX ran unusual IPOs.</p>
+          <p>Skeptic's note: confirmed facts are the offer price, opening print and first close, which agree across sources. Valuation figures vary by share count method. The 900 billion dollar commitments figure is Bloomberg's characterization of filing disclosures and includes items not on the balance sheet.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Bull read: Anthropic is now a public, cash rich compute buyer with tens of billions of fresh primary capital, and a falling share price raises its incentive to buy capacity on flexible terms rather than build. Threat read: a junk rated counterparty with nearly 900 billion dollars of commitments is a credit that neocloud lenders will haircut, so Anthropic backed contracts will not finance like Meta or Microsoft backed ones; and Nscale and Lambda already hold larger disclosed Anthropic commitments than CoreWeave. Ask: model financing terms for an Anthropic backed DDTL at BB+ versus the A3 Meta structure.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.forbes.com/sites/fionariley/2026/11/19/anthropic-ipo-live-nasdaq-futures-jump-2-ahead-of-record-stock-debut/">Forbes</a>
+            <a href="https://deadline.com/2026/11/anthropic-ai-volatile-ipo-shares-trading-nasdaq-market-1237229045/">Deadline</a>
+            <a href="https://www.technology.org/2026/11/20/anthropic-stock-first-trading-day-close-97-17-nasdaq-debut/">Technology.org</a>
+            <a href="https://finance.yahoo.com/technology/live/anthropic-ipo-live-anthropic-stock-drops-after-first-day-of-trading-143300513.html">Yahoo Finance (live)</a>
+            <a href="https://news.bloombergtax.com/financial-accounting/anthropic-ipo-filing-reveals-nearly-900-billion-in-hidden-debt">Bloomberg Tax (commitments)</a>
+            <a href="https://cryptobriefing.com/anthropic-bb-plus-credit-rating-kbra/">KBRA rating coverage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">06</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag infra">AI Infrastructure &amp; Chips</span>
+          <span class="tag markets">Markets</span>
+          <span class="srccount">5 sources</span>
+        </div>
+        <div class="headline">Oracle says its OpenAI contract is fully funded after its 20 billion dollar November raise and vendor financing, with Abilene nearly complete and Vera Rubin racks due at Shackelford County in the coming weeks</div>
+        <p class="tldr">In a November 20 statement, reported by Reuters and summarized by Infraday, Oracle said it has secured the money needed to fulfil its infrastructure contract with OpenAI, citing its final capital raise and the vendor financing it outlined to investors, and said it could perform even if ongoing vendor talks produce no further agreements. On November 2 Oracle priced about 10 billion dollars of common stock and 10 billion dollars of senior notes; it has not said how much goes to either Texas campus. Abilene's eight buildings already run AI workloads; Shackelford County has all permits for a 10 building, roughly gigawatt scale campus with an on site microgrid. Flag: the roughly 300 billion dollar contract value is from 2025 WSJ reporting, not this statement, and an X post claiming GPT&#8209;6 Astra was trained at Abilene could not be verified.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>This is the clearest example this week of a large AI landlord funding its obligations through public equity and IG debt plus supplier credit, the mix that neoclouds can no longer access cheaply. Oracle choosing to say "fully funded" in a down tape is a preemptive answer to the same counterparty and financing questions weighing on CoreWeave.</p>
+          <p>Skeptic's note: "fully funded" is Oracle's own characterization; the split between vendor financing and Oracle capital is not disclosed, and the Vera Rubin handover is a stated expectation, not a delivery.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: OpenAI's largest alternative supplier now has funded capacity and early Vera Rubin deliveries, which reduces OpenAI's need for incremental neocloud capacity and strengthens its hand in pricing CoreWeave renewals. Bull read: Oracle's reliance on vendor financing signals Nvidia and others are still extending credit to builders with investment grade balance sheets and committed tenants, which is the template CoreWeave's contract backed DDTLs follow. Ask: compare the timing of Oracle's Shackelford Vera Rubin handover with CoreWeave's own Vera Rubin ramp for OpenAI.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://www.oracle.com/news/announcement/oracle-statement-2026-11-20/">Oracle statement</a>
+            <a href="https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/">Reuters</a>
+            <a href="https://infraday.com/2026/11/21/oracle-openai-data-center-funding-texas-stargate/">Infraday</a>
+            <a href="https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Pricing-of-20-Billion-of-Common-Stock-and-Senior-Notes/default.aspx">Oracle pricing release (Nov 2)</a>
+            <a href="https://x.com/marketsday/status/2124150339171721354">Markets Today on X (unverified claims)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">07</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#9889; Medium Signal</span>
+          <span class="tag markets">Markets</span>
+          <span class="tag policy">Power &amp; Policy</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">Neocloud credit stays shut: WSJ reports CoreWeave, Nebius and Nscale are effectively out of the bond market, Reuters says banks are scrutinizing termination clauses even with Big Tech guarantees, and Bessent's rate pushback lifts neoclouds premarket</div>
+        <p class="tldr">An aggregator summary of a Wall Street Journal report says CoreWeave, Nebius and Nscale have been effectively shut out of the bond market in recent weeks as investors demand tougher terms, and that Nebius abandoned a planned high yield deal. A November 9 Reuters report, summarized secondarily, says some banks are reluctant to finance more AI deals even with major tech company guarantees and are examining customer commitments, cash flows and termination conditions. Nebius cut its 2026 revenue outlook toward the low end of 3 to 3.4 billion dollars on third party site delays. TipRanks attributes today's neocloud bounce partly to Bessent pushing back on further Fed hikes on Sunday; Bessent's documented on record comments, from November 13, warned against hiking into an energy supply shock. Flag: a Sunday, November 22 Bessent statement was not found in a separate search; the WSJ and Reuters items were read through summaries, not the originals.</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>Taken with Nvidia's conditional neocloud commitments in Thursday's edition, the financing stack for second tier GPU clouds now has three closed doors (unsecured bonds, equity near lows, Nvidia backstops tightening) and one open one: contract backed, investment grade structured loans tied to top tier offtakers. Odd Lots' recent episode (podcast pick below) argues rising GPU rental prices reflect tight credit as much as demand. TheStreet separately reports banks that raced to fund neoclouds are now hesitating.</p>
+          <p>Skeptic's note: confirmed facts are Nebius's guidance change and Bessent's November 13 comments. The bond market shutout is a characterization, not a measured issuance freeze, and the Fed decision on December 8 to 9 still depends on data, including today's flash PMIs.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: if banks start pricing termination optionality in hyperscaler contracts, even Microsoft or Meta backed DDTLs could carry wider spreads or lower advance rates, which goes directly to CoreWeave's cost of capital guidance. Bull read: CoreWeave is the only neocloud with an A3 rated contract backed facility in market, so a selective lending environment concentrates bank appetite on it relative to Nebius, Nscale and IREN. Ask: termination and step down provisions in the top five customer contracts as lenders will now read them, and whether the pending Meta backed loan can launch before the December FOMC.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://aiweekly.co/alerts/wsj-coreweave-nebius-and-nscale-effectively-shut-out-of-bond-market-as-lenders">WSJ via AI Weekly</a>
+            <a href="https://lapaasvoice.com/global-banks-and-investors-curb-lending-to-ai-companies-as-debt-risks-rise/">Reuters via Lapaas Voice</a>
+            <a href="https://www.thestreet.com/investing/banks-hesitate-fund-neoclouds-coreweave-nebius-oracle-debt">TheStreet (banks hesitate)</a>
+            <a href="https://www.aljazeera.com/economy/2026/11/13/us-treasury-warns-against-rate-hikes-during-us-iran-war-energy-shock">Al Jazeera (Bessent Nov 13)</a>
+            <a href="https://www.tipranks.com/news/sp-global-flash-pmis-test-wall-streets-monday-rebound-as-hot-u-s-growth-fuels-fed-rate-hike-bets">TipRanks (PMIs, Fed bets)</a>
+            <a href="https://www.businesswire.com/news/home/20260330529766/en/CoreWeave-Closes-Landmark-8.5-Billion-Financing-Facility-Achieving-First-Investment-Grade-Rated-GPU-backed-Financing/">CoreWeave DDTL 4.0 release (Mar 30)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="rank">08</div>
+      <div class="card-body">
+        <div class="meta-row">
+          <span class="signal">&#128161; Low Signal</span>
+          <span class="tag agents">Agentic AI &amp; Tooling</span>
+          <span class="tag models">LLM Model Releases</span>
+          <span class="srccount">6 sources</span>
+        </div>
+        <div class="headline">A quiet model week after last week's two frontier launches; agent governance tooling ships from Databricks and LangChain, and several "new" items in release trackers turn out to be older</div>
+        <p class="tldr">No new frontier model from OpenAI, Google, Anthropic, xAI, Meta, DeepSeek or Qwen was verified as released between November 19 and November 23. On agents, aggregators report Databricks put Genie ZeroOps into public beta on November 19, an agent that monitors jobs and tables and proposes fixes as pull requests with human approval before production changes, and LangChain put LangSmith Tool Gateway into public beta the same day, centralizing credentials, access policies, approvals and audit traces for agent tool calls. Levenza announced general availability of enterprise personal agents on November 23 alongside its acquisition of Fluid Inference. Flag: several items surfaced as current are older or unverified, including ChatGPT Wallet (launched November 13, listed under November 21 by one digest), Kimi K3.1 Pro (October), Inkling 2 Small (November 5; an "Inkling 2 Mini" dated November 20 could not be confirmed) and Anthropic's 3.4 billion dollar OnePWR gas generator deal (FT, November 8).</p>
+        <span class="toggle" onclick="this.nextElementSibling.classList.toggle('open')">Read analysis &#9662;</span>
+        <div class="detail">
+          <p>The pattern in agent tooling is the same one Ignite showed last week: the value is moving into identity, policy, approval and audit layers that sit next to inference. These are mostly CPU and control plane workloads, sold by data platforms and hyperscalers rather than GPU clouds. Release trackers this month have repeatedly misdated items, so treat any model "launch" without a lab blog post or model card as unconfirmed.</p>
+          <p>Skeptic's note: the Databricks, LangChain and Levenza items come from aggregator pages and a newswire release; primary announcements were not read in this run.</p>
+          <div class="why">
+            <span class="lbl">Why It Matters for CoreWeave</span>
+            <p>Threat read: governance layers lock agent workloads into the platform that holds the data and identity (Databricks, Azure), which can commoditize the underlying inference provider. Bull read: every agent framework still has to call a model, and long running, multi step agents multiply inference tokens; a quiet launch week also means last week's GPT&#8209;6.2 and Gemini 4 Neon demand is still ramping. Ask: whether CoreWeave's inference and sandbox products integrate with tool gateways like LangSmith so they appear as a default backend.</p>
+          </div>
+          <div class="srcs">
+            <a href="https://aiagentsdirectory.com/news/ai-agents-news-brief-november-18-2026">AI Agents Directory</a>
+            <a href="https://aiagentstore.ai/ai-agent-news/this-week">AI Agent Store (weekly)</a>
+            <a href="https://manilatimes.net/2026/11/23/tmt-newswire/globenewswire/levenza-launches-personal-ai-agents-globally-for-the-enterprise/2476336">Levenza (GlobeNewswire)</a>
+            <a href="https://thepaypers.com/payments/news/openai-launches-chatgpt-wallet-for-agentic-payments-in-the-us">The Paypers (Wallet, Nov 13)</a>
+            <a href="https://letsdatascience.com/news/thinking-machines-lab-releases-inkling-2-small-a-594b-moe-mo-2b2a96ce">Inkling 2 Small (Nov 5)</a>
+            <a href="https://thenextweb.com/news/anthropic-3-4bn-gas-generators-onepwr-ft">TNW (OnePWR, Nov 8)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PODCASTS -->
+  <div class="section-title">Podcast Picks</div>
+
+  <div class="pod">
+    <div class="show">ODD LOTS (BLOOMBERG)</div>
+    <div class="ep">Why AI's Most Bullish GPU Chart Is Misleading &#183; listed as of November 19 2026</div>
+    <div class="who">Hosts Joe Weisenthal and Tracy Alloway; guests not confirmed from the summary page.</div>
+    <ul>
+      <li>Per a 24/7 Wall St. summary, the episode argues that rising GPU rental prices may reflect tighter credit more than demand, and discusses CoreWeave asking customers for larger prepayments and leaning on investment grade customers.</li>
+      <li>Directly relevant to stories 02 and 07: it frames Nvidia balance sheet support as a risk factor for smaller GPU operators.</li>
+      <li>Note: details come from a third party summary page; the exact release date and guests were not checked against the Bloomberg feed, no audio was listened to, and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="pod">
+    <div class="show">EQUITY (TECHCRUNCH)</div>
+    <div class="ep">Nvidia's China retreat, Anthropic's IPO, and the next phase of the AI boom &#183; November 20 2026</div>
+    <div class="who">TechCrunch's startup and venture podcast; hosts per the Spotify listing.</div>
+    <ul>
+      <li>Per the listing, covers Nvidia halting H200 sales to China, the board dismissing calls to reinstate Huang, and Anthropic's debut.</li>
+      <li>Useful as a venture lens on what the Anthropic pricing and Nvidia's retreat mean for AI startup financing, the demand base behind neocloud capacity.</li>
+      <li>Note: date and topics come from a search listing; no audio was listened to and content is not independently confirmed.</li>
+    </ul>
+  </div>
+
+  <div class="connected">
+    <strong>Connected sources.</strong> This edition was produced as an unattended scheduled run working entirely from public web research. No Gmail, Calendar, Slack, Drive, PitchBook or meeting connector was read. Items were found through web search and direct page fetches, cross checked against at least two independent outlets where possible, and dated against the publisher's page, filing or release rather than an aggregator. The window covers Thursday, November 19 (after the prior edition) through early morning ET on Monday, November 23, and avoids repeating Thursday's stories unless there was new information. Full articles read directly: TheStreet (Huang foundation), TipRanks (November 20 CoreWeave and November 23 premarket pieces), the Motley Fool's November 20 market wrap and Infraday's summary of Oracle's statement. Reuters on the SEC inquiry could not be fetched (rate limit), so it is cited through syndications and search excerpts; the WSJ bond market and Reuters bank lending items were read only through secondary summaries. Recycled, misdated or corrected items: a Yahoo syndicated BeInCrypto piece on Monday chip losses that is dated November 16, not today (excluded); ChatGPT Wallet, launched November 13 but listed under November 21 (flagged); Kimi K3.1 Pro and Inkling 2 Small, both earlier releases surfaced as current (flagged); Anthropic's OnePWR generator deal, reported November 8 (flagged); and a Bessent rate statement attributed to Sunday, November 22, which a separate search could not locate. The export control rule was released around November 16, slightly before this window, but was not covered Thursday. Searches for a confirmed launch of CoreWeave's Meta backed IG loan, a named outlet behind the Google chip cut report, and an official Nvidia response to Bessent's deadline returned no verifiable items.
+  </div>
+
+  <footer>
+    Generated by Claude &#183; November 23 2026 &#183; Main sources: Reuters (via Investing.com, Euronext, NewsNation), Yahoo Finance, AP via ABC News, TechCrunch, CBS San Francisco, Fortune, Al Jazeera, TheStreet, Bloomberg, TipRanks, BeInCrypto, TradingView, TIKR, Motley Fool, Globe and Mail, NBC News, TNW, CNBC, Seoul Economic Daily, Let's Data Science, Defense News, Data Center Knowledge, StockTitan, Gotrade, ZeroHedge, Finimize, Forbes, Deadline, Technology.org, Bloomberg Tax, Crypto Briefing, Oracle, Infraday, AI Weekly, Lapaas Voice, Business Wire, AI Agents Directory, AI Agent Store, GlobeNewswire, The Paypers, 24/7 Wall St., Spotify, podcast listings.
+    <span class="cav">Uncertainty flags: On Nvidia, the SEC inquiry is sourced to unnamed people and unconfirmed by the SEC or Nvidia, its scope is reported only, and the roughly November 25 Bessent deadline is approximate. On CoreWeave, total debt is reported as both about 47 billion and 66.2 billion dollars for September 30, the 350 million dollar foundation commitment is Bloomberg's reading of a tax filing, Venturo's purchase price is undisclosed, premarket gains are not closes, and the Meta backed loan remains unconfirmed. On export controls, the release date, TPP trigger wording and US headquarters exemption need checking against the Federal Register, and the Moonshot cancellation is single sourced. On markets, single stock percentages vary by outlet, the Google chip cut report is unattributed, and Hunterbrook holds a disclosed short. On Anthropic, valuation and total proceeds figures vary by method and the 900 billion dollar commitments figure is a characterization. On Oracle, "fully funded" is the company's own claim and the financing split is undisclosed. On credit, the WSJ and Reuters items were read via summaries and a Sunday Bessent statement could not be found. On agents and models, items come from aggregators and several trackers misdated older releases. Podcast details come from listings and summaries, and content was not independently confirmed. Verify all figures against primary sources before external use.</span>
+  </footer>
+
+</div>
+</body>
+</html>
